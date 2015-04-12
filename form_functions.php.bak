@@ -263,7 +263,7 @@ $optionsArray = array_fill( 1, 5, 'apples' );
 				<div class="col-md-3">
 					<form>
 						<h3>Regular Form</h3>
-						<?=genInput( 'Plain Text', 'pt', '', [ 'placeholder' => '', 'align' => 'right', 'addon' => [ 'type' => 'icon', 'option' => 'home', 'align' => 'right' ] ] );?>
+						<?=genInput( 'Plain Text', 'pt', '', [ 'placeholder' => '', 'align' => 'right' ] );?>
 					</form>
 				</div>
 			</div>	
