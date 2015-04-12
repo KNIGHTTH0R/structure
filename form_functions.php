@@ -219,30 +219,51 @@ $optionsArray = array_fill( 1, 5, 'apples' );
 			.form-group input {
 				border: none;
 				border-radius: 0px;
+				border-bottom: 1px solid #eee;
 				box-shadow: none;
-				background-image: linear-gradient(#009688,#009688),linear-gradient(#d2d2d2,#d2d2d2);
-			  background-size: 0 2px,100% 1px;
-			  background-repeat: no-repeat;
-			  background-position: center bottom,center calc(100% - 1px);
-			  background-color: transparent;
 				transition: all 0.3s cubic-bezier(.64,.09,.08,1);
-				width: 100%;
+				background: linear-gradient( to bottom, rgba( 255, 255, 255, 0 ) 90%, teal 10% );
+				background-repeat: no-repeat;
+				background-position: -100% 0;
+				background-size: 0% 35px;
+				padding: 0px !important;
+ 				margin: 0px !important;
 			}
 			.form-group input:focus {
-				background-image: linear-gradient(#009688,#009688),linear-gradient(#d2d2d2,#d2d2d2);
-			  background-size: 0 2px,100% 3px;
-				//animation: input-highlight 0.5s forwards;
+				background-size: 100% 35px;
 				box-shadow: none;
+			}
+			
+			.form-group input:focus ~ label {
+				transform: translateY( -20px );
+				font-size: 12px;				
+			}
+			
+			.form-group label {
+				color: #999;
+				font-size: 16px;
+				font-weight: 100;
+				position: relative;
+				bottom: 26px;
+				transition: all 0.3s cubic-bezier(.64,.09,.08,1);
+			}
+			
+			.form-group .input-group-addon {
+				border: none;
+				border-radius: 0px;
+				background-color: transparent;
+				position: relative;
+				right: 35px;
 			}
 		</style>
 	</head>
 	<body>
 		<div class="container-fluid">
 			<div class="row" style="margin-top: 50px;">
-				<div class="col-md-6">
+				<div class="col-md-3">
 					<form>
 						<h3>Regular Form</h3>
-						<?=genInput( 'Plain Text', 'pt', '', [ 'class' => 'input-matd' ] );?>
+						<?=genInput( 'Plain Text', 'pt', '', [ 'placeholder' => '', 'align' => 'right' ] );?>
 					</form>
 				</div>
 			</div>	
