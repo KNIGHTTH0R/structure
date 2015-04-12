@@ -18,8 +18,13 @@
 	<body>
 		<div class="page-container">
 			<nav class="top-nav">
-				<ul class="nav">
-					<li><a href="#">Home</a></li>
+				<div class="nav-logo">
+					<img src="logo.png"> Company Logo
+				</div>
+				<ul class="nav-menu">
+					<li><a href="#"><i class="fa fa-home"></i><div class="nav-item">Home</div></a></li>
+					<li><a href="#">Subscribe</a></li>
+					<li><a href="#">Cyber Risk News</a></li>
 				</ul>	
 			</nav>
 		</div>
