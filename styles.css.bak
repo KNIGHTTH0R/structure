@@ -1,14 +1,17 @@
 nav {
 	background: #607D8B;
-	border-bottom: 8px solid #37474F;
+	border-bottom: 5px solid #37474F;
 	box-shadow: 0px 4px 10px #999;
 	height: 70px;
+	position: fixed;
+	top: 0px;
+	width: 100%;
 }
 
 .nav-logo {
 	float: left;
 	padding-left: 125px;
-	width: 30%;	
+	width: 400px;	
 }
 
 .nav-logo img {
@@ -29,14 +32,38 @@ nav {
 	color: #fff;
 	display: block;
 	height: 70px;
+	font-size: 12px;
 	letter-spacing: 1px;
-	padding: 20px 0px 20px 0px;
+	line-height: 1;
+	padding-top: 10px;
 	text-align: center;
 	text-decoration: none;
 	width: 100px;
 }
 
-.nav-menu li a:hover {
+.nav-menu li a i {
+	font-size: 18px;
+}
+
+.nav-menu .nav-item {
+	padding-top: 5px;
+}
+
+.nav-menu > li > a:hover {
 	background-color: #78909C;
-	border-bottom: 8px solid #fff;
+	border-bottom: 5px solid #fff;
+}
+
+.page-content {
+	margin-top: 95px;
+}
+
+.panel {
+	border-radius: 0px;
+	box-shadow: 0px 2px 12px rgba( 0, 0, 0, .2 ) !important;
+}
+
+.portfolio-project {
+	padding: 0px;
+	height: 400px;
 }

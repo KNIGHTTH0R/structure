@@ -22,11 +22,57 @@
 					<img src="logo.png"> Company Logo
 				</div>
 				<ul class="nav-menu">
-					<li><a href="#"><i class="fa fa-home"></i><span class="nav-item">Home</span></a></li>
-					<li><a href="#">Subscribe</a></li>
-					<li><a href="#">Cyber Risk News</a></li>
+					<li>
+						<a href="#">
+							<i class="fa fa-home"></i>
+							<div class="nav-item">Home</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-globe"></i>
+							<div class="nav-item">Link #2</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-ticket"></i>
+							<div class="nav-item">Link #3</div>
+						</a>
+					</li>
 				</ul>	
 			</nav>
+			<div class="page-content">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<section class="row">
+								<div class="col-md-4">
+									<div class="panel panel-default">
+										<div class="panel-body portfolio-project">
+											<img src="http://th07.deviantart.net/fs71/PRE/f/2010/325/5/0/personal_portfolio_website_v4_by_zblowfish-d3391qy.jpg" class="img-responsive" style="height: 300px;">
+										</div>	
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="panel panel-default">
+										<div class="panel-body portfolio-project">
+											<img src="http://media.mediatemple.netdna-cdn.com/wp-content/uploads/images/fresh-portfolios/thetoke.jpg" class="img-responsive" style="height: 300px;">
+										</div>	
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="panel panel-default">
+										<div class="panel-body">
+											Project	
+										</div>	
+									</div>
+								</div>	
+							</section>
+						</div>	
+					</div>	
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
