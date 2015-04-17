@@ -19,9 +19,6 @@ function genInputAddon( $input, $addon ) {
 		case 'input':
 		  $inputAddon = '<span class="input-group-addon">' . $option . '</span>';
 		break;
-		case 'segmented':
-		  $inputAddon = '<div class="input-group-btn">' . genButtonDropdown( 'segmented', $dropdown ) . '<button type="button" class="btn ' . $class . '">' . $option . '</button></div>';
-		break;
 		case 'text':
 		  $inputAddon = '<span class="input-group-addon">' . $option . '</span>';
 		break;
@@ -35,14 +32,7 @@ function genInputAddon( $input, $addon ) {
 }
 
 function genButtonDropdown( $type, $dropdown ) {
-	switch( $type ) {
-		case 'segmented':
-		  $text = '';
-		break;
-		default:
-			$text = 'Action';
-	}
-	$buttonDropdown  = '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">' . $text . ' <span class="caret"></span></button>';
+	$buttonDropdown  = '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>';
 	$buttonDropdown .= '<ul class="dropdown-menu" role="menu">';
 	
 	foreach( $dropdown as $link => $linkText ) {
@@ -198,8 +188,3 @@ function genMultiSelect( $label = '', $fieldName, $options, $selectedValues = []
 		echo '<div class="form-group">' . $returnInput . '</div>';
 	}
 }
-
-$dropdownArray = [ '#' => 'Action', '1' => 'Action2' ];
-$optionsArray = array_fill( 1, 5, 'apples' );
-
-?>
