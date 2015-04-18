@@ -1,0 +1,222 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct scripts access allowed');
+
+function add_style( $file ) {
+	return '<link href="' . $file . '" rel="stylesheet" type="text/css">';
+}
+
+function add_script( $file ) {
+	return '<script src="' . $file . '" type="text/javascript"></script>';
+}
+
+function gen_styles( $styles = array() ) {	
+	$default_styles = '';
+	if( !empty( $styles ) && is_array( $styles ) ) {
+		foreach( $styles as $file ) {
+			$default_styles .= add_style( site_url( $file ) );
+		}	
+	} else if( !empty( $styles ) ) {
+		$default_styles .= add_style( site_url( $styles ) );
+	}
+	echo $default_styles;
+}
+
+function gen_scripts( $scripts = array() ) {
+	$default_scripts = '';
+	if( !empty( $scripts['js'] ) && is_array( $scripts['js'] ) ) {
+		foreach( $scripts['js'] as $file ) {
+			$default_scripts .= add_script( site_url( $file ) );
+		}	
+	} else if( !empty( $scripts['js'] ) ) {
+		$default_scripts .= add_script( site_url( $scripts['js'] ) );
+	}
+	
+	switch( section_check() ) {
+		case 'ad':
+			$section = 'admin';
+		break;
+		case 'po':
+			$section = 'portal';
+		break;
+		case 'fr':
+			$section = 'front';
+		break;
+	}
+	
+	$default_scripts .= '<script>';
+	$default_scripts .= 'var site_url = "' . site_url() . '";' . "\n";
+	$default_scripts .= 'var section = "' . $section . '";' . "\n";
+	$default_scripts .= '$( document ).ready( function() {';
+	$default_scripts .= 'Metronic.init();';
+	$default_scripts .= 'Layout.init();';
+	$default_scripts .= 'Datatables.init();';
+		
+	if( !empty( $scripts['init'] ) && is_array( $scripts['init'] ) ) {
+		foreach( $scripts['init'] as $init ) {
+			$default_scripts .= $init . '.init();';
+		}	
+	} else if( !empty( $scripts['init'] ) ) {
+		$default_scripts .= $scripts['init'] . '.init();';
+	}
+
+	$default_scripts .= '});';
+	$default_scripts .= '</script>';
+	echo $default_scripts;
+}
+
+function gen_page_header( $page_title, $return = FALSE ) {
+	if( $page_title == 'none' ) {
+		return;
+	}
+	$title  = '<div class="page-head">';
+	$title .= '<div class="page-title">';
+	$title .= '<h1>' . $page_title . '</h1>';
+	$title .= '</div></div>';
+	
+	if( $return === FALSE ) {
+		echo $title;
+	} else if( $return === TRUE ) {
+		return $title;
+	}	
+}
+
+function gen_breadcrumbs( $breadcrumbs, $return = FALSE ) {
+	if( $breadcrumbs == 'none' ) {
+		return;
+	}
+	
+	switch( section_check() ) {
+		case 'po':
+			$section_location = site_url( 'admin/portal/' );
+		break;
+		default:
+			$section_location = site_url( 'admin/' );
+	}
+	
+	$replace_array 		= array( '_' );
+	$extension				= explode( '/', site_url() );
+	if( isset( $extension[3] ) ) {
+		$extension = $extension[3];
+	} else {
+		$extension = '';
+	}
+	
+	$default_breadcrumbs  = '<ul class="page-breadcrumb breadcrumb">';
+	$default_breadcrumbs .= '<li>';
+	$default_breadcrumbs .= '<a href="' . $section_location . '/dashboard">Dashboard</a><i class="fa fa-circle"></i>';
+	$default_breadcrumbs .= '</li>' . "\n";	
+	
+	if( empty( $breadcrumbs ) ) {
+		$current_page = explode( '/', $_SERVER['REQUEST_URI'] );
+		array_shift( $current_page );
+		$count = 1;
+		foreach( $current_page as $key => $link ) {
+			if( is_numeric( $link ) ) {
+				unset( $current_page[$key] );
+			} else if( $link == $extension ) {
+				unset( $current_page[$key] );
+			} else if( substr( $link, 0, 1 ) == '?' ) {
+				unset( $current_page[$key] );
+			}
+		}
+		
+		foreach( $current_page as $link ) {
+			$title = str_replace( $replace_array, ' ', $link );
+			$title = ucwords( $title );
+			if( $count == 1 && $count == count( $current_page ) ) {
+				$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";
+			} else if( $link == 'admin' ) {
+				$default_breadcrumbs .= '<li class="active">' . $title . '<i class="fa fa-circle"></i></li>' . "\n";
+			} else if( $link == 'portal' ) {
+				$default_breadcrumbs .= '<li class="active">' . $title . '<i class="fa fa-circle"></i></li>' . "\n";
+			} else if( $count != count( $current_page ) ) {
+				$default_breadcrumbs .= '<li><a href="' . $section_location . '/' . $link . '">' . $title . '</a><i class="fa fa-circle"></i></li>' . "\n";
+			} else {
+				$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";
+			}
+			$count++;
+		}
+	} else if( is_array( $breadcrumbs ) ) {
+		$count = 1;
+		foreach( $breadcrumbs as $title => $link ) {
+			if( $count != count( $breadcrumbs ) ) {
+				$default_breadcrumbs .= '<li><a href="' . $section_location . $link . '">' . $title . '</a><i class="fa fa-circle"></i></li>' . "\n";
+			} else {
+				$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";
+			}
+			$count++;
+		}
+	}
+	
+	$default_breadcrumbs .= '</ul>';
+	
+	if( $return === TRUE ) {
+		return $default_breadcrumbs;
+	} else {
+		echo $default_breadcrumbs;
+	}
+}
+
+function get_access_levels() {
+	$access_array = array();
+	
+	$CI =& get_instance();
+	$CI->load->database();
+	
+	$CI->db->order_by( 'level', 'DESC' );
+	$access_levels = $CI->db->get( 'access_level' );
+	if( $access_levels->num_rows() > 0 ) {
+		foreach( $access_levels->result_array() as $row ) {
+			extract( $row );
+			
+			$access_array[$level] = $title;
+		}
+	}
+	return $access_array;
+}
+
+function access_check( $access ) {
+	$CI =& get_instance();
+	
+	$access_array = get_access_levels();
+
+	if( $CI->session->userdata( 'user_level' ) ) {
+		if( $access_array[$CI->session->userdata( 'user_level' )] >= $access_array[$access] ) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	} else if( $access == 0 ) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+function section_check() {
+	$current_page = explode( '/', $_SERVER['REQUEST_URI'] );
+	if( in_array( 'portal', $current_page ) ) {
+		return 'po';
+	} else if( in_array( 'admin', $current_page ) ) {
+		return 'ad';
+	} else {
+		return 'fr';
+	}
+}
+
+//Update to use codeigniter methods
+function last_activity_check() {
+	if( ! isset( $_SESSION['last_activity'] ) ) {
+		return;
+	} else if( strtotime( '-20 minutes' ) > strtotime( $_SESSION['last_activity'] ) ) {
+		session_destroy();
+		session_start();
+		$_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
+	} else {
+		$_SESSION['last_activity'] = date( 'Y-m-d H:i:s' );
+	}
+}
+
+function get_portal_id() {
+	$CI =& get_instance();
+	return $CI->session->userdata( 'portal_id' ) ? $CI->session->userdata( 'portal_id' ) : -1;
+}

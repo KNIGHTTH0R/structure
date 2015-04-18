@@ -1,0 +1,46 @@
+[22-Jan-2015 01:59:22 UTC] PHP Fatal error:  Call to undefined function site_url() in /home/johnjleider/public_html/cms2/application/libraries/layout.php on line 12
+[22-Jan-2015 02:00:24 UTC] PHP Fatal error:  Call to a member function userdata() on a non-object in /home/johnjleider/public_html/cms2/application/libraries/layout.php on line 19
+[22-Jan-2015 02:33:55 UTC] PHP Fatal error:  Call to undefined function get_menu_items() in /home/johnjleider/public_html/cms2/application/views/admin/layouts/header.php on line 498
+[22-Jan-2015 02:34:12 UTC] PHP Fatal error:  Call to undefined function section_check() in /home/johnjleider/public_html/cms2/application/helpers/menu_helper.php on line 9
+[22-Jan-2015 02:56:03 UTC] PHP Fatal error:  Call to undefined function get_scripts() in /home/johnjleider/public_html/cms2/application/views/admin/layouts/footer.php on line 40
+[22-Jan-2015 03:00:28 UTC] PHP Parse error:  syntax error, unexpected '$view_params' (T_VARIABLE) in /home/johnjleider/public_html/cms2/application/libraries/layout.php on line 13
+[22-Jan-2015 03:09:37 UTC] PHP Fatal error:  Call to undefined function gen_ui_portlet_open() in /home/johnjleider/public_html/cms2/application/views/admin/menu_items_view.php on line 3
+[23-Jan-2015 01:47:05 UTC] PHP Parse error:  syntax error, unexpected 'menu_item_id' (T_STRING) in /home/johnjleider/public_html/cms2/application/helpers/ui_helper.php on line 386
+[23-Jan-2015 02:25:32 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/johnjleider/public_html/cms2/application/views/admin/menu_items_create_view.php on line 19
+[23-Jan-2015 02:53:07 UTC] PHP Fatal error:  Call to undefined function gen_ui_publish() in /home/johnjleider/public_html/cms2/application/views/admin/menu_items_view.php on line 52
+[23-Jan-2015 03:31:21 UTC] PHP Fatal error:  Call to undefined function gen_breadcrumbs1() in /home/johnjleider/public_html/cms2/application/views/admin/layouts/header.php on line 527
+[23-Jan-2015 03:41:31 UTC] PHP Fatal error:  Call to undefined function gen_ui_publish() in /home/johnjleider/public_html/cms2/application/views/admin/access_levels_view.php on line 38
+[23-Jan-2015 03:49:48 UTC] PHP Fatal error:  Call to undefined function gen_ui_publish() in /home/johnjleider/public_html/cms2/application/views/admin/access_levels_view.php on line 38
+[23-Jan-2015 22:10:22 UTC] PHP Fatal error:  Call to a member function get_where() on a non-object in /home/johnjleider/public_html/cms2/application/libraries/layout.php on line 12
+[23-Jan-2015 22:10:32 UTC] PHP Fatal error:  Call to a member function get_where() on a non-object in /home/johnjleider/public_html/cms2/application/libraries/layout.php on line 12
+[23-Jan-2015 22:15:25 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/johnjleider/public_html/cms2/application/views/admin/settings_view.php on line 11
+[23-Jan-2015 22:20:30 UTC] PHP Fatal error:  Call to undefined function gen_ui_publish() in /home/johnjleider/public_html/cms2/application/views/admin/frameworks_view.php on line 19
+[23-Jan-2015 22:22:21 UTC] PHP Fatal error:  Call to undefined function gen_ui_publish() in /home/johnjleider/public_html/cms2/application/views/admin/frameworks_view.php on line 19
+[23-Jan-2015 22:22:32 UTC] PHP Fatal error:  Call to undefined function gen_ui_publish() in /home/johnjleider/public_html/cms2/application/views/admin/frameworks_view.php on line 19
+[24-Jan-2015 02:53:12 UTC] PHP Fatal error:  Cannot redeclare Frameworks_model::get_framework() in /home/johnjleider/public_html/cms2/application/models/admin/frameworks_model.php on line 84
+[24-Jan-2015 02:58:42 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/johnjleider/public_html/cms2/application/controllers/admin/frameworks.php on line 41
+[24-Jan-2015 03:02:11 UTC] PHP Fatal error:  Call to undefined function gen_ui_publish() in /home/johnjleider/public_html/cms2/application/views/admin/templates_view.php on line 19
+[27-Jan-2015 02:37:20 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/johnjleider/public_html/cms2/application/views/admin/templates_create_view.php on line 17
+[27-Jan-2015 02:37:26 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/johnjleider/public_html/cms2/application/views/admin/templates_create_view.php on line 20
+[28-Jan-2015 03:08:39 UTC] PHP Fatal error:  Function name must be a string in /home/johnjleider/public_html/cms2/application/models/admin/templates_model.php on line 80
+[28-Jan-2015 22:15:22 UTC] PHP Fatal error:  Can't use function return value in write context in /home/johnjleider/public_html/cms2/application/helpers/menu_helper.php on line 35
+[29-Jan-2015 02:36:25 UTC] PHP Fatal error:  Call to a member function portal_list() on a non-object in /home/johnjleider/public_html/cms2/application/controllers/admin/portals.php on line 19
+[31-Jan-2015 22:10:23 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/johnjleider/public_html/cms2/application/helpers/ui_helper.php on line 284
+[01-Feb-2015 01:52:35 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/johnjleider/public_html/cms2/application/helpers/ui_helper.php on line 285
+[02-Feb-2015 01:46:01 UTC] PHP Parse error:  syntax error, unexpected ')' in /home/johnjleider/public_html/cms2/application/controllers/admin/objects.php on line 20
+[02-Feb-2015 21:56:03 UTC] PHP Fatal error:  Call to undefined function gen_select() in /home/johnjleider/public_html/cms2/application/views/admin/objects_create_view.php on line 10
+[04-Feb-2015 03:43:03 UTC] PHP Fatal error:  Call to a member function portal_list() on a non-object in /home/johnjleider/public_html/cms2/application/controllers/admin/portals.php on line 19
+[04-Feb-2015 15:09:15 UTC] PHP Fatal error:  Call to undefined function gen_ui_text() in /home/johnjleider/public_html/cms2/application/views/admin/objects_create_view.php on line 15
+[05-Feb-2015 02:59:43 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/johnjleider/public_html/cms2/application/helpers/ui_helper.php on line 327
+[05-Feb-2015 03:00:40 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/johnjleider/public_html/cms2/application/helpers/ui_helper.php on line 327
+[07-Feb-2015 01:53:43 UTC] PHP Fatal error:  Call to undefined method Objects_model::get_objects() in /home/johnjleider/public_html/cms2/application/controllers/admin/objects.php on line 52
+[07-Feb-2015 02:04:56 UTC] PHP Fatal error:  Call to undefined method Objects_model::object_update() in /home/johnjleider/public_html/cms2/application/controllers/admin/objects.php on line 59
+[07-Feb-2015 02:05:56 UTC] PHP Fatal error:  Call to undefined method Objects_model::object_update() in /home/johnjleider/public_html/cms2/application/controllers/admin/objects.php on line 59
+[07-Feb-2015 03:43:00 UTC] PHP Parse error:  syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in /home/johnjleider/public_html/cms2/application/helpers/form_helper.php on line 229
+[07-Feb-2015 04:26:15 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/johnjleider/public_html/cms2/application/controllers/admin/widgets.php on line 53
+[07-Feb-2015 04:36:43 UTC] PHP Fatal error:  Cannot redeclare Widgets_model::widget_insert() in /home/johnjleider/public_html/cms2/application/models/admin/widgets_model.php on line 48
+[07-Feb-2015 13:04:01 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/johnjleider/public_html/cms2/application/views/admin/objects_revise_view.php on line 18
+[07-Feb-2015 19:46:54 UTC] PHP Fatal error:  Call to undefined method Widgets_model::object_options() in /home/johnjleider/public_html/cms2/application/controllers/admin/widgets.php on line 33
+[07-Feb-2015 21:07:30 UTC] PHP Fatal error:  Call to a member function portal_list() on a non-object in /home/johnjleider/public_html/cms2/application/controllers/admin/portals.php on line 19
+[07-Feb-2015 21:45:58 UTC] PHP Parse error:  syntax error, unexpected 'switch' (T_SWITCH), expecting case (T_CASE) or default (T_DEFAULT) or '}' in /home/johnjleider/public_html/cms2/application/helpers/layout_helper.php on line 34
+[27-Mar-2015 21:54:56 UTC] PHP Fatal error:  Call to undefined function gen_form_multi() in /home/johnjleider/public_html/cms2/application/views/admin/settings_view.php on line 35
