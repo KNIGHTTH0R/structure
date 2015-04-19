@@ -6,7 +6,7 @@ class Objects_model extends CI_Model {
 		$this->load->database();
 	}
 	
-	/** List **/
+	/** List Model **/
 	public function object_list() {
 		$this->db->order_by( 'title' );
 		return $this->db->get( 'object' )->result_array();
@@ -16,7 +16,7 @@ class Objects_model extends CI_Model {
 		return $this->db->get_where( 'object', [ 'object_id' => $object_id ] )->row_array();
 	}
 	
-	/** Insert **/
+	/** Insert Model **/
 	public function object_insert() {
 		if( empty( $_POST ) ) {
 			return false;
@@ -36,7 +36,7 @@ class Objects_model extends CI_Model {
 		return $this->db->insert( 'object', $data );
 	}
 	
-	/** Update **/
+	/** Update Model **/
 	public function object_update() {
 		if( empty( $_POST ) ) {
 			return false;
@@ -48,7 +48,7 @@ class Objects_model extends CI_Model {
 		return $this->db->update( 'object', $data, [ 'object_id' => $this->input->post( 'object_id' ) ] );
 	}
 	
-	/** Status **/
+	/** Status Model **/
 	public function set_status() {
 		$data['status'] = $this->input->post( 'status' );
 		$this->db->update( 'object', $data, [ 'object_id' => $this->input->post( 'target_id' ) ] );

@@ -42,12 +42,13 @@ class Objects extends CI_Controller {
 	}
 	
 	public function revise( $object_id ) {
-		$params = params_array( 'Objects', 'Objects <small>revise</small>' );
+		$params['page_title']			= 'Objects';
+		$params['page_header']		= 'Object <small>revise</small>';
 		
 		$object										= $this->objects_model->object_revise( $object_id );
 		$params['object']					= $object;
 		$params['object_params']	= gen_ui_object_params( $object['params'] );
-		$params['scripts']				= [ 'js' => $this->js, 'init' => 'Objects_revise' ];
+		$params['scripts']				= array( 'js' => $this->js, 'init' => 'Objects_revise' );
 		
 		$this->layout->view( 'admin/objects_revise_view', $params );
 	}

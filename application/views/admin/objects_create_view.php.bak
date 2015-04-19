@@ -3,11 +3,11 @@
 		<?=gen_ui_portlet_open( 'Object Create', 'cube', 'form' );?>
 			<form id="object-create">
 				<div class="row">
-					<h4 class="col-md-12">Settings</h4>
+					<h3 class="col-md-12">Settings</h4>
 					<div class="col-md-6">
 						<?=gen_form_text( 'Title', 'title' );?>
 					</div>
-					<h4 class="col-md-12">Parameters</h4>
+					<h3 class="col-md-12">Parameters</h4>
 					<div class="col-md-12">
 					  <div class="row" id="params-container">
 					</div>

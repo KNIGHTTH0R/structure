@@ -6,7 +6,7 @@ class Dashboard extends CI_Controller {
 	}
 	
 	public function index() {		
-		$params = params_array( 'Dashboard', 'Dashboard <small> statistics and more</small>' );
+		$params = params_array( 'Dashboard', 'Dashboard <small> statistics and more1</small>' );
 		
 		$this->layout->view( 'admin/dashboard_view', $params, 'default' );
 	}

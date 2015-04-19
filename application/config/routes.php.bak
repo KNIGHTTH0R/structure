@@ -40,7 +40,7 @@
 
 $route['default_controller'] 							= "site";
 $route['404_override'] 										= '';
-$route['admin']                           = 'admin/dashboard';
+$route['admin'] = 'admin/dashboard';
 $route['(\w{2}\/)?admin\/?(.*)'] 					= 'admin/$2';
 $route['(.*)']														= "site";
 
