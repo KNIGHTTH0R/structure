@@ -48,7 +48,7 @@ class Frameworks extends CI_Controller {
 	public function revise( $framework_id ) {
 		$params = params_array( 'Frameworks', 'Frameworks <small>revise</small>' );
 		
-		$params['framework']				= $this->frameworks_model->get_framework( $framework_id );
+		$params['framework']				= $this->frameworks_model->framework_revise( $framework_id );
 		$params['scripts']					= [ 'js' => $this->js, 'init' => 'Framework_revise' ];
 		
 		$this->layout->view( 'admin/frameworks_revise_view.php', $params );

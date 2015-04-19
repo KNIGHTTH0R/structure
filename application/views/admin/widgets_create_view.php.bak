@@ -4,7 +4,7 @@
 			<form id="widget-create">
 				<div class="row">
 					<div class="col-md-6">
-						<?=gen_form_text( 'Alias', 'alias' );?>
+						<?=gen_input( 'Alias', 'alias' );?>
 					</div>
 					<div class="col-md-6">
 						<?=gen_object_select();?>

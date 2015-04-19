@@ -9,7 +9,7 @@ var Framework_list = function() {
 var Framework_create = function() {
 	return {
 		init: function() {
-			var add_row 					= $( '#add-row' );
+			var add_row 					= $( '.add-row' );
 			var framework_create 	= $( '.form-body' );
 			var total_columns 		= $( '#total_columns' );
 			var framework_form 		= $( '#framework-create-form' );
@@ -21,9 +21,8 @@ var Framework_create = function() {
 				var num_columns = total_columns.select2( 'val' );
 				var columns = 12 / num_columns;
 				
-				framework_create.append( gen_ui_framework_block( columns, num_columns, count ) );
+				framework_create.append( gen_ui_framework_block( columns, num_columns ) );
 				$( ".make-switch" ).bootstrapSwitch();
-				count++;
 			});
 			
 			framework_create.on( 'keyup', 'input', function() {
@@ -52,6 +51,8 @@ var Framework_create = function() {
 			framework_form.on( 'submit', function( e ) {
 				e.preventDefault();
 				
+				alert( $( this ).serialize() );
+				return false;
 				$.post( site_url + 'admin/frameworks/insert', $( this ).serialize(), function( data ) {
 					gen_toastr( data );
 				});

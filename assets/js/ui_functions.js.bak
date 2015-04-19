@@ -22,18 +22,23 @@ function gen_ui_framework_block( columns, num_columns, count ) {
 	portlet.append( $( '<div>', { class: "portlet-title" } ) );
 	$( '.portlet-title', portlet ).append( $( '<div>', { class: "caption" } )
 	                                       .append( $( '<span>', { class: "caption-subject uppercase bold", text: 'Content Row' } ) ) );
-	$( '.portlet-title', portlet ).append( '<div class="actions"><a class="btn btn-cicle btn-icon-only btn-default framework-delete" href="javascript:;" data-value="' + count + '"><i class="fa fa-trash"></i></a></div>' );
-	portlet.append( '<div class="portlet-body"></div>' );
-	$( '.portlet-body', portlet ).append( '<div class="row" style="padding: 15px;"></div>' );
+	$( '.portlet-title', portlet ).append( $( '<div>', { class: "actions" } )
+	                                       .append( $( '<a>', { class: "btn btn-cicle btn-icon-only btn-default framework-delete", href: "javascript:;" } )
+	                                                .append( $( '<i>', { class: "fa fa-trash" } ) ) ) );
+	portlet.append( $( '<div>', { class: "portlet-body" } ) );
+	$( '.portlet-body', portlet ).append( $( '<div>', { class: "row", style: "padding: 15px;" } ) );
 	
 	for( var i = 0; i < num_columns; i++ ) {
-		var framework_column = $( '<div class="col-md-' + columns + ' framework-row"></div>' );
-		framework_column.append( '<div class="bg-green"></div>' );
+		var framework_column = $( '<div>', { class: "col-md-" + columns + " framework-row" } );
+		framework_column.append( $( '<div>', { class: "bg-green"} ) );
 		
-		var widget_input 	= '<div class="form-group"><label class="control-label col-md-3">Allow Widgets?</label><div class="col-md-9"><input type="checkbox" class="make-switch" data-size="small" name="framework-widgets-' + i + '-' + count + '" value="y" checked /></div></div>';
-		var width_input		= '<div class="form-group"><label class="control-label col-md-3">Column Width</label><div class="col-md-9"><input class="form-control input-small" type="text" name="framework-column-' + i + '-' + count + '" value="' + columns + '" /></div></div>';
-		$( '.bg-green', framework_column ).append( widget_input );
+		// Fix this ugly shit
+		var widget_input 	= '<div class="form-group"><label class="control-label col-md-3">Allow Widgets?</label><div class="col-md-9"><input type="checkbox" class="make-switch" data-size="small" name="allow_widgets[]" value="y" checked /></div></div>';
+		var width_input		= '<div class="form-group"><label class="control-label col-md-3">Column Width</label><div class="col-md-9"><input class="form-control input-small" type="text" name="framework_width" value="' + columns + '" /></div></div>';
+		
 		$( '.bg-green', framework_column ).append( width_input );
+		$( '.bg-green', framework_column ).append( widget_input );
+		framework_column.prepend( $( '<input hidden>', { name: 'columns[]', value: columns } ) );
 		$( '.portlet-body .row', portlet ).append( framework_column );
 	}
 	

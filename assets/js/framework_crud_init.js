@@ -21,9 +21,8 @@ var Framework_create = function() {
 				var num_columns = total_columns.select2( 'val' );
 				var columns = 12 / num_columns;
 				
-				framework_create.append( gen_ui_framework_block( columns, num_columns, count ) );
+				framework_create.append( gen_ui_framework_block( columns, num_columns ) );
 				$( ".make-switch" ).bootstrapSwitch();
-				count++;
 			});
 			
 			framework_create.on( 'keyup', 'input', function() {
@@ -53,6 +52,8 @@ var Framework_create = function() {
 				e.preventDefault();
 				
 				$.post( site_url + 'admin/frameworks/insert', $( this ).serialize(), function( data ) {
+					alert( data );
+					return false;
 					gen_toastr( data );
 				});
 			});

@@ -36,6 +36,8 @@ class Frameworks extends CI_Controller {
 	
 	/** Insert **/
 	public function insert() {
+		print_r( $_POST );
+		exit;
 		$framework = $this->frameworks_model->framework_insert();
 		if( $framework ) {
 			echo 's|created Framework|' . site_url( 'admin/frameworks' );
@@ -48,7 +50,7 @@ class Frameworks extends CI_Controller {
 	public function revise( $framework_id ) {
 		$params = params_array( 'Frameworks', 'Frameworks <small>revise</small>' );
 		
-		$params['framework']				= $this->frameworks_model->framework_update( $framework_id );
+		$params['framework']				= $this->frameworks_model->framework_revise( $framework_id );
 		$params['scripts']					= [ 'js' => $this->js, 'init' => 'Framework_revise' ];
 		
 		$this->layout->view( 'admin/frameworks_revise_view.php', $params );
