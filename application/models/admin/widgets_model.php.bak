@@ -12,7 +12,11 @@ class Widgets_model extends CI_Model {
 		return $query->result_array();
 	}
 	
-	/** Insert **/
+	public function object_params( $object_id ) {
+		$query = $this->db->get_where( 'object', [ 'object_id' => $object_id ] );
+		return $query->row_array();
+	}
+	
 	public function widget_insert() {		
 		$data['alias'] 			= $this->input->post( 'alias' );
 		$data['status']			= '+';
@@ -23,13 +27,11 @@ class Widgets_model extends CI_Model {
 		return $this->db->insert( 'widget', $data );
 	}
 	
-	/** Revise **/
 	public function widget_revise( $widget_id ) {
 		$query = $this->db->get_where( 'widget', [ 'widget_id' => $widget_id ] );
 		return $query->row_array();
 	}
 	
-	/** Update **/
 	public function widget_update() {		
 		$data['alias'] 			= $this->input->post( 'alias' );
 		$data['updated']		= date( 'Y-m-d H:i:s' );
@@ -38,15 +40,8 @@ class Widgets_model extends CI_Model {
 		return $this->db->update( 'widget', $data, [ 'widget_id' => $this->input->post( 'widget_id' ) ] );
 	}
 	
-	/** Status **/
 	public function set_status() {
 		$data['status'] = $this->input->post( 'status' );
 		$this->db->update( 'widget', $data, [ 'widget_id' => $this->input->post( 'target_id' ) ] );
-	}
-	
-	/** General **/
-	public function object_params( $object_id ) {
-		$query = $this->db->get_where( 'object', [ 'object_id' => $object_id ] );
-		return $query->row_array();
 	}
 }

@@ -5,7 +5,7 @@
 				<div class="row">
 					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-6">
-						<?=gen_form_text( 'Title', 'title' );?>
+						<?=gen_input( 'Title', 'title' );?>
 					</div>
 					<h4 class="col-md-12">Parameters</h4>
 					<div class="col-md-12">

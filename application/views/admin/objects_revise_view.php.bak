@@ -16,10 +16,10 @@
 									<?=gen_select( '', '', [ 'text' => 'Text', 'select' => 'Select', 'multi' => 'Multi-Select', 'toggle' => 'Toggle', 'wysiwyg' => 'WYSIWYG' ], $input['type'], [ 'prop' => 'disabled' ] );?>
 								</div>
 								<div class="col-md-4">
-									<?=gen_input( '', '', $input['label'], [ 'placeholder' => 'Label' ] );?>	
+									<?=gen_form_text( 'none', '', $input['label'], [ 'placeholder' => 'Label' ] );?>	
 								</div>
 								<div class="col-md-4">
-									<?=gen_input( '', '', $input['field_name'], [ 'placeholder' => 'Variable Name' ] );?>	
+									<?=gen_form_text( 'none', '', $input['field_name'], [ 'placeholder' => 'Variable Name' ] );?>	
 								</div>
 							</div>
 						<?php endforeach;?>

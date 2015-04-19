@@ -376,6 +376,32 @@ function gen_ui_widget_params( $params ) {
 		$selected_values = array_combine( $selected_values, $selected_values );
 		$input_values[] = [ 'value' => $values, 'selected_values' => $selected_values ];
 	}
+	
+	/*
+	if( strpos( $params, '|' ) ) {
+		$params_array = explode( '|', $params );
+		
+		foreach( $params_array as $values ) {
+			if( strpos( $values, '^!' ) ) {
+				$selected_values = explode( '^!', $values );				
+			} else {
+				$selected_values = array( $values );
+			}
+			
+			$selected_values = array_combine( $selected_values, $selected_values );
+			$input_values[] = array( 'value' => $values, 'selected_values' => $selected_values );
+		}
+	} else {
+		if( strpos( $params, '^!' ) ) {
+			$selected_values = explode( '^!', $input );			
+		} else {
+			$selected_values = array( $params );
+		}
+		
+		$selected_values = array_combine( $selected_values, $selected_values );
+		$input_values[] = array( 'value' => $params, 'selected_values' => $selected_values );
+	}*/
+	
 	return $input_values;
 }
 

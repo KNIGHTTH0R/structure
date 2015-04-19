@@ -37,7 +37,7 @@ var Objects_create = function() {
 				}
 				
 				$( '.params-tags' ).select2( 'destroy' );
-			$( this ).parents( '.params-wrapper' ).append( $( '<div>', { class: 'col-md-10' } ).append( $( '<div>', { class: 'form-group' } ) .append( $( '<input>', { class: 'form-control object-params params-tags', placeholder: 'Enter new options...' } ) ) ) );
+			  $( this ).parents( '.params-wrapper' ).append( $( '<div>', { class: 'col-md-10' } ).append( $( '<div>', { class: 'form-group' } ) .append( $( '<input>', { class: 'form-control object-params params-tags', placeholder: 'Enter new options...' } ) ) ) );
 				$( '.params-tags' ).select2({ tags: [] });
 			});
 			
@@ -67,15 +67,17 @@ var Objects_create = function() {
 						} else {
 							var push_value = $( this ).val();
 						}
+						
 						params.push( push_value );
 					});
-					params = params.join( '|' );
+					//params = params.join( '|' );
 					object_params.push( params );
 				});
-				object_params = object_params.join( '~' );
+				//object_params = object_params.join( '~' );
 				var form_data = $( this ).serialize() + '&params=' + object_params;
 				$.post( site_url + 'admin/objects/insert', form_data, function( data ) {
-					gen_toastr( data );
+					alert( data );
+					//gen_toastr( data );
 				});
 			});
 		}

@@ -7,6 +7,7 @@ class Objects extends CI_Controller {
 		$this->js = 'assets/js/objects_crud_init.js';
 	}
 	
+	/** List **/
 	public function index() {
 		$params = params_array( 'Objects', 'Objects <small>list</small>' );
 		
@@ -24,6 +25,7 @@ class Objects extends CI_Controller {
 		$this->layout->view( 'admin/objects_view', $params );
 	}
 	
+	/** Create **/
 	public function create() {
 		$params = params_array( 'Objects', 'Objects <small>create</small>' );
 		
@@ -32,7 +34,10 @@ class Objects extends CI_Controller {
 		$this->layout->view( 'admin/objects_create_view', $params );
 	}
 	
+	/** Insert **/
 	public function insert() {
+		print_r( $_POST );
+		exit;
 		$object = $this->objects_model->object_insert();
 		if( $object ) {
 			echo 's|created Object|' . site_url( 'admin/objects' );
@@ -41,6 +46,7 @@ class Objects extends CI_Controller {
 		}
 	}
 	
+	/** Revise **/
 	public function revise( $object_id ) {
 		$params = params_array( 'Objects', 'Objects <small>revise</small>' );
 		
@@ -52,6 +58,7 @@ class Objects extends CI_Controller {
 		$this->layout->view( 'admin/objects_revise_view', $params );
 	}
 	
+	/** Update **/
 	public function update() {
 		$object = $this->objects_model->object_update();
 		if( $object ) {
@@ -61,6 +68,7 @@ class Objects extends CI_Controller {
 		}
 	}
 	
+	/** Status **/
 	public function status() {
 		$this->objects_model->set_status();
 	}

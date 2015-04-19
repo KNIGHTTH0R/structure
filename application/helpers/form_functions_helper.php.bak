@@ -130,7 +130,7 @@ function gen_select( $label = '', $field_name, $options, $selectedValue = '', $a
 		$label = '<label for="' . $field_name . '" class="control-label ' . $labelClass . '">' . $label . '</label>';
 	}
 	
-	$select = '<select class="form-control select2me ' . $class. '" id="' . $field_name . '" name="' . $name . '" placeholder="' . $placeholder . '" ' . $prop . '>';
+	$select = '<select class="form-control ' . $class. '" id="' . $field_name . '" name="' . $name . '" placeholder="' . $placeholder . '" ' . $prop . '>';
 	
 	$select .= '<option value=""></option>';
 	foreach( $options as $optionValue => $optionText ) {
