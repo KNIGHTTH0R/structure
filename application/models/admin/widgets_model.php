@@ -8,14 +8,15 @@ class Widgets_model extends CI_Model {
 	
 	/** List **/
 	public function widget_list() {
-		$query = $this->db->get( 'widget' );
+		$this->db->select( 'w.widget_id, w.status, w.alias, o.title' );
+		$this->db->join( 'object AS o', 'o.object_id = w.object_id' );
+		$query = $this->db->get( 'widget AS w' );
 		return $query->result_array();
 	}
 	
 	/** Insert **/
 	public function widget_insert() {		
 		$data['alias'] 			= $this->input->post( 'alias' );
-		$data['status']			= '+';
 		$data['entered']		= date( 'Y-m-d H:i:s' );
 		$data['object_id'] 	= $this->input->post( 'object_id' );
 		$data['params']			= $this->input->post( 'params' );

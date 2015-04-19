@@ -8,10 +8,12 @@ class Objects_model extends CI_Model {
 	
 	/** List **/
 	public function object_list() {
+		$this->db->order_by( 'status' );
 		$this->db->order_by( 'title' );
 		return $this->db->get( 'object' )->result_array();
 	}
 	
+	/** Revise **/
 	public function object_revise( $object_id ) {
 		return $this->db->get_where( 'object', [ 'object_id' => $object_id ] )->row_array();
 	}

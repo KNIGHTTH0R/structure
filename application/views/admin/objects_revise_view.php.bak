@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-md-6">
 		<?=gen_ui_portlet_open( 'Object Revise', 'cube', 'form' );?>
 			<form id="object-revise">
 				<?=gen_form_hidden_input( 'object_id', $object['object_id'] );?>
@@ -16,10 +16,10 @@
 									<?=gen_select( '', '', [ 'text' => 'Text', 'select' => 'Select', 'multi' => 'Multi-Select', 'toggle' => 'Toggle', 'wysiwyg' => 'WYSIWYG' ], $input['type'], [ 'prop' => 'disabled' ] );?>
 								</div>
 								<div class="col-md-4">
-									<?=gen_form_text( 'none', '', $input['label'], [ 'placeholder' => 'Label' ] );?>	
+									<?=gen_input( '', '', $input['label'], [ 'placeholder' => 'Label' ] );?>	
 								</div>
 								<div class="col-md-4">
-									<?=gen_form_text( 'none', '', $input['field_name'], [ 'placeholder' => 'Variable Name' ] );?>	
+									<?=gen_input( '', '', $input['field_name'], [ 'placeholder' => 'Variable Name' ] );?>	
 								</div>
 							</div>
 						<?php endforeach;?>

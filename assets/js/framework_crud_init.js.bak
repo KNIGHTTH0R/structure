@@ -9,7 +9,7 @@ var Framework_list = function() {
 var Framework_create = function() {
 	return {
 		init: function() {
-			var add_row 					= $( '.add-row' );
+			var add_row 					= $( '#add-row' );
 			var framework_create 	= $( '.form-body' );
 			var total_columns 		= $( '#total_columns' );
 			var framework_form 		= $( '#framework-create-form' );

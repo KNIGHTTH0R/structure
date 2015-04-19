@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-md-6">
 		<?=gen_ui_portlet_open( 'Object Create', 'cube', 'form' );?>
 			<form id="object-create">
 				<div class="row">

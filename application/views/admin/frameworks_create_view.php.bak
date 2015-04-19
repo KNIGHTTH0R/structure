@@ -8,7 +8,7 @@
 							<?=gen_input( 'Title', 'title', '', [ 'inline' => 3 ] );?>
 						</div>
 						<div class="col-md-3">
-							<?=gen_select( '# of Columns', 'total_columns', [ 1 => 'One', 2 => 'Two', 3 => 'Three' ], '', [ 'inline' => 5, 'addon' => [ 'type' => 'button', 'option' => 'Add', 'align' => 'right', 'class' => 'blue add-row' ] ] );?>
+							<?=gen_select( '# of Columns', 'total_columns', [ 1 => 'One', 2 => 'Two', 3 => 'Three' ], '', [ 'inline' => 5, 'class' => 'add-row', 'addon' => [ 'type' => 'button', 'option' => 'Add', 'align' => 'right', 'class' => 'blue' ] ] );?>
 						</div>	
 					</div>
 				</div>

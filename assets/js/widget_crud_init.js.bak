@@ -15,7 +15,7 @@ var Widget_create = function() {
 				}
 				$( '.select2me' ).select2( 'destroy' );
 				$.get( site_url + 'admin/widgets/get_object_params/' + $( this ).val(), function( data ) {
-					var line_break = $( '<div>', { class: 'col-md-12' } );
+					var line_break = $( '<div>', { class: 'col-md-12', html: '<hr>' } );
 					$( '#object-area' ).html( data );
 					$( '#object-area' ).prepend( line_break );
 					$( '.summernote' ).summernote( { height: 250 } );

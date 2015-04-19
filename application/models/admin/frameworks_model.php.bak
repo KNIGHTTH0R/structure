@@ -84,19 +84,17 @@ class Frameworks_model extends CI_Model {
 	}
 	
 	/** Revise **/
-	function framework_revise( $framework_id ) {
+	function get_framework( $framework_id ) {
 		return $this->db->get_where( 'framework', array( 'framework_id' => $framework_id ) )->row_array();
 	}
 	
-	/** Update **/
 	function framework_update() {
 		$data['title'] = $this->input->post( 'title' );
 		
 		return $this->db->update( 'framework', $data, array( 'framework_id' => $this->input->post( 'framework_id' ) ) );
 	}
 	
-	/** Status **/
-	function set_status() {
+	public function set_status() {
 		$data['status'] = $this->input->post( 'status' );
 		$this->db->update( 'framework', $data, array( 'framework_id' => $this->input->post( 'target_id' ) ) );
 	}

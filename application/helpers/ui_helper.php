@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct scripts access allowed');
 
-function gen_ui_dashboard_stat( $params = array() ) {
+function gen_ui_dashboard_stat( $params = [] ) {
 	$params['color'] 			= isset( $params['color'] ) ? $params['color'] : 'blue';
 	$params['icon']				= isset( $params['icon'] ) ? $params['icon'] : '';
 	$params['details']		= isset( $params['details'] ) ? $params['details'] : '';
@@ -30,7 +30,7 @@ EOD;
 	echo $ui_block;
 }
 
-function gen_ui_news_stat( $params = array(), $return = FALSE ) {
+function gen_ui_news_stat( $params = [], $return = FALSE ) {
 	$params['title'] 			= isset( $params['title'] ) ? $params['title'] : 'Default';
 	$params['sub']				= isset( $params['sub'] ) ? $params['sub'] : 'Default';
 	$params['sub_icon']		= isset( $params['sub_icon'] ) ? $params['sub_icon'] : '';
@@ -57,11 +57,11 @@ EOD;
 	}
 }
 
-function gen_ui_revise_button( $href, $params = array() ) {
+function gen_ui_revise_button( $href, $params = [] ) {
 	echo '<a class="btn blue-madison btn-xs" href="' . $href . '">Revise</a>';
 }
 
-function gen_ui_portlet_open( $title, $icon, $type = '', $params = array(), $return = FALSE ) {
+function gen_ui_portlet_open( $title, $icon, $type = '', $params = [], $return = FALSE ) {
 	$params['actions'] 			= isset( $params['actions'] ) ? gen_ui_portlet_actions( $params['actions'] ) : '';
 	$params['body_cclass']	= isset( $params['body_cclass'] ) ? $params['body_cclass'] : '';
 	$params['title_cclass']	= isset( $params['title_cclass'] ) ? $params['title_cclass'] : 'green';
@@ -96,7 +96,7 @@ EOD;
 	}
 }
 
-function gen_ui_modal_open( $params = array() ) {
+function gen_ui_modal_open( $params = [] ) {
 	$params['modal_id'] = isset( $params['modal_id'] ) ? $params['modal_id'] : '';
 	$params['form_id']	= isset( $params['form_id'] ) ? $params['form_id'] : '';
 	$params['title']		= isset( $params['title'] ) ? $params['title'] : '';
@@ -124,7 +124,7 @@ EOD;
 	echo $modal;
 }
 
-function gen_ui_portlet_actions( $params = array() ) {
+function gen_ui_portlet_actions( $params = [] ) {
 	$params['href'] 					= isset( $params['href'] ) ? '<a href="' . $params['href'] . '" data-toggle="modal" class="btn btn-default">' : '';
 	$params['icon_text'] 			= isset( $params['icon_text'] ) ? '<i class="fa fa-plus"></i> ' . $params['icon_text'] . '</a>' : '';
 	$params['reorder'] 				= isset( $params['reorder'] ) ? '<a href="javascript:;" class="reorder btn btn-default"><i class="fa fa-bars"></i> Reorder</a>' : '';
@@ -235,23 +235,23 @@ function gen_ui_icon( $icon ) {
 	}
 }
 
-function gen_ui_framework_preview( $framework_list = array() ) {
+function gen_ui_framework_preview( $framework_list = [] ) {
 	$framework_preview = '';
 	foreach( $framework_list as $framework_item ) {
 		$framework_preview .= '<div class="col-md-6">';
 		$framework_preview .= '<h4 class="text-center bold">' . $framework_item['title'] . '</h4>';
 		$framework_preview .= '<div id="framework-id-' . $framework_item['framework_id'] . '" class="framework-preview-wrapper">';
 		$framework_preview .= '<div class="framework-mockup">';
-		$framework_preview .= gen_ui_framework_item( $framework_item, array(), TRUE );
+		$framework_preview .= gen_ui_framework_item( $framework_item, [], TRUE );
 		$framework_preview .= '</div></div></div>';
 	}
 	echo $framework_preview;
 }
 
-function gen_ui_framework_item( $framework_item, $position_array = array(), $return = FALSE ) {
+function gen_ui_framework_item( $framework_item, $position_array = [], $return = FALSE ) {
 	extract( $framework_item );
 	
-	$mockup_array = array();
+	$mockup_array = [];
 	if( strpos( $mockup, '~' ) ) {
 		if( strpos( $mockup, '|' ) ) {
 			$row = explode( '~', $mockup );
@@ -292,7 +292,7 @@ function gen_ui_framework_item( $framework_item, $position_array = array(), $ret
 			if( !empty( $position_array ) && isset( $position_array['column_id'][$column_count] ) ) {
 				$widgets = gen_ui_positions( $position_array['column_id'][$column_count] );
 			} else {
-				$widgets = gen_ui_positions( array() );
+				$widgets = gen_ui_positions( [] );
 			}
 			
 			$framework_preview .= '<div class="column-count-' . $framework . '"><div id="widget-column-' . $column_count . '" class="bg-green column-content"><div class="list-group-title">Column ' . $column_count . '</div>' . $widgets . '</div></div>';
@@ -313,7 +313,7 @@ function gen_ui_framework_item( $framework_item, $position_array = array(), $ret
 	}
 }
 
-function gen_ui_positions( $position_array = array() ) {
+function gen_ui_positions( $position_array = [] ) {
 	$position = '<ul class="list-group ui-sortable">';
 	foreach( $position_array as $widget ) {
 		extract( $widget );
@@ -326,10 +326,10 @@ function gen_ui_positions( $position_array = array() ) {
 
 function gen_ui_object_params( $params ) {	
 	if( empty( $params ) ) {
-		return array();	
+		return [];	
 	}
 	
-	$input_options = array();
+	$input_options = [];
 	if( strpos( $params, '~' ) ) {
 		$params_array = explode( '~', $params );
 		
@@ -341,11 +341,11 @@ function gen_ui_object_params( $params ) {
 					$select_options = explode( '^!', $input );
 					$select_options = array_combine( $select_options, $select_options );
 				} else {
-					$select_options = array();
+					$select_options = [];
 				}
 			}
 			
-			$selected_options = array();
+			$selected_options = [];
 			$input_options[] = array( 'type' => $input_values[0], 'label' => $input_values[1], 'field_name' => $input_values[2], 'select_options' => $select_options );
 		}
 	} else {
@@ -356,7 +356,7 @@ function gen_ui_object_params( $params ) {
 				$select_options = explode( '^!', $input );
 				$select_options = array_combine( $select_options, $select_options );
 			} else {
-				$select_options = array();
+				$select_options = [];
 			}
 		}
 		

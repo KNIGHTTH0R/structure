@@ -16,11 +16,12 @@ function gen_ui_datatable( field_id, return_param ) {
 }
 
 function gen_ui_framework_block( columns, num_columns, count ) {
-	var framework_wrapper = $( '<div id="framework-row-' + count + '" class="row framework-wrapper" style="margin: 0px;"></div>' );
-	var portlet 					= $( '<div class="portlet light bordered"></div>' );
+	var framework_wrapper = $( '<div>', { class: "row framework-wrapper", style: "margin: 0px;" } );
+	var portlet 					= $( '<div>', { class: "portlet light bordered" } );
 	
-	portlet.append( '<div class="portlet-title"></div>' );
-	$( '.portlet-title', portlet ).append( '<div class="caption"><span class="caption-subject uppercase bold">Content Row</span></div>' );
+	portlet.append( $( '<div>', { class: "portlet-title" } ) );
+	$( '.portlet-title', portlet ).append( $( '<div>', { class: "caption" } )
+	                                       .append( $( '<span>', { class: "caption-subject uppercase bold", text: 'Content Row' } ) ) );
 	$( '.portlet-title', portlet ).append( '<div class="actions"><a class="btn btn-cicle btn-icon-only btn-default framework-delete" href="javascript:;" data-value="' + count + '"><i class="fa fa-trash"></i></a></div>' );
 	portlet.append( '<div class="portlet-body"></div>' );
 	$( '.portlet-body', portlet ).append( '<div class="row" style="padding: 15px;"></div>' );
@@ -43,9 +44,9 @@ function gen_ui_framework_block( columns, num_columns, count ) {
 function gen_ui_object_params_options() {
 	var form_group					= $( '<div>', { class: 'form-group' } );
 	
-	var label_input					= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params', placeholder: 'Label', name: 'object_params[]' } ) );
-	var variable_input			= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params', placeholder: 'Variable Name', name: 'object_params[]' } ) );
-	var select							= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params params-select', placeholder: 'Select...', name: 'object_params[]' } ) );
+	var label_input					= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params', placeholder: 'Label' } ) );
+	var variable_input			= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params', placeholder: 'Variable Name' } ) );
+	var select							= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params params-select', placeholder: 'Select...' } ) );
 	var params_wrapper			= $( '<div>', { class: 'params-wrapper' } );
 	var add_button					= $( '<button>', { type: 'button', class: 'btn blue add-params', text: 'Add More' } );
 	

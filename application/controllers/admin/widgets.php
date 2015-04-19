@@ -30,8 +30,8 @@ class Widgets extends CI_Controller {
 	public function create() {		
 		$params = params_array( 'Widgets', 'Widgets <small>create</small>' );
 		
-		$params['scripts']					= [ 'js' => $this->js, 'init' => 'Widget_create' ];
-		$params['styles']						= $this->styles;
+		$params['scripts']	= [ 'js' => $this->js, 'init' => 'Widget_create' ];
+		$params['styles']		= $this->styles;
 		
 		$this->layout->view( 'admin/widgets_create_view.php', $params );
 	}

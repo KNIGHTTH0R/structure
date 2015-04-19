@@ -16,12 +16,15 @@ function gen_ui_datatable( field_id, return_param ) {
 }
 
 function gen_ui_framework_block( columns, num_columns, count ) {
-	var framework_wrapper = $( '<div id="framework-row-' + count + '" class="row framework-wrapper" style="margin: 0px;"></div>' );
-	var portlet 					= $( '<div class="portlet light bordered"></div>' );
+	var framework_wrapper = $( '<div>', { class: "row framework-wrapper", style: "margin: 0px;" } );
+	var portlet 					= $( '<div>', { class: "portlet light bordered" } );
 	
-	portlet.append( '<div class="portlet-title"></div>' );
-	$( '.portlet-title', portlet ).append( '<div class="caption"><span class="caption-subject uppercase bold">Content Row</span></div>' );
-	$( '.portlet-title', portlet ).append( '<div class="actions"><a class="btn btn-cicle btn-icon-only btn-default framework-delete" href="javascript:;" data-value="' + count + '"><i class="fa fa-trash"></i></a></div>' );
+	portlet.append( $( '<div>', { class: "portlet-title" } ) );
+	$( '.portlet-title', portlet ).append( $( '<div>', { class: "caption" } )
+	                                       .append( $( '<span>', { class: "caption-subject uppercase bold", text: 'Content Row' } ) ) );
+	$( '.portlet-title', portlet ).append( $( '<div>', { class: "actions" } )
+	                                       .append( $( '<a>', { class: "btn btn-cicle btn-icon-only btn-default framework-delete", href: "javascript:;" } )
+	                                                .append( $( '<i>', { class: "fa fa-trash" } ) ) ) );
 	portlet.append( '<div class="portlet-body"></div>' );
 	$( '.portlet-body', portlet ).append( '<div class="row" style="padding: 15px;"></div>' );
 	

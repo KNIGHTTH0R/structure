@@ -36,8 +36,6 @@ class Objects extends CI_Controller {
 	
 	/** Insert **/
 	public function insert() {
-		print_r( $_POST );
-		exit;
 		$object = $this->objects_model->object_insert();
 		if( $object ) {
 			echo 's|created Object|' . site_url( 'admin/objects' );

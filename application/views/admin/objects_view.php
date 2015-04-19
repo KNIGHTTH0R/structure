@@ -1,6 +1,6 @@
 <div class="row">
 	<div id="access-level-wrapper" class="col-md-12">
-		<?=gen_ui_portlet_open( 'Objects List', 'cubes', '', $object_list );?>
+		<?=gen_ui_portlet_open( 'Objects List', 'cube', '', $object_list );?>
 		<table class="table table-striped table-hover standard-table">
 			<thead>
 				<tr>

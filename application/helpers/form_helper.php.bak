@@ -188,6 +188,22 @@ EOD;
 	}
 }
 
+function gen_form_entup( $entered, $updated ) {
+	$entered = !empty( $entered ) ? date( 'm/d/Y h:i a', strtotime( $entered ) ) : 'None';
+	$updated = !empty( $updated ) ? date( 'm/d/Y h:i a', strtotime( $updated ) ) : 'None';
+	$entered_input 	= gen_form_text( 'Entered', 'entered', $entered, array( 'coption' => 'disabled' ), 'standard', TRUE );
+	$updated_input	= gen_form_text( 'Updated', 'updated', $updated, array( 'coption' => 'disabled' ), 'standard', TRUE );
+	$entup =<<<EOD
+		<div class="col-md-6">
+			$entered_input
+		</div>
+		<div class="col-md-6">
+			$updated_input
+		</div>
+EOD;
+	echo $entup;
+}
+
 function gen_form_toggle( $label, $field_id, $status = '', $params = array(), $return = FALSE ) {
 	switch( $status ) {
 		case '+':

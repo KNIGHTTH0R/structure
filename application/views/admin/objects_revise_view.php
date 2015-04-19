@@ -1,8 +1,8 @@
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-md-6">
 		<?=gen_ui_portlet_open( 'Object Revise', 'cube', 'form' );?>
 			<form id="object-revise">
-				<?=gen_form_hidden_input( 'object_id', $object['object_id'] );?>
+				<?=gen_hidden_input( 'object_id', $object['object_id'] );?>
 				<div class="row">
 					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-6">

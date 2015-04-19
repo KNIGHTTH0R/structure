@@ -4,7 +4,6 @@
 			<form id="widget-revise">
 				<?=gen_hidden_input( 'widget_id', $widget['widget_id'] );?>
 				<div class="row">
-					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-6">
 						<?=gen_input( 'Alias', 'alias', $widget['alias'] );?>
 					</div>
