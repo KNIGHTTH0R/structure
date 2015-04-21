@@ -36,8 +36,6 @@ class Frameworks extends CI_Controller {
 	
 	/** Insert **/
 	public function insert() {
-		print_r( $_POST );
-		exit;
 		$framework = $this->frameworks_model->framework_insert();
 		if( $framework ) {
 			echo 's|created Framework|' . site_url( 'admin/frameworks' );

@@ -28,76 +28,61 @@ class Frameworks_model extends CI_Model {
 		
 		$framework_id = $this->db->insert_id();
 		$count = 1;
+		
 		$file_data = '<div class="row">' . "\n";
-		foreach( $_POST as $key => $value ) {
-			if( strpos( $key, '-' ) ) {
-				$framework = explode( '-', $key );
-				if( in_array( 'column', $framework ) ) {
-					$column 		= array_pop( $framework );
-					$column_num = $framework[2];
-					$mockup_array[$column][$column_num]['size'] = $this->input->post( $key );
+		foreach( $this->input->post( 'framework_width' ) as $row => $columns ) {
+			foreach( $columns as $column_count => $column ) {
+				if( $this->input->post( 'allow_widgets', $row, $column_count ) ) {
+					$mockup_array[$row][] = $column;
 					
-					if( $this->input->post( 'framework-widgets-' . $column_num . '-' . $column ) ) {
-						$mockup_array[$column][$column_num]['widgets'] = 'yes';
-						$data = array(
-							'framework_id' => $framework_id,
-							'target' => 'column-' . $count 
-						);
-						
-						$this->db->insert( 'column', $data );
-						
-						$variable = '<?=$column_' . $count . ';?>';
-						$count++;
-					} else {
-						$variable = '';
-					}
+					$data = [
+						'framework_id' => $framework_id,
+						'target' => 'column-' . $count
+					];
 					
-					$file_data .= '<div class="col-md-' . $this->input->post( $key ) . '">' . $variable . '</div>'  . "\n";
+					$this->db->insert( 'column', $data );
+					
+					$variable = '<?=$column_' . $count . ';?>';
+					$count++;
+				} else {
+					$mockup_array[$row][] = $column . '*';
+					$variable = '';
 				}
+				$file_data .= '<div class="col-md-' . $column . '">' . $variable . '</div>'  . "\n";
 			}
-		}
-		$file_data .= '</div>' . "\n";
-		$fh = fopen( APPPATH . 'views/frameworks/' . $file . '.php', "w" );
+		}		
+		$file_data .= '</div>';
+		$fh = fopen( APPPATH . 'views/frameworks/' . $file . '.php', 'w' );
 		fwrite( $fh, $file_data );
 		fclose( $fh );
 		
-		$mockup = '';
-		foreach( $mockup_array as $row ) {
-			foreach( $row as $preview ) {
-				$widgets = '';
-				extract( $preview );
-				
-				$widget_check = empty( $widgets ) ? '*' : '';
-				$mockup .= $size . $widget_check . '|';
-			}
-			$mockup = rtrim( $mockup, '|' );
-			$mockup .= '~';
-		}
+		$mockup = implode( '|', array_map( function( $index ) {
+			return implode( '~', $index );
+		}, $mockup_array ) );
 		
-		$mockup = rtrim( $mockup, '~' );
-		$data = array(
+		$data = [
 			'mockup' => $mockup
-		);
+		];
 		
-		$this->db->update( 'framework', $data, array( 'framework_id' => $framework_id ) );
+		$this->db->update( 'framework', $data, [ 'framework_id' => $framework_id ] );
 		return $framework_id;
 	}
 	
 	/** Revise **/
 	function framework_revise( $framework_id ) {
-		return $this->db->get_where( 'framework', array( 'framework_id' => $framework_id ) )->row_array();
+		return $this->db->get_where( 'framework', [ 'framework_id' => $framework_id ] )->row_array();
 	}
 	
 	/** Update **/
 	function framework_update() {
 		$data['title'] = $this->input->post( 'title' );
 		
-		return $this->db->update( 'framework', $data, array( 'framework_id' => $this->input->post( 'framework_id' ) ) );
+		return $this->db->update( 'framework', $data, [ 'framework_id' => $this->input->post( 'framework_id' ) ] );
 	}
 	
 	/** Status **/
 	function set_status() {
 		$data['status'] = $this->input->post( 'status' );
-		$this->db->update( 'framework', $data, array( 'framework_id' => $this->input->post( 'target_id' ) ) );
+		$this->db->update( 'framework', $data, [ 'framework_id' => $this->input->post( 'target_id' ) ] );
 	}
 }
