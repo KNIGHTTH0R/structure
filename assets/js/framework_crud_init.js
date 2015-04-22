@@ -53,7 +53,6 @@ var Framework_create = function() {
 				e.preventDefault();
 				
 				$.post( site_url + 'admin/frameworks/insert', $( this ).serialize(), function( data ) {
-					alert( data );
 					gen_toastr( data );
 				});
 			});

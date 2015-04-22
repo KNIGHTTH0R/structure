@@ -9,7 +9,7 @@
 						<?=gen_input( 'Title', 'title', $template['title'], [ 'inline' => 3 ] );?>
 					</div>
 					<div class="col-md-4">
-						<?=gen_select_framework( $template['framework_id'], [ 'inline' => 3, 'prop' => 'disabled' ] );?>
+						<?=gen_select_framework( '', [ 'inline' => 3, 'prop' => 'disabled' ] );?>
 					</div>
 					<div class="col-md-4">
 						<?=gen_select( 'Widgets', 'column_id', [], '', [ 'inline' => 3, 'addon' => [ 'type' => 'button', 'class' => 'blue widget-add', 'option' => 'Add', 'align' => 'right' ] ] );?>	

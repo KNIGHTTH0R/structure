@@ -50,7 +50,6 @@ var Templates_create = function() {
 			var template_wrapper	= $( '#template-wrapper' );
 			var framework_preview	= $( '#framework-item-preview' );
 			var target_column			= '';
-			var widget_add        = $( '.widget-add' );
 			var widget_add_form		= $( '#widget-add-form' );
 			var widget_add_modal  = $( '#widget-add-modal' );
 			
@@ -87,10 +86,6 @@ var Templates_create = function() {
 	          revert: 250, // animation in milliseconds
 	        });
 				});
-			});
-			
-			widget_add.on( 'click', function() {
-				widget_add_modal.modal( 'show' );
 			});
 			
 			widget_add_form.on( 'submit', function( e ) {

@@ -1,27 +1,29 @@
 <div class="row">
-	<div id="template-wrapper" class="col-md-12">
-		<?=gen_ui_portlet_open( 'Template Revise', 'picture-o' , 'form' );?>
-			<form id="template-revise" class="form-horizontal">
-				<?=gen_form_hidden_input( 'template_id', $template['template_id'] );?>
-				<?=gen_form_hidden_input( 'framework_id', $template['framework_id'] );?>
+	<div id="framework-wrapper" class="col-md-12">
+		<div class="row">
+			<?=gen_ui_framework_preview( $framework_list );?>
+		</div>
+	</div>	
+</div>
+<div class="row">
+	<div id="template-wrapper" class="col-md-12" style="display: none;">
+		<?=gen_ui_portlet_open( 'Template Create', 'picture-o' , 'form', $template_create );?>
+			<form id="template-create" class="form-horizontal">
 				<div class="row">
 					<div class="col-md-4">
-						<?=gen_input( 'Title', 'title', $template['title'], [ 'inline' => 3 ] );?>
+						<?=gen_input( 'Title', 'title', '', [ 'inline' => 3 ] );?>
 					</div>
 					<div class="col-md-4">
-						<?=gen_select_framework( $template['framework_id'], [ 'inline' => 3, 'prop' => 'disabled' ] );?>
 					</div>
 					<div class="col-md-4">
 						<?=gen_select( 'Widgets', 'column_id', [], '', [ 'inline' => 3, 'addon' => [ 'type' => 'button', 'class' => 'blue widget-add', 'option' => 'Add', 'align' => 'right' ] ] );?>	
 					</div>
 				</div>
 				<div id="framework-item-preview" class="row">
-					<div class="framework-mockup">
-						<?=gen_ui_framework_item( $framework, $positions );?>
-					</div>
+					<?=$framework_preview;?>
 				</div>
 				<div class="form-actions right">
-					<?=gen_form_actions( site_url( 'admin/templates' ) );?>
+					<?=gen_form_actions();?>
 				</div>
 			</form>
 		<?=gen_ui_portlet_close();?>

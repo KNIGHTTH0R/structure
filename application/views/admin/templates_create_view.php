@@ -11,25 +11,13 @@
 			<form id="template-create" class="form-horizontal">
 				<div class="row">
 					<div class="col-md-4">
-						<?=gen_form_text( 'Title', 'title', '', array(), 'inline' );?>
+						<?=gen_input( 'Title', 'title', '', [ 'inline' => 3 ] );?>
 					</div>
 					<div class="col-md-4">
-						<?=gen_select_framework( '', array(), 'inline' );?>
+						<?=gen_select_framework( '', [ 'inline' => 3 ] );?>
 					</div>
 					<div class="col-md-4">
-						<div class="form-group">
-							<label class="col-md-3 control-label">Widgets</label>
-							<div class="col-md-9">
-								<div class="input-group">
-									<select class="form-control select2me" id="column_id" data-placeholder="Select...">
-										<option value=""></option>
-									</select>
-									<span class="input-group-btn">
-									<button id="add-row" href="#widget-add-modal" data-toggle="modal" type="button" class="btn blue" type="button">Add</button>
-									</span>
-								</div>
-							</div>
-						</div>	
+						<?=gen_select( 'Widgets', 'column_id', [], '', [ 'inline' => 3, 'addon' => [ 'type' => 'button', 'class' => 'blue widget-add', 'option' => 'Add', 'align' => 'right' ] ] );?>	
 					</div>
 				</div>
 				<div id="framework-item-preview" class="row">

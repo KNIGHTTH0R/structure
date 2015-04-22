@@ -218,26 +218,6 @@ EOD;
 	}
 }
 
-function gen_select_framework( $selected_id = '', $params = array(), $wrapper = 'standard' ) {
-	$framework_options = array();
-	
-	$CI =& get_instance();
-	$CI->load->database();
-	
-	$CI->db->order_by( 'file' );
-	$query = $CI->db->get( 'framework' );
-	
-	if( $query->num_rows() > 0 ) {
-		foreach( $query->result_array() as $row ) {
-			extract( $row );
-			
-			$framework_options[$framework_id] = $title;
-		}
-	}
-	
-	return gen_form_select( 'Framework', 'framework_id', $framework_options, $selected_id, $params, $wrapper );
-}
-
 function gen_select_access_level( $access_level = '', $params = array(), $wrapper = 'standard' ) {
 	$access_level_options = get_access_levels();
 	

@@ -17,7 +17,7 @@ class Frameworks_model extends CI_Model {
 	
 	/** Insert **/
 	function framework_insert() {
-		$mockup_array = array();
+		$mockup_array = [];
 		$file = str_replace( ' ', '_', strtolower( $this->input->post( 'title' ). '_fr' ) );
 		
 		$data['status']		= '+';
@@ -32,7 +32,7 @@ class Frameworks_model extends CI_Model {
 		$file_data = '<div class="row">' . "\n";
 		foreach( $this->input->post( 'framework_width' ) as $row => $columns ) {
 			foreach( $columns as $column_count => $column ) {
-				if( $this->input->post( 'allow_widgets', $row, $column_count ) ) {
+				if( isset( $_POST['allow_widgets'][$row][$column_count] ) ) {
 					$mockup_array[$row][] = $column;
 					
 					$data = [
@@ -50,7 +50,7 @@ class Frameworks_model extends CI_Model {
 				}
 				$file_data .= '<div class="col-md-' . $column . '">' . $variable . '</div>'  . "\n";
 			}
-		}		
+		}
 		$file_data .= '</div>';
 		$fh = fopen( APPPATH . 'views/frameworks/' . $file . '.php', 'w' );
 		fwrite( $fh, $file_data );

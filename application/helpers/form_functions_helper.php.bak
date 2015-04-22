@@ -4,7 +4,7 @@
 function gen_input_addon( $input, $addon ) {
 	extract( $addon );
 	
-	$align = isset( $align ) ? $align : 'right';
+	$align = isset( $align ) ? $align : 'left';
 	$class = isset( $class ) ? $class : 'btn-default';
 	
 	switch( $type ) {
@@ -238,6 +238,22 @@ function gen_form_entup( $entered, $updated ) {
 }
 
 /** Custom Inputs **/
+function gen_select_framework( $selected_id = '', $args = [] ) {
+	$framework_options = [];
+	
+	$CI =& get_instance();
+	$CI->load->database();
+	
+	$CI->db->order_by( 'file' );
+	$query = $CI->db->get( 'framework' );
+	
+	if( $query->num_rows() > 0 ) {
+		$framework_options = array_column( $query->result_array(), 'title', 'framework_id' );
+	}
+	
+	return gen_select( 'Framework', 'framework_id', $framework_options, $selected_id, $args );
+}
+
 function gen_object_select( $selected_option = '', $args = [], $return = FALSE ) {
 	$object_options = [];
 	

@@ -90,17 +90,17 @@ class Templates_model extends CI_Model {
 	
 	/** Template Widget Positions **/
 	public function get_positions( $template_id ) {
-		$position_array = [];
+		$position_array = array();
 		$this->db->select( 'p.widget_id, p.column_id, w.alias' );
 		$this->db->join( 'widget AS w', 'w.widget_id = p.widget_id', 'inner' );
 		$this->db->order_by( 'p.column_id' );
 		$this->db->order_by( 'p.sequence' );
-		$query = $this->db->get_where( 'position AS p', [ 'template_id' => $template_id ] );
+		$query = $this->db->get_where( 'position AS p', array( 'template_id' => $template_id ) );
 		if( $query->num_rows > 0 ) {
 			foreach( $query->result_array() as $row ) {
 				extract( $row );
 				
-				$position_array['column_id'][$column_id][] = [ 'widget_id' => $widget_id, 'alias' => $alias ];
+				$position_array['column_id'][$column_id][] = array( 'widget_id' => $widget_id, 'alias' => $alias );
 			}
 		}
 		return $position_array;
