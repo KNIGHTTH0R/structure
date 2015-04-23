@@ -32,7 +32,7 @@ class Frameworks_model extends CI_Model {
 		$file_data = '<div class="row">' . "\n";
 		foreach( $this->input->post( 'framework_width' ) as $row => $columns ) {
 			foreach( $columns as $column_count => $column ) {
-				if( $this->input->post( 'allow_widgets', $row, $column_count ) ) {
+				if( isset( $_POST['allow_widgets'][$row][$column_count] ) ) {
 					$mockup_array[$row][] = $column;
 					
 					$data = [
@@ -56,12 +56,12 @@ class Frameworks_model extends CI_Model {
 		fwrite( $fh, $file_data );
 		fclose( $fh );
 		
-		$mockup = implode( '|', array_map( function( $index ) {
+		/*$mockup = implode( '|', array_map( function( $index ) {
 			return implode( '~', $index );
-		}, $mockup_array ) );
+		}, $mockup_array ) );*/
 		
 		$data = [
-			'mockup' => $mockup
+			'mockup' => json_encode( $mockup_array )
 		];
 		
 		$this->db->update( 'framework', $data, [ 'framework_id' => $framework_id ] );

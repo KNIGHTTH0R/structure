@@ -29,7 +29,7 @@ class Objects_model extends CI_Model {
 		$data['entered'] = date( 'Y-m-d H:i:s' );
 		$data['title']	 = $this->input->post( 'title' );
 		$data['file']		 = $file;
-		$data['params']	 = $this->input->post( 'params' );
+		$data['params']	 = json_encode( $this->input->post( 'params' ) );
 		
 		$fh = fopen( APPPATH . 'views/objects/' . $file . '.php', 'w' );
 		fwrite( $fh, '' );

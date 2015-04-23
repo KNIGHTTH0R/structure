@@ -30,8 +30,8 @@ class Widgets extends CI_Controller {
 	public function create() {		
 		$params = params_array( 'Widgets', 'Widgets <small>create</small>' );
 		
-		$params['scripts']					= [ 'js' => $this->js, 'init' => 'Widget_create' ];
-		$params['styles']						= $this->styles;
+		$params['scripts']	= [ 'js' => $this->js, 'init' => 'Widget_create' ];
+		$params['styles']		= $this->styles;
 		
 		$this->layout->view( 'admin/widgets_create_view.php', $params );
 	}
@@ -78,7 +78,6 @@ class Widgets extends CI_Controller {
 	/** General **/
 	public function get_object_params( $object_id ) {
 		$object = $this->widgets_model->object_params( $object_id );
-		$object_params = gen_ui_object_params( $object['params'] );
-		gen_ui_object_inputs( $object_params );
+		gen_ui_object_params( $object['params'] );
 	}
 }

@@ -181,7 +181,6 @@ var Templates_revise = function() {
 			var widget_add_modal  = $( '#widget-add-modal' );
 			
 			$( document ).ready( function() {
-				framework_preview.slideDown();
 				
 				$( ".list-group" ).sortable({
 						axis: 'y',

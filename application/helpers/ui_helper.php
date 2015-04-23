@@ -251,58 +251,37 @@ function gen_ui_framework_preview( $framework_list = [] ) {
 function gen_ui_framework_item( $framework_item, $position_array = [], $return = FALSE ) {
 	extract( $framework_item );
 	
-	$mockup_array = [];
-	if( strpos( $mockup, '~' ) ) {
-		if( strpos( $mockup, '|' ) ) {
-			$row = explode( '~', $mockup );
-			foreach( $row as $column ) {
-				if( strpos( $mockup, '|' ) ) {
-					$split_row = explode( '|', $column );
-					foreach( $split_row as $split_column ) {
-						$mockup_array[] = $split_column;
-					}
-				} else {
-					$mockup_array[] = $column;
-				}
-			}
-		} else {
-			$mockup_array = explode( '~', $mockup );
-		}
-	} else if( strpos( $mockup, '|' ) ) {
-		$split_row = explode( '|', $column );
-		foreach( $split_row as $split_column ) {
-			$mockup_array[] = $split_column;
-		}
-	} else {
-		$mockup_array[] = $mockup;
-	}
+	$mockup_array = json_decode( $mockup );
 	
 	$framework_preview = '';
 	$column_count = 1;
 	$break_count	= 0;
-	foreach( $mockup_array as $framework ) {
-		if( $break_count == 0 ) {
-			$framework_preview .= '<div class="row-wrapper">';	
-		}
-		
-		if( strpos( $framework, '*' ) ) {
-			$framework = str_replace( '*', '', $framework );
-			$framework_preview .= '<div class="column-count-' . $framework . '"><div class="bg-grey column-content"><div class="list-group-title">No Widgets</div></div></div>';
-		} else {
-			if( !empty( $position_array ) && isset( $position_array['column_id'][$column_count] ) ) {
-				$widgets = gen_ui_positions( $position_array['column_id'][$column_count] );
-			} else {
-				$widgets = gen_ui_positions( [] );
+	
+	foreach( $mockup_array as $row ) {
+		foreach( $row as $column ) {
+			if( $break_count == 0 ) {
+				$framework_preview .= '<div class="row-wrapper">';	
 			}
 			
-			$framework_preview .= '<div class="column-count-' . $framework . '"><div id="widget-column-' . $column_count . '" class="bg-green column-content"><div class="list-group-title">Column ' . $column_count . '</div>' . $widgets . '</div></div>';
-			$column_count++;
-		}
-		$break_count += $framework;
-		
-		if( $break_count == 12 ) {
-			$framework_preview .= '</div>';
-			$break_count = 0;
+			if( strpos( $column, '*' ) ) {
+				$column = str_replace( '*', '', $column );
+				$framework_preview .= '<div class="column-count-' . $column . '"><div class="bg-grey column-content"><div class="list-group-title">No Widgets</div></div></div>';
+			} else {
+				if( ! empty( $position_array ) && isset( $position_array['column_id'][$column_count] ) ) {
+					$widgets = gen_ui_positions( $position_array['column_id'][$column_count] );
+				} else {
+					$widgets = gen_ui_positions( [] );
+				}
+				
+				$framework_preview .= '<div class="column-count-' . $column . '"><div id="widget-column-' . $column_count . '" class="bg-green column-content"><div class="list-group-title">Column ' . $column_count . '</div>' . $widgets . '</div></div>';
+				$column_count++;
+			}
+			$break_count += $column;
+			
+			if( $break_count == 12 ) {
+				$framework_preview .= '</div>';
+				$break_count = 0;
+			}
 		}
 	}
 	
@@ -324,46 +303,39 @@ function gen_ui_positions( $position_array = [] ) {
 	return $position;
 }
 
-function gen_ui_object_params( $params ) {	
+function gen_ui_object_params( $params, $return = FALSE ) {	
 	if( empty( $params ) ) {
 		return [];	
 	}
 	
-	$input_options = [];
-	if( strpos( $params, '~' ) ) {
-		$params_array = explode( '~', $params );
+	$inputs = '';
+	$input_array = json_decode( $params, TRUE );
+	foreach( $input_array as $input ) {
+		extract( $input );
 		
-		foreach( $params_array as $input_params ) {
-			$input_values = explode( '|', $input_params );
-			
-			foreach( $input_values as $input ) {
-				if( strpos( $input, '^!' ) ) {
-					$select_options = explode( '^!', $input );
-					$select_options = array_combine( $select_options, $select_options );
-				} else {
-					$select_options = [];
-				}
-			}
-			
-			$selected_options = [];
-			$input_options[] = array( 'type' => $input_values[0], 'label' => $input_values[1], 'field_name' => $input_values[2], 'select_options' => $select_options );
+		switch( $type ) {
+			case 'text':
+				$inputs .= '<div class="col-md-6">' . gen_input( $label, $variable, '', [], TRUE ) . '</div>';
+			break;
+			case 'select':
+				$inputs .= '<div class="col-md-6">' . gen_select( $label, $variable, $options, '', [], TRUE ) . '</div>';
+			break;
+			case 'multi':
+				$inputs .= '<div class="col-md-6">' . gen_multi_select( $label, $variable, $options, [], [], TRUE ) . '</div>';
+			break;
+			case 'toggle':
+				$inputs .= '<div class="col-md-6">' . gen_toggle( $label, $variable, '', [], TRUE ) . '</div>';
+			break;
+			case 'wysiwyg':
+				$inputs .= '<div class="col-md-12">' . gen_form_wysiwyg( $label, $variable, '', [], TRUE ) . '</div>';
+			break;
 		}
-	} else {
-		$input_values = explode( '|', $params );
-		
-		foreach( $input_values as $input ) {
-			if( strpos( $input, '^!' ) ) {
-				$select_options = explode( '^!', $input );
-				$select_options = array_combine( $select_options, $select_options );
-			} else {
-				$select_options = [];
-			}
-		}
-		
-		$input_options[] = array( 'type' => $input_values[0], 'label' => $input_values[1], 'field_name' => $input_values[2], 'select_options' => $select_options );
 	}
-	
-	return $input_options;
+	if( $return === TRUE ) {
+		return $inputs;
+	} else {
+		echo $inputs;
+	}
 }
 
 function gen_ui_widget_params( $params ) {
@@ -377,54 +349,4 @@ function gen_ui_widget_params( $params ) {
 		$input_values[] = [ 'value' => $values, 'selected_values' => $selected_values ];
 	}
 	return $input_values;
-}
-
-function gen_ui_object_inputs( $input_options, $input_values = [], $return = FALSE ) {
-	if( empty( $input_options ) ) {
-		return;
-	}
-	
-	$inputs = '';
-	$count  = 0;
-	
-	foreach( $input_options as $input ) {
-		extract( $input );
-		
-		if( ! empty( $input_values ) ) {
-			$value 						= $input_values[$count]['value'];
-			$selected_values 	= $input_values[$count]['selected_values'];
-		} else {
-			$value = '';
-			$selected_values = [];
-		}
-		
-		switch( $type ) {
-			case 'text':
-				$inputs .= '<div class="col-md-6">' . gen_input( $label, '', $value, [ 'class' => 'widget-params' ], TRUE ) . '</div>';
-			break;
-			case 'select':
-				$inputs .= '<div class="col-md-6">' . gen_form_select( $label, '', $select_options, $value, array( 'cclass' => 'widget-params' ), 'standard', TRUE ) . '</div>';
-			break;
-			case 'multi':
-				$inputs .= '<div class="col-md-6">' . gen_form_multi_select( $label, '', $select_options, $selected_values, array( 'cclass' => 'widget-params' ), 'standard', TRUE ) . '</div>';
-			break;
-			case 'toggle':
-				$inputs .= '<div class="col-md-6">' . gen_form_toggle( $label, '', $value, array( 'cclass' => 'widget-params' ), TRUE ) . '</div>';
-			break;
-			case 'wysiwyg':
-				$inputs .= '<div class="col-md-12">' . gen_form_wysiwyg( $label, '', $value, TRUE ) . '</div>';
-			break;
-		}
-		$count++;
-		
-		if( $count %2 == 0 ) {
-			$inputs .= '<div class="clearfix"></div>';
-		}
-	}
-	
-	if( $return === TRUE ) {
-		return $inputs;
-	} else {
-		echo $inputs;
-	}
 }

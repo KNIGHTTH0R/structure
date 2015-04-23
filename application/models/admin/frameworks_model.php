@@ -56,12 +56,10 @@ class Frameworks_model extends CI_Model {
 		fwrite( $fh, $file_data );
 		fclose( $fh );
 		
-		$mockup = implode( '|', array_map( function( $index ) {
-			return implode( '~', $index );
-		}, $mockup_array ) );
+		$mockup_array = array_values( $mockup_array );
 		
 		$data = [
-			'mockup' => $mockup
+			'mockup' => json_encode( $mockup_array )
 		];
 		
 		$this->db->update( 'framework', $data, [ 'framework_id' => $framework_id ] );

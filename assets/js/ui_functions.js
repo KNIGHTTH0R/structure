@@ -52,8 +52,8 @@ function gen_ui_framework_block( columns, num_columns, count ) {
 function gen_ui_object_params_options() {
 	var form_group					= $( '<div>', { class: 'form-group' } );
 	
-	var label_input					= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params', placeholder: 'Label' } ) );
-	var variable_input			= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params', placeholder: 'Variable Name' } ) );
+	var label_input					= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params params-label', placeholder: 'Label' } ) );
+	var variable_input			= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params params-variable', placeholder: 'Variable Name' } ) );
 	var select							= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params params-select', placeholder: 'Select...' } ) );
 	var params_wrapper			= $( '<div>', { class: 'params-wrapper' } );
 	var add_button					= $( '<button>', { type: 'button', class: 'btn blue add-params', text: 'Add More' } );

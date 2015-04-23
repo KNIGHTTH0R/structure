@@ -33,7 +33,6 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="<?=site_url();?>assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
 <link href="<?=site_url();?>assets/global/plugins/select2/select2.css" rel="stylesheet" type="text/css"/>
 <link href="<?=site_url();?>assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css"/>
-<link href="<?=site_url();?>assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN THEME STYLES -->
 <link href="<?=site_url();?>assets/global/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css"/>

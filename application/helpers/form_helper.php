@@ -175,49 +175,6 @@ EOD;
 	return $actions;
 }
 
-function gen_form_wysiwyg( $label, $field_id, $value = '', $return = FALSE ) {
-	$wysiwyg =<<<EOD
-		<div class="summernote" id="$field_id">$value</div>
-		<textarea name="wysiwyg" id="wysiwyg" class="widget-params" style="display:none;"></textarea>
-EOD;
-
-	if( $return === TRUE ) {
-		return gen_form_std_wrapper( $label, $wysiwyg );
-	} else {
-		echo gen_form_std_wrapper( $label, $wysiwyg );
-	}
-}
-
-function gen_form_toggle( $label, $field_id, $status = '', $params = array(), $return = FALSE ) {
-	switch( $status ) {
-		case '+':
-			$status = 'checked';
-		break;
-		case 'on':
-			$status = 'checked';
-		break;
-		case '-':
-			$status = '';
-		break;
-		default:
-			$status = '';;
-	}
-	
-	$params['cclass'] = isset( $params['cclass'] ) ? $params['cclass'] : '';
-	
-	$toggle =<<<EOD
-		<div>
-			<input type="checkbox" class="make-switch {$params['cclass']}" data-on-color="primary" data-off-color="danger" data-on-text="&nbsp;On&nbsp;" data-off-text="&nbsp;Off&nbsp;" $status>
-		</div>
-EOD;
-
-	if( $return === TRUE ) {
-		return gen_form_std_wrapper( $label, $toggle );
-	} else {
-		echo gen_form_std_wrapper( $label, $toggle );
-	}
-}
-
 function gen_select_access_level( $access_level = '', $params = array(), $wrapper = 'standard' ) {
 	$access_level_options = get_access_levels();
 	

@@ -50,7 +50,7 @@ class Objects extends CI_Controller {
 		
 		$object										= $this->objects_model->object_revise( $object_id );
 		$params['object']					= $object;
-		$params['object_params']	= gen_ui_object_params( $object['params'] );
+		$params['object_params']	= json_decode( $object['params'], TRUE );
 		$params['scripts']				= [ 'js' => $this->js, 'init' => 'Objects_revise' ];
 		
 		$this->layout->view( 'admin/objects_revise_view', $params );

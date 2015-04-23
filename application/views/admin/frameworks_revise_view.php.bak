@@ -17,10 +17,10 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<?=gen_input( 'Entered', 'entered', date( 'm/d/Y h:i a', strtotime( $framework['entered'] ) ), [ 'inline' => '3', 'prop' => 'disabled', 'class' => 'input-medium' ] );?>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<?=gen_input( 'Updated', 'updated', ! empty( $framework['updated'] ) ? date( 'm/d/Y h:i a', strtotime( $framework['updated'] ) ) : 'None', [ 'inline' => '3', 'prop' => 'disabled', 'class' => 'input-medium' ] );?>
 						</div>
 					</div>

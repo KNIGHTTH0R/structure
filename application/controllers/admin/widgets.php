@@ -52,7 +52,7 @@ class Widgets extends CI_Controller {
 		
 		$widget											= $this->widgets_model->widget_revise( $widget_id );
 		$object											= $this->widgets_model->object_params( $widget['object_id'] );
-		$params['object']						= gen_ui_object_params( $object['params'] );
+		$params['object']						= gen_ui_object_params( $object['params'], TRUE );
 		$params['scripts']					= [ 'js' => $this->js, 'init' => 'Widget_revise' ];
 		$params['styles']						= $this->styles;
 		$params['widget']						= $widget;
@@ -78,7 +78,6 @@ class Widgets extends CI_Controller {
 	/** General **/
 	public function get_object_params( $object_id ) {
 		$object = $this->widgets_model->object_params( $object_id );
-		$object_params = gen_ui_object_params( $object['params'] );
-		gen_ui_object_inputs( $object_params );
+		gen_ui_object_params( $object['params'] );
 	}
 }

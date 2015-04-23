@@ -174,7 +174,7 @@ function gen_multi_select( $label = '', $field_name, $options, $selectedValues =
 		$label = '<label for="' . $field_name . '" class="control-label ' . $labelClass . '">' . $label . '</label>';
 	}
 	
-	$select = '<select class="form-control ' . $class. '" id="' . $field_name . '" name="' . $name . '" placeholder="' . $placeholder . '" ' . $prop . ' multiple>';
+	$select = '<select class="form-control select2me ' . $class. '" id="' . $field_name . '" name="' . $name . '" placeholder="' . $placeholder . '" ' . $prop . ' multiple>';
 	
 	$select .= '<option value=""></option>';
 	foreach( $options as $optionValue => $optionText ) {
@@ -200,6 +200,42 @@ function gen_multi_select( $label = '', $field_name, $options, $selectedValues =
 	}
 }
 
+function gen_toggle( $label, $field_id, $status = '', $params = [], $return = FALSE ) {
+	switch( $status ) {
+		case '+':
+			$status = 'checked';
+		break;
+		case 'on':
+			$status = 'checked';
+		break;
+		case '-':
+			$status = '';
+		break;
+		default:
+			$status = '';;
+	}
+	
+	$params['cclass'] = isset( $params['cclass'] ) ? $params['cclass'] : '';
+	
+	$toggle =	'<div><input type="checkbox" class="make-switch ' . $params['cclass'] . '" data-on-color="primary" data-off-color="danger" data-on-text="&nbsp;On&nbsp;" data-off-text="&nbsp;Off&nbsp;" ' . $status . '></div>';
+
+	if( $return === TRUE ) {
+		return gen_form_std_wrapper( $label, $toggle );
+	} else {
+		echo gen_form_std_wrapper( $label, $toggle );
+	}
+}
+
+function gen_form_wysiwyg( $label, $field_id, $value = '', $return = FALSE ) {
+	$wysiwyg  = '<div class="summernote" id="' . $field_id . '">' . $value . '</div>';
+	$wysiwyg .= '<textarea name="wysiwyg" id="wysiwyg" class="widget-params" style="display:none;"></textarea>';
+
+	if( $return === TRUE ) {
+		return gen_form_std_wrapper( $label, $wysiwyg );
+	} else {
+		echo gen_form_std_wrapper( $label, $wysiwyg );
+	}
+}
 function gen_hidden_input( $field_name, $value, $return = FALSE ) {
 	if( $return === TRUE ) {
 		return '<input type="text" value="' . $value . '" name="' . $field_name . '" hidden>';
@@ -244,7 +280,7 @@ function gen_select_framework( $selected_id = '', $args = [] ) {
 	$CI =& get_instance();
 	$CI->load->database();
 	
-	$CI->db->order_by( 'file' );
+	$CI->db->order_by( 'title' );
 	$query = $CI->db->get( 'framework' );
 	
 	if( $query->num_rows() > 0 ) {
