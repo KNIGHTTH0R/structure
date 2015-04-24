@@ -1,10 +1,10 @@
 <div class="row">
 	<div class="col-md-6">
-		<?=gen_ui_portlet_open( 'Object Revise', 'cube', 'form' );?>
-			<form id="object-revise">
+		<?=gen_ui_portlet_open( 'Object Read', 'cube', 'form' );?>
+			<form id="object-read">
 				<?=gen_hidden_input( 'object_id', $object['object_id'] );?>
 				<div class="row">
-					<h4 class="col-md-12">Options</h4>
+					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-6">
 						<?=gen_input( 'Title', 'title', $object['title'] );?>
 					</div>
@@ -20,6 +20,7 @@
 							<div class="col-md-4 text-center">
 								<strong>Field Name</strong>
 							</div>
+							<div class="col-md-12"><hr></div>
 							<?php foreach( $object_params as $param ):?>
 								<div class="params-wrapper">
 									<div class="col-md-4">

@@ -112,8 +112,6 @@ var Objects_revise = function() {
 			var options							= [{ id: 'text', text: 'Text Input' }, { id: 'select', text: 'Select' }, { id: 'multi', text: 'Multi-Select' },{ id: 'toggle', text: 'Toggle Switch' }, { id: 'wysiwyg', text: 'WYSIWYG' }];
 			
 			$( document ).ready( function() {
-				//params_container.append( gen_ui_object_params_options() );
-				//$( '.params-select', params_container ).select2({ data: options });
 				$( '.summernote' ).summernote( { height: 250 } );
 			});
 			

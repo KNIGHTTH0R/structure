@@ -22,7 +22,7 @@ class Menu_items extends CI_Controller {
 		
 		$params['access_options']	= get_access_levels();
 		$params['menu_item_list']	= $menu_item_list;
-		$params['list']						= $this->menu_items_model->menu_item_list( $this->input->get( 'section' ) );
+		$params['list']						= $this->menu_items_model->menu_item_list( 'ad' );
 		
 		$this->layout->view( 'admin/menu_items_view', $params );
 	}

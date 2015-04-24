@@ -215,7 +215,6 @@ Rounded Portlets
 .column-content .list-group li {
 	color: #000;
 	margin: 0px auto;
-	transition: border-color 0.3s ease;
 	transition: background-color 0.3s ease;
 }
 
@@ -223,7 +222,6 @@ Rounded Portlets
 
 .list-group li:hover {
 	color: #fff;
-	border-color: #2196F3;
 	background-color: #2196F3;
 	cursor: pointer;
 }

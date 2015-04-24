@@ -20,7 +20,6 @@
 							<div class="col-md-4 text-center">
 								<strong>Field Name</strong>
 							</div>
-							<div class="col-md-12"><hr></div>
 							<?php foreach( $object_params as $param ):?>
 								<div class="params-wrapper">
 									<div class="col-md-4">

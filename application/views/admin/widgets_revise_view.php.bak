@@ -4,6 +4,7 @@
 			<form id="widget-revise">
 				<?=gen_hidden_input( 'widget_id', $widget['widget_id'] );?>
 				<div class="row">
+					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-6">
 						<?=gen_input( 'Alias', 'alias', $widget['alias'] );?>
 					</div>
@@ -12,7 +13,7 @@
 					</div>
 					<h4 class="col-md-12">Object Settings</h4>
 					<div id="object-area">
-						<?=gen_ui_object_inputs( $object, gen_ui_widget_params( $widget['params'] ) );?>	
+						<?=gen_ui_object_params( $object['params'], $widget['params'] );?>
 					</div>
 				</div>
 				<div class="row">

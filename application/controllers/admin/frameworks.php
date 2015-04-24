@@ -9,7 +9,7 @@ class Frameworks extends CI_Controller {
 	
 	/** List **/
 	public function index() {
-		$params = params_array( 'Frameworks', 'Frameworks <small>list</small>' );
+		$params = params_array( 'Frameworks', 'Frameworks <small>list</small>', $this->js, '', 'Framework_list' );
 		
 		$framework_list = [
 			'actions' => [
@@ -20,16 +20,13 @@ class Frameworks extends CI_Controller {
 		
 		$params['framework_list']	= $framework_list;
 		$params['list']						= $this->frameworks_model->framework_list();		
-		$params['scripts']				= [ 'js' => $this->js, 'init' => 'Framework_list' ];
 		
 		$this->layout->view( 'admin/frameworks_view', $params );
 	}
 	
 	/** Create **/
 	public function create() {
-		$params = params_array( 'Frameworks', 'Frameworks <small>create</small>' );
-		
-		$params['scripts']					= [ 'js' => $this->js, 'init' => 'Framework_create' ];
+		$params = params_array( 'Frameworks', 'Frameworks <small>create</small>', $this->js, '', 'Framework_create' );
 		
 		$this->layout->view( 'admin/frameworks_create_view.php', $params );
 	}
@@ -46,10 +43,9 @@ class Frameworks extends CI_Controller {
 	
 	/** Revise **/
 	public function revise( $framework_id ) {
-		$params = params_array( 'Frameworks', 'Frameworks <small>revise</small>' );
+		$params = params_array( 'Frameworks', 'Frameworks <small>revise</small>', $this->js, '', 'Framework_revise' );
 		
 		$params['framework']				= $this->frameworks_model->framework_revise( $framework_id );
-		$params['scripts']					= [ 'js' => $this->js, 'init' => 'Framework_revise' ];
 		
 		$this->layout->view( 'admin/frameworks_revise_view.php', $params );
 	}

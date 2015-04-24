@@ -15,11 +15,24 @@ class Widgets_model extends CI_Model {
 	}
 	
 	/** Insert **/
-	public function widget_insert() {		
+	public function widget_insert() {
+		$this->db->select( 'params' );
+		$object_params = $this->db->get_where( 'object', [ 'object_id' => $this->input->post( 'object_id' ) ] )->row_array();
+		$object_params = json_decode( $object_params['params'], TRUE );
+		$object_params = array_column( $object_params, 'variable' );
+		
+		$params_array = [];
+		foreach( $object_params as $param ) {
+			if( $this->input->post( $param ) ) {
+				$params_array[$param] = $this->input->post( $param );
+			}
+		}
+
+		
 		$data['alias'] 			= $this->input->post( 'alias' );
 		$data['entered']		= date( 'Y-m-d H:i:s' );
 		$data['object_id'] 	= $this->input->post( 'object_id' );
-		$data['params']			= $this->input->post( 'params' );
+		$data['params']			= json_encode( $params_array );
 		
 		return $this->db->insert( 'widget', $data );
 	}
@@ -31,10 +44,22 @@ class Widgets_model extends CI_Model {
 	}
 	
 	/** Update **/
-	public function widget_update() {		
+	public function widget_update() {
+		$this->db->select( 'params' );
+		$object_params = $this->db->get_where( 'object', [ 'object_id' => $this->input->post( 'object_id' ) ] )->row_array();
+		$object_params = json_decode( $object_params['params'], TRUE );
+		$object_params = array_column( $object_params, 'variable' );
+		
+		$params_array = [];
+		foreach( $object_params as $param ) {
+			if( $this->input->post( $param ) ) {
+				$params_array[$param] = $this->input->post( $param );
+			}
+		}
+		
 		$data['alias'] 			= $this->input->post( 'alias' );
 		$data['updated']		= date( 'Y-m-d H:i:s' );
-		$data['params']			= $this->input->post( 'params' );
+		$data['params']			= json_encode( $params_array );
 		
 		return $this->db->update( 'widget', $data, [ 'widget_id' => $this->input->post( 'widget_id' ) ] );
 	}

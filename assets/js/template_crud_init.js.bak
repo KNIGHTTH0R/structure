@@ -46,6 +46,7 @@ var Templates_list = function() {
 var Templates_create = function() {
 	return {
 		init: function() {
+			alert( 'here' );
 			var framework_wrapper = $( '#framework-wrapper' );
 			var template_wrapper	= $( '#template-wrapper' );
 			var framework_preview	= $( '#framework-item-preview' );
@@ -181,7 +182,6 @@ var Templates_revise = function() {
 			var widget_add_modal  = $( '#widget-add-modal' );
 			
 			$( document ).ready( function() {
-				framework_preview.slideDown();
 				
 				$( ".list-group" ).sortable({
 						axis: 'y',

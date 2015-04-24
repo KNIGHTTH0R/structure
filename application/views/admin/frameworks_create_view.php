@@ -4,6 +4,7 @@
 			<form id="framework-create-form" class="form-horizontal" role="form">
 				<div class="form-body">
 					<div class="row">
+						<h4 class="col-md-12">Settings</h4>
 						<div class="col-md-4">
 							<?=gen_input( 'Title', 'title', '', [ 'inline' => 3 ] );?>
 						</div>

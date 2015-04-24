@@ -215,14 +215,11 @@ Rounded Portlets
 .column-content .list-group li {
 	color: #000;
 	margin: 0px auto;
-	transition: background-color 0.3s ease;
 }
 
 /** Sequence List Item Styles */
 
 .list-group li:hover {
-	color: #fff;
-	background-color: #2196F3;
 	cursor: pointer;
 }
 

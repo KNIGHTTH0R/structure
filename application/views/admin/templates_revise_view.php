@@ -5,6 +5,7 @@
 				<?=gen_form_hidden_input( 'template_id', $template['template_id'] );?>
 				<?=gen_form_hidden_input( 'framework_id', $template['framework_id'] );?>
 				<div class="row">
+					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-4">
 						<?=gen_input( 'Title', 'title', $template['title'], [ 'inline' => 3 ] );?>
 					</div>
@@ -18,6 +19,15 @@
 				<div id="framework-item-preview" class="row">
 					<div class="framework-mockup">
 						<?=gen_ui_framework_item( $framework, $positions );?>
+					</div>
+				</div>
+				<div class="row">
+					<h4 class="col-md-12">Record Info</h4>
+					<div class="col-md-4">
+						<?=gen_input( 'Created Date', 'entered', date( 'm/d/Y h:i a', strtotime( $template['entered'] ) ), [ 'inline' => '3', 'prop' => 'disabled', 'class' => 'input-medium' ] );?>
+					</div>
+					<div class="col-md-4 col-md-offset-4">
+						<?=gen_input( 'Last Updated Date', 'updated', ! empty( $template['updated'] ) ? date( 'm/d/Y h:i a', strtotime( $template['updated'] ) ) : 'None', [ 'inline' => '5', 'prop' => 'disabled', 'class' => 'input-medium' ] );?>
 					</div>
 				</div>
 				<div class="form-actions right">

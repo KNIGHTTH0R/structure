@@ -303,31 +303,39 @@ function gen_ui_positions( $position_array = [] ) {
 	return $position;
 }
 
-function gen_ui_object_params( $params, $return = FALSE ) {	
+function gen_ui_object_params( $params, $params_selected = '', $return = FALSE ) {	
 	if( empty( $params ) ) {
-		return [];	
+		return;	
 	}
 	
-	$inputs = '';
-	$input_array = json_decode( $params, TRUE );
+	$inputs         = '';
+	$input_array    = json_decode( $params, TRUE );
+	$selected_array = json_decode( $params_selected, TRUE );
 	foreach( $input_array as $input ) {
 		extract( $input );
 		
+		if( ! empty( $selected_array ) && isset( $selected_array[$variable] ) ) {
+			$value = $selected_array[$variable];
+		} else {
+			$value = '';
+		}
+		
 		switch( $type ) {
 			case 'text':
-				$inputs .= '<div class="col-md-6">' . gen_input( $label, $variable, '', [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-6">' . gen_input( $label, $variable, $value, [], TRUE ) . '</div>';
 			break;
 			case 'select':
-				$inputs .= '<div class="col-md-6">' . gen_select( $label, $variable, $options, '', [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-6">' . gen_select( $label, $variable, $options, $value, [], TRUE ) . '</div>';
 			break;
 			case 'multi':
-				$inputs .= '<div class="col-md-6">' . gen_multi_select( $label, $variable, $options, [], [], TRUE ) . '</div>';
+				$value = ! empty( $value ) ? array_fill_keys( $value, '' ) : [];
+				$inputs .= '<div class="col-md-6">' . gen_multi_select( $label, $variable, $options, $value, [], TRUE ) . '</div>';
 			break;
 			case 'toggle':
-				$inputs .= '<div class="col-md-6">' . gen_toggle( $label, $variable, '', [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-6">' . gen_toggle( $label, $variable, $value, [], TRUE ) . '</div>';
 			break;
 			case 'wysiwyg':
-				$inputs .= '<div class="col-md-12">' . gen_form_wysiwyg( $label, $variable, '', [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-12">' . gen_form_wysiwyg( $label, $variable, $value, [], TRUE ) . '</div>';
 			break;
 		}
 	}

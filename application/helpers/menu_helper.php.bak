@@ -112,6 +112,7 @@ function menu_children_active_check( $current_page, $views ) {
 	foreach( $views as $row ) {
 		extract( $row );
 		
+		$view = substr( $view, 0, strpos( $view, '?' ) );
 		$view_split = explode( '/', $view );
 		$view_split = array_pop( $view_split );
 		if( in_array( $view_split, $current_page)  ) {

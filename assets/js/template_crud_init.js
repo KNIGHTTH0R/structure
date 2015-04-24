@@ -177,6 +177,7 @@ var Templates_revise = function() {
 			var template_wrapper	= $( '#template-wrapper' );
 			var framework_preview	= $( '#framework-item-preview' );
 			var target_column			= '';
+			var widget_add        = $( '.widget-add' );
 			var widget_add_form		= $( '#widget-add-form' );
 			var widget_add_modal  = $( '#widget-add-modal' );
 			
@@ -200,6 +201,10 @@ var Templates_revise = function() {
 					$( '#column_id' ).append( '<option value="' + count + '">' + $( '.list-group-title', this ).text() + '</option>' );
 					count++;
 				});
+			});
+			
+			widget_add.on( 'click', function() {
+				widget_add_modal.modal( 'show' );
 			});
 			
 			widget_add_form.on( 'submit', function( e ) {

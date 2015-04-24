@@ -36,17 +36,6 @@ class Frameworks extends CI_Controller {
 	
 	/** Insert **/
 	public function insert() {
-		foreach( $this->input->post( 'framework_width' ) as $row => $columns ) {
-			foreach( $columns as $column_count => $column ) {
-				if( isset( $_POST['allow_widgets'][$row][$column_count] ) ) {
-					$mockup_array[$row][] = $column;
-				} else {
-					$mockup_array[$row][] = $column . '*';
-				}
-			}
-		}
-		print_r( $mockup_array );
-		exit;
 		$framework = $this->frameworks_model->framework_insert();
 		if( $framework ) {
 			echo 's|created Framework|' . site_url( 'admin/frameworks' );

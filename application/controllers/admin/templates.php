@@ -9,7 +9,7 @@ class Templates extends CI_Controller {
 	
 	/** List **/
 	public function index() {
-		$params = params_array( 'Templates', 'Templates <small>list</small>' );
+		$params = params_array( 'Templates', 'Templates <small>list</small>', $this->js, '', 'Templates_list' );
 		
 		$template_list = [
 			'title' => 'Templates',
@@ -23,8 +23,6 @@ class Templates extends CI_Controller {
 		$params['access_options']			= get_access_levels();
 		$params['template_list']			= $template_list;
 		$params['list']								= $this->templates_model->template_list();
-		$params['scripts']						= [ 'js' => $this->js, 'init' => 'Templates_list' ];
-		$params['site_url']						= site_url();
 		
 		$this->layout->view( 'admin/templates_view', $params );
 	}
@@ -33,7 +31,7 @@ class Templates extends CI_Controller {
 	public function create() {
 		$this->load->model( 'admin/frameworks_model' );
 		
-		$params = params_array( 'Templates', 'Templates <small>create</small>' );
+		$params = params_array( 'Templates', 'Templates <small>create</small>', $this->js, '', 'Templates_create' );
 		
 		$template_create = array(
 			'title' => 'Template Create',
@@ -43,7 +41,6 @@ class Templates extends CI_Controller {
 		
 		$params['framework_list']				= $this->frameworks_model->framework_list();
 		$params['template_create']			= $template_create;
-		$params['scripts']							= [ 'js' => $this->js, 'init' => 'Templates_create' ];
 		
 		$this->layout->view( 'admin/templates_create_view', $params );
 	}
@@ -62,13 +59,12 @@ class Templates extends CI_Controller {
 	public function revise( $template_id ) {
 		$this->load->model( 'admin/frameworks_model' );		
 		
-		$params = params_array( 'Templates', 'Templates <small>revise</small>' );
+	  $params = params_array( 'Templates', 'Templates <small>revise</small>', $this->js, '', 'Templates_revise' );
 		
 		$template 											= $this->templates_model->template_revise( $template_id );
 		$params['positions']						= $this->templates_model->get_positions( $template_id );
 		$params['framework']						= $this->frameworks_model->framework_revise( $template['framework_id'] );
 		$params['template']							= $template;
-		$params['scripts']							= [ 'js' => $this->js, 'init' => 'Templates_revise' ];
 		
 		$this->layout->view( 'admin/templates_revise_view', $params );
 	}

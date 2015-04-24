@@ -3,6 +3,7 @@
 		<?=gen_ui_portlet_open( 'Widget Revise', 'cubes', 'form' );?>
 			<form id="widget-revise">
 				<?=gen_hidden_input( 'widget_id', $widget['widget_id'] );?>
+				<?=gen_hidden_input( 'object_id', $widget['object_id'] );?>
 				<div class="row">
 					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-6">
@@ -13,7 +14,7 @@
 					</div>
 					<h4 class="col-md-12">Object Settings</h4>
 					<div id="object-area">
-						<?=gen_ui_object_inputs( $object, gen_ui_widget_params( $widget['params'] ) );?>	
+						<?=gen_ui_object_params( $object['params'], $widget['params'] );?>
 					</div>
 				</div>
 				<div class="row">

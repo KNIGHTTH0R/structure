@@ -178,7 +178,7 @@ function gen_multi_select( $label = '', $field_name, $options, $selectedValues =
 	
 	$select .= '<option value=""></option>';
 	foreach( $options as $optionValue => $optionText ) {
-		$selected = in_array( $optionValue, $selectedValues ) ? 'selected' : '';
+		$selected = array_key_exists( $optionValue, $selectedValues ) ? 'selected' : '';
 		$select  .= '<option value="' . $optionValue . '" ' . $selected . '>' . $optionText . '</option>';
 	}	
 	$select .= '</select>';
@@ -200,7 +200,7 @@ function gen_multi_select( $label = '', $field_name, $options, $selectedValues =
 	}
 }
 
-function gen_toggle( $label, $field_id, $status = '', $params = [], $return = FALSE ) {
+function gen_toggle( $label, $field_name, $status = '', $params = [], $return = FALSE ) {
 	switch( $status ) {
 		case '+':
 			$status = 'checked';
@@ -212,12 +212,12 @@ function gen_toggle( $label, $field_id, $status = '', $params = [], $return = FA
 			$status = '';
 		break;
 		default:
-			$status = '';;
+			$status = '';
 	}
 	
 	$params['cclass'] = isset( $params['cclass'] ) ? $params['cclass'] : '';
 	
-	$toggle =	'<div><input type="checkbox" class="make-switch ' . $params['cclass'] . '" data-on-color="primary" data-off-color="danger" data-on-text="&nbsp;On&nbsp;" data-off-text="&nbsp;Off&nbsp;" ' . $status . '></div>';
+	$toggle =	'<div><input type="checkbox" class="make-switch ' . $params['cclass'] . '" id="' . $field_name . '" name="' . $field_name . '" data-on-color="primary" data-off-color="danger" data-on-text="&nbsp;On&nbsp;" data-off-text="&nbsp;Off&nbsp;" ' . $status . '></div>';
 
 	if( $return === TRUE ) {
 		return gen_form_std_wrapper( $label, $toggle );
@@ -226,9 +226,9 @@ function gen_toggle( $label, $field_id, $status = '', $params = [], $return = FA
 	}
 }
 
-function gen_form_wysiwyg( $label, $field_id, $value = '', $args = [], $return = FALSE ) {
-	$wysiwyg  = '<div class="summernote" id="' . $field_id . '">' . $value . '</div>';
-	$wysiwyg .= '<textarea name="wysiwyg" id="wysiwyg" class="widget-params" style="display:none;"></textarea>';
+function gen_form_wysiwyg( $label, $field_name, $value = '', $args = [], $return = FALSE ) {
+	$wysiwyg  = '<div class="summernote" id="' . $field_name . '">' . $value . '</div>';
+	$wysiwyg .= '<textarea name="' . $field_name . '" class="widget-params" style="display:none;"></textarea>';
 
 	if( $return === TRUE ) {
 		return gen_form_std_wrapper( $label, $wysiwyg );
@@ -263,8 +263,8 @@ function gen_form_actions( $cancel = '', $params = [] ) {
 function gen_form_entup( $entered, $updated ) {
 	$entered = ! empty( $entered ) ? date( 'm/d/Y h:i a', strtotime( $entered ) ) : 'None';
 	$updated = ! empty( $updated ) ? date( 'm/d/Y h:i a', strtotime( $updated ) ) : 'None';
-	$entered_input 	= gen_input( 'Entered', 'entered', $entered, [ 'prop' => 'disabled' ], TRUE );
-	$updated_input	= gen_input( 'Updated', 'updated', $updated, [ 'prop' => 'disabled' ], TRUE );
+	$entered_input 	= gen_input( 'Created Date', 'entered', $entered, [ 'prop' => 'disabled' ], TRUE );
+	$updated_input	= gen_input( 'Last Updated Date', 'updated', $updated, [ 'prop' => 'disabled' ], TRUE );
 	
 	$entup  = '<h4 class="col-md-12">Record Info</h4>';
 	$entup .= '<div class="col-md-6">' . $entered_input .	'</div>';

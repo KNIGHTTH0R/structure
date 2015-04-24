@@ -10,7 +10,7 @@ class Widgets extends CI_Controller {
 	
 	/** List **/
 	public function index() {
-		$params = params_array( 'Widgets', 'Widgets <small>list</small>' );
+		$params = params_array( 'Widgets', 'Widgets <small>list</small>', $this->js, '', 'Widget_list' );
 		
 		$widget_list = [
 			'actions' => [
@@ -21,17 +21,13 @@ class Widgets extends CI_Controller {
 		
 		$params['list']	       = $this->widgets_model->widget_list();
 		$params['widget_list'] = $widget_list;
-		$params['scripts']		= [ 'js' => $this->js, 'init' => 'Widget_list' ];
 		
 		$this->layout->view( 'admin/widgets_view', $params );
 	}
 	
 	/** Create **/
 	public function create() {		
-		$params = params_array( 'Widgets', 'Widgets <small>create</small>' );
-		
-		$params['scripts']	= [ 'js' => $this->js, 'init' => 'Widget_create' ];
-		$params['styles']		= $this->styles;
+		$params = params_array( 'Widgets', 'Widgets <small>create</small>', $this->js, $this->styles, 'Widget_create' );
 		
 		$this->layout->view( 'admin/widgets_create_view.php', $params );
 	}
@@ -48,13 +44,10 @@ class Widgets extends CI_Controller {
 	
 	/** Revise **/
 	public function revise( $widget_id ) {
-		$params = params_array( 'Widgets', 'Widgets <small>revise</small>' );
+		$params = params_array( 'Widgets', 'Widgets <small>revise</small>', $this->js, $this->styles, 'Widget_revise' );
 		
 		$widget											= $this->widgets_model->widget_revise( $widget_id );
-		$object											= $this->widgets_model->object_params( $widget['object_id'] );
-		$params['object']						= gen_ui_object_params( $object['params'], TRUE );
-		$params['scripts']					= [ 'js' => $this->js, 'init' => 'Widget_revise' ];
-		$params['styles']						= $this->styles;
+		$params['object']		        = $this->widgets_model->object_params( $widget['object_id'] );
 		$params['widget']						= $widget;
 		
 		$this->layout->view( 'admin/widgets_revise_view.php', $params );

@@ -5,11 +5,12 @@ class Objects extends CI_Controller {
 		parent::__construct();
 		$this->load->model( 'admin/objects_model' );
 		$this->js = 'assets/js/objects_crud_init.js';
+		$this->styles = '';
 	}
 	
 	/** List **/
 	public function index() {
-		$params = params_array( 'Objects', 'Objects <small>list</small>' );
+		$params = params_array( 'Objects', 'Objects <small>list</small>', $this->js, $this->styles, 'Objects_list' );
 		
 		$object_list = [
 			'actions' => [
@@ -20,16 +21,13 @@ class Objects extends CI_Controller {
 		
 		$params['object_list']		= $object_list;
 		$params['list']						= $this->objects_model->object_list();
-		$params['scripts']				= [ 'js' => $this->js, 'init' => 'Objects_list' ];
 		
 		$this->layout->view( 'admin/objects_view', $params );
 	}
 	
 	/** Create **/
 	public function create() {
-		$params = params_array( 'Objects', 'Objects <small>create</small>' );
-		
-		$params['scripts'] = [ 'js' => $this->js, 'init' => 'Objects_create' ];
+		$params = params_array( 'Objects', 'Objects <small>create</small>', $this->js, $this->styles, 'Objects_create' );
 		
 		$this->layout->view( 'admin/objects_create_view', $params );
 	}
@@ -46,12 +44,11 @@ class Objects extends CI_Controller {
 	
 	/** Revise **/
 	public function revise( $object_id ) {
-		$params = params_array( 'Objects', 'Objects <small>revise</small>' );
+		$params = params_array( 'Objects', 'Objects <small>revise</small>', $this->js, $this->styles, 'Objects_revise' );
 		
 		$object										= $this->objects_model->object_revise( $object_id );
 		$params['object']					= $object;
 		$params['object_params']	= json_decode( $object['params'], TRUE );
-		$params['scripts']				= [ 'js' => $this->js, 'init' => 'Objects_revise' ];
 		
 		$this->layout->view( 'admin/objects_revise_view', $params );
 	}

@@ -108,14 +108,15 @@ function gen_breadcrumbs( $breadcrumbs, $return = FALSE ) {
 	if( empty( $breadcrumbs ) ) {
 		$current_page = explode( '/', $_SERVER['REQUEST_URI'] );
 		array_shift( $current_page );
+		$current_page = substr( $current_page, 0, strpos( $current_page, '?' ) );
 		$count = 1;
 		foreach( $current_page as $key => $link ) {
 			if( is_numeric( $link ) ) {
 				unset( $current_page[$key] );
 			} else if( $link == $extension ) {
 				unset( $current_page[$key] );
-			} else if( strpos( $link, '?' ) ) {
-				$current_page[$key] = substr( $link, 0, strpos( $link, '?' ) );
+			} else if( substr( $link, 0, 1 ) == '?' ) {
+				unset( $current_page[$key] );
 			}
 		}
 		

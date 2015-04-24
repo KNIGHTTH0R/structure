@@ -303,31 +303,39 @@ function gen_ui_positions( $position_array = [] ) {
 	return $position;
 }
 
-function gen_ui_object_params( $params, $return = FALSE ) {	
+function gen_ui_object_params( $params, $params_selected = '', $return = FALSE ) {	
 	if( empty( $params ) ) {
-		return [];	
+		return;	
 	}
 	
 	$inputs = '';
 	$input_array = json_decode( $params, TRUE );
+	$selected_array = json_decode( $params_selected, TRUE );
 	foreach( $input_array as $input ) {
 		extract( $input );
 		
+		if( ! empty( $selected_array ) && isset( $selected_array[$variable] ) ) {
+			$value = $selected_array[$variable];
+		} else {
+			$value = '';
+		}
+		
 		switch( $type ) {
 			case 'text':
-				$inputs .= '<div class="col-md-6">' . gen_input( $label, $variable, '', [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-6">' . gen_input( $label, $variable, $value, [], TRUE ) . '</div>';
 			break;
 			case 'select':
-				$inputs .= '<div class="col-md-6">' . gen_select( $label, $variable, $options, '', [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-6">' . gen_select( $label, $variable, $options, $value, [], TRUE ) . '</div>';
 			break;
 			case 'multi':
-				$inputs .= '<div class="col-md-6">' . gen_multi_select( $label, $variable, $options, [], [], TRUE ) . '</div>';
+				$value = ! empty( $value ) ? array_fill_keys( $value, '' ) : [];
+				$inputs .= '<div class="col-md-6">' . gen_multi_select( $label, $variable, $options, $value, [], TRUE ) . '</div>';
 			break;
 			case 'toggle':
-				$inputs .= '<div class="col-md-6">' . gen_toggle( $label, $variable, '', [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-6">' . gen_toggle( $label, $variable, $value, [], TRUE ) . '</div>';
 			break;
 			case 'wysiwyg':
-				$inputs .= '<div class="col-md-12">' . gen_form_wysiwyg( $label, $variable, '', [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-12">' . gen_form_wysiwyg( $label, $variable, $value, [], TRUE ) . '</div>';
 			break;
 		}
 	}
@@ -349,54 +357,4 @@ function gen_ui_widget_params( $params ) {
 		$input_values[] = [ 'value' => $values, 'selected_values' => $selected_values ];
 	}
 	return $input_values;
-}
-
-function gen_ui_object_inputs( $input_options, $input_values = [], $return = FALSE ) {
-	if( empty( $input_options ) ) {
-		return;
-	}
-	
-	$inputs = '';
-	$count  = 0;
-	
-	foreach( $input_options as $input ) {
-		extract( $input );
-		
-		if( ! empty( $input_values ) ) {
-			$value 						= $input_values[$count]['value'];
-			$selected_values 	= $input_values[$count]['selected_values'];
-		} else {
-			$value = '';
-			$selected_values = [];
-		}
-		
-		switch( $type ) {
-			case 'text':
-				$inputs .= '<div class="col-md-6">' . gen_input( $label, '', $value, [ 'class' => 'widget-params' ], TRUE ) . '</div>';
-			break;
-			case 'select':
-				$inputs .= '<div class="col-md-6">' . gen_form_select( $label, '', $select_options, $value, array( 'cclass' => 'widget-params' ), 'standard', TRUE ) . '</div>';
-			break;
-			case 'multi':
-				$inputs .= '<div class="col-md-6">' . gen_form_multi_select( $label, '', $select_options, $selected_values, array( 'cclass' => 'widget-params' ), 'standard', TRUE ) . '</div>';
-			break;
-			case 'toggle':
-				$inputs .= '<div class="col-md-6">' . gen_form_toggle( $label, '', $value, array( 'cclass' => 'widget-params' ), TRUE ) . '</div>';
-			break;
-			case 'wysiwyg':
-				$inputs .= '<div class="col-md-12">' . gen_form_wysiwyg( $label, '', $value, TRUE ) . '</div>';
-			break;
-		}
-		$count++;
-		
-		if( $count %2 == 0 ) {
-			$inputs .= '<div class="clearfix"></div>';
-		}
-	}
-	
-	if( $return === TRUE ) {
-		return $inputs;
-	} else {
-		echo $inputs;
-	}
 }

@@ -57,7 +57,7 @@ class Menu_items_model extends CI_Model {
 		$query = $this->db->get_where( 'menu_item', [ 'parent_id' => $this->input->post( 'parent_id' ) ], 1 );
 		if( $query->num_rows() > 0 ) {
 			extract( $query->row_array() );
-			$sequence = $sequence + 1;
+			$sequence = $sequence;
 		} else {
 			$sequence = 1;
 		}		
