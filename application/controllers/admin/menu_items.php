@@ -25,11 +25,11 @@ class Menu_items extends CI_Controller {
 	}
 	
 	public function portal() {
-		$this->page = 'list';
+		$this->page         = 'list';
 		$this->control_item = 24;
 		$params = params_array( $this );
 		
-		$portal_id  = ! empty( $this->input->get( 'portal_id' ) ) ? $this->input->get( 'portal_id' ) : -1;
+		$portal_id  = ! empty( $this->input->get( 'portal_id' ) ) ? $this->input->get( 'portal_id' ) : -2;
 		
 		$params['access_options']	= get_access_levels();
 		$params['list']						= $this->menu_items_model->menu_item_list( 'po', $portal_id );
