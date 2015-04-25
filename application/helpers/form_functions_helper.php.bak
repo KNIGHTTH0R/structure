@@ -291,6 +291,7 @@ function gen_select_framework( $selected_id = '', $args = [] ) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 function gen_select_template( $selected_id = '', $args = [] ) {
 	$template_options = [];
 	
@@ -306,6 +307,8 @@ function gen_select_template( $selected_id = '', $args = [] ) {
 }
 
 //Rename this
+=======
+>>>>>>> parent of 08943ad... asdf
 =======
 >>>>>>> parent of 08943ad... asdf
 function gen_object_select( $selected_option = '', $args = [], $return = FALSE ) {
