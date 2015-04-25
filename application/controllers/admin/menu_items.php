@@ -8,7 +8,15 @@ class Menu_items extends CI_Controller {
 		/** Section Params **/
 		$this->js           = 'assets/js/menu_items_crud_init.js';		
 		$this->styles       = '';
-		$this->control_item = 8;
+		$this->query_string = $this->input->get( 'section' );
+		switch( $this->query_string ) {
+			case 'ad':
+				$this->control_item = 8;
+			break;
+			case 'po':
+				$this->control_item = 36;
+			break;
+		}
 	}
 	
 	/** List **/
@@ -17,44 +25,19 @@ class Menu_items extends CI_Controller {
 		$params = params_array( $this );
 		
 		$params['access_options']	= get_access_levels();
-<<<<<<< HEAD
-<<<<<<< HEAD
-		$params['list']						= $this->menu_items_model->menu_item_list( 'ad', -1 );
-		$params['section']				= 'ad';
-		$params['portal_id']			= -1;
-		
-		$this->layout->view( 'admin/menu_items_view', $params );
-	}
-	
-	public function portal() {
-		$this->page         = 'list';
-		$this->control_item = 24;
-		$params = params_array( $this );
-		
-		$portal_id  = ! empty( $this->input->get( 'portal_id' ) ) ? $this->input->get( 'portal_id' ) : -1;
-		
-		$params['access_options']	= get_access_levels();
-		$params['list']						= $this->menu_items_model->menu_item_list( 'po', $portal_id );
-		$params['section']				= 'po';
-		$params['portal_id']			= $portal_id;
-=======
-		$params['list']						= $this->menu_items_model->menu_item_list( 'ad' );
->>>>>>> parent of 08943ad... asdf
-=======
-		$params['list']						= $this->menu_items_model->menu_item_list( 'ad' );
->>>>>>> parent of 08943ad... asdf
+		$params['list']						= $this->menu_items_model->menu_item_list( $this->query_string );
+		$params['section']				= $this->query_string;
 		
 		$this->layout->view( 'admin/menu_items_view', $params );
 	}
 	
 	/** Create **/
-	public function create( $section, $portal_id ) {
+	public function create() {
 		$this->page = 'create';
 		$params = params_array( $this );		
 
 		$params['parent_options']			= $this->menu_items_model->parent_options( $section );
-		$params['section']				= $section;
-		$params['portal_id']			= $portal_id;
+		$params['section']				= $this->query_string;
 		
 		$this->layout->view( 'admin/menu_items_create_view', $params );
 	}
@@ -63,7 +46,7 @@ class Menu_items extends CI_Controller {
 	public function insert() {
 		$menu_item = $this->menu_items_model->menu_item_insert();
 		if( $menu_item ) {
-			echo 's|created Menu Item|' . site_url( 'admin/menu_items/' );
+			echo 's|created Menu Item|' . site_url( 'admin/menu_items?section=' . $this->query_string );
 		} else {
 			echo 'f|create Menu Item';
 		}
@@ -76,6 +59,7 @@ class Menu_items extends CI_Controller {
 		
 		$params['menu_item']					= $this->menu_items_model->menu_item_revise( $menu_item_id );
 		$params['parent_options']			= $this->menu_items_model->parent_options( $params['menu_item']['section'], $params['menu_item']['menu_item_id'] );
+		$params['section']				= $this->query_string;
 		
 		$this->layout->view( 'admin/menu_items_revise_view', $params );
 	}
@@ -84,7 +68,7 @@ class Menu_items extends CI_Controller {
 	public function update() {
 		$menu_item = $this->menu_items_model->menu_item_update();
 		if( $menu_item ) {
-			echo 's|updated Menu Item|' . site_url( 'admin/menu_items/' );
+			echo 's|created Menu Item|' . site_url( 'admin/menu_items?section=' . $this->input->post( 'section' ) );
 		} else {
 			echo 'f|update Menu Item';
 		}

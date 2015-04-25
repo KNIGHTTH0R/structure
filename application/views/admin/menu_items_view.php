@@ -33,7 +33,7 @@
 		<?=gen_ui_portlet_close();?>
 	</div>
 	<div id="menu-item-wrapper" class="col-md-12">
-		<?=gen_ui_portlet_open( $page_title, $page_icon, '', [ 'actions' => [ 'href' => site_url( '/' . section_check( TRUE ) . '/menu_items/create/' . $section . '/' . $portal_id ), 'icon_text' => 'Create', 'reorder' => TRUE ] ] );?>
+		<?=gen_ui_portlet_open( $page_title, $page_icon, '', [ 'actions' => [ 'href' => site_url( 'admin/menu_items/create?section=' . $section ), 'icon_text' => 'Create', 'reorder' => TRUE ] ] );?>
 		<table class="table table-striped table-hover menu-item-table">
 			<thead>
 				<tr>
@@ -48,7 +48,7 @@
 			<tbody>
 			<?php foreach( $list as $menu_item ):?>
 				<tr>
-					<td class="text-center"><?=gen_ui_revise_button( site_url( '/' . section_check( TRUE ) . '/menu_items/revise/' . $menu_item['menu_item_id'] ) );?></td>
+					<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/menu_items/revise/' . $menu_item['menu_item_id'] . '?section=' . $section ) );?></td>
 					<td class="bold"><?=$menu_item['title'];?></td>
 					<td><?=$menu_item['view'];?></td>
 					<td><?=$access_options[$menu_item['access_level']];?></td>
@@ -58,7 +58,7 @@
 				<?php if( isset( $menu_item['children_list'] ) ):?>
 					<?php foreach( $menu_item['children_list'] as $child ):?>
 						<tr>
-							<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/menu_items/revise/' . $child['menu_item_id'] ) );?></td>
+							<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/menu_items/revise/' . $menu_item['menu_item_id'] . '?section=' . $section ) );?></td>
 							<td class="text-indent"><?=$child['title'];?></td>
 							<td><?=$child['view'];?></td>
 							<td><?=$access_options[$child['access_level']];?></td>

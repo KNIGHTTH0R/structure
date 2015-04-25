@@ -7,11 +7,11 @@ class Menu_items_model extends CI_Model {
 	}
 	
 	/** List **/
-	public function menu_item_list( $section, $portal_id ) {
+	public function menu_item_list( $section ) {
 		$parents = [];
 		$this->db->order_by( 'status' );
 		$this->db->order_by( 'sequence' );
-		$query = $this->db->get_where( 'menu_item', [ 'parent_id' => 0, 'portal_id' => $portal_id, 'section' => $section ] );
+		$query = $this->db->get_where( 'menu_item', [ 'parent_id' => 0, 'portal_id' => -1, 'section' => $section ] );
 		if( $query->num_rows() > 0 ) {
 			$parents = $query->result_array();
 			$count = 0;
@@ -46,7 +46,7 @@ class Menu_items_model extends CI_Model {
 		
 		$data['status'] 			= '+';
 		$data['entered']			= date( 'Y-m-d H:i:s' );
-		$data['portal_id']		= $this->input->post( 'portal_id' );
+		$data['portal_id']		= -1;
 		$data['title']				= $this->input->post( 'title' );
 		$data['view']					= $this->input->post( 'view' );
 		$data['access_level']	= $this->input->post( 'access_level' );

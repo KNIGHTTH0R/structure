@@ -2,7 +2,9 @@
 	<div class="col-md-6">
 		<?=gen_ui_portlet_open( $page_title, $page_icon, 'form' );?>
 			<form id="menu-item-revise">
-				<?=gen_form_hidden_input( 'menu_item_id', $menu_item['menu_item_id'] );?>
+				<?=gen_hidden_input( 'menu_item_id', $menu_item['menu_item_id'] );?>
+				<?=gen_hidden_input( 'section', $menu_item['section'] );?>
+				<?=gen_hidden_input( 'portal_id', $menu_item['portal_id'] );?>
 				<div class="row">
 					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-6">

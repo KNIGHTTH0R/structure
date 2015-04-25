@@ -4,10 +4,9 @@
 			<form id="menu-item-revise">
 				<?=gen_hidden_input( 'menu_item_id', $menu_item['menu_item_id'] );?>
 				<?=gen_hidden_input( 'section', $menu_item['section'] );?>
-				<?=gen_hidden_input( 'portal_id', $menu_item['portal_id'] );?>
 				<div class="row">
 					<h4 class="col-md-12">Settings</h4>
-					<div class="col-md-6">
+					<div class="col-md-6">	
 						<?=gen_input( 'Title', 'title', $menu_item['title'] );?>
 					</div>
 					<div class="col-md-6">
@@ -28,7 +27,7 @@
 					<?=gen_form_entup( $menu_item['entered'], $menu_item['updated'] );?>	
 				</div>
 				<div class="form-actions right">
-					<?=gen_form_actions( site_url( 'admin/menu_items/index/' . $menu_item['section'] . '/' . $menu_item['portal_id'] ) );?>
+					<?=gen_form_actions( site_url( 'admin/menu_items?section=' . $section  ) );?>
 				</div>
 			</form>
 		<?=gen_ui_portlet_close();?>
