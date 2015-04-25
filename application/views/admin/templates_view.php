@@ -1,6 +1,6 @@
 <div class="row">
 	<div id="template-wrapper" class="col-md-12">
-		<?=gen_ui_portlet_open( 'Templates List', 'picture-o', '', $template_list );?>
+		<?=gen_ui_portlet_open( $page_title, $page_icon, '', [ 'title' => 'Templates', 'actions' => [ 'href' => 'templates/create', 'icon_text' => 'Create'	], 'title_icon' 	=> 'file-text' ] );?>
 		<table class="table table-striped table-hover standard-table">
 			<thead>
 				<tr>

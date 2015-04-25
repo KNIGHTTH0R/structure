@@ -33,7 +33,7 @@
 		<?=gen_ui_portlet_close();?>
 	</div>
 	<div id="menu-item-wrapper" class="col-md-12">
-		<?=gen_ui_portlet_open( 'Menu Item List', 'list', '', $menu_item_list );?>
+		<?=gen_ui_portlet_open( $page_title, $page_icon, '', [ 'actions' => [ 'href' => 'menu_items/create', 'icon_text' => 'Create', 'reorder' => TRUE ] ] );?>
 		<table class="table table-striped table-hover menu-item-table">
 			<thead>
 				<tr>

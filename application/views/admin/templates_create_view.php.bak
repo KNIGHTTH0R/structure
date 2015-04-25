@@ -10,6 +10,7 @@
 		<?=gen_ui_portlet_open( 'Template Create', 'picture-o' , 'form', $template_create );?>
 			<form id="template-create" class="form-horizontal">
 				<div class="row">
+					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-4">
 						<?=gen_input( 'Title', 'title', '', [ 'inline' => 3 ] );?>
 					</div>

@@ -19,7 +19,7 @@ class Widgets_model extends CI_Model {
 		$this->db->select( 'params' );
 		$object_params = $this->db->get_where( 'object', [ 'object_id' => $this->input->post( 'object_id' ) ] )->row_array();
 		$object_params = json_decode( $object_params['params'], TRUE );
-		$object_params = array_column( $object_params, 'variable' );
+		$object_params = array_column( $object_params, 'field_name' );
 		
 		$params_array = [];
 		foreach( $object_params as $param ) {
@@ -48,7 +48,7 @@ class Widgets_model extends CI_Model {
 		$this->db->select( 'params' );
 		$object_params = $this->db->get_where( 'object', [ 'object_id' => $this->input->post( 'object_id' ) ] )->row_array();
 		$object_params = json_decode( $object_params['params'], TRUE );
-		$object_params = array_column( $object_params, 'variable' );
+		$object_params = array_column( $object_params, 'field_name' );
 		
 		$params_array = [];
 		foreach( $object_params as $param ) {

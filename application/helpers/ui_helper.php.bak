@@ -308,14 +308,14 @@ function gen_ui_object_params( $params, $params_selected = '', $return = FALSE )
 		return;	
 	}
 	
-	$inputs = '';
-	$input_array = json_decode( $params, TRUE );
+	$inputs         = '';
+	$input_array    = json_decode( $params, TRUE );
 	$selected_array = json_decode( $params_selected, TRUE );
 	foreach( $input_array as $input ) {
 		extract( $input );
 		
-		if( ! empty( $selected_array ) && isset( $selected_array[$variable] ) ) {
-			$value = $selected_array[$variable];
+		if( ! empty( $selected_array ) && isset( $selected_array[$field_name] ) ) {
+			$value = $selected_array[$field_name];
 		} else {
 			$value = '';
 		}

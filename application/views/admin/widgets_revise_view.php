@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-6">
-		<?=gen_ui_portlet_open( 'Widget Revise', 'cubes', 'form' );?>
+		<?=gen_ui_portlet_open( $page_title, $page_icon, 'form' );?>
 			<form id="widget-revise">
 				<?=gen_hidden_input( 'widget_id', $widget['widget_id'] );?>
 				<?=gen_hidden_input( 'object_id', $widget['object_id'] );?>

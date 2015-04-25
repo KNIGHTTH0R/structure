@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<?=gen_ui_portlet_open( 'Framework Revise', 'building', 'form' );?>
+		<?=gen_ui_portlet_open( $page_title, $page_icon, 'form' );?>
 			<form id="framework-revise-form" class="form-horizontal" role="form">
 				<?=gen_hidden_input( 'framework_id', $framework['framework_id'] );?>
 				<div class="form-body">

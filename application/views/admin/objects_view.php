@@ -1,6 +1,6 @@
 <div class="row">
 	<div id="access-level-wrapper" class="col-md-12">
-		<?=gen_ui_portlet_open( 'Objects List', 'cube', '', $object_list );?>
+		<?=gen_ui_portlet_open( $page_title, $page_icon, '', [ 'actions' => [ 'href' => 'objects/create', 'icon_text' => 'Create' ] ] );?>
 		<table class="table table-striped table-hover standard-table">
 			<thead>
 				<tr>
@@ -23,4 +23,7 @@
 		</table>
 		<?=gen_ui_portlet_close();?>	
 	</div>	
+	<div class="col-md-12">
+		<?=print_r( $page_breadcrumbs );?>	
+	</div>
 </div>

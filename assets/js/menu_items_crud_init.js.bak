@@ -21,8 +21,6 @@ var Menu_items_list = function() {
 				$( '.dataTables_length' ).find( 'label' ).prepend( 'Show' );
 				$( '.dataTables_length' ).find( 'select' ).select2();
 				
-				$( '#menu-item-wrapper .caption' ).append( $( '<button>', { class: 'btn btn-xs green', text: 'Admin' } ) );
-				
 				$( "#sequence-list" ).sortable({
 						axis: 'y',
 						update: function() {

@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<?=gen_ui_portlet_open( 'Framework Create', 'building', 'form' );?>
+		<?=gen_ui_portlet_open( $page_title, $page_icon, 'form' );?>
 			<form id="framework-create-form" class="form-horizontal" role="form">
 				<div class="form-body">
 					<div class="row">

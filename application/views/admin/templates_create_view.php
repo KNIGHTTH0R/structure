@@ -7,7 +7,7 @@
 </div>
 <div class="row">
 	<div id="template-wrapper" class="col-md-12" style="display: none;">
-		<?=gen_ui_portlet_open( 'Template Create', 'picture-o' , 'form', $template_create );?>
+		<?=gen_ui_portlet_open( $page_title, $page_icon, 'form', $template_create );?>
 			<form id="template-create" class="form-horizontal">
 				<div class="row">
 					<h4 class="col-md-12">Settings</h4>

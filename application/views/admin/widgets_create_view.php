@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-6">
-		<?=gen_ui_portlet_open( 'Widget Create', 'cubes', 'form' );?>
+		<?=gen_ui_portlet_open( $page_title, $page_icon, 'form' );?>
 			<form id="widget-create">
 				<div class="row">
 					<h4 class="col-md-12">Settings</h4>

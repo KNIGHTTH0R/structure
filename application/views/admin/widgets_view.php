@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<?=gen_ui_portlet_open( 'Widgets List', 'cubes', '', $widget_list );?>
+		<?=gen_ui_portlet_open( $page_title, $page_icon, '', [ 'actions' => [ 'href' => 'widgets/create', 'icon_text' => 'Create'	]	] );?>
 			<table class="table table-striped table-hover standard-table">
 				<thead>
 					<tr>

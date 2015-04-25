@@ -85,67 +85,36 @@ function gen_breadcrumbs( $breadcrumbs, $return = FALSE ) {
 	}
 	
 	switch( section_check() ) {
+		case 'ad':
+			$dashboard = '/admin/';
+		break;
 		case 'po':
-			$section_location = site_url( 'admin/portal/' );
+			$dashboard = '/portal/';
 		break;
 		default:
-			$section_location = site_url( 'admin/' );
+			$dashboard = '/admin/';
 	}
 	
-	$replace_array 		= array( '_' );
-	$extension				= explode( '/', site_url() );
-	if( isset( $extension[3] ) ) {
-		$extension = $extension[3];
-	} else {
-		$extension = '';
-	}
+	$section_location = site_url();
 	
 	$default_breadcrumbs  = '<ul class="page-breadcrumb breadcrumb">';
 	$default_breadcrumbs .= '<li>';
-	$default_breadcrumbs .= '<a href="' . $section_location . '/dashboard">Dashboard</a><i class="fa fa-circle"></i>';
+	$default_breadcrumbs .= '<a href="' . $dashboard . '/dashboard">Dashboard</a><i class="fa fa-circle"></i>';
 	$default_breadcrumbs .= '</li>' . "\n";	
 	
-	if( empty( $breadcrumbs ) ) {
-		$current_page = explode( '/', $_SERVER['REQUEST_URI'] );
-		array_shift( $current_page );
-		$current_page = substr( $current_page, 0, strpos( $current_page, '?' ) );
-		$count = 1;
-		foreach( $current_page as $key => $link ) {
-			if( is_numeric( $link ) ) {
-				unset( $current_page[$key] );
-			} else if( $link == $extension ) {
-				unset( $current_page[$key] );
-			} else if( substr( $link, 0, 1 ) == '?' ) {
-				unset( $current_page[$key] );
-			}
+	$count = 1;
+	foreach( $breadcrumbs as $title => $link ) {
+		$title = ucwords( $title );
+		if( $count == 1 && $count == count( $breadcrumbs ) ) {
+			$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";
+		} else if( $title == 'Admin' || $title == 'Portal' ) {
+			$default_breadcrumbs .= '<li class="active">' . $title . '<i class="fa fa-circle"></i></li>' . "\n";
+		} else if( $count != count( $breadcrumbs ) ) {
+			$default_breadcrumbs .= '<li><a href="' . $section_location .  $link . '">' . $title . '</a><i class="fa fa-circle"></i></li>' . "\n";
+		} else {
+			$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";
 		}
-		
-		foreach( $current_page as $link ) {
-			$title = str_replace( $replace_array, ' ', $link );
-			$title = ucwords( $title );
-			if( $count == 1 && $count == count( $current_page ) ) {
-				$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";
-			} else if( $link == 'admin' ) {
-				$default_breadcrumbs .= '<li class="active">' . $title . '<i class="fa fa-circle"></i></li>' . "\n";
-			} else if( $link == 'portal' ) {
-				$default_breadcrumbs .= '<li class="active">' . $title . '<i class="fa fa-circle"></i></li>' . "\n";
-			} else if( $count != count( $current_page ) ) {
-				$default_breadcrumbs .= '<li><a href="' . $section_location . '/' . $link . '">' . $title . '</a><i class="fa fa-circle"></i></li>' . "\n";
-			} else {
-				$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";
-			}
-			$count++;
-		}
-	} else if( is_array( $breadcrumbs ) ) {
-		$count = 1;
-		foreach( $breadcrumbs as $title => $link ) {
-			if( $count != count( $breadcrumbs ) ) {
-				$default_breadcrumbs .= '<li><a href="' . $section_location . $link . '">' . $title . '</a><i class="fa fa-circle"></i></li>' . "\n";
-			} else {
-				$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";
-			}
-			$count++;
-		}
+		$count++;
 	}
 	
 	$default_breadcrumbs .= '</ul>';
@@ -195,12 +164,17 @@ function access_check( $access ) {
 
 function section_check() {
 	$current_page = explode( '/', $_SERVER['REQUEST_URI'] );
-	if( in_array( 'portal', $current_page ) ) {
-		return 'po';
-	} else if( in_array( 'admin', $current_page ) ) {
-		return 'ad';
-	} else {
-		return 'fr';
+	
+	switch( TRUE ) {
+		case ( in_array( 'admin', $current_page ) ):
+			return 'ad';
+		break;
+		case ( in_array( 'portal', $current_page ) ):
+			return 'po';
+		break;
+		case 'fr':
+			return 'fr';
+		break;
 	}
 }
 

@@ -1,6 +1,6 @@
 <div class="row">
 	<div id="template-wrapper" class="col-md-12">
-		<?=gen_ui_portlet_open( 'Template Revise', 'picture-o' , 'form' );?>
+		<?=gen_ui_portlet_open( $page_title, $page_icon, 'form' );?>
 			<form id="template-revise" class="form-horizontal">
 				<?=gen_form_hidden_input( 'template_id', $template['template_id'] );?>
 				<?=gen_form_hidden_input( 'framework_id', $template['framework_id'] );?>

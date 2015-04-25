@@ -488,7 +488,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			<!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
 			<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
 			<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-				<?=get_menu_items();?>
+				<?=get_menu_items( $page_current );?>
 				<!--<li class="">
 					<a href="index.html">
 					<i class="icon-home"></i>
@@ -525,6 +525,6 @@ License: You must have a valid license purchased only from themeforest(the above
 			<?=gen_page_header( $page_header );?>
 			<!-- END PAGE HEAD -->
 			<!-- BEGIN PAGE BREADCRUMB -->
-			<?=gen_breadcrumbs( $breadcrumbs );?>
+			<?=gen_breadcrumbs( $page_breadcrumbs );?>
 			<!-- END PAGE BREADCRUMB -->
 			<!-- END PAGE HEADER-->

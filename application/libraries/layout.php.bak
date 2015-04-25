@@ -10,7 +10,7 @@ class Layout {
 	
 	public function view( $view_name, $view_params = array(), $layout = 'default' ) {
 		if( ! access_check( $view_params['page_access_level'] ) ) {
-			show_404();
+			
 		}
 		$settings = $this->CI->db->get_where( 'setting', array( 'setting_id' => 1 ) )->row_array();
 		define( 'SITE_TITLE', $settings['site_title'] . ' | ' );

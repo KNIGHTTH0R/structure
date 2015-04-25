@@ -4,30 +4,27 @@ class Widgets extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model( 'admin/widgets_model' );
-		$this->js = array( 'assets/js/widget_crud_init.js', 'assets/global/plugins/bootstrap-summernote/summernote.min.js' );
-		$this->styles = 'assets/global/plugins/bootstrap-summernote/summernote.css';
+		
+		/** Section Params **/
+		$this->js      = [ 'assets/js/widgets_crud_init.js', 'assets/global/plugins/bootstrap-summernote/summernote.min.js' ];
+		$this->styles  = 'assets/global/plugins/bootstrap-summernote/summernote.css';
+		$this->control = 'Widgets';
 	}
 	
 	/** List **/
 	public function index() {
-		$params = params_array( 'Widgets', 'Widgets <small>list</small>', $this->js, '', 'Widget_list' );
-		
-		$widget_list = [
-			'actions' => [
-				'href' => 'widgets/create',
-				'icon_text' => 'Create'
-			]
-		];
+		$this->page = 'list';
+		$params = params_array( $this );
 		
 		$params['list']	       = $this->widgets_model->widget_list();
-		$params['widget_list'] = $widget_list;
 		
 		$this->layout->view( 'admin/widgets_view', $params );
 	}
 	
 	/** Create **/
-	public function create() {		
-		$params = params_array( 'Widgets', 'Widgets <small>create</small>', $this->js, $this->styles, 'Widget_create' );
+	public function create() {
+		$this->page = 'create';
+		$params = params_array( $this );
 		
 		$this->layout->view( 'admin/widgets_create_view.php', $params );
 	}
@@ -44,8 +41,9 @@ class Widgets extends CI_Controller {
 	
 	/** Revise **/
 	public function revise( $widget_id ) {
-		$params = params_array( 'Widgets', 'Widgets <small>revise</small>', $this->js, $this->styles, 'Widget_revise' );
-		
+		$this->page = 'revise';
+		$params = params_array( $this );
+
 		$widget											= $this->widgets_model->widget_revise( $widget_id );
 		$params['object']		        = $this->widgets_model->object_params( $widget['object_id'] );
 		$params['widget']						= $widget;

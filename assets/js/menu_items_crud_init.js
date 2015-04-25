@@ -1,4 +1,4 @@
-var Menu_items_list = function() {
+var Menu_Items_list = function() {
 	return {
 		init: function() {
 			switch( section ) {
@@ -66,7 +66,7 @@ var Menu_items_list = function() {
 	}
 }();
 
-var Menu_items_create = function() {
+var Menu_Items_create = function() {
 	return {
 		init: function() {
 			$( '#menu-item-create' ).on( 'submit', function( e ) {
@@ -89,7 +89,7 @@ var Menu_items_create = function() {
 	}
 }();
 
-var Menu_items_revise = function() {
+var Menu_Items_revise = function() {
 	return {
 		init: function() {			
 			$( '#menu-item-revise' ).on( 'submit', function( e ) {

@@ -3,7 +3,7 @@
 		<?=gen_ui_portlet_open( 'Object Create', 'cube', 'form' );?>
 			<form id="object-create">
 				<div class="row">
-					<h4 class="col-md-12">Options</h4>
+					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-6">
 						<?=gen_input( 'Title', 'title' );?>
 					</div>

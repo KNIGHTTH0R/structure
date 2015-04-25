@@ -69,8 +69,8 @@ var Objects_create = function() {
 							case ( $( this ).hasClass( 'params-label' ) ):
 								var array_type = 'label';
 							break;
-							case ( $( this ).hasClass( 'params-variable' ) ):
-								var array_type = 'variable';
+							case ( $( this ).hasClass( 'params-field_name' ) ):
+								var array_type = 'field_name';
 							break;
 							case ( $( this ).hasClass( 'params-select' ) ):
 								var array_type = 'type';

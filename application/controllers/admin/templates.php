@@ -4,24 +4,19 @@ class Templates extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model( 'admin/templates_model' );
-		$this->js = 'assets/js/template_crud_init.js';
+		
+		/** Section Params **/
+		$this->js      = 'assets/js/templates_crud_init.js';
+		$this->styles  = '';
+		$this->control = 'Templates';
 	}
 	
 	/** List **/
 	public function index() {
-		$params = params_array( 'Templates', 'Templates <small>list</small>', $this->js, '', 'Templates_list' );
-		
-		$template_list = [
-			'title' => 'Templates',
-			'actions' => [
-				'href' => 'templates/create',
-				'icon_text' => 'Create'
-			],
-			'title_icon' 	=> 'file-text'
-		];
+		$this->page = 'list';
+		$params = params_array( $this );
 		
 		$params['access_options']			= get_access_levels();
-		$params['template_list']			= $template_list;
 		$params['list']								= $this->templates_model->template_list();
 		
 		$this->layout->view( 'admin/templates_view', $params );
@@ -29,9 +24,9 @@ class Templates extends CI_Controller {
 	
 	/** Create **/
 	public function create() {
-		$this->load->model( 'admin/frameworks_model' );
-		
-		$params = params_array( 'Templates', 'Templates <small>create</small>', $this->js, '', 'Templates_create' );
+		$this->load->model( 'admin/frameworks_model' );		
+		$this->page = 'create';
+		$params = params_array( $this );
 		
 		$template_create = array(
 			'title' => 'Template Create',
@@ -58,8 +53,8 @@ class Templates extends CI_Controller {
 	/** Revise **/
 	public function revise( $template_id ) {
 		$this->load->model( 'admin/frameworks_model' );		
-		
-	  $params = params_array( 'Templates', 'Templates <small>revise</small>', $this->js, '', 'Templates_revise' );
+		$this->page = 'revise';
+		$params = params_array( $this );
 		
 		$template 											= $this->templates_model->template_revise( $template_id );
 		$params['positions']						= $this->templates_model->get_positions( $template_id );
