@@ -6,9 +6,9 @@ class Widgets extends CI_Controller {
 		$this->load->model( 'admin/widgets_model' );
 		
 		/** Section Params **/
-		$this->js      = [ 'assets/js/widgets_crud_init.js', 'assets/global/plugins/bootstrap-summernote/summernote.min.js' ];
-		$this->styles  = 'assets/global/plugins/bootstrap-summernote/summernote.css';
-		$this->control = 'Widgets';
+		$this->js           = [ 'assets/js/widgets_crud_init.js', 'assets/global/plugins/bootstrap-summernote/summernote.min.js' ];
+		$this->styles       = 'assets/global/plugins/bootstrap-summernote/summernote.css';
+		$this->control_item = 6;
 	}
 	
 	/** List **/

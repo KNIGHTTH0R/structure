@@ -24,7 +24,7 @@ class Menu_items extends CI_Controller {
 	
 	/** Create **/
 	public function create() {
-		$this->page = 'list';
+		$this->page = 'create';
 		$params = params_array( $this );		
 
 		$params['parent_options']			= $this->menu_items_model->parent_options();
@@ -44,9 +44,8 @@ class Menu_items extends CI_Controller {
 	
 	/** Revise **/
 	public function revise( $menu_item_id ) {
-		$params['page_title']					= 'Menu Item';
-		$params['page_header']				= 'Menu Item <small>revise</small>';
-		$params['scripts']						= array( 'js' => $this->js, 'init' => 'Menu_items_revise' );
+		$this->page = 'revise';
+		$params = params_array( $this );	
 		
 		$params['menu_item']					= $this->menu_items_model->get_menu_item( $menu_item_id );
 		$params['parent_options']			= $this->menu_items_model->parent_options();

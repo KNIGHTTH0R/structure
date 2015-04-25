@@ -6,17 +6,17 @@ class Objects extends CI_Controller {
 		$this->load->model( 'admin/objects_model' );
 		
 		/** Section Params **/
-		$this->js          = 'assets/js/objects_crud_init.js';
-		$this->styles      = '';
-		$this->control     = 'Objects';
+		$this->js           = 'assets/js/objects_crud_init.js';
+		$this->styles       = '';
+		$this->control_item = 4;
 	}
 	
 	/** List **/
 	public function index() {
-		$this->page        = 'list';
+		$this->page = 'list';
 		$params = params_array( $this );
 		
-		$params['list']						= $this->objects_model->object_list();
+		$params['list']	= $this->objects_model->object_list();
 		
 		$this->layout->view( 'admin/objects_view', $params );
 	}

@@ -6,9 +6,9 @@ class Templates extends CI_Controller {
 		$this->load->model( 'admin/templates_model' );
 		
 		/** Section Params **/
-		$this->js      = 'assets/js/templates_crud_init.js';
-		$this->styles  = '';
-		$this->control = 'Templates';
+		$this->js           = 'assets/js/templates_crud_init.js';
+		$this->styles       = '';
+		$this->control_item = 5;
 	}
 	
 	/** List **/

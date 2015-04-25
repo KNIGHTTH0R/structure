@@ -16,10 +16,7 @@ class Templates extends CI_Controller {
 		$this->page = 'list';
 		$params = params_array( $this );
 		
-		$template_list = ;
-		
 		$params['access_options']			= get_access_levels();
-		$params['template_list']			= $template_list;
 		$params['list']								= $this->templates_model->template_list();
 		
 		$this->layout->view( 'admin/templates_view', $params );
