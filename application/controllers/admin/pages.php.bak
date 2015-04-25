@@ -1,68 +1,69 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct scripts access allowed');
 
-class Objects extends CI_Controller {
+class Pages extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model( 'admin/objects_model' );
+		$this->load->model( 'admin/pages_model' );
 		
 		/** Section Params **/
-		$this->js           = 'assets/js/objects_crud_init.js';
+		$this->js           = 'assets/js/pages_crud_init.js';
 		$this->styles       = '';
-		$this->control_item = 4;
+		$this->control_item = 27;
 	}
 	
 	/** List **/
-	public function index() {
+	public function index( $portal_id ) {
 		$this->page = 'list';
 		$params = params_array( $this );
 		
-		$params['list']	= $this->objects_model->object_list();
+		$portal_id  = ! empty( $portal_id ) ? $portal_id : -1;
+		$params['list']	= $this->pages_model->page_list( $portal_id );
 		
-		$this->layout->view( 'admin/objects_view', $params );
+		$this->layout->view( 'admin/pages_view', $params );
 	}
 	
 	/** Create **/
-	public function create() {
+	public function create( $portal_id = '' ) {
 		$this->page = 'create';
 		$params = params_array( $this );
 		
-		$this->layout->view( 'admin/objects_create_view', $params );
+		$params['portal_id']  = ! empty( $portal_id ) ? $portal_id : -1;
+		
+		$this->layout->view( 'admin/pages_create_view', $params );
 	}
 	
 	/** Insert **/
 	public function insert() {
-		$object = $this->objects_model->object_insert();
-		if( $object ) {
-			echo 's|created Object|' . site_url( 'admin/objects' );
+		$page = $this->pages_model->page_insert();
+		if( $page ) {
+			echo 's|created Page|' . site_url( 'admin/pages' );
 		} else {
-			echo 'f|create Object';
+			echo 'f|create Page';
 		}
 	}
 	
 	/** Revise **/
-	public function revise( $object_id ) {
+	public function revise( $page_id ) {
 		$this->page = 'revise';
 		$params = params_array( $this );
 		
-		$object										= $this->objects_model->object_revise( $object_id );
-		$params['object']					= $object;
-		$params['object_params']	= json_decode( $object['params'], TRUE );
+		$params['page'] 				= $this->pages_model->page_revise( $page_id );
 		
-		$this->layout->view( 'admin/objects_revise_view', $params );
+		$this->layout->view( 'admin/pages_revise_view', $params );
 	}
 	
 	/** Update **/
 	public function update() {
-		$object = $this->objects_model->object_update();
-		if( $object ) {
-			echo 's|updated Object|' . site_url( 'admin/objects' );
+		$page = $this->pages_model->page_update();
+		if( $page ) {
+			echo 's|updated Page|' . site_url( 'admin/pages' );
 		} else {
-			echo 'f|update Object';
+			echo 'f|update Page';
 		}
 	}
 	
 	/** Status **/
 	public function status() {
-		$this->objects_model->set_status();
+		$this->pages_model->set_status();
 	}
 }

@@ -200,7 +200,7 @@ function gen_multi_select( $label = '', $field_name, $options, $selectedValues =
 	}
 }
 
-function gen_toggle( $label, $field_name, $status = '', $params = [], $return = FALSE ) {
+function gen_toggle( $label, $field_name, $status = '', $args = [], $return = FALSE ) {
 	switch( $status ) {
 		case '+':
 			$status = 'checked';
@@ -215,9 +215,9 @@ function gen_toggle( $label, $field_name, $status = '', $params = [], $return = 
 			$status = '';
 	}
 	
-	$params['cclass'] = isset( $params['cclass'] ) ? $params['cclass'] : '';
+	$args['class'] = isset( $args['class'] ) ? $args['class'] : '';
 	
-	$toggle =	'<div><input type="checkbox" class="make-switch ' . $params['cclass'] . '" id="' . $field_name . '" name="' . $field_name . '" data-on-color="primary" data-off-color="danger" data-on-text="&nbsp;On&nbsp;" data-off-text="&nbsp;Off&nbsp;" ' . $status . '></div>';
+	$toggle =	'<div><input type="checkbox" class="make-switch ' . $args['class'] . '" id="' . $field_name . '" name="' . $field_name . '" data-on-color="primary" data-off-color="danger" data-on-text="&nbsp;On&nbsp;" data-off-text="&nbsp;Off&nbsp;" ' . $status . '></div>';
 
 	if( $return === TRUE ) {
 		return gen_form_std_wrapper( $label, $toggle );
@@ -291,7 +291,17 @@ function gen_select_framework( $selected_id = '', $args = [] ) {
 }
 
 function gen_select_template( $selected_id = '', $args = [] ) {
+	$template_options = [];
 	
+	$CI =& get_instance();
+	$CI->load->database();
+	
+	$query = $CI->db->get( 'template' );
+	if( $query->num_rows() > 0 ) {
+		$template_options = array_column( $query->result_array(), 'title', 'template_id' );
+	}
+	
+	return gen_select( 'Template', 'template_id', $template_options, $selected_id, $args );
 }
 
 //Rename this

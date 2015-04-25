@@ -86,20 +86,20 @@ function gen_breadcrumbs( $breadcrumbs, $return = FALSE ) {
 	
 	switch( section_check() ) {
 		case 'ad':
-			$dashboard = '/admin/';
+			$dashboard = 'admin';
 		break;
 		case 'po':
-			$dashboard = '/portal/';
+			$dashboard = 'portal';
 		break;
 		default:
-			$dashboard = '/admin/';
+			$dashboard = 'admin';
 	}
 	
 	$section_location = site_url();
 	
 	$default_breadcrumbs  = '<ul class="page-breadcrumb breadcrumb">';
 	$default_breadcrumbs .= '<li>';
-	$default_breadcrumbs .= '<a href="' . $dashboard . '/dashboard">Dashboard</a><i class="fa fa-circle"></i>';
+	$default_breadcrumbs .= '<a href="/' . $dashboard . '/dashboard">Dashboard</a><i class="fa fa-circle"></i>';
 	$default_breadcrumbs .= '</li>' . "\n";	
 	
 	$count = 1;
@@ -162,19 +162,26 @@ function access_check( $access ) {
 	}
 }
 
-function section_check() {
+function section_check( $full = FALSE ) {
 	$current_page = explode( '/', $_SERVER['REQUEST_URI'] );
 	
 	switch( TRUE ) {
 		case ( in_array( 'admin', $current_page ) ):
-			return 'ad';
+			$section = 'ad';
 		break;
 		case ( in_array( 'portal', $current_page ) ):
-			return 'po';
+			$section = 'po';
 		break;
 		case 'fr':
-			return 'fr';
+			$section = 'fr';
 		break;
+	}
+	
+	if( $full === FALSE ) {
+		return $section;
+	} else {
+		$section_array = [ 'ad' => 'Admin', 'po' => 'Portal', 'fr' => 'Portal' ];
+		return $section_array[$section];
 	}
 }
 

@@ -12,19 +12,22 @@ class Pages extends CI_Controller {
 	}
 	
 	/** List **/
-	public function index() {
+	public function index( $portal_id = '' ) {
 		$this->page = 'list';
 		$params = params_array( $this );
 		
-		$params['list']	= $this->pages_model->page_list();
+		$portal_id  = ! empty( $portal_id ) ? $portal_id : -1;
+		$params['list']	= $this->pages_model->page_list( $portal_id );
 		
 		$this->layout->view( 'admin/pages_view', $params );
 	}
 	
 	/** Create **/
-	public function create() {
+	public function create( $portal_id = '' ) {
 		$this->page = 'create';
 		$params = params_array( $this );
+		
+		$params['portal_id']  = ! empty( $portal_id ) ? $portal_id : -1;
 		
 		$this->layout->view( 'admin/pages_create_view', $params );
 	}
@@ -44,9 +47,7 @@ class Pages extends CI_Controller {
 		$this->page = 'revise';
 		$params = params_array( $this );
 		
-		$page									= $this->pages_model->page_revise( $page_id );
-		$params['page'] 				= $page;
-		$params['page_params']	= json_decode( $page['params'], TRUE );
+		$params['page'] 				= $this->pages_model->page_revise( $page_id );
 		
 		$this->layout->view( 'admin/pages_revise_view', $params );
 	}

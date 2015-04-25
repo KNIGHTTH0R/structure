@@ -200,7 +200,7 @@ function gen_multi_select( $label = '', $field_name, $options, $selectedValues =
 	}
 }
 
-function gen_toggle( $label, $field_name, $status = '', $params = [], $return = FALSE ) {
+function gen_toggle( $label, $field_name, $status = '', $args = [], $return = FALSE ) {
 	switch( $status ) {
 		case '+':
 			$status = 'checked';
@@ -208,16 +208,16 @@ function gen_toggle( $label, $field_name, $status = '', $params = [], $return = 
 		case 'on':
 			$status = 'checked';
 		break;
-		case '-':
-			$status = '';
+		case 'y':
+			$status = 'checked';
 		break;
 		default:
 			$status = '';
 	}
 	
-	$params['cclass'] = isset( $params['cclass'] ) ? $params['cclass'] : '';
+	$args['class'] = isset( $args['class'] ) ? $args['class'] : '';
 	
-	$toggle =	'<div><input type="checkbox" class="make-switch ' . $params['cclass'] . '" id="' . $field_name . '" name="' . $field_name . '" data-on-color="primary" data-off-color="danger" data-on-text="&nbsp;On&nbsp;" data-off-text="&nbsp;Off&nbsp;" ' . $status . '></div>';
+	$toggle =	'<div><input type="checkbox" class="make-switch ' . $args['class'] . '" id="' . $field_name . '" name="' . $field_name . '" data-on-color="primary" data-off-color="danger" data-on-text="&nbsp;On&nbsp;" data-off-text="&nbsp;Off&nbsp;" ' . $status . '></div>';
 
 	if( $return === TRUE ) {
 		return gen_form_std_wrapper( $label, $toggle );

@@ -1,20 +1,34 @@
 <div class="row">
 	<div class="col-md-6">
 		<?=gen_ui_portlet_open( $page_title, $page_icon, 'form' );?>
-			<form id="object-create">
+			<form id="page-revise">
 				<div class="row">
+					<?=gen_hidden_input( 'page_id', $page['page_id'] );?>
 					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-6">
-						<?=gen_input( 'Title', 'title' );?>
+						<?=gen_input( 'Title', 'title', $page['title'] );?>
 					</div>
-					<h4 class="col-md-12">Parameters</h4>
-					<div class="col-md-12">
-					  <div class="row" id="params-container">
+					<div class="col-md-6">
+						<?=gen_select_template( $page['template_id'] );?>	
 					</div>
+					<div class="col-md-6">
+						<?=gen_input( 'View (alias)', 'view', $page['view'] );?>	
+					</div>
+					<div class="col-md-6">
+						<?=gen_select_access_level( $page['access_level'] );?>	
 					</div>
 				</div>
+				<div class="row">
+					<h4 class="col-md-12">Display</h4>
+					<div class="col-md-6">
+						<?=gen_toggle( 'Portal Default', 'default_view', $page['default_view'] );?>
+					</div>	
+				</div>
+				<div class="row">
+					<?=gen_form_entup( $page['entered'], $page['updated'] );?>	
+				</div>
 				<div class="form-actions right">
-					<?=gen_form_actions( site_url( 'admin/objects' ) );?>
+					<?=gen_form_actions( site_url( 'admin/pages/index/' . $page['portal_id'] ) );?>
 				</div>
 			</form>
 		<?=gen_ui_portlet_close();?>

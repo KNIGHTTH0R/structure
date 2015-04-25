@@ -40,8 +40,15 @@
 
 $route['default_controller'] 							= "site";
 $route['404_override'] 										= '';
-$route['admin']                           = 'admin/dashboard';
+/*$route['admin']                           = 'admin/dashboard';
 $route['(\w{2}\/)?admin\/?(.*)'] 					= 'admin/$2';
+$route['portal/menu_items/index/(:any)']								= 'admin/menu_items/index/$1';
+$route['portal/menu_items/revise/(:any)']								= 'admin/menu_items/revise/$1';
+$route['portal']                          = 'portal/dashboard';
+$route['(\w{2}\/)?portal\/?(.*)'] 				= 'portal/$2';*/
+$route['admin/(:any)'] = 'admin/$1';
+$route['portal/(:any)'] = 'portal/$1';
+$route['portal/(:any)'] = 'admin/$1';
 $route['(.*)']														= "site";
 
 

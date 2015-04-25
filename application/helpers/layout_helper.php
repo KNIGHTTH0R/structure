@@ -162,19 +162,26 @@ function access_check( $access ) {
 	}
 }
 
-function section_check() {
+function section_check( $full = FALSE ) {
 	$current_page = explode( '/', $_SERVER['REQUEST_URI'] );
 	
 	switch( TRUE ) {
 		case ( in_array( 'admin', $current_page ) ):
-			return 'ad';
+			$section = 'ad';
 		break;
 		case ( in_array( 'portal', $current_page ) ):
-			return 'po';
+			$section = 'po';
 		break;
 		case 'fr':
-			return 'fr';
+			$section = 'fr';
 		break;
+	}
+	
+	if( $full === FALSE ) {
+		return $section;
+	} else {
+		$section_array = [ 'ad' => 'admin', 'po' => 'portal', 'fr' => 'portal' ];
+		return $section_array[$section];
 	}
 }
 

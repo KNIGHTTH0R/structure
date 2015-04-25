@@ -1,58 +1,61 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct scripts access allowed');
 
-class Objects_model extends CI_Model {
+class Pages_model extends CI_Model {
 	function __construct() {
 		parent::__construct();
 		$this->load->database();
 	}
 	
 	/** List **/
-	public function object_list() {
+	public function page_list( $portal_id ) {
 		$this->db->order_by( 'status' );
 		$this->db->order_by( 'title' );
-		return $this->db->get( 'object' )->result_array();
+		return $this->db->get_where( 'page', [ 'portal_id' => $portal_id ] )->result_array();
 	}
 	
 	/** Insert **/
-	public function object_insert() {
+	public function page_insert() {
 		if( empty( $_POST ) ) {
 			return false;
 		}
 		
-		$file = str_replace( ' ', '_', strtolower( $this->input->post( 'title' ) . '_ob' ) );
+		$data['entered']       = date( 'Y-m-d H:i:s' );
+		$data['title']	       = $this->input->post( 'title' );
+		$data['template_id']   = $this->input->post( 'template_id' );
+		$data['portal_id']	   = $this->input->post( 'portal_id' );
+		$data['access_level']	 = $this->input->post( 'access_level' );
+		$data['view']					 = $this->input->post( 'view' );
+		if( $this->input->post( 'default_view' ) ) {
+			$data['default_view'] = 'y';
+		} else {
+			$data['default_view'] = 'n';
+		}
 		
-		$data['entered'] = date( 'Y-m-d H:i:s' );
-		$data['title']	 = $this->input->post( 'title' );
-		$data['file']		 = $file;
-		$data['params']	 = json_encode( $this->input->post( 'params' ) );
-		
-		$fh = fopen( APPPATH . 'views/objects/' . $file . '.php', 'w' );
-		fwrite( $fh, '' );
-		fclose( $fh );
-		
-		return $this->db->insert( 'object', $data );
+		return $this->db->insert( 'page', $data );
 	}
 	
 	/** Revise **/
-	public function object_revise( $object_id ) {
-		return $this->db->get_where( 'object', [ 'object_id' => $object_id ] )->row_array();
+	public function page_revise( $page_id ) {
+		return $this->db->get_where( 'page', [ 'page_id' => $page_id ] )->row_array();
 	}
 	
 	/** Update **/
-	public function object_update() {
+	public function page_update() {
 		if( empty( $_POST ) ) {
 			return false;
 		}
 		
-		$data['updated']		= date( 'Y-m-d H:i:s' );
-		$data['title']			= $this->input->post( 'title' );
+		$data['updated']		   = date( 'Y-m-d H:i:s' );
+		$data['title']	       = $this->input->post( 'title' );
+		$data['template_id']   = $this->input->post( 'template_id' );
+		$data['access_level']	 = $this->input->post( 'access_level' );
 		
-		return $this->db->update( 'object', $data, [ 'object_id' => $this->input->post( 'object_id' ) ] );
+		return $this->db->update( 'page', $data, [ 'page_id' => $this->input->post( 'page_id' ) ] );
 	}
 	
 	/** Status **/
 	public function set_status() {
 		$data['status'] = $this->input->post( 'status' );
-		$this->db->update( 'object', $data, [ 'object_id' => $this->input->post( 'target_id' ) ] );
+		$this->db->update( 'page', $data, [ 'page_id' => $this->input->post( 'target_id' ) ] );
 	}
 }

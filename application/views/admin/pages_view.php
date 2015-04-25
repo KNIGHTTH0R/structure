@@ -15,7 +15,7 @@
 				<tr>
 					<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/pages/revise/' . $page['page_id'] ) );?></td>
 					<td><?=$page['title'];?></tdw>
-					<td><?=$page['view'];?>.php</td>
+					<td><?=$page['view'];?></td>
 					<td class="text-center"><?=gen_ui_status( $page['page_id'], $page['status'] );?></td>
 				</tr>
 			<?php endforeach; ?>	

@@ -74,6 +74,11 @@ function gen_menu_link( $title, $view, $active = '', $icon = '', $args = [] ) {
 		$view = site_url( $view );
 	}
 	
+	if( section_check( TRUE ) == 'portal' ) {
+		$CI =& get_instance();
+		$view = $view . '?portal_id=' . $CI->input->get( 'portal_id' );
+	}
+	
 	$link	 = '<li class="' . $active . ' ' . $args['cclass'] . '">';
 	$link	.= '<a href="' . $view . '">';
 	if( !empty( $icon ) ) {

@@ -2,7 +2,8 @@
 	<div class="col-md-6">
 		<?=gen_ui_portlet_open( $page_title, $page_icon, 'form' );?>
 			<form id="menu-item-create">
-				<?=gen_hidden_input( 'section', 'ad' );?>
+				<?=gen_hidden_input( 'section', $section );?>
+				<?=gen_hidden_input( 'portal_id', $portal_id );?>
 				<div class="row">
 					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-6">
@@ -23,7 +24,7 @@
 					</div>
 				</div>
 				<div class="form-actions right">
-					<?=gen_form_actions( site_url( 'admin/menu_items' ) );?>
+					<?=gen_form_actions( site_url( 'admin/menu_items/index/' . $section . '/' . $portal_id ) );?>
 				</div>
 			</form>
 		<?=gen_ui_portlet_close();?>

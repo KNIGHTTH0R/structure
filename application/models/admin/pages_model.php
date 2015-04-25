@@ -7,10 +7,10 @@ class Pages_model extends CI_Model {
 	}
 	
 	/** List **/
-	public function page_list() {
+	public function page_list( $portal_id ) {
 		$this->db->order_by( 'status' );
 		$this->db->order_by( 'title' );
-		return $this->db->get( 'page' )->result_array();
+		return $this->db->get_where( 'page', [ 'portal_id' => $portal_id ] )->result_array();
 	}
 	
 	/** Insert **/
@@ -19,11 +19,17 @@ class Pages_model extends CI_Model {
 			return false;
 		}
 		
-		$data['entered'] = date( 'Y-m-d H:i:s' );
-		$data['title']	 = $this->input->post( 'title' );
-		$data['template_id'] = $this->input->post( 'template_id' );
-		$data['portal_id']	 = $this->input->post( 'portal_id' );
+		$data['entered']       = date( 'Y-m-d H:i:s' );
+		$data['title']	       = $this->input->post( 'title' );
+		$data['template_id']   = $this->input->post( 'template_id' );
+		$data['portal_id']	   = $this->input->post( 'portal_id' );
 		$data['access_level']	 = $this->input->post( 'access_level' );
+		$data['view']					 = $this->input->post( 'view' );
+		if( $this->input->post( 'default_view' ) ) {
+			$data['default_view'] = 'y';
+		} else {
+			$data['default_view'] = 'n';
+		}
 		
 		return $this->db->insert( 'page', $data );
 	}
@@ -43,6 +49,12 @@ class Pages_model extends CI_Model {
 		$data['title']	       = $this->input->post( 'title' );
 		$data['template_id']   = $this->input->post( 'template_id' );
 		$data['access_level']	 = $this->input->post( 'access_level' );
+		$data['view']					 = $this->input->post( 'view' );
+		if( $this->input->post( 'default_view' ) ) {
+			$data['default_view'] = 'y';
+		} else {
+			$data['default_view'] = 'n';
+		}
 		
 		return $this->db->update( 'page', $data, [ 'page_id' => $this->input->post( 'page_id' ) ] );
 	}

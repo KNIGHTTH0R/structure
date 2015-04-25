@@ -6,17 +6,17 @@
 				<tr>
 					<th>Revise</th>	
 					<th>Title</th>
-					<th>File</th>
+					<th>View</th>
 					<th>Status</th>
 				</tr>	
 			</thead>
 			<tbody>
 			<?php foreach( $list as $page ): ?>
 				<tr>
-					<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/pages/revise/' . $page['page_id'] ) );?></td>
-					<td><?=$object['title'];?></tdw>
-					<td><?=$object['file'];?>.php</td>
-					<td class="text-center"><?=gen_ui_status( $object['object_id'], $object['status'] );?></td>
+					<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/pages/revise/' . $page['portal_id'] . '/' . $page['page_id'] ) );?></td>
+					<td><?=$page['title'];?></tdw>
+					<td><?=$page['view'];?></td>
+					<td class="text-center"><?=gen_ui_status( $page['page_id'], $page['status'] );?></td>
 				</tr>
 			<?php endforeach; ?>	
 			</tbody>
