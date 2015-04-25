@@ -17,7 +17,7 @@ class Menu_items extends CI_Controller {
 		$params = params_array( $this );
 		
 		$params['access_options']	= get_access_levels();
-		$params['list']						= $this->menu_items_model->menu_item_list( 'ad' );
+		$params['list']						= $this->menu_items_model->menu_item_list( section_check() );
 		
 		$this->layout->view( 'admin/menu_items_view', $params );
 	}

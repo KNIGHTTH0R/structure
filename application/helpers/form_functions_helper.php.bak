@@ -212,7 +212,7 @@ function gen_toggle( $label, $field_name, $status = '', $params = [], $return = 
 			$status = '';
 		break;
 		default:
-			$status = '';;
+			$status = '';
 	}
 	
 	$params['cclass'] = isset( $params['cclass'] ) ? $params['cclass'] : '';
@@ -290,6 +290,11 @@ function gen_select_framework( $selected_id = '', $args = [] ) {
 	return gen_select( 'Framework', 'framework_id', $framework_options, $selected_id, $args );
 }
 
+function gen_select_template( $selected_id = '', $args = [] ) {
+	
+}
+
+//Rename this
 function gen_object_select( $selected_option = '', $args = [], $return = FALSE ) {
 	$object_options = [];
 	

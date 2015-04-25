@@ -1,0 +1,68 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct scripts access allowed');
+
+class Objects extends CI_Controller {
+	function __construct() {
+		parent::__construct();
+		$this->load->model( 'admin/objects_model' );
+		
+		/** Section Params **/
+		$this->js           = 'assets/js/objects_crud_init.js';
+		$this->styles       = '';
+		$this->control_item = 4;
+	}
+	
+	/** List **/
+	public function index() {
+		$this->page = 'list';
+		$params = params_array( $this );
+		
+		$params['list']	= $this->objects_model->object_list();
+		
+		$this->layout->view( 'admin/objects_view', $params );
+	}
+	
+	/** Create **/
+	public function create() {
+		$this->page = 'create';
+		$params = params_array( $this );
+		
+		$this->layout->view( 'admin/objects_create_view', $params );
+	}
+	
+	/** Insert **/
+	public function insert() {
+		$object = $this->objects_model->object_insert();
+		if( $object ) {
+			echo 's|created Object|' . site_url( 'admin/objects' );
+		} else {
+			echo 'f|create Object';
+		}
+	}
+	
+	/** Revise **/
+	public function revise( $object_id ) {
+		$this->page = 'revise';
+		$params = params_array( $this );
+		
+		$object										= $this->objects_model->object_revise( $object_id );
+		$params['object']					= $object;
+		$params['object_params']	= json_decode( $object['params'], TRUE );
+		
+		$this->layout->view( 'admin/objects_revise_view', $params );
+	}
+	
+	/** Update **/
+	public function update() {
+		$object = $this->objects_model->object_update();
+		if( $object ) {
+			echo 's|updated Object|' . site_url( 'admin/objects' );
+		} else {
+			echo 'f|update Object';
+		}
+	}
+	
+	/** Status **/
+	public function status() {
+		$this->objects_model->set_status();
+	}
+}
