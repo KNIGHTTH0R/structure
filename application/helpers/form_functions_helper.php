@@ -290,21 +290,6 @@ function gen_select_framework( $selected_id = '', $args = [] ) {
 	return gen_select( 'Framework', 'framework_id', $framework_options, $selected_id, $args );
 }
 
-function gen_select_template( $selected_id = '', $args = [] ) {
-	$template_options = [];
-	
-	$CI =& get_instance();
-	$CI->load->database();
-	
-	$query = $CI->db->get( 'template' );
-	if( $query->num_rows() > 0 ) {
-		$template_options = array_column( $query->result_array(), 'title', 'template_id' );
-	}
-	
-	return gen_select( 'Template', 'template_id', $template_options, $selected_id, $args );
-}
-
-//Rename this
 function gen_object_select( $selected_option = '', $args = [], $return = FALSE ) {
 	$object_options = [];
 	

@@ -26,7 +26,7 @@ function params_array( $mvc ) {
 	}
 	
 	if( ! isset( $mvc->init ) ) {
-		$page_init    = str_replace( ' ', '_', $title ) . '_' . strtolower( $page_page );
+		$page_init    = strtolower( str_replace( ' ', '_', $title ) . '_' . $page_page );
 	} else {
 		$page_init = $mvc->init;
 	}

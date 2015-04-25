@@ -17,6 +17,7 @@ class Menu_items extends CI_Controller {
 		$params = params_array( $this );
 		
 		$params['access_options']	= get_access_levels();
+<<<<<<< HEAD
 		$params['list']						= $this->menu_items_model->menu_item_list( 'ad', -1 );
 		$params['section']				= 'ad';
 		$params['portal_id']			= -1;
@@ -35,6 +36,9 @@ class Menu_items extends CI_Controller {
 		$params['list']						= $this->menu_items_model->menu_item_list( 'po', $portal_id );
 		$params['section']				= 'po';
 		$params['portal_id']			= $portal_id;
+=======
+		$params['list']						= $this->menu_items_model->menu_item_list( 'ad' );
+>>>>>>> parent of 08943ad... asdf
 		
 		$this->layout->view( 'admin/menu_items_view', $params );
 	}

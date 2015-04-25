@@ -22,5 +22,8 @@
 			</tbody>
 		</table>
 		<?=gen_ui_portlet_close();?>	
+	</div>	
+	<div class="col-md-12">
+		<?=print_r( $page_breadcrumbs );?>	
 	</div>
 </div>

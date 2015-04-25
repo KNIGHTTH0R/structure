@@ -6,9 +6,9 @@ class Menu_items extends CI_Controller {
 		$this->load->model( 'admin/menu_items_model' );
 		
 		/** Section Params **/
-		$this->js           = 'assets/js/menu_items_crud_init.js';		
-		$this->styles       = '';
-		$this->control_item = 8;
+		$this->js      = 'assets/js/menu_items_crud_init.js';		
+		$this->styles  = '';
+		$this->control = 'Menu Items';
 	}
 	
 	/** List **/
