@@ -8,7 +8,7 @@ class Templates extends CI_Controller {
 		/** Section Params **/
 		$this->js           = 'assets/js/templates_crud_init.js';
 		$this->styles       = '';
-		$this->control_item = 5;
+		$this->control_item = 'admin/templates';
 	}
 	
 	/** List **/
@@ -68,7 +68,7 @@ class Templates extends CI_Controller {
 	public function update() {
 		$template = $this->templates_model->template_update();
 		if( $template ) {
-			echo 's|updated Template|' . site_url( 'admin/templates' );
+			//echo 's|updated Template|' . site_url( 'admin/templates' );
 		} else {
 			echo 'f|update Template';
 		}

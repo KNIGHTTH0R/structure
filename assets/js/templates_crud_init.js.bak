@@ -144,7 +144,7 @@ var Templates_create = function() {
 				$( '.list-group', framework_preview ).each( function() {
 					var column_id = $( this ).parent().attr( 'id' ).split( '-' ).pop();
 					$( 'li', this ).each( function( e ) {
-						template_data.push( 'position' + '[column_' + column_id + ']' + '[' + e + ']=' + this.id.split( '-' ).pop() );
+						template_data.push( 'column' + '[' + column_id + ']' + '[' + e + ']=' + this.id.split( '-' ).pop() );
 					});
 				});
 				

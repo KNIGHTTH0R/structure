@@ -19,7 +19,7 @@ class Site extends CI_Controller {
 		$this->db->select( 'p.page_id, f.file AS view_name' );
 		$this->db->join( 'template AS t', 't.template_id = p.template_id' );
 		$this->db->join( 'framework AS f', 'f.framework_id = t.framework_id' );
-		$this->db->where( 'portal_id', 1 );
+		$this->db->where( 'portal_id', -1 );
 		if( ! empty( $segment_1 ) ) {
 			$this->db->where( 'alias', $this->uri->segment( 1 ) );
 			$query = $this->db->get( 'page AS p' );
@@ -32,7 +32,7 @@ class Site extends CI_Controller {
 			$params['page_id'] 		= $page_id;
 			$params['segment_2'] 	= $segment_2;
 			$params['segment_3'] 	= $segment_3;
-			$params['access_level'] 	= 0;
+			$params['page_access_level'] 	= 0;
 		} else {
 			show_404();
 		}

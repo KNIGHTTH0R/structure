@@ -110,7 +110,7 @@ function fr_get_menu_items() {
 	$CI->load->database();
 	
 	$CI->db->where( 'parent_id', 0 );
-	$CI->db->where( 'portal_id', 1 );
+	$CI->db->where( 'portal_id', get_portal_id() );
 	$CI->db->where( 'status', '+' );
 	$CI->db->order_by( 'sequence' );
 	$menu_items = $CI->db->get( 'fr_menu_item' )->result_array();

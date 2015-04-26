@@ -18,7 +18,7 @@ class Layout {
 		if( isset( $framework_params['page_id'] ) ) {
 			$location = 'frameworks/';
 			
-			$this->CI->db->select( 'o.file, po.column_id, w.params' );
+			$this->CI->db->select( 'o.file, c.target, w.params' );
 			$this->CI->db->join( 'template AS t', 't.template_id = p.template_id' );
 			$this->CI->db->join( 'framework AS f', 'f.framework_id = t.framework_id' );
 			$this->CI->db->join( 'column AS c', 'c.framework_id = f.framework_id' );
@@ -26,16 +26,17 @@ class Layout {
 			$this->CI->db->join( 'widget AS w', 'w.widget_id = po.widget_id' );
 			$this->CI->db->join( 'object AS o', 'o.object_id = w.object_id' );
 			$this->CI->db->where( 'p.page_id', $view_params['page_id'] );
-			$this->CI->db->order_by( 'po.column_id' );
+			$this->CI->db->order_by( 'c.target' );
+			$this->CI->db->order_by( 'po.sequence' );
 			$query = $this->CI->db->get( 'page AS p' );
 			
 			$column_count 	= 1;
 			if( $query->num_rows() > 0 ) {
 				foreach( $query->result_array() as $row ) {
 					extract( $row );
-					
-					$widgets_array[$column_id][] = [ 'file' => $file, 'params' => $params ];
+					$widgets_array[$target][] = [ 'file' => $file, 'params' => $params ];
 				}
+				
 				foreach( $widgets_array as $column ) {
 					$target_column = '';
 					foreach( $column as $widget ) {
@@ -62,6 +63,9 @@ class Layout {
 		$layout_params['page_title']		= isset( $view_params['page_title'] ) ? SITE_TITLE . $view_params['page_title'] : SITE_TITLE . 'Default';
 		$layout_params['styles'] 				= isset( $view_params['styles'] ) ? $view_params['styles'] : '';
 		$layout_params['scripts']				= isset( $view_params['scripts'] ) ? $view_params['scripts'] : '';
+		
+		$allParams = $view_params;
+		$view_params['allParams'] = $allParams;
 		$layout_params['username'] 			= $this->CI->session->userdata( 'username' );
 		$layout_params['view_content']	= $this->CI->load->view( $location . $view_name, $view_params, TRUE );
 		

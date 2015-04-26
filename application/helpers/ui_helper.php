@@ -271,8 +271,8 @@ function gen_ui_framework_item( $framework_item, $position_array = [], $return =
 				$column = str_replace( '*', '', $column );
 				$framework_preview .= '<div class="column-count-' . $column . '"><div class="bg-grey column-content"><div class="list-group-title">No Widgets</div></div></div>';
 			} else {
-				if( ! empty( $position_array ) && isset( $position_array['column_id'][$column_count] ) ) {
-					$widgets = gen_ui_positions( $position_array['column_id'][$column_count] );
+				if( ! empty( $position_array ) && isset( $position_array['column_' . $column_count] ) ) {
+					$widgets = gen_ui_positions( $position_array['column_' . $column_count] );
 				} else {
 					$widgets = gen_ui_positions( [] );
 				}

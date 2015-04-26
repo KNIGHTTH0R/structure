@@ -158,7 +158,7 @@ function fr_gen_menu_link( $title, $view, $active = '', $icon = '', $args = [] )
 	if( !empty( $icon ) ) {
 		$link .= '<i class="fa fa-' . $icon . '"></i> ';
 	}
-	$link	.= '<div class class="nav-item">' . $title . '</div></a>';
+	$link	.= '<div class="nav-item">' . $title . '</div></a>';
 	$link .= $args['noclose'];
 	return $link;
 }

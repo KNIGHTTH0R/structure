@@ -37,7 +37,7 @@ class Frameworks_model extends CI_Model {
 					
 					$data = [
 						'framework_id' => $framework_id,
-						'target' => 'column-' . $count
+						'target' => 'column_' . $count
 					];
 					
 					$this->db->insert( 'column', $data );
