@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2015 at 04:18 AM
+-- Generation Time: Apr 26, 2015 at 09:32 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `column` (
   `framework_id` int(8) NOT NULL DEFAULT '0',
   `target` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`column_id`,`framework_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Truncate table before insert `column`
@@ -77,7 +77,9 @@ TRUNCATE TABLE `column`;
 --
 
 INSERT INTO `column` (`column_id`, `framework_id`, `target`) VALUES
-(1, 1, 'column-1');
+(1, 1, 'column-1'),
+(2, 2, 'column-1'),
+(3, 2, 'column-2');
 
 -- --------------------------------------------------------
 
@@ -95,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `framework` (
   `file` varchar(45) DEFAULT NULL,
   `mockup` text,
   PRIMARY KEY (`framework_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Truncate table before insert `framework`
@@ -107,7 +109,43 @@ TRUNCATE TABLE `framework`;
 --
 
 INSERT INTO `framework` (`framework_id`, `status`, `entered`, `updated`, `title`, `file`, `mockup`) VALUES
-(1, '+', '2015-04-26 02:57:19', NULL, 'Standard', 'standard_fr', '[["12"]]');
+(1, '+', '2015-04-26 02:57:19', NULL, 'Standard', 'standard_fr', '[["12"]]'),
+(2, '+', '2015-04-26 20:48:27', NULL, 'Standard 2', 'standard_2_fr', '[["6","6"]]');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fr_menu_item`
+--
+
+DROP TABLE IF EXISTS `fr_menu_item`;
+CREATE TABLE IF NOT EXISTS `fr_menu_item` (
+  `fr_menu_item_id` int(8) NOT NULL AUTO_INCREMENT,
+  `status` char(1) DEFAULT '+',
+  `entered` datetime DEFAULT NULL,
+  `updated` datetime DEFAULT NULL,
+  `portal_id` int(11) DEFAULT NULL,
+  `title` varchar(45) DEFAULT NULL,
+  `alias` varchar(45) DEFAULT NULL,
+  `access_level` int(2) DEFAULT NULL,
+  `parent_id` int(8) DEFAULT NULL,
+  `sequence` int(2) DEFAULT NULL,
+  `icon` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`fr_menu_item_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Truncate table before insert `fr_menu_item`
+--
+
+TRUNCATE TABLE `fr_menu_item`;
+--
+-- Dumping data for table `fr_menu_item`
+--
+
+INSERT INTO `fr_menu_item` (`fr_menu_item_id`, `status`, `entered`, `updated`, `portal_id`, `title`, `alias`, `access_level`, `parent_id`, `sequence`, `icon`) VALUES
+(1, '+', '2015-04-26 19:11:19', '2015-04-26 19:30:03', 1, 'Learning', 'learning', 0, 0, 1, 'book'),
+(2, '+', '2015-04-26 19:17:39', NULL, 1, 'News', 'news', 0, 0, 2, 'file-pdf-o');
 
 -- --------------------------------------------------------
 
@@ -158,12 +196,10 @@ INSERT INTO `menu_item` (`menu_item_id`, `status`, `entered`, `updated`, `portal
 (20, '+', '2015-02-07 21:47:20', '2015-02-07 21:59:20', -1, 'Portal Admin', '', 0, 'po', 0, 5, 'lock'),
 (22, '+', '2015-02-07 21:48:37', '2015-04-25 20:17:54', -1, 'Settings', 'portal/settings', 0, 'po', 20, 2, 'cogs'),
 (23, '+', '2015-02-07 21:58:39', '2015-02-07 22:05:39', -1, 'Front-End', '', 0, 'po', 0, 4, 'database'),
-(24, '+', '2015-02-07 22:07:35', '2015-04-26 02:54:57', -1, 'Menu Items', 'portal/menu_items', 0, 'po', 23, NULL, 'list'),
-(25, '+', '2015-02-07 22:13:48', NULL, -1, 'Home', '', 0, 'fr', 0, NULL, 'home'),
-(26, '+', '2015-02-07 22:17:26', NULL, -1, 'News', '', 0, 'fr', 0, NULL, 'cog'),
-(27, '+', '2015-04-24 04:47:58', '2015-04-26 01:04:11', -1, 'Pages', 'admin/pages?portal_id=-1', 0, 'ad', 2, 5, 'file'),
+(24, '+', '2015-02-07 22:07:35', '2015-04-26 05:09:47', -1, 'Menu Items', 'portal/fr_menu_items', 0, 'po', 23, NULL, 'list-ol'),
+(27, '+', '2015-04-24 04:47:58', '2015-04-26 19:47:59', -1, 'Pages', 'admin/pages?portal_id=-1', 0, 'ad', 2, 5, 'file'),
 (34, '+', '2015-04-24 05:00:55', '2015-04-26 01:48:17', -1, 'Portals', 'admin/portals', 0, 'ad', 10, 1, 'users'),
-(35, '+', '2015-04-25 20:21:11', '2015-04-26 02:26:37', -1, 'Pages', 'portal/pages', 0, 'po', 23, 1, 'file'),
+(35, '+', '2015-04-25 20:21:11', '2015-04-26 19:48:18', -1, 'Pages', 'portal/pages', 0, 'po', 23, 1, 'file'),
 (37, '+', '2015-04-26 00:39:45', NULL, -1, 'Menu Items', 'admin/menu_items?section=po', 0, 'ad', 10, 2, 'list'),
 (38, '+', '2015-04-26 03:01:13', '2015-04-26 03:01:22', -1, 'Defaults', 'admin/defaults', 0, 'ad', 2, 5, 'magic');
 
@@ -216,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `page` (
   `access_level` int(2) DEFAULT NULL,
   `default_view` char(1) DEFAULT NULL,
   PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Truncate table before insert `page`
@@ -230,8 +266,9 @@ TRUNCATE TABLE `page`;
 INSERT INTO `page` (`page_id`, `status`, `entered`, `updated`, `template_id`, `portal_id`, `title`, `alias`, `access_level`, `default_view`) VALUES
 (1, '+', '2015-04-26 02:57:51', NULL, 1, -1, 'Home Page', 'home', 0, 'y'),
 (2, '+', '2015-04-26 03:42:27', NULL, 1, -1, 'RSS Page', 'rss', 0, 'y'),
-(3, '+', '2015-04-26 03:50:59', NULL, 1, -1, 'Videos', 'videos', 0, 'n'),
-(4, '+', '2015-04-26 03:51:11', NULL, 1, -1, 'Articles', 'articles', 0, 'n');
+(3, '+', '2015-04-26 03:50:59', NULL, 1, -1, 'Videos', 'videos', 0, 'y'),
+(4, '+', '2015-04-26 03:51:11', NULL, 1, -1, 'Articles', 'articles', 0, 'y'),
+(5, '+', '2015-04-26 19:34:55', '2015-04-26 20:48:53', 2, 1, 'Tools', 'tools', 1, 'n');
 
 -- --------------------------------------------------------
 
@@ -277,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `position` (
   `column_id` int(8) NOT NULL DEFAULT '0',
   `sequence` int(2) DEFAULT NULL,
   PRIMARY KEY (`position_id`,`framework_id`,`template_id`,`widget_id`,`column_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Truncate table before insert `position`
@@ -289,7 +326,10 @@ TRUNCATE TABLE `position`;
 --
 
 INSERT INTO `position` (`position_id`, `framework_id`, `template_id`, `widget_id`, `column_id`, `sequence`) VALUES
-(1, 1, 1, 1, 1, 1);
+(2, 1, 1, 1, 1, 1),
+(3, 1, 1, 1, 1, 2),
+(4, 2, 2, 1, 2, 1),
+(5, 2, 2, 1, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -331,7 +371,7 @@ CREATE TABLE IF NOT EXISTS `template` (
   `framework_id` int(8) DEFAULT NULL,
   `title` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`template_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Truncate table before insert `template`
@@ -343,7 +383,8 @@ TRUNCATE TABLE `template`;
 --
 
 INSERT INTO `template` (`template_id`, `status`, `entered`, `updated`, `framework_id`, `title`) VALUES
-(1, '+', '2015-04-26 02:57:34', NULL, 1, 'Home Page');
+(1, '+', '2015-04-26 02:57:34', '2015-04-26 20:46:45', 1, 'Home Page'),
+(2, '+', '2015-04-26 20:48:44', NULL, 2, 'Test 2');
 
 -- --------------------------------------------------------
 
@@ -373,7 +414,7 @@ TRUNCATE TABLE `widget`;
 --
 
 INSERT INTO `widget` (`widget_id`, `status`, `entered`, `updated`, `object_id`, `alias`, `params`) VALUES
-(1, '+', '2015-04-26 02:57:09', NULL, 1, 'Home WYSIWYG', '{"wysiwyg":"<p>Home<\\/p>"}');
+(1, '+', '2015-04-26 02:57:09', '2015-04-26 20:42:54', 1, 'Home WYSIWYG', '{"wysiwyg":"<h1>Home Page<\\/h1>\\r\\n<p>This is a test of the emergency broadcast system<\\/p>"}');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -11,7 +11,6 @@ var Pages_create = function() {
 		init: function() {			
 			$( '#page-create' ).on( 'submit', function( e ) {
 				e.preventDefault();
-				
 				var form_data = $( this ).serialize();				
 				$.post( site_url + 'admin/pages/insert', form_data, function( data ) {
 					gen_toastr( data );

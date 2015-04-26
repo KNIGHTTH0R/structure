@@ -1,7 +1,7 @@
 <?php
 
 $object_params = json_decode( $params, TRUE );
-extract( $object_params );
+
 
 ?>
 

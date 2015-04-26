@@ -39,6 +39,9 @@ class Pages extends CI_Controller {
 	
 	/** Insert **/
 	public function insert() {
+		echo section_check( TRUE );
+		echo $_SERVER['HTTP_REFERER'];
+		exit;
 		$page = $this->pages_model->page_insert();
 		if( $page ) {
 			echo 's|created Page|' . site_url( section_check( TRUE ) . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
@@ -62,7 +65,7 @@ class Pages extends CI_Controller {
 	public function update() {
 		$page = $this->pages_model->page_update();
 		if( $page ) {
-			echo 's|updated Page|' . site_url( $this->input->post( 'section' ) . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
+			echo 's|updated Page|' . site_url( section_check( TRUE ) . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
 		} else {
 			echo 'f|update Page';
 		}

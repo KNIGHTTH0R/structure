@@ -39,9 +39,11 @@ class Pages extends CI_Controller {
 	
 	/** Insert **/
 	public function insert() {
+		$section = $this->input->post( 'portal_id' ) == -1 ? 'admin' : 'portal';
+		
 		$page = $this->pages_model->page_insert();
 		if( $page ) {
-			echo 's|created Page|' . site_url( section_check( TRUE ) . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
+			echo 's|created Page|' . site_url( $section . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
 		} else {
 			echo 'f|create Page';
 		}
@@ -60,9 +62,10 @@ class Pages extends CI_Controller {
 	
 	/** Update **/
 	public function update() {
+		$section = $this->input->post( 'portal_id' ) == -1 ? 'admin' : 'portal';
 		$page = $this->pages_model->page_update();
 		if( $page ) {
-			echo 's|updated Page|' . site_url( section_check( TRUE ) . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
+			echo 's|updated Page|' . site_url( $section . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
 		} else {
 			echo 'f|update Page';
 		}
