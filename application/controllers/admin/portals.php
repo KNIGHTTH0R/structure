@@ -4,24 +4,18 @@ class Portals extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model( 'admin/portals_model' );
-		//$this->js = 'assets/js/access_levels_crud_init.js';
+		
+		/** Section Params **/
+		$this->js           = '';
+		$this->styles       = '';
+		$this->control_item = 'admin/portals';
 	}
 	
 	public function index() {
-		$params['page_title']					= 'Portals';
-		$params['page_header']				= 'Portals <small>list</small>';
+		$this->page = 'list';
+		$params = params_array( $this );
 		
-		$portal_list = array(
-			'actions' => array(
-				'href' => 'portals/create',
-				'icon_text' => 'Create'
-			)
-		);
-		
-		$params['portal_list']	= $portal_list;
 		$params['list']					= $this->portals_model->portal_list();
-		
-		//$params['scripts']						= array( 'js' => $this->js, 'init' => 'Access_levels_list' );
 		
 		$this->layout->view( 'admin/portals_view', $params );
 	}

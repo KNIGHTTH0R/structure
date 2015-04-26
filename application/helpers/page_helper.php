@@ -3,11 +3,11 @@
 function params_array( $mvc ) {
 	$page_control_item = isset( $mvc->control_item ) ? $mvc->control_item : '';
 	
-	if( ! empty( $page_control_item ) ) {
-		$CI =& get_instance();
-		$query = $CI->db->get_where( 'menu_item', [ 'menu_item_id' => $page_control_item ] );
-		extract( $query->row_array() );
-	}
+	$CI =& get_instance();
+	$CI->db->select( 'mi.*, mi2.title AS parent_title' );
+	$CI->db->join( 'menu_item AS mi2', 'mi2.menu_item_id = mi.parent_id', 'left' );
+	$query = $CI->db->get_where( 'menu_item AS mi', [ 'mi.view' => $page_control_item ] );
+	extract( $query->row_array() );
 	
 	$page_section      = isset( $mvc->section ) ? $mvc->section : section_check();
 	$page_page         = isset( $mvc->page ) ? $mvc->page : '';
@@ -44,7 +44,11 @@ function params_array( $mvc ) {
 	}
 	
 	if( ! isset( $mvc->breadcrumbs ) ) {
-		$page_breadcrumbs = [ $page_section => '#', $title => $view, $page_page => '#' ];
+		if( ! empty( $parent_title ) ) {
+			$page_breadcrumbs = [ $page_section => '#', $parent_title => '#', $title => $view, $page_page => '#' ];
+		} else {
+			$page_breadcrumbs = [ $page_section => '#', $title => $view ];
+		}
 	} else {
 		$page_breadcrumbs = $mvc->breadcrumbs;
 	}

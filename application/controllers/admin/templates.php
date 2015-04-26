@@ -8,7 +8,7 @@ class Templates extends CI_Controller {
 		/** Section Params **/
 		$this->js           = 'assets/js/templates_crud_init.js';
 		$this->styles       = '';
-		$this->control_item = 5;
+		$this->control_item = 'admin/templates';
 	}
 	
 	/** List **/

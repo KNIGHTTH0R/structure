@@ -16,7 +16,7 @@ class Objects extends CI_Controller {
 		$this->page = 'list';
 		$params = params_array( $this );
 		
-		$params['list']						= $this->objects_model->object_list();
+		$params['list']	= $this->objects_model->object_list();
 		
 		$this->layout->view( 'admin/objects_view', $params );
 	}

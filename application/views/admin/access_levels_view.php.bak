@@ -1,6 +1,6 @@
 <div class="row">
 	<div id="list-reorder" class="col-md-3 col-md-offset-4" style="display: none;">
-		<?=gen_ui_portlet_open( 'Order Access Levels', $page_icon, 'form' );?>
+		<?=gen_ui_portlet_open( 'Order Access Levels', 'list', 'form' );?>
 			<form>
 				<div class="row">
 					<div class="col-md-12">

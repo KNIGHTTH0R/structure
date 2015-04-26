@@ -105,11 +105,11 @@ function gen_breadcrumbs( $breadcrumbs, $return = FALSE ) {
 	$count = 1;
 	foreach( $breadcrumbs as $title => $link ) {
 		$title = ucwords( $title );
-		if( $count == 1 && $count == count( $breadcrumbs ) ) {
+		if( $count == 1 && count( $breadcrumbs ) == 1 ) {
 			$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";
 		} else if( $title == 'Admin' || $title == 'Portal' ) {
 			$default_breadcrumbs .= '<li class="active">' . $title . '<i class="fa fa-circle"></i></li>' . "\n";
-		} else if( $count != count( $breadcrumbs ) ) {
+		} else if( $count != count( $breadcrumbs ) - 1 ) {
 			$default_breadcrumbs .= '<li><a href="' . $section_location .  $link . '">' . $title . '</a><i class="fa fa-circle"></i></li>' . "\n";
 		} else {
 			$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";
@@ -180,7 +180,7 @@ function section_check( $full = FALSE ) {
 	if( $full === FALSE ) {
 		return $section;
 	} else {
-		$section_array = [ 'ad' => 'Admin', 'po' => 'Portal', 'fr' => 'Portal' ];
+		$section_array = [ 'ad' => 'admin', 'po' => 'portal', 'fr' => 'portal' ];
 		return $section_array[$section];
 	}
 }

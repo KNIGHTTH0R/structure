@@ -5,7 +5,7 @@ function get_menu_items( $page_current ) {
 	$CI->load->database();
 	
 	$CI->db->where( 'parent_id', 0 );
-	$CI->db->where( 'section', section_check() );
+	$CI->db->where( 'section', 'po' );
 	$CI->db->where( 'portal_id', get_portal_id() );
 	$CI->db->where( 'status', '+' );
 	$CI->db->order_by( 'sequence' );
@@ -76,7 +76,7 @@ function gen_menu_link( $title, $view, $active = '', $icon = '', $args = [] ) {
 	
 	if( section_check( TRUE ) == 'portal' ) {
 		$CI =& get_instance();
-		//$view += '?portal_id=' . $CI->input->get( 'portal_id' );
+		$view = $view . '?portal_id=' . $CI->input->get( 'portal_id' );
 	}
 	
 	$link	 = '<li class="' . $active . ' ' . $args['cclass'] . '">';

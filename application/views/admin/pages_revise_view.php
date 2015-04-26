@@ -12,7 +12,7 @@
 						<?=gen_select_template( $page['template_id'] );?>	
 					</div>
 					<div class="col-md-6">
-						<?=gen_input( 'View (alias)', 'view', $page['view'] );?>	
+						<?=gen_input( 'View (alias)', 'alias', $page['view'] );?>	
 					</div>
 					<div class="col-md-6">
 						<?=gen_select_access_level( $page['access_level'] );?>	
@@ -28,7 +28,7 @@
 					<?=gen_form_entup( $page['entered'], $page['updated'] );?>	
 				</div>
 				<div class="form-actions right">
-					<?=gen_form_actions( site_url( 'admin/pages/index/' . $page['portal_id'] ) );?>
+					<?=gen_form_actions( site_url( section_check( TRUE ) . '/pages?portal_id=' . $portal_id ) );?>
 				</div>
 			</form>
 		<?=gen_ui_portlet_close();?>

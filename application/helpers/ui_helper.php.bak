@@ -57,8 +57,11 @@ EOD;
 	}
 }
 
-function gen_ui_revise_button( $href, $params = [] ) {
-	echo '<a class="btn blue-madison btn-xs" href="' . $href . '">Revise</a>';
+function gen_ui_revise_button( $href, $args = [] ) {
+	$args['label'] = isset( $args['label'] ) ? $args['label'] : 'Revise';
+	$args['target'] = isset( $args['target'] ) ? $args['target'] : '_self';
+	
+	echo '<a class="btn blue-madison btn-xs" href="' . $href . '" target="' . $args['target'] . '">' . $args['label'] . '</a>';
 }
 
 function gen_ui_portlet_open( $title, $icon, $type = '', $params = [], $return = FALSE ) {
@@ -322,20 +325,20 @@ function gen_ui_object_params( $params, $params_selected = '', $return = FALSE )
 		
 		switch( $type ) {
 			case 'text':
-				$inputs .= '<div class="col-md-6">' . gen_input( $label, $variable, $value, [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-6">' . gen_input( $label, $field_name, $value, [], TRUE ) . '</div>';
 			break;
 			case 'select':
-				$inputs .= '<div class="col-md-6">' . gen_select( $label, $variable, $options, $value, [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-6">' . gen_select( $label, $field_name, $options, $value, [], TRUE ) . '</div>';
 			break;
 			case 'multi':
 				$value = ! empty( $value ) ? array_fill_keys( $value, '' ) : [];
-				$inputs .= '<div class="col-md-6">' . gen_multi_select( $label, $variable, $options, $value, [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-6">' . gen_multi_select( $label, $field_name, $options, $value, [], TRUE ) . '</div>';
 			break;
 			case 'toggle':
-				$inputs .= '<div class="col-md-6">' . gen_toggle( $label, $variable, $value, [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-6">' . gen_toggle( $label, $field_name, $value, [], TRUE ) . '</div>';
 			break;
 			case 'wysiwyg':
-				$inputs .= '<div class="col-md-12">' . gen_form_wysiwyg( $label, $variable, $value, [], TRUE ) . '</div>';
+				$inputs .= '<div class="col-md-12">' . gen_form_wysiwyg( $label, $field_name, $value, [], TRUE ) . '</div>';
 			break;
 		}
 	}

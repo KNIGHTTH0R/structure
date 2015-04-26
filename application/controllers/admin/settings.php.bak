@@ -12,7 +12,6 @@ class Settings extends CI_Controller {
 	}
 	
 	public function index() {
-		$this->page = 'Options';
 		$this->init = 'Settings';
 		$params = params_array( $this );
 		

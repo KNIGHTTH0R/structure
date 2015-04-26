@@ -58,7 +58,7 @@
 				<?php if( isset( $menu_item['children_list'] ) ):?>
 					<?php foreach( $menu_item['children_list'] as $child ):?>
 						<tr>
-							<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/menu_items/revise/' . $menu_item['menu_item_id'] . '?section=' . $section ) );?></td>
+							<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/menu_items/revise/' . $child['menu_item_id'] . '?section=' . $section ) );?></td>
 							<td class="text-indent"><?=$child['title'];?></td>
 							<td><?=$child['view'];?></td>
 							<td><?=$access_options[$child['access_level']];?></td>

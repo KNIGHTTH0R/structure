@@ -5,9 +5,9 @@ class Dashboard extends CI_Controller {
 		parent::__construct();
 		
 		/** Section Params **/
-		$this->js           = 'assets/js/pages_crud_init.js';
+		$this->js           = '';
 		$this->styles       = '';
-		$this->control_item = 19;
+		$this->control_item = 'portal/dashboard';
 	}
 	
 	public function index() {

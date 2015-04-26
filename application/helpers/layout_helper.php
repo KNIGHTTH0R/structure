@@ -105,7 +105,7 @@ function gen_breadcrumbs( $breadcrumbs, $return = FALSE ) {
 	$count = 1;
 	foreach( $breadcrumbs as $title => $link ) {
 		$title = ucwords( $title );
-		if( $count == 1 && $count == count( $breadcrumbs ) ) {
+		if( $count == 1 && count( $breadcrumbs ) == 1 ) {
 			$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";
 		} else if( $title == 'Admin' || $title == 'Portal' ) {
 			$default_breadcrumbs .= '<li class="active">' . $title . '<i class="fa fa-circle"></i></li>' . "\n";

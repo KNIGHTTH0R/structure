@@ -8,9 +8,12 @@ class Pages_model extends CI_Model {
 	
 	/** List **/
 	public function page_list( $portal_id ) {
-		$this->db->order_by( 'status' );
-		$this->db->order_by( 'title' );
-		return $this->db->get_where( 'page', [ 'portal_id' => $portal_id ] )->result_array();
+		$this->db->select( 'p.*, t.title AS template_title, al.title AS access_level_title' );
+		$this->db->join( 'template AS t', 't.template_id = p.template_id' );
+		$this->db->join( 'access_level AS al', 'al.level = p.access_level' );
+		$this->db->order_by( 'p.status' );
+		$this->db->order_by( 'p.title' );
+		return $this->db->get_where( 'page AS p', [ 'portal_id' => $portal_id ] )->result_array();
 	}
 	
 	/** Insert **/
@@ -49,6 +52,12 @@ class Pages_model extends CI_Model {
 		$data['title']	       = $this->input->post( 'title' );
 		$data['template_id']   = $this->input->post( 'template_id' );
 		$data['access_level']	 = $this->input->post( 'access_level' );
+		$data['view']					 = $this->input->post( 'view' );
+		if( $this->input->post( 'default_view' ) ) {
+			$data['default_view'] = 'y';
+		} else {
+			$data['default_view'] = 'n';
+		}
 		
 		return $this->db->update( 'page', $data, [ 'page_id' => $this->input->post( 'page_id' ) ] );
 	}

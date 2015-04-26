@@ -7,10 +7,11 @@ class Dashboard extends CI_Controller {
 		/** Section Params **/
 		$this->js           = '';
 		$this->styles       = '';
-		$this->control_item = 19;
+		$this->control_item = 'portal/dashboard';
 	}
 	
 	public function index() {
+		$this->page = 'dashboard';
 		$params = params_array( $this );
 		
 		$this->layout->view( 'portal/dashboard_view', $params, 'default' );

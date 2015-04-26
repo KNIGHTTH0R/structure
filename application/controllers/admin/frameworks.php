@@ -8,7 +8,7 @@ class Frameworks extends CI_Controller {
 		/** Section Params **/
 		$this->js           = 'assets/js/frameworks_crud_init.js';
 		$this->styles       = '';
-		$this->control_item = 3;
+		$this->control_item = 'admin/frameworks';
 	}
 	
 	/** List **/

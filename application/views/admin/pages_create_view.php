@@ -12,7 +12,7 @@
 						<?=gen_select_template();?>	
 					</div>
 					<div class="col-md-6">
-						<?=gen_input( 'View (alias)', 'view' );?>	
+						<?=gen_input( 'View (alias)', 'alias' );?>	
 					</div>
 					<div class="col-md-6">
 						<?=gen_select_access_level();?>	
@@ -25,7 +25,7 @@
 					</div>	
 				</div>
 				<div class="form-actions right">
-					<?=gen_form_actions( site_url( 'admin/objects' ) );?>
+					<?=gen_form_actions( site_url( section_check( TRUE ) . '/pages?portal_id=' . $portal_id ) );?>
 				</div>
 			</form>
 		<?=gen_ui_portlet_close();?>

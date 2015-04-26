@@ -7,7 +7,7 @@ class Dashboard extends CI_Controller {
 		/** Section Params **/
 		$this->js           = '';
 		$this->styles       = '';
-		$this->control_item = 1;
+		$this->control_item = 'admin/dashboard';
 	}
 	
 	public function index() {		

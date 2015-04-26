@@ -8,7 +8,7 @@ class Portals_model extends CI_Model {
 	
 	public function portal_list() {
 		$this->db->where( 'portal_id > 0' );
-		return $this->db->get( 'portal' )->result_array();
+		return $this->db->get( 'portal', )->result_array();
 	}
 	
 	public function portal_insert() {

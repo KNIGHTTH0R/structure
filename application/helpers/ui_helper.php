@@ -57,8 +57,11 @@ EOD;
 	}
 }
 
-function gen_ui_revise_button( $href, $params = [] ) {
-	echo '<a class="btn blue-madison btn-xs" href="' . $href . '">Revise</a>';
+function gen_ui_revise_button( $href, $args = [] ) {
+	$args['label'] = isset( $args['label'] ) ? $args['label'] : 'Revise';
+	$args['target'] = isset( $args['target'] ) ? $args['target'] : '_self';
+	
+	echo '<a class="btn blue-madison btn-xs" href="' . $href . '" target="' . $args['target'] . '">' . $args['label'] . '</a>';
 }
 
 function gen_ui_portlet_open( $title, $icon, $type = '', $params = [], $return = FALSE ) {
@@ -125,6 +128,7 @@ EOD;
 }
 
 function gen_ui_portlet_actions( $params = [] ) {
+	$params['href_prop']			= isset( $params['href_prop'] ) ? $params['href_prop'] : '';
 	$params['href'] 					= isset( $params['href'] ) ? '<a href="' . $params['href'] . '" data-toggle="modal" class="btn btn-default">' : '';
 	$params['icon_text'] 			= isset( $params['icon_text'] ) ? '<i class="fa fa-plus"></i> ' . $params['icon_text'] . '</a>' : '';
 	$params['reorder'] 				= isset( $params['reorder'] ) ? '<a href="javascript:;" class="reorder btn btn-default"><i class="fa fa-bars"></i> Reorder</a>' : '';

@@ -216,8 +216,9 @@ function gen_toggle( $label, $field_name, $status = '', $args = [], $return = FA
 	}
 	
 	$args['class'] = isset( $args['class'] ) ? $args['class'] : '';
+	$args['name']  = isset( $args['name'] ) ? $args['name'] : $field_name;
 	
-	$toggle =	'<div><input type="checkbox" class="make-switch ' . $args['class'] . '" id="' . $field_name . '" name="' . $field_name . '" data-on-color="primary" data-off-color="danger" data-on-text="&nbsp;On&nbsp;" data-off-text="&nbsp;Off&nbsp;" ' . $status . '></div>';
+	$toggle =	'<div><input type="checkbox" class="make-switch ' . $args['class'] . '" id="' . $field_name . '" name="' . $args['name'] . '" data-on-color="primary" data-off-color="danger" data-on-text="&nbsp;On&nbsp;" data-off-text="&nbsp;Off&nbsp;" ' . $status . '></div>';
 
 	if( $return === TRUE ) {
 		return gen_form_std_wrapper( $label, $toggle );
@@ -288,6 +289,22 @@ function gen_select_framework( $selected_id = '', $args = [] ) {
 	}
 	
 	return gen_select( 'Framework', 'framework_id', $framework_options, $selected_id, $args );
+}
+
+function gen_select_template( $selected_id = '', $args = [] ) {
+	$template_options = [];
+	
+	$CI =& get_instance();
+	$CI->load->database();
+	
+	$CI->db->order_by( 'title' );
+	$query = $CI->db->get( 'template' );
+	
+	if( $query->num_rows() > 0 ) {
+		$template_options = array_column( $query->result_array(), 'title', 'template_id' );
+	}
+	
+	return gen_select( 'Template', 'template_id', $template_options, $selected_id, $args );
 }
 
 function gen_object_select( $selected_option = '', $args = [], $return = FALSE ) {

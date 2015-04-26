@@ -12,7 +12,7 @@
 			<tbody>
 			<?php foreach( $list as $portal ):?>
 				<tr>
-					<td class="text-center"><?=gen_ui_revise_button( site_url( 'portal/dashboard?portal_id=' . $portal['portal_id'] ), [ 'label' => 'Manage', 'target' => '_blank' ] );?></td>
+					<td class="text-center"><?=gen_ui_revise_button( site_url( 'portal/dashboard?portal_id=' . $portal['portal_id'] ), [ 'label' => 'Manage', 'target' => '_blank' );?></td>
 					<td><?=$portal['name'];?></td>
 					<td class="text-center"><?=gen_ui_status( $portal['portal_id'], $portal['status'] );?></td>
 				</tr>
