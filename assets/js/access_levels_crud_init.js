@@ -1,4 +1,4 @@
-var Access_levels_list = function() {
+var Access_Levels_list = function() {
 	return {
 		init: function() {
 			$( document ).ready( function() {
@@ -45,7 +45,7 @@ var Access_levels_list = function() {
 	}
 }();
 
-var Access_levels_create = function() {
+var Access_Levels_create = function() {
 	return {
 		init: function() {			
 			$( '#access-level-create' ).on( 'submit', function( e ) {
@@ -60,7 +60,7 @@ var Access_levels_create = function() {
 	}
 }();
 
-var Access_levels_revise = function() {
+var Access_Levels_revise = function() {
 	return {
 		init: function() {			
 			$( '#access-level-revise' ).on( 'submit', function( e ) {

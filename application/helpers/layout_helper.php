@@ -144,24 +144,6 @@ function get_access_levels() {
 	return $access_array;
 }
 
-function access_check( $access ) {
-	$CI =& get_instance();
-	
-	$access_array = get_access_levels();
-
-	if( $CI->session->userdata( 'user_level' ) ) {
-		if( $access_array[$CI->session->userdata( 'user_level' )] >= $access_array[$access] ) {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	} else if( $access == 0 ) {
-		return TRUE;
-	} else {
-		return FALSE;
-	}
-}
-
 function section_check( $full = FALSE ) {
 	$current_page = explode( '/', $_SERVER['REQUEST_URI'] );
 	

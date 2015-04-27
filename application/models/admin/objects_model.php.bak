@@ -13,11 +13,6 @@ class Objects_model extends CI_Model {
 		return $this->db->get( 'object' )->result_array();
 	}
 	
-	/** Revise **/
-	public function object_revise( $object_id ) {
-		return $this->db->get_where( 'object', [ 'object_id' => $object_id ] )->row_array();
-	}
-	
 	/** Insert **/
 	public function object_insert() {
 		if( empty( $_POST ) ) {
@@ -36,6 +31,11 @@ class Objects_model extends CI_Model {
 		fclose( $fh );
 		
 		return $this->db->insert( 'object', $data );
+	}
+	
+	/** Revise **/
+	public function object_revise( $object_id ) {
+		return $this->db->get_where( 'object', [ 'object_id' => $object_id ] )->row_array();
 	}
 	
 	/** Update **/

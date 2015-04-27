@@ -32,7 +32,11 @@ class Site extends CI_Controller {
 			$params['page_id'] 		= $page_id;
 			$params['segment_2'] 	= $segment_2;
 			$params['segment_3'] 	= $segment_3;
-			$params['page_access_level'] 	= 0;
+			
+			$this->db->select( 'access_level' );
+			$query = $this->db->get_where( 'page', [ 'page_id' => $page_id ] );
+			extract( $query->row_array() );
+			$params['page_access_level'] 	= $access_level;
 		} else {
 			show_404();
 		}

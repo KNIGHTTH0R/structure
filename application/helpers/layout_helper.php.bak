@@ -109,7 +109,7 @@ function gen_breadcrumbs( $breadcrumbs, $return = FALSE ) {
 			$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";
 		} else if( $title == 'Admin' || $title == 'Portal' ) {
 			$default_breadcrumbs .= '<li class="active">' . $title . '<i class="fa fa-circle"></i></li>' . "\n";
-		} else if( $count != count( $breadcrumbs ) - 1 ) {
+		} else if( $count != count( $breadcrumbs ) ) {
 			$default_breadcrumbs .= '<li><a href="' . $section_location .  $link . '">' . $title . '</a><i class="fa fa-circle"></i></li>' . "\n";
 		} else {
 			$default_breadcrumbs .= '<li class="active">' . $title . '</li>' . "\n";

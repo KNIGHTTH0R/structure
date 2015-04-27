@@ -150,6 +150,12 @@ Rounded Portlets
 	padding: 25px;
 }
 
+.widget-delete {
+	position: absolute;
+  right: 10px;
+  padding-left: 10px;
+}
+
 /** Framework CRUD Styles */
 
 .framework-row .bg-green {
@@ -205,26 +211,23 @@ Rounded Portlets
 	width: 100%;
 }
 .column-content .list-group {
-	padding-left: 25%;
-	padding-right: 25%;
+	display: block;
 	position: relative;
-	display: inline-block;
+	margin: 0px auto 15px auto;
+	padding: 0px 15% 0px 15%;
 	width: 100%;
 }
 
 .column-content .list-group li {
 	color: #000;
 	margin: 0px auto;
+	max-width: 400px;
 }
 
 /** Sequence List Item Styles */
 
 .list-group li:hover {
 	cursor: pointer;
-}
-
-.list-group li:hover a {
-	color: #fff;
 }
 
 .list-group li.ui-sortable-helper {

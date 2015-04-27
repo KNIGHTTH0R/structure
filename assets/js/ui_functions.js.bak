@@ -53,15 +53,15 @@ function gen_ui_object_params_options() {
 	var form_group					= $( '<div>', { class: 'form-group' } );
 	
 	var label_input					= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params params-label', placeholder: 'Label' } ) );
-	var variable_input			= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params params-variable', placeholder: 'Variable Name' } ) );
+	var field_name_input		= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params params-field_name', placeholder: 'Field Name' } ) );
 	var select							= form_group.clone().append( $( '<input>', { type: 'text', class: 'form-control object-params params-select', placeholder: 'Select...' } ) );
 	var params_wrapper			= $( '<div>', { class: 'params-wrapper' } );
-	var add_button					= $( '<button>', { type: 'button', class: 'btn blue add-params', text: 'Add More' } );
+	var remove_button					= $( '<button>', { type: 'button', class: 'btn red remove-params', text: 'Remove' } );
 	
-	var column_1						= $( '<div>', { class: 'col-md-4' } ).append( select );
+	var column_1						= $( '<div>', { class: 'col-md-3' } ).append( select );
 	var column_2						= $( '<div>', { class: 'col-md-3' } ).append( label_input );
-	var column_3						= $( '<div>', { class: 'col-md-3' } ).append( variable_input );				
-	var column_4						= $( '<div>', { class: 'col-md-2' } ).append( add_button );
+	var column_3						= $( '<div>', { class: 'col-md-3' } ).append( field_name_input );
+	var column_4						= $( '<div>', { class: 'col-md-2' } ).append( remove_button );
 	
 	params_wrapper.append( column_1 );
 	params_wrapper.append( column_2 );

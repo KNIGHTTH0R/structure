@@ -7,7 +7,7 @@
 					<div class="col-md-6">
 						<?=gen_input( 'Title', 'title' );?>
 					</div>
-					<h4 class="col-md-12">Parameters</h4>
+					<h4 class="col-md-12">Parameters <button type="button" class="btn btn-xs blue add-params">Add More</button></h4>
 					<div class="col-md-12">
 					  <div class="row" id="params-container">
 					</div>

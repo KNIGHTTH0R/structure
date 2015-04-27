@@ -238,7 +238,6 @@ var Templates_revise = function() {
 				
 				form_data = form_data + '&' + template_data.join( '&' );
 				$.post( site_url + 'admin/templates/update', form_data, function( data ) {
-					alert( data );
 					gen_toastr( data );
 				});
 			});

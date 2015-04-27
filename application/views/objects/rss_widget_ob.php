@@ -15,6 +15,6 @@ $count = 0;
 				break;
 			}
 		?>
-		<li><a href="<?=$item->link;?>"><?=$item->title;?></a></li>
+		<li><a target="_blank" href="<?=$item->link;?>"><?=$item->title;?></a></li>
 	<?php $count++; endforeach;?>	
 </ul>

@@ -18,8 +18,7 @@ var Objects_create = function() {
 				$( '.params-select', params_container ).select2({ data: options });
 			});
 			
-			params_container.on( 'click', '.add-params', function() {
-				$( this ).text( 'Remove' ).toggleClass( 'blue add-params remove-params red' );
+			$( '.add-params' ).on( 'click', function() {
 				
 				$( '.params-select' ).select2( 'destroy' );
 				params_container.append( gen_ui_object_params_options() );
@@ -115,8 +114,7 @@ var Objects_revise = function() {
 				$( '.summernote' ).summernote( { height: 250 } );
 			});
 			
-			params_container.on( 'click', '.add-params', function() {
-				$( this ).text( 'Remove' ).toggleClass( 'blue add-params remove-params red' );
+			$( '.add-params' ).on( 'click', function() {
 				
 				$( '.params-select' ).select2( 'destroy' );
 				params_container.append( gen_ui_object_params_options() );
@@ -143,8 +141,7 @@ var Objects_revise = function() {
 			$( '#object-revise' ).on( 'submit', function( e ) {
 				e.preventDefault();
 				
-				// Work on this later
-				/*var object_params = [];
+				var object_params = [];
 				var params = [];
 				var object_count = 0;
 				$( '.params-wrapper', params_container ).each( function() {
@@ -159,8 +156,8 @@ var Objects_revise = function() {
 							case ( $( this ).hasClass( 'params-label' ) ):
 								var array_type = 'label';
 							break;
-							case ( $( this ).hasClass( 'params-variable' ) ):
-								var array_type = 'variable';
+							case ( $( this ).hasClass( 'params-field_name' ) ):
+								var array_type = 'field_name';
 							break;
 							case ( $( this ).hasClass( 'params-select' ) ):
 								var array_type = 'type';
@@ -172,10 +169,8 @@ var Objects_revise = function() {
 								return;
 						}
 						
-						if( array_type == 'options' ) {
-							alert( $( this ).val() );
+						if( $( this ).val().indexOf( ',' ) != -1 ) {
 							var select_options = $( this ).val().split( ',' );
-							alert( JSON.stringify( select_options ) );
 							for( var i = 0; i < select_options.length; i++ ) {
 								params.push( 'params[' + object_count + '][' + array_type + '][' + select_options[i] + ']=' + select_options[i] );
 							}							
@@ -187,9 +182,9 @@ var Objects_revise = function() {
 					object_params.push( params );
 					object_count++;
 				});
-				object_params = object_params.join( '&' );*/
+				object_params = object_params.join( '&' );
 				
-				var form_data = $( this ).serialize();
+				var form_data = $( this ).serialize() + '&' + object_params;
 				$.post( site_url + 'admin/objects/update', form_data, function( data ) {
 					gen_toastr( data );
 				});

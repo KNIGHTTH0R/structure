@@ -71,3 +71,22 @@ function params_array( $mvc ) {
 	
 	return [ 'page_access_level' => $page_access_level, 'page_current' => $view, 'page_breadcrumbs' => $page_breadcrumbs, 'page_icon' => $icon, 'page_title' => $page_title, 'page_header' => $page_header, 'styles' => $page_styles, 'scripts' => [ 'js' => $page_js, 'init' => $page_init ] ];
 }
+
+
+function access_check( $access ) {
+	$CI =& get_instance();
+	
+	$access_array = get_access_levels();
+
+	if( $CI->session->userdata( 'user_level' ) ) {
+		if( $access_array[$CI->session->userdata( 'user_level' )] >= $access_array[$access] ) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	} else if( $access == 0 ) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}

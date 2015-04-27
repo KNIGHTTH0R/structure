@@ -24,10 +24,10 @@
 				<div class="row">
 					<h4 class="col-md-12">Record Info</h4>
 					<div class="col-md-4">
-						<?=gen_input( 'Created Date', 'entered', date( 'm/d/Y h:i a', strtotime( $template['entered'] ) ), [ 'inline' => '3', 'prop' => 'disabled', 'class' => 'input-medium' ] );?>
+						<?=gen_input( 'Created Date', 'entered', date( 'm/d/Y h:i a', strtotime( $template['entered'] ) ), [ 'inline' => '3', 'prop' => 'disabled' ] );?>
 					</div>
-					<div class="col-md-4 col-md-offset-4">
-						<?=gen_input( 'Last Updated Date', 'updated', ! empty( $template['updated'] ) ? date( 'm/d/Y h:i a', strtotime( $template['updated'] ) ) : 'None', [ 'inline' => '5', 'prop' => 'disabled', 'class' => 'input-medium' ] );?>
+					<div class="col-md-4">
+						<?=gen_input( 'Last Updated Date', 'updated', ! empty( $template['updated'] ) ? date( 'm/d/Y h:i a', strtotime( $template['updated'] ) ) : 'None', [ 'inline' => '5', 'prop' => 'disabled' ] );?>
 					</div>
 				</div>
 				<div class="form-actions right">
