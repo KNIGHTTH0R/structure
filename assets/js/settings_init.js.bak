@@ -13,17 +13,17 @@ var Settings = function() {
 				});
 			});
 			
-			( function( $ ) {
+			(function(jQuery) {
 				jQuery.fn.select2options = function( data ) {
 					var $elem = this;
-					$( 'option:not(:first)', $elem ).remove();
 					$.each( data, function( i, val ) {
 						$elem.append( $( '<option>', { value: val.id, text: val.text } ) );
 					});
 				};
-			})( jQuery );
+			})(jQuery);
 			
 			$( '#selectme' ).on( 'change', function() {
+				$( '#testing option:not(:first)' ).remove();
 				switch( $( this ).val() ) {
 					case '1':
 						var data = [{ id: '1', text: 'Testing again' },{ id: '2', text: 'Testing 2' }];
@@ -35,6 +35,7 @@ var Settings = function() {
 				
 				
 				$( '#testing' ).select2options( data );
+				//$( '#testing' ).select2({ data: data, placeholder: "Select" });
 			});
 		}
 	}

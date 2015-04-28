@@ -62,7 +62,7 @@ function params_array( $mvc ) {
 	}
 	
 	if( ! isset( $mvc->access_level ) ) {
-		$page_access_level = $access_level;
+		$page_access_level = $access_level_id;
 	} else if( isset( $mvc->access_level ) ) {
 		$page_access_level = $mvc->access_level;
 	} else {
@@ -73,18 +73,25 @@ function params_array( $mvc ) {
 }
 
 
-function access_check( $access ) {
+function access_check( $access_level_id ) {
 	$CI =& get_instance();
+	
+	$query = $CI->db->get_where( 'access_level', [ 'access_level_id' => $access_level_id ] );
+	if( $query->num_rows() == 0 ) {
+		return FALSE;
+	} else {
+		extract( $query->row_array() );
+	}
 	
 	$access_array = get_access_levels();
 
 	if( $CI->session->userdata( 'user_level' ) ) {
-		if( $access_array[$CI->session->userdata( 'user_level' )] >= $access_array[$access] ) {
+		if( $access_array[$CI->session->userdata( 'user_level' )] >= $access_array[$level] ) {
 			return TRUE;
 		} else {
 			return FALSE;
 		}
-	} else if( $access == 0 ) {
+	} else if( $level == 0 ) {
 		return TRUE;
 	} else {
 		return FALSE;

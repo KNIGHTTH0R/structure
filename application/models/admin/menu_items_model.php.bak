@@ -46,7 +46,7 @@ class Menu_items_model extends CI_Model {
 		
 		$data['status'] 			= '+';
 		$data['entered']			= date( 'Y-m-d H:i:s' );
-		$data['portal_id']		= $this->input->post( 'portal_id' );
+		$data['portal_id']		= -1;
 		$data['title']				= $this->input->post( 'title' );
 		$data['view']					= $this->input->post( 'view' );
 		$data['access_level']	= $this->input->post( 'access_level' );

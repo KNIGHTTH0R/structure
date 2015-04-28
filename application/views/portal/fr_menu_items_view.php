@@ -51,7 +51,7 @@
 					<td class="text-center"><?=gen_ui_revise_button( site_url( 'portal/fr_menu_items/revise/' . $menu_item['fr_menu_item_id'] . '?portal_id=' . $portal_id ) );?></td>
 					<td class="bold"><?=$menu_item['title'];?></td>
 					<td><?=$menu_item['alias'];?></td>
-					<td><?=$access_options[$menu_item['access_level']];?></td>
+					<td><?=$access_options[$menu_item['access_level_id']];?></td>
 					<td class="text-center"><?=gen_ui_icon( $menu_item['icon'] );?></td>
 					<td class="text-center"><?=gen_ui_status( $menu_item['fr_menu_item_id'], $menu_item['status'] );?></td>
 				</tr>
@@ -61,7 +61,7 @@
 							<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/menu_items/revise/' . $child['fr_menu_item_id'] ) );?></td>
 							<td class="text-indent"><?=$child['title'];?></td>
 							<td><?=$child['alias'];?></td>
-							<td><?=$access_options[$child['access_level']];?></td>
+							<td><?=$access_options[$child['access_level_id']];?></td>
 							<td class="text-center"><?=gen_ui_icon( $child['icon'] );?></td>
 							<td class="text-center"><?=gen_ui_status( $child['fr_menu_item_id'], $child['status'] );?></td>
 						</tr>

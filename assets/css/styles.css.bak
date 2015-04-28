@@ -1,5 +1,30 @@
 /* here you can put your own css to customize and override the theme */
 
+/** Select2 Fix **/
+.select2-hidden-accessible {
+	display: none !important;
+}
+
+.select2-selection {
+	height: 34px !important;
+}
+
+.select2-selection__placeholder {
+	line-height: 34px !important;
+}
+
+.select2-selection__arrow {
+	height: 34px !important;
+}
+
+.select2-selection__clear {
+	line-height: 34px !important;
+}
+
+.select2-search__field {
+	padding: 0px !important;
+}
+
 /***
 Rounded Portlets
 ***/
@@ -148,6 +173,12 @@ Rounded Portlets
 
 .widget-block {
 	padding: 25px;
+}
+
+.widget-delete {
+	position: absolute;
+  right: 10px;
+  padding-left: 10px;
 }
 
 /** Framework CRUD Styles */

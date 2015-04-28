@@ -4,6 +4,7 @@
 			<form id="page-revise">
 				<div class="row">
 					<?=gen_hidden_input( 'page_id', $page['page_id'] );?>
+					<?=gen_hidden_input( 'portal_id', $page['portal_id'] );?>
 					<h4 class="col-md-12">Settings</h4>
 					<div class="col-md-6">
 						<?=gen_input( 'Title', 'title', $page['title'] );?>

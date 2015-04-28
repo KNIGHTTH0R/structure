@@ -49,7 +49,7 @@
 			<?php foreach( $list as $menu_item ):?>
 				<tr>
 					<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/menu_items/revise/' . $menu_item['menu_item_id'] . '?section=' . $section ) );?></td>
-					<td class="bold"><?=$_SERVER['REQUEST_URI'];?></td>
+					<td class="bold"><?=$menu_item['title'];?></td>
 					<td><?=$menu_item['view'];?></td>
 					<td><?=$access_options[$menu_item['access_level']];?></td>
 					<td class="text-center"><?=gen_ui_icon( $menu_item['icon'] );?></td>

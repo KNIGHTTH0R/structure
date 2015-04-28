@@ -48,7 +48,7 @@ class Fr_menu_items_model extends CI_Model {
 		$data['portal_id']		= $this->input->post( 'portal_id' );
 		$data['title']				= $this->input->post( 'title' );
 		$data['alias']				= $this->input->post( 'alias' );
-		$data['access_level']	= $this->input->post( 'access_level' );
+		$data['access_level_id']	= $this->input->post( 'access_level_id' );
 		$data['parent_id']		= $this->input->post( 'parent_id' );
 		$data['icon']					= $this->input->post( 'icon' );
 		$data['sequence']			= $sequence;
@@ -70,7 +70,7 @@ class Fr_menu_items_model extends CI_Model {
 		$data['updated']			= date( 'Y-m-d H:i:s' );
 		$data['title']				= $this->input->post( 'title' );
 		$data['alias']				= $this->input->post( 'alias' );
-		$data['access_level']	= $this->input->post( 'access_level' );
+		$data['access_level_id']	= $this->input->post( 'access_level_id' );
 		$data['parent_id']		= $this->input->post( 'parent_id' );
 		$data['icon']					= $this->input->post( 'icon' );
 		

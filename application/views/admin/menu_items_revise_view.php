@@ -20,7 +20,7 @@
 						<?=gen_select( 'Parent', 'parent_id', $parent_options, $menu_item['parent_id'] );?>	
 					</div>
 					<div class="col-md-6">
-						<?=gen_select_access_level( $menu_item['access_level'] );?>
+						<?=gen_select_access_level( $menu_item['access_level_id'] );?>
 					</div>
 				</div>
 				<div class="row">

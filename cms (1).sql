@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2015 at 04:37 AM
+-- Generation Time: Apr 28, 2015 at 04:07 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `fr_menu_item` (
   `portal_id` int(11) DEFAULT NULL,
   `title` varchar(45) DEFAULT NULL,
   `alias` varchar(45) DEFAULT NULL,
-  `access_level` int(2) DEFAULT NULL,
+  `access_level_id` int(2) DEFAULT NULL,
   `parent_id` int(8) DEFAULT NULL,
   `sequence` int(2) DEFAULT NULL,
   `icon` varchar(16) DEFAULT NULL,
@@ -154,10 +154,10 @@ TRUNCATE TABLE `fr_menu_item`;
 -- Dumping data for table `fr_menu_item`
 --
 
-INSERT INTO `fr_menu_item` (`fr_menu_item_id`, `status`, `entered`, `updated`, `portal_id`, `title`, `alias`, `access_level`, `parent_id`, `sequence`, `icon`) VALUES
-(1, '+', '2015-04-26 19:11:19', '2015-04-26 19:30:03', 1, 'Learning', 'learning', 0, 0, 1, 'book'),
-(2, '+', '2015-04-26 19:17:39', NULL, 1, 'News', 'news', 0, 0, 2, 'file-pdf-o'),
-(3, '+', '2015-04-26 21:42:09', NULL, 1, 'Feeds', 'feed', 0, 0, 3, 'rss');
+INSERT INTO `fr_menu_item` (`fr_menu_item_id`, `status`, `entered`, `updated`, `portal_id`, `title`, `alias`, `access_level_id`, `parent_id`, `sequence`, `icon`) VALUES
+(1, '+', '2015-04-26 19:11:19', '2015-04-28 04:06:11', 1, 'Learning', 'learning', 4, 0, 1, 'book'),
+(2, '+', '2015-04-26 19:17:39', '2015-04-28 04:06:16', 1, 'News', 'news', 4, 0, 2, 'file-pdf-o'),
+(3, '+', '2015-04-26 21:42:09', '2015-04-28 04:06:20', 1, 'Feeds', 'feed', 4, 0, 3, 'rss');
 
 -- --------------------------------------------------------
 
@@ -174,13 +174,13 @@ CREATE TABLE IF NOT EXISTS `menu_item` (
   `portal_id` int(8) DEFAULT NULL,
   `title` varchar(45) DEFAULT NULL,
   `view` varchar(45) DEFAULT NULL,
-  `access_level` int(2) DEFAULT NULL,
+  `access_level_id` int(2) DEFAULT NULL,
   `section` char(2) DEFAULT NULL,
   `parent_id` int(8) DEFAULT NULL,
   `sequence` int(2) DEFAULT NULL,
   `icon` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`menu_item_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
 -- Truncate table before insert `menu_item`
@@ -191,29 +191,29 @@ TRUNCATE TABLE `menu_item`;
 -- Dumping data for table `menu_item`
 --
 
-INSERT INTO `menu_item` (`menu_item_id`, `status`, `entered`, `updated`, `portal_id`, `title`, `view`, `access_level`, `section`, `parent_id`, `sequence`, `icon`) VALUES
-(1, '+', '2015-01-17 12:00:00', '2015-04-26 00:57:46', -1, 'Dashboard', 'admin/dashboard', 0, 'ad', 0, 1, 'home'),
-(2, '+', '2015-01-17 12:00:00', '2015-04-24 05:01:46', -1, 'Portal Management', '', 0, 'ad', 0, 2, 'globe'),
-(3, '+', '2015-01-17 12:00:00', '2015-01-22 03:31:28', -1, 'Display Management', '', 0, 'ad', 0, 3, 'laptop'),
-(4, '+', '2015-01-17 12:00:00', '2015-04-25 19:58:45', -1, 'CMS Management', '', 0, 'ad', 0, 4, 'lock'),
-(5, '+', '2015-04-24 05:00:55', '2015-04-26 01:48:17', -1, 'Portals', 'admin/portals', 0, 'ad', 2, 1, 'users'),
-(6, '+', '2015-04-26 00:39:45', NULL, -1, 'Menu Items', 'admin/menu_items?section=po', 0, 'ad', 2, 2, 'list'),
-(7, '+', '2015-01-17 12:00:00', '2015-04-25 03:45:49', -1, 'Objects', 'admin/objects', 0, 'ad', 3, 1, 'cube'),
-(8, '+', '2015-01-17 12:00:00', '2015-01-22 03:32:35', -1, 'Widgets', 'admin/widgets', 0, 'ad', 3, 2, 'cubes'),
-(9, '+', '2015-01-17 12:00:00', '2015-01-22 03:31:58', -1, 'Frameworks', 'admin/frameworks', 0, 'ad', 3, 3, 'building'),
-(10, '+', '2015-01-17 12:00:00', '2015-02-01 04:39:13', -1, 'Templates', 'admin/templates', 0, 'ad', 3, 4, 'picture-o'),
-(11, '+', '2015-04-24 04:47:58', '2015-04-26 19:47:59', -1, 'Pages', 'admin/pages?portal_id=-1', 0, 'ad', 3, 5, 'file'),
-(12, '+', '2015-04-26 03:01:13', '2015-04-26 03:01:22', -1, 'Defaults', 'admin/defaults', 0, 'ad', 3, 5, 'magic'),
-(13, '+', '2015-01-17 12:00:00', '2015-01-22 03:26:11', -1, 'Access Levels', 'admin/access_levels', 0, 'ad', 4, 1, 'key'),
-(14, '+', '2015-01-17 12:00:00', '2015-04-26 03:03:05', -1, 'Admin Users', 'admin/admin_users', 0, 'ad', 4, 2, 'user-secret'),
-(15, '+', '2015-01-17 12:00:00', '2015-04-26 00:36:04', -1, 'Menu Items', 'admin/menu_items?section=ad', 0, 'ad', 4, 3, 'list'),
-(16, '+', NULL, NULL, -1, 'Settings', 'admin/settings', 0, 'ad', 4, 4, 'cogs'),
-(17, '+', '2015-02-07 21:42:48', '2015-04-26 02:26:12', -1, 'Dashboard', 'portal/dashboard', 0, 'po', 0, 3, 'home'),
-(18, '+', '2015-02-07 21:58:39', '2015-02-07 22:05:39', -1, 'Front-End', '', 0, 'po', 0, 4, 'database'),
-(19, '+', '2015-02-07 21:47:20', '2015-02-07 21:59:20', -1, 'Portal Admin', '', 0, 'po', 0, 5, 'lock'),
-(20, '+', '2015-02-07 22:07:35', '2015-04-26 05:09:47', -1, 'Menu Items', 'portal/fr_menu_items', 0, 'po', 18, NULL, 'list-ol'),
-(21, '+', '2015-04-25 20:21:11', '2015-04-26 19:48:18', -1, 'Pages', 'portal/pages', 0, 'po', 18, 1, 'file'),
-(22, '+', '2015-02-07 21:48:37', '2015-04-25 20:17:54', -1, 'Settings', 'portal/settings', 0, 'po', 19, 2, 'cogs');
+INSERT INTO `menu_item` (`menu_item_id`, `status`, `entered`, `updated`, `portal_id`, `title`, `view`, `access_level_id`, `section`, `parent_id`, `sequence`, `icon`) VALUES
+(1, '+', '2015-01-17 12:00:00', '2015-04-28 04:04:36', -1, 'Dashboard', 'admin/dashboard', 4, 'ad', 0, 1, 'home'),
+(2, '+', '2015-01-17 12:00:00', '2015-04-24 05:01:46', -1, 'Portal Management', '', 4, 'ad', 0, 2, 'globe'),
+(3, '+', '2015-01-17 12:00:00', '2015-01-22 03:31:28', -1, 'Display Management', '', 4, 'ad', 0, 3, 'laptop'),
+(4, '+', '2015-01-17 12:00:00', '2015-04-25 19:58:45', -1, 'CMS Management', '', 4, 'ad', 0, 4, 'lock'),
+(5, '+', '2015-04-24 05:00:55', '2015-04-26 01:48:17', -1, 'Portals', 'admin/portals', 4, 'ad', 2, 1, 'users'),
+(6, '+', '2015-04-26 00:39:45', NULL, -1, 'Menu Items', 'admin/menu_items?section=po', 4, 'ad', 2, 2, 'list'),
+(7, '+', '2015-01-17 12:00:00', '2015-04-25 03:45:49', -1, 'Objects', 'admin/objects', 4, 'ad', 3, 1, 'cube'),
+(8, '+', '2015-01-17 12:00:00', '2015-01-22 03:32:35', -1, 'Widgets', 'admin/widgets', 4, 'ad', 3, 2, 'cubes'),
+(9, '+', '2015-01-17 12:00:00', '2015-01-22 03:31:58', -1, 'Frameworks', 'admin/frameworks', 4, 'ad', 3, 3, 'building'),
+(10, '+', '2015-01-17 12:00:00', '2015-02-01 04:39:13', -1, 'Templates', 'admin/templates', 4, 'ad', 3, 4, 'picture-o'),
+(11, '+', '2015-04-24 04:47:58', '2015-04-26 19:47:59', -1, 'Pages', 'admin/pages?portal_id=-1', 4, 'ad', 3, 5, 'file'),
+(12, '+', '2015-04-26 03:01:13', '2015-04-26 03:01:22', -1, 'Defaults', 'admin/defaults', 4, 'ad', 3, 5, 'magic'),
+(13, '+', '2015-01-17 12:00:00', '2015-01-22 03:26:11', -1, 'Access Levels', 'admin/access_levels', 4, 'ad', 4, 1, 'key'),
+(14, '+', '2015-01-17 12:00:00', '2015-04-26 03:03:05', -1, 'Admin Users', 'admin/admin_users', 4, 'ad', 4, 2, 'user-secret'),
+(15, '+', '2015-01-17 12:00:00', '2015-04-26 00:36:04', -1, 'Menu Items', 'admin/menu_items?section=ad', 4, 'ad', 4, 3, 'list'),
+(16, '+', NULL, NULL, -1, 'Settings', 'admin/settings', 4, 'ad', 4, 4, 'cogs'),
+(17, '+', '2015-02-07 21:42:48', '2015-04-26 02:26:12', -1, 'Dashboard', 'portal/dashboard', 4, 'po', 0, 3, 'home'),
+(18, '+', '2015-02-07 21:58:39', '2015-02-07 22:05:39', -1, 'Front-End', '', 4, 'po', 0, 4, 'database'),
+(19, '+', '2015-02-07 21:47:20', '2015-02-07 21:59:20', -1, 'Portal Admin', '', 4, 'po', 0, 5, 'lock'),
+(20, '+', '2015-02-07 22:07:35', '2015-04-26 05:09:47', -1, 'Menu Items', 'portal/fr_menu_items', 4, 'po', 18, NULL, 'list-ol'),
+(21, '+', '2015-04-25 20:21:11', '2015-04-26 19:48:18', -1, 'Pages', 'portal/pages', 4, 'po', 18, 1, 'file'),
+(22, '+', '2015-02-07 21:48:37', '2015-04-25 20:17:54', -1, 'Settings', 'portal/settings', 4, 'po', 19, 2, 'cogs');
 
 -- --------------------------------------------------------
 
@@ -264,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `page` (
   `portal_id` int(8) DEFAULT NULL,
   `title` varchar(32) DEFAULT NULL,
   `alias` varchar(45) DEFAULT NULL,
-  `access_level` int(2) DEFAULT NULL,
+  `access_level_id` int(2) DEFAULT NULL,
   `default_view` char(1) DEFAULT NULL,
   PRIMARY KEY (`page_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
@@ -278,9 +278,9 @@ TRUNCATE TABLE `page`;
 -- Dumping data for table `page`
 --
 
-INSERT INTO `page` (`page_id`, `status`, `entered`, `updated`, `template_id`, `portal_id`, `title`, `alias`, `access_level`, `default_view`) VALUES
-(1, '+', '2015-04-26 22:50:40', '2015-04-27 01:13:13', 7, -1, 'Home', 'home', 0, 'y'),
-(2, '+', '2015-04-27 00:20:26', NULL, 2, -1, 'Feeds', 'feed', 0, 'y');
+INSERT INTO `page` (`page_id`, `status`, `entered`, `updated`, `template_id`, `portal_id`, `title`, `alias`, `access_level_id`, `default_view`) VALUES
+(1, '+', '2015-04-26 22:50:40', '2015-04-28 04:03:18', 7, -1, 'Home', 'home', 4, 'y'),
+(2, '+', '2015-04-27 00:20:26', '2015-04-28 04:02:42', 2, -1, 'Feeds', 'feed', 4, 'y');
 
 -- --------------------------------------------------------
 

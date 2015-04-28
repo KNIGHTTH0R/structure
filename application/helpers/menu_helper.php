@@ -16,7 +16,7 @@ function get_menu_items( $page_current ) {
 	foreach( $menu_items as $attributes ) {
 		extract( $attributes );
 		
-		if( ! access_check( $access_level ) ) {
+		if( ! access_check( $access_level_id ) ) {
 			continue;
 		}
 		
@@ -55,7 +55,7 @@ function gen_menu_children( $menu_items, $page_current ) {
 	foreach( $menu_items as $attributes ) {
 		extract( $attributes );
 		
-		if( ! access_check( $access_level ) ) {
+		if( ! access_check( $access_level_id ) ) {
 			continue;
 		}
 		

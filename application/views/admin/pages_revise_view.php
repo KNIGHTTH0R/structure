@@ -16,7 +16,7 @@
 						<?=gen_input( 'View (alias)', 'alias', $page['alias'] );?>	
 					</div>
 					<div class="col-md-6">
-						<?=gen_select_access_level( $page['access_level'] );?>	
+						<?=gen_select_access_level( $page['access_level_id'] );?>	
 					</div>
 				</div>
 				<div class="row">

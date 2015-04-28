@@ -48,7 +48,7 @@
 			<tbody>
 			<?php foreach( $list as $menu_item ):?>
 				<tr>
-					<td class="text-center"><?=gen_ui_revise_button( site_url( 'portal/menu_items/revise/' . $menu_item['fr_menu_item_id'] ) );?></td>
+					<td class="text-center"><?=gen_ui_revise_button( site_url( 'portal/fr_menu_items/revise/' . $menu_item['fr_menu_item_id'] . '?portal_id=' . $portal_id ) );?></td>
 					<td class="bold"><?=$menu_item['title'];?></td>
 					<td><?=$menu_item['alias'];?></td>
 					<td><?=$access_options[$menu_item['access_level']];?></td>

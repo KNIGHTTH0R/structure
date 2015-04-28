@@ -133,7 +133,7 @@ function gen_select( $label = '', $field_name, $options, $selected_option = '', 
 	
 	$select = '<select class="form-control select2me ' . $class. '" id="' . $field_name . '" name="' . $name . '" placeholder="' . $placeholder . '" ' . $prop . '>';
 	
-	$select .= '<option value=""></option>';
+	$select .= '<option value="-1"></option>';
 	foreach( $options as $option_value => $option_text ) {
 		$selected = $option_value == $selected_option ? 'selected' : '';
 		$select  .= '<option value="' . $option_value . '" ' . $selected . '>' . $option_text . '</option>';
@@ -218,7 +218,7 @@ function gen_toggle( $label, $field_name, $status = '', $args = [], $return = FA
 	$args['class'] = isset( $args['class'] ) ? $args['class'] : '';
 	$args['name']  = isset( $args['name'] ) ? $args['name'] : $field_name;
 	
-	$toggle =	'<div><input type="checkbox" class="make-switch ' . $args['class'] . '" id="' . $field_name . '" name="' . $field_name . '" data-on-color="primary" data-off-color="danger" data-on-text="&nbsp;On&nbsp;" data-off-text="&nbsp;Off&nbsp;" ' . $status . '></div>';
+	$toggle =	'<div><input type="checkbox" class="make-switch ' . $args['class'] . '" id="' . $field_name . '" name="' . $args['name'] . '" data-on-color="primary" data-off-color="danger" data-on-text="&nbsp;On&nbsp;" data-off-text="&nbsp;Off&nbsp;" ' . $status . '></div>';
 
 	if( $return === TRUE ) {
 		return gen_form_std_wrapper( $label, $toggle );

@@ -62,25 +62,25 @@ class Fr_menu_items_model extends CI_Model {
 	}
 	
 	/** Update **/
-	public function menu_item_update() {
+	public function fr_menu_item_update() {
 		if( empty( $_POST ) ) {
 			return false;
 		}
 		
 		$data['updated']			= date( 'Y-m-d H:i:s' );
 		$data['title']				= $this->input->post( 'title' );
-		$data['view']					= $this->input->post( 'view' );
+		$data['alias']				= $this->input->post( 'alias' );
 		$data['access_level']	= $this->input->post( 'access_level' );
 		$data['parent_id']		= $this->input->post( 'parent_id' );
 		$data['icon']					= $this->input->post( 'icon' );
 		
-		return $this->db->update( 'menu_item', $data, [ 'menu_item_id' => $this->input->post( 'menu_item_id' ) ] );
+		return $this->db->update( 'fr_menu_item', $data, [ 'fr_menu_item_id' => $this->input->post( 'fr_menu_item_id' ) ] );
 	}
 	
 	/** Status **/
 	public function set_status() {
 		$data['status'] = $this->input->post( 'status' );
-		$this->db->update( 'menu_item', $data, array( 'menu_item_id' => $this->input->post( 'target_id' ) ) );
+		$this->db->update( 'fr_menu_item', $data, [ 'fr_menu_item_id' => $this->input->post( 'target_id' ) ] );
 	}
 	
 	/** Sequence **/
