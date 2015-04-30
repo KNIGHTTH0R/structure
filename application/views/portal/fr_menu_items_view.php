@@ -34,7 +34,7 @@
 	</div>
 	<div id="menu-item-wrapper" class="col-md-12">
 		<?=gen_ui_portlet_open( $page_title, $page_icon, '', [ 'actions' => [ 'href' => 'fr_menu_items/create?portal_id=' . $portal_id, 'icon_text' => 'Create', 'reorder' => TRUE ] ] );?>
-		<table class="table table-striped table-hover menu-item-table">
+		<table class="table table-striped table-hover fr-menu-item-table">
 			<thead>
 				<tr>
 					<th>Revise</th>	
@@ -48,7 +48,7 @@
 			<tbody>
 			<?php foreach( $list as $menu_item ):?>
 				<tr>
-					<td class="text-center"><?=gen_ui_revise_button( site_url( 'portal/fr_menu_items/revise/' . $menu_item['fr_menu_item_id'] . '?portal_id=' . $portal_id ) );?></td>
+					<td class="text-center"><?=gen_ui_revise_button( site_url( 'portal/fr_menu_items/revise/' . $menu_item['fr_menu_item_id'] . '?portal_id=' . $portal_id ), [ 'class' => 'default-revise' ] );?></td>
 					<td class="bold"><?=$menu_item['title'];?></td>
 					<td><?=$menu_item['alias'];?></td>
 					<td><?=$access_options[$menu_item['access_level_id']];?></td>

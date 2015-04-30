@@ -2,12 +2,12 @@ var Defaults = function() {
 	return {
 		init: function() {
 			var default_pages = $( '#default-pages' );
+			var default_fr_menu_items = $( '#default-fr-menu-items' );
 			
 			var default_pages_list = function() {
 				$.get( site_url + 'admin/pages/defaults_list', function( data ) {
 					default_pages.html( data );
 					$( '.btn-create', default_pages ).attr( 'href', '' );
-					gen_ui_datatable( '.page-table' );
 				});
 			}
 			
@@ -28,8 +28,38 @@ var Defaults = function() {
 				});
 			}
 			
+			var default_fr_menu_items_list = function() {
+				$.get( site_url + 'portal/fr_menu_items/defaults_menu_item_list', function( data ) {
+					default_fr_menu_items.html( data );
+					$( '.btn-create', default_fr_menu_items ).attr( 'href', '' );
+				});
+			}
+			
+			var default_fr_menu_items_create = function() {
+				$.get( site_url + 'portal/fr_menu_items/defaults_menu_item_create', function( data ) {
+					default_fr_menu_items.html( data );
+					$( 'select' ).select2();
+					$( '.make-switch' ).bootstrapSwitch();
+				});
+			}
+			
+			var default_fr_menu_items_revise = function( object_ref ) {
+				var fr_menu_item_id = $( object_ref ).attr( 'href' ).split( '/' ).pop().split( '?' ).shift();
+				$.get( site_url + 'portal/fr_menu_items/defaults_menu_item_revise/' + fr_menu_item_id, function( data ) {
+					default_fr_menu_items.html( data );
+					$( 'select' ).select2();
+					$( '.make-switch' ).bootstrapSwitch();
+				});
+			}
+			
 			$( document ).ready( function() {
 				default_pages_list();
+				default_fr_menu_items_list();
+			});
+			
+			/** Default Pages List **/
+			$( '.default-pages' ).on( 'click', function() {
+				//default_pages_list();
 			});
 			
 			/** Defaults Page Create **/
@@ -90,6 +120,70 @@ var Defaults = function() {
 				default_pages_list();
 			});
 			
+			/** Default Front-End Menu Items List **/
+			$( '.default-fr-menu-items' ).on( 'click', function() {
+				//default_fr_menu_items_list();
+			});
+			
+			/** Default Front-End Menu Items Create **/			
+			default_fr_menu_items.on( 'click', '.btn-create', function( e ) {
+				e.preventDefault();
+				default_fr_menu_items_create();
+			});
+			
+			/** Default Front-End Menu Items Insert **/
+			default_fr_menu_items.on( 'submit', '#fr-menu-item-create', function( e ) {
+				e.preventDefault();
+				
+				var form_data = $( this ).serialize();
+				$.post( site_url + 'portal/fr_menu_items/insert', form_data, function( data ) {
+					var results = data.split( '|' )[0];
+					
+					switch( results ) {
+						case 's':
+							gen_toastr( results + '|created Page|' );
+							default_fr_menu_items_list();
+						break;
+						case 'e':
+							gen_toastr( results + '|create Page|' );
+						break;
+					}
+				});
+			});
+			
+			/** Default Front-End Menu Items Revise **/
+			default_fr_menu_items.on( 'click', '.default-revise', function( e ) {
+				e.preventDefault();
+				default_fr_menu_items_revise( $( this ) );
+			});
+			
+			/** Default Front-End Menu Items Update **/
+			default_fr_menu_items.on( 'submit', '#fr-menu-item-revise', function( e ) {
+				e.preventDefault();
+				
+				var form_data = $( this ).serialize();
+				$.post( site_url + 'portal/fr_menu_items/update', form_data, function( data ) {
+					var results = data.split( '|' )[0];
+					
+					switch( results ) {
+						case 's':
+							gen_toastr( results + '|updated Menu Item|' );
+							default_fr_menu_items_list();
+						break;
+						case 'e':
+							gen_toastr( results + '|update Menu Item|' );
+						break;
+					}
+				});
+			});
+			
+			/** Defaults Page Cancel **/
+			default_fr_menu_items.on( 'click', '.default', function( e ) {
+				e.preventDefault();
+				default_fr_menu_items_list();
+			});
+			
+			status_update( site_url + 'admin/pages/status' );
 		}
 	}
 }();

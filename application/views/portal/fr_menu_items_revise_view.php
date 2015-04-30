@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-6">
 		<?=gen_ui_portlet_open( $page_title, $page_icon, 'form' );?>
-			<form id="menu-item-revise">
+			<form id="fr-menu-item-revise">
 				<?=gen_hidden_input( 'fr_menu_item_id', $fr_menu_item['fr_menu_item_id'] );?>
 				<?=gen_hidden_input( 'portal_id', $portal_id );?>
 				<div class="form-body">

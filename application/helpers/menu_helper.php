@@ -119,7 +119,7 @@ function fr_get_menu_items() {
 	foreach( $menu_items as $attributes ) {
 		extract( $attributes );
 		
-		if( ! access_check( $access_level ) ) {
+		if( ! access_check( $access_level_id ) ) {
 			continue;
 		}
 		
@@ -146,11 +146,6 @@ function fr_gen_menu_link( $title, $view, $active = '', $icon = '', $args = [] )
 		$view = 'javascript:;';
 	} else {
 		$view = site_url( $view );
-	}
-	
-	if( section_check( TRUE ) == 'portal' ) {
-		$CI =& get_instance();
-		$view = $view . '?portal_id=' . $CI->input->get( 'portal_id' );
 	}
 	
 	$link	 = '<li class="' . $active . ' ' . $args['cclass'] . '">';

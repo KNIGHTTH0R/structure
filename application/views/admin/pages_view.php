@@ -16,7 +16,7 @@
 			<tbody>
 			<?php foreach( $list as $page ): ?>
 				<tr>
-					<td class="text-center"><?=gen_ui_revise_button( site_url( section_check( TRUE ) . '/pages/revise/' . $page['page_id'] . '?portal_id=' . $portal_id ), [ 'class' => 'default-revise' ] );?></td>
+					<td class="text-center"><?=gen_ui_revise_button( site_url( '/pages/revise/' . $page['page_id'] . '?portal_id=' . $portal_id ), [ 'class' => 'default-revise' ] );?></td>
 					<td><?=$page['title'];?></tdw>
 					<td><?=$page['alias'];?></td>
 					<td><?=$page['template_title'];?></td>
