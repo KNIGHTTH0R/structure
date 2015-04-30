@@ -8,7 +8,7 @@ class Access_levels_model extends CI_Model {
 	
 	/** List **/
 	public function access_level_list() {
-		$this->db->select( "access_level_id, status, title, level, IF( admin_flg = 'y', 'Yes', 'No' ) AS admin_flg", FALSE );
+		$this->db->select( "access_level_id, status, title, level, IF( admin_flg = 'y', 'checked', '' ) AS admin_flg", FALSE );
 		$this->db->order_by( 'level', 'DESC' );
 		return $this->db->get( 'access_level' )->result_array();
 	}
