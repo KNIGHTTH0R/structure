@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2015 at 04:07 AM
+-- Generation Time: Apr 30, 2015 at 05:36 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -34,8 +34,9 @@ CREATE TABLE IF NOT EXISTS `access_level` (
   `updated` datetime DEFAULT NULL,
   `title` varchar(45) DEFAULT NULL,
   `level` int(2) DEFAULT NULL,
+  `admin_flg` char(1) DEFAULT NULL,
   PRIMARY KEY (`access_level_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Truncate table before insert `access_level`
@@ -46,12 +47,48 @@ TRUNCATE TABLE `access_level`;
 -- Dumping data for table `access_level`
 --
 
-INSERT INTO `access_level` (`access_level_id`, `status`, `entered`, `updated`, `title`, `level`) VALUES
-(1, '+', '2015-01-19 23:07:17', NULL, 'Super Admin', 4),
-(2, '+', '2015-01-19 23:07:23', NULL, 'Admin', 3),
-(3, '+', '2015-01-19 23:07:29', NULL, 'User', 1),
-(4, '+', '2015-01-19 23:07:35', NULL, 'Guest', 0),
-(5, '+', '2015-01-23 04:01:27', NULL, 'Portal Admin', 2);
+INSERT INTO `access_level` (`access_level_id`, `status`, `entered`, `updated`, `title`, `level`, `admin_flg`) VALUES
+(1, '+', '2015-01-19 23:07:17', '2015-04-30 03:04:40', 'Super Admin', 4, 'y'),
+(2, '+', '2015-01-19 23:07:23', '2015-04-30 03:05:07', 'Admin', 3, 'y'),
+(3, '+', '2015-01-19 23:07:29', NULL, 'User', 1, NULL),
+(4, '+', '2015-01-19 23:07:35', NULL, 'Guest', 0, NULL),
+(5, '+', '2015-01-23 04:01:27', '2015-04-30 03:05:11', 'Portal Admin', 2, 'y'),
+(6, '+', '2015-04-30 05:29:28', NULL, 'Developer', 5, 'y');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_user`
+--
+
+DROP TABLE IF EXISTS `admin_user`;
+CREATE TABLE IF NOT EXISTS `admin_user` (
+  `admin_user_id` int(8) NOT NULL AUTO_INCREMENT,
+  `status` char(1) NOT NULL DEFAULT '+',
+  `entered` datetime NOT NULL,
+  `updated` datetime DEFAULT NULL,
+  `first_name` varchar(64) NOT NULL,
+  `last_name` varchar(64) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `access_level_id` int(8) NOT NULL,
+  `site_owner_flg` char(1) DEFAULT NULL,
+  PRIMARY KEY (`admin_user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Truncate table before insert `admin_user`
+--
+
+TRUNCATE TABLE `admin_user`;
+--
+-- Dumping data for table `admin_user`
+--
+
+INSERT INTO `admin_user` (`admin_user_id`, `status`, `entered`, `updated`, `first_name`, `last_name`, `email`, `username`, `password`, `access_level_id`, `site_owner_flg`) VALUES
+(1, '+', '2015-04-30 03:42:32', '2015-04-30 04:04:34', 'John', 'Leider', 'john.j.leider@gmail.com', 'john.j.leider', '$2y$10$zUyW38LmgfsoMtK86rNDUushssT5OVteMthR6ErEdeCj8XVXQqF8e', -1, 'y'),
+(2, '+', '2015-04-30 05:34:29', NULL, 'Cynthia', 'Burke', 'cynthia@furrylogic.net', 'cburke', '$2y$10$Dby6BWnRqU15T1Kv6MHXuubOHqXC9pB8FwcC2BSDukpxf5A/fcTfa', 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -192,22 +229,21 @@ TRUNCATE TABLE `menu_item`;
 --
 
 INSERT INTO `menu_item` (`menu_item_id`, `status`, `entered`, `updated`, `portal_id`, `title`, `view`, `access_level_id`, `section`, `parent_id`, `sequence`, `icon`) VALUES
-(1, '+', '2015-01-17 12:00:00', '2015-04-28 04:04:36', -1, 'Dashboard', 'admin/dashboard', 4, 'ad', 0, 1, 'home'),
+(1, '+', '2015-01-17 12:00:00', '2015-04-29 04:47:53', -1, 'Dashboard', 'admin/dashboard', 4, 'ad', 0, 1, 'home'),
 (2, '+', '2015-01-17 12:00:00', '2015-04-24 05:01:46', -1, 'Portal Management', '', 4, 'ad', 0, 2, 'globe'),
 (3, '+', '2015-01-17 12:00:00', '2015-01-22 03:31:28', -1, 'Display Management', '', 4, 'ad', 0, 3, 'laptop'),
 (4, '+', '2015-01-17 12:00:00', '2015-04-25 19:58:45', -1, 'CMS Management', '', 4, 'ad', 0, 4, 'lock'),
 (5, '+', '2015-04-24 05:00:55', '2015-04-26 01:48:17', -1, 'Portals', 'admin/portals', 4, 'ad', 2, 1, 'users'),
-(6, '+', '2015-04-26 00:39:45', NULL, -1, 'Menu Items', 'admin/menu_items?section=po', 4, 'ad', 2, 2, 'list'),
+(6, '+', '2015-04-26 00:39:45', '2015-04-30 04:10:12', -1, 'Portal Menu', 'admin/menu_items?section=po', 4, 'ad', 4, 4, 'list-ol'),
 (7, '+', '2015-01-17 12:00:00', '2015-04-25 03:45:49', -1, 'Objects', 'admin/objects', 4, 'ad', 3, 1, 'cube'),
 (8, '+', '2015-01-17 12:00:00', '2015-01-22 03:32:35', -1, 'Widgets', 'admin/widgets', 4, 'ad', 3, 2, 'cubes'),
 (9, '+', '2015-01-17 12:00:00', '2015-01-22 03:31:58', -1, 'Frameworks', 'admin/frameworks', 4, 'ad', 3, 3, 'building'),
 (10, '+', '2015-01-17 12:00:00', '2015-02-01 04:39:13', -1, 'Templates', 'admin/templates', 4, 'ad', 3, 4, 'picture-o'),
-(11, '+', '2015-04-24 04:47:58', '2015-04-26 19:47:59', -1, 'Pages', 'admin/pages?portal_id=-1', 4, 'ad', 3, 5, 'file'),
-(12, '+', '2015-04-26 03:01:13', '2015-04-26 03:01:22', -1, 'Defaults', 'admin/defaults', 4, 'ad', 3, 5, 'magic'),
-(13, '+', '2015-01-17 12:00:00', '2015-01-22 03:26:11', -1, 'Access Levels', 'admin/access_levels', 4, 'ad', 4, 1, 'key'),
-(14, '+', '2015-01-17 12:00:00', '2015-04-26 03:03:05', -1, 'Admin Users', 'admin/admin_users', 4, 'ad', 4, 2, 'user-secret'),
-(15, '+', '2015-01-17 12:00:00', '2015-04-26 00:36:04', -1, 'Menu Items', 'admin/menu_items?section=ad', 4, 'ad', 4, 3, 'list'),
-(16, '+', NULL, NULL, -1, 'Settings', 'admin/settings', 4, 'ad', 4, 4, 'cogs'),
+(12, '+', '2015-04-26 03:01:13', '2015-04-30 01:59:49', -1, 'Defaults', 'admin/defaults', 4, 'ad', 2, 2, 'magic'),
+(13, '+', '2015-01-17 12:00:00', '2015-01-22 03:26:11', -1, 'Access Levels', 'admin/access_levels', 4, 'ad', 4, 2, 'key'),
+(14, '+', '2015-01-17 12:00:00', '2015-04-26 03:03:05', -1, 'Admin Users', 'admin/admin_users', 4, 'ad', 4, 1, 'user-secret'),
+(15, '+', '2015-01-17 12:00:00', '2015-04-30 04:10:01', -1, 'Admin Menu', 'admin/menu_items?section=ad', 4, 'ad', 4, 3, 'list-ol'),
+(16, '+', NULL, NULL, -1, 'Settings', 'admin/settings', 4, 'ad', 4, 5, 'cogs'),
 (17, '+', '2015-02-07 21:42:48', '2015-04-26 02:26:12', -1, 'Dashboard', 'portal/dashboard', 4, 'po', 0, 3, 'home'),
 (18, '+', '2015-02-07 21:58:39', '2015-02-07 22:05:39', -1, 'Front-End', '', 4, 'po', 0, 4, 'database'),
 (19, '+', '2015-02-07 21:47:20', '2015-02-07 21:59:20', -1, 'Portal Admin', '', 4, 'po', 0, 5, 'lock'),
@@ -267,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `page` (
   `access_level_id` int(2) DEFAULT NULL,
   `default_view` char(1) DEFAULT NULL,
   PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Truncate table before insert `page`
@@ -279,8 +315,9 @@ TRUNCATE TABLE `page`;
 --
 
 INSERT INTO `page` (`page_id`, `status`, `entered`, `updated`, `template_id`, `portal_id`, `title`, `alias`, `access_level_id`, `default_view`) VALUES
-(1, '+', '2015-04-26 22:50:40', '2015-04-28 04:03:18', 7, -1, 'Home', 'home', 4, 'y'),
-(2, '+', '2015-04-27 00:20:26', '2015-04-28 04:02:42', 2, -1, 'Feeds', 'feed', 4, 'y');
+(1, '+', '2015-04-26 22:50:40', '2015-04-29 04:37:07', 7, -1, 'Home', 'home', 4, 'y'),
+(2, '+', '2015-04-27 00:20:26', '2015-04-30 04:48:17', 2, -1, 'Feeds', 'feed', 4, 'y'),
+(3, '+', '2015-04-30 05:13:14', NULL, 2, -1, 'test', 'test', 1, 'y');
 
 -- --------------------------------------------------------
 
@@ -456,7 +493,7 @@ TRUNCATE TABLE `widget`;
 INSERT INTO `widget` (`widget_id`, `status`, `entered`, `updated`, `object_id`, `alias`, `params`) VALUES
 (1, '+', '2015-04-26 22:48:58', '2015-04-27 00:41:10', 1, 'Home Page', '{"wysiwyg":"<h1>Home Page<\\/h1><p>Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Praesent ac sem eget est egestas volutpat. Donec interdum, metus et hendrerit aliquet, dolor diam sagittis ligula, eget egestas libero turpis vel mi. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.<\\/p><p><span style=\\"line-height: 1.42857143;\\">Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.. Proin faucibus arcu quis ante. Aenean commodo ligula eget dolor. Nullam tincidunt adipiscing enim.<\\/span><br><\\/p><p><span style=\\"line-height: 1.42857143;\\">Aliquam erat volutpat. Curabitur blandit mollis lacus. Fusce commodo aliquam arcu. Praesent nonummy mi in odio. Suspendisse non nisl sit amet velit hendrerit rutrum.<\\/span><br><\\/p><p><span style=\\"line-height: 1.42857143;\\">Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Curabitur at lacus ac velit ornare lobortis. Praesent ut ligula non mi varius sagittis. Nunc nec neque. Vivamus euismod mauris.<\\/span><br><\\/p><p><span style=\\"line-height: 1.42857143;\\">Aliquam erat volutpat. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Sed libero. Quisque malesuada placerat nisl. Suspendisse non nisl sit amet velit hendrerit rutrum.<\\/span><br><\\/p>"}'),
 (2, '+', '2015-04-26 22:49:26', NULL, 2, 'League of Legends', '{"url":"http:\\/\\/www.reddit.com\\/r\\/leagueoflegends\\/.rss","feeds":"5"}'),
-(3, '+', '2015-04-26 22:49:51', NULL, 2, 'Heroes of the Storm', '{"url":"http:\\/\\/www.reddit.com\\/r\\/heroesofthestorm\\/.rss","feeds":"10"}');
+(3, '+', '2015-04-26 22:49:51', '2015-04-29 04:40:54', 2, 'Heroes of the Storm', '{"url":"http:\\/\\/www.reddit.com\\/r\\/heroesofthestorm\\/.rss","feeds":"2"}');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
