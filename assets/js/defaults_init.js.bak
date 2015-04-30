@@ -90,7 +90,6 @@ var Defaults = function() {
 				default_pages_list();
 			});
 			
-			status_update( site_url + 'admin/pages/status' );
 		}
 	}
 }();

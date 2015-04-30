@@ -1,18 +1,17 @@
 <?php
 
 function params_array( $mvc ) {
-	$page_control_item = isset( $mvc->control_item ) ? $mvc->control_item : '';
+	$page_control_item = $mvc->control_item;
+	$page_section      = isset( $mvc->section ) ? $mvc->section : section_check();
+	$page_page         = isset( $mvc->page ) ? $mvc->page : '';
+	$page_styles       = isset( $mvc->styles ) ? $mvc->styles : '';
+	$page_js           = isset( $mvc->js ) ? $mvc->js : '';
 	
 	$CI =& get_instance();
 	$CI->db->select( 'mi.*, mi2.title AS parent_title' );
 	$CI->db->join( 'menu_item AS mi2', 'mi2.menu_item_id = mi.parent_id', 'left' );
 	$query = $CI->db->get_where( 'menu_item AS mi', [ 'mi.view' => $page_control_item ] );
 	extract( $query->row_array() );
-	
-	$page_section      = isset( $mvc->section ) ? $mvc->section : section_check();
-	$page_page         = isset( $mvc->page ) ? $mvc->page : '';
-	$page_styles       = isset( $mvc->styles ) ? $mvc->styles : '';
-	$page_js           = isset( $mvc->js ) ? $mvc->js : '';
 	
 	switch( $page_section ) {
 		case 'ad':
@@ -78,12 +77,11 @@ function access_check( $access_level_id ) {
 	
 	$query = $CI->db->get_where( 'access_level', [ 'access_level_id' => $access_level_id ] );
 	if( $query->num_rows() == 0 ) {
-		//return FALSE;
-		$level = 0;
+		return FALSE;
 	} else {
 		extract( $query->row_array() );
 	}
-	$level = 0;
+	
 	$access_array = get_access_levels();
 
 	if( $CI->session->userdata( 'user_level' ) ) {

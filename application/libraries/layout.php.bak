@@ -10,7 +10,7 @@ class Layout {
 	
 	public function view( $view_name, $view_params = [], $layout = 'default' ) {
 		if( ! access_check( $view_params['page_access_level'] ) ) {
-			show_404();
+			//show_404();
 		}
 		
 		if( isset( $view_params['page_id'] ) ) {
@@ -23,7 +23,7 @@ class Layout {
 			$this->CI->db->where( 'p.page_id', $view_params['page_id'] );
 			$query = $this->CI->db->get( 'framework AS f' );
 			$widgets_array = array_column( $query->result_array(), 'target' );
-			$widgets_array = array_fill_keys( $widgets_array, '' );
+			$widgets_array = array_fill_keys( $widgets_array, [] );
 			
 			$this->CI->db->select( 'o.file, c.target, w.params' );
 			$this->CI->db->join( 'template AS t', 't.template_id = p.template_id' );

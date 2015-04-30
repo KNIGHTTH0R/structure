@@ -75,4 +75,36 @@ class Pages extends CI_Controller {
 	public function status() {
 		$this->pages_model->set_status();
 	}
+	
+	/** Defaults **/
+	/** Defaults Page List **/
+	public function defaults_list() {
+		$this->page = 'list';
+		$params = params_array( $this );
+		
+		$params['list']	     = $this->pages_model->page_list( -1 );
+		$params['portal_id'] = -1;
+		$this->load->view( 'admin/pages_view', $params );
+	}
+	
+	/** Defaults Create Page **/
+	public function defaults_create() {
+		$this->page = 'create';
+		$params = params_array( $this );
+		
+		$params['portal_id'] = -1;
+		
+		$this->load->view( 'admin/pages_create_view', $params );
+	}
+	
+	/** Defaults Revise Page **/
+	public function defaults_revise( $page_id ) {
+		$this->page = 'revise';
+		$params = params_array( $this );
+		
+		$params['page'] 		 = $this->pages_model->page_revise( $page_id );
+		$params['portal_id'] = -1;
+		
+		$this->load->view( 'admin/pages_revise_view', $params );
+	}
 }

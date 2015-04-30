@@ -7,6 +7,9 @@
 						<div class="col-md-6">
 							<?=gen_input( 'Title', 'title' );?>
 						</div>
+						<div class="col-md-6">
+							<?=gen_toggle( 'Admin Access', 'admin_flg' );?>	
+						</div>
 					</div>
 				</div>
 				<div class="form-actions right">

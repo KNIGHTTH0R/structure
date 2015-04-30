@@ -27,6 +27,7 @@
 					<th>Revise</th>	
 					<th>Title</th>
 					<th>Level</th>
+					<th>Admin Access</th>
 					<th>Status</th>
 				</tr>	
 			</thead>
@@ -36,6 +37,7 @@
 					<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/access_levels/revise/' . $access_level['access_level_id'] ) );?></td>
 					<td><?=$access_level['title'];?></td>
 					<td><?=$access_level['level'];?></td>
+					<td class="text-center"><span class="badge bg-<?=$access_level['admin_flg'] == 'Yes' ? 'blue-madison' : 'red';?>"><?=$access_level['admin_flg'];?></span></td>
 					<td class="text-center"><?=gen_ui_status( $access_level['access_level_id'], $access_level['status'] );?></td>
 				</tr>
 			<?php endforeach;?>	

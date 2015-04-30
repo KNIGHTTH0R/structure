@@ -8,6 +8,9 @@
 						<div class="col-md-6">
 							<?=gen_input( 'Title', 'title', $access_level['title'] );?>
 						</div>
+						<div class="col-md-6">
+							<?=gen_toggle( 'Admin Access', 'admin_flg', $access_level['admin_flg'] );?>	
+						</div>
 					</div>
 					<div class="row">
 						<?=gen_form_entup( $access_level['entered'], $access_level['updated'], $access_level['status'] );?>	

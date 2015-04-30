@@ -5,7 +5,7 @@
 				<div class="form-body">
 					<div class="row">
 						<div class="col-md-6">
-							<?=gen_text( 'Title', 'title' );?>
+							<?=gen_input( 'Title', 'title' );?>
 						</div>
 					</div>
 				</div>

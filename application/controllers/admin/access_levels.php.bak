@@ -42,11 +42,10 @@ class Access_levels extends CI_Controller {
 	
 	/** Revise **/
 	public function revise( $access_level_id ) {
-		$params['page_title']						= 'Access Levels';
-		$params['page_header']					= 'Access Level <small>revise</small>';
+		$this->page = 'revise';
+		$params = params_array( $this );
 		
 		$params['access_level']					= $this->access_levels_model->get_access_level( $access_level_id );
-		$params['scripts']							= array( 'js' => $this->js, 'init' => 'Access_levels_revise' );
 		
 		$this->layout->view( 'admin/access_levels_revise_view', $params );
 	}

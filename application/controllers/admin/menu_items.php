@@ -14,11 +14,11 @@ class Menu_items extends CI_Controller {
 	/** List **/
 	public function index() {
 		$this->page = 'list';
+		$this->init = 'Menu_Items_list';
 		$params = params_array( $this );
 		
-		$params['access_options']	= get_access_levels();
-		$params['list']						= $this->menu_items_model->menu_item_list( $this->input->get( 'section' ) );
-		$params['section']				= $this->input->get( 'section' );
+		$params['list']		 = $this->menu_items_model->menu_item_list( $this->input->get( 'section' ) );
+		$params['section'] = $this->input->get( 'section' );
 		
 		$this->layout->view( 'admin/menu_items_view', $params );
 	}
@@ -26,6 +26,7 @@ class Menu_items extends CI_Controller {
 	/** Create **/
 	public function create() {
 		$this->page = 'create';
+		$this->init = 'Menu_Items_create';
 		$params = params_array( $this );		
 
 		$params['parent_options'] = $this->menu_items_model->parent_options( $this->input->get( 'section' ) );
@@ -47,6 +48,7 @@ class Menu_items extends CI_Controller {
 	/** Revise **/
 	public function revise( $menu_item_id ) {
 		$this->page = 'revise';
+		$this->init = 'Menu_Items_revise';
 		$params = params_array( $this );	
 		
 		$params['menu_item']			= $this->menu_items_model->menu_item_revise( $menu_item_id );

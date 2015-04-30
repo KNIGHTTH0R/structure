@@ -175,11 +175,7 @@ EOD;
 	return $actions;
 }
 
-function gen_select_access_level( $access_level = '', $params = array(), $wrapper = 'standard' ) {
-	$access_level_options = get_access_levels();
-	
-	return gen_form_select( 'Access Level', 'access_level_id', $access_level_options, $access_level, $params, $wrapper );
-}
+
 
 function gen_widget_select( $selected_id = '' ) {
 	$widget_options = array();

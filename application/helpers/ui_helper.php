@@ -58,10 +58,11 @@ EOD;
 }
 
 function gen_ui_revise_button( $href, $args = [] ) {
-	$args['label'] = isset( $args['label'] ) ? $args['label'] : 'Revise';
+	$args['label']  = isset( $args['label'] ) ? $args['label'] : 'Revise';
 	$args['target'] = isset( $args['target'] ) ? $args['target'] : '_self';
+	$args['class']  = isset( $args['class'] ) ? $args['class'] : '';
 	
-	echo '<a class="btn blue-madison btn-xs" href="' . $href . '" target="' . $args['target'] . '">' . $args['label'] . '</a>';
+	echo '<a class="btn blue-madison btn-xs ' . $args['class'] . '" href="' . $href . '" target="' . $args['target'] . '">' . $args['label'] . '</a>';
 }
 
 function gen_ui_portlet_open( $title, $icon, $type = '', $params = [], $return = FALSE ) {
@@ -129,7 +130,7 @@ EOD;
 
 function gen_ui_portlet_actions( $params = [] ) {
 	$params['href_prop']			= isset( $params['href_prop'] ) ? $params['href_prop'] : '';
-	$params['href'] 					= isset( $params['href'] ) ? '<a href="' . $params['href'] . '" data-toggle="modal" class="btn btn-default">' : '';
+	$params['href'] 					= isset( $params['href'] ) ? '<a href="' . $params['href'] . '" data-toggle="modal" class="btn btn-default btn-create">' : '';
 	$params['icon_text'] 			= isset( $params['icon_text'] ) ? '<i class="fa fa-plus"></i> ' . $params['icon_text'] . '</a>' : '';
 	$params['reorder'] 				= isset( $params['reorder'] ) ? '<a href="javascript:;" class="reorder btn btn-default"><i class="fa fa-bars"></i> Reorder</a>' : '';
 	
@@ -361,4 +362,14 @@ function gen_ui_widget_params( $params ) {
 		$input_values[] = [ 'value' => $values, 'selected_values' => $selected_values ];
 	}
 	return $input_values;
+}
+
+function gen_ui_admin_user_label( $access_level_title ) {
+	switch( $access_level_title ) {
+		case 'Site Owner':
+			return '<span class="badge bg-green">' . $access_level_title . '</span>';
+		break;
+		default:
+			return '<span class="badge bg-blue-madison">' . $access_level_title . '</span>';
+	}
 }

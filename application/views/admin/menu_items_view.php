@@ -1,6 +1,6 @@
 <div class="row">
 	<div id="list-reorder" class="col-md-3 col-md-offset-4" style="display: none;">
-		<?=gen_ui_portlet_open( 'Menu Item Sequence', 'list', 'form' );?>
+		<?=gen_ui_portlet_open( 'Menu Item Sequence', $page_icon, 'form' );?>
 			<form>
 				<div class="row">
 					<div class="col-md-12">
@@ -51,7 +51,7 @@
 					<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/menu_items/revise/' . $menu_item['menu_item_id'] . '?section=' . $section ) );?></td>
 					<td class="bold"><?=$menu_item['title'];?></td>
 					<td><?=$menu_item['view'];?></td>
-					<td><?=$access_options[$menu_item['access_level_id']];?></td>
+					<td><?=$menu_item['access_level_title'];?></td>
 					<td class="text-center"><?=gen_ui_icon( $menu_item['icon'] );?></td>
 					<td class="text-center"><?=gen_ui_status( $menu_item['menu_item_id'], $menu_item['status'] );?></td>
 				</tr>
@@ -61,7 +61,7 @@
 							<td class="text-center"><?=gen_ui_revise_button( site_url( 'admin/menu_items/revise/' . $child['menu_item_id'] . '?section=' . $section ) );?></td>
 							<td class="text-indent"><?=$child['title'];?></td>
 							<td><?=$child['view'];?></td>
-							<td><?=$access_options[$child['access_level_id']];?></td>
+							<td><?=$child['access_level_title'];?></td>
 							<td class="text-center"><?=gen_ui_icon( $child['icon'] );?></td>
 							<td class="text-center"><?=gen_ui_status( $child['menu_item_id'], $child['status'] );?></td>
 						</tr>

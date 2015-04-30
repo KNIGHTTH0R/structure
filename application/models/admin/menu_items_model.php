@@ -9,17 +9,20 @@ class Menu_items_model extends CI_Model {
 	/** List **/
 	public function menu_item_list( $section ) {
 		$parents = [];
-		$this->db->order_by( 'status' );
-		$this->db->order_by( 'sequence' );
-		$query = $this->db->get_where( 'menu_item', [ 'parent_id' => 0, 'portal_id' => -1, 'section' => $section ] );
+		$this->db->select( 'mi.*, a.title AS access_level_title' );
+		$this->db->join( 'access_level AS a', 'a.access_level_id = mi.access_level_id' );
+		$this->db->order_by( 'mi.sequence' );
+		$query = $this->db->get_where( 'menu_item AS mi', [ 'mi.parent_id' => 0, 'mi.section' => $section ] );
 		if( $query->num_rows() > 0 ) {
 			$parents = $query->result_array();
 			$count = 0;
 			foreach( $parents as $parent ) {
 				extract( $parent );
 				
-				$this->db->order_by( 'sequence' );
-				$children = $this->db->get_where( 'menu_item', array( 'parent_id' => $menu_item_id, 'portal_id' => -1 ) );
+				$this->db->select( 'mi.*, a.title AS access_level_title' );
+				$this->db->join( 'access_level AS a', 'a.access_level_id = mi.access_level_id' );
+				$this->db->order_by( 'mi.sequence' );
+				$children = $this->db->get_where( 'menu_item AS mi', [ 'mi.parent_id' => $menu_item_id ] );
 				if( $children->num_rows() > 0 ) {
 					$parents[$count]['children_list'] = $children->result_array();
 				}
@@ -39,28 +42,27 @@ class Menu_items_model extends CI_Model {
 		$query = $this->db->get_where( 'menu_item', [ 'parent_id' => $this->input->post( 'parent_id' ) ], 1 );
 		if( $query->num_rows() > 0 ) {
 			extract( $query->row_array() );
-			$sequence = $sequence + 1;
+			$sequence++;
 		} else {
 			$sequence = 1;
 		}		
 		
-		$data['status'] 			= '+';
-		$data['entered']			= date( 'Y-m-d H:i:s' );
-		$data['portal_id']		= -1;
-		$data['title']				= $this->input->post( 'title' );
-		$data['view']					= $this->input->post( 'view' );
+		$data['status'] 			    = '+';
+		$data['entered']			    = date( 'Y-m-d H:i:s' );
+		$data['title']				    = $this->input->post( 'title' );
+		$data['view']					    = $this->input->post( 'view' );
 		$data['access_level_id']	= $this->input->post( 'access_level_id' );
-		$data['parent_id']		= $this->input->post( 'parent_id' );
-		$data['section']			= $this->input->post( 'section' );
-		$data['icon']					= $this->input->post( 'icon' );
-		$data['sequence']			= $sequence;
+		$data['parent_id']		    = $this->input->post( 'parent_id' );
+		$data['section']			    = $this->input->post( 'section' );
+		$data['icon']					    = $this->input->post( 'icon' );
+		$data['sequence']			    = $sequence;
 		
 		return $this->db->insert( 'menu_item', $data );
 	}
 	
 	/** Revise **/
 	public function menu_item_revise( $menu_item_id ) {
-		return $this->db->get_where( 'menu_item', array( 'menu_item_id' => $menu_item_id ) )->row_array();
+		return $this->db->get_where( 'menu_item', [ 'menu_item_id' => $menu_item_id ] )->row_array();
 	}
 	
 	/** Update **/
@@ -69,12 +71,12 @@ class Menu_items_model extends CI_Model {
 			return false;
 		}
 		
-		$data['updated']			= date( 'Y-m-d H:i:s' );
-		$data['title']				= $this->input->post( 'title' );
-		$data['view']					= $this->input->post( 'view' );
+		$data['updated']			    = date( 'Y-m-d H:i:s' );
+		$data['title']				    = $this->input->post( 'title' );
+		$data['view']					    = $this->input->post( 'view' );
 		$data['access_level_id']	= $this->input->post( 'access_level_id' );
-		$data['parent_id']		= $this->input->post( 'parent_id' );
-		$data['icon']					= $this->input->post( 'icon' );
+		$data['parent_id']		    = $this->input->post( 'parent_id' );
+		$data['icon']					    = $this->input->post( 'icon' );
 		
 		return $this->db->update( 'menu_item', $data, [ 'menu_item_id' => $this->input->post( 'menu_item_id' ) ] );
 	}
@@ -82,14 +84,14 @@ class Menu_items_model extends CI_Model {
 	/** Status **/
 	public function set_status() {
 		$data['status'] = $this->input->post( 'status' );
-		$this->db->update( 'menu_item', $data, array( 'menu_item_id' => $this->input->post( 'target_id' ) ) );
+		$this->db->update( 'menu_item', $data, [ 'menu_item_id' => $this->input->post( 'target_id' ) ] );
 	}
 	
 	/** Sequence **/
 	public function update_sequence() {
 		foreach( $this->input->post( 'menu_item_id' ) as $sequence => $menu_item_id ) {
 			$data['sequence'] = $sequence + 1;
-			$this->db->update( 'menu_item', $data, array( 'menu_item_id' => $menu_item_id ) );
+			$this->db->update( 'menu_item', $data, [ 'menu_item_id' => $menu_item_id ] );
 		}
 	}
 	

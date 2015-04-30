@@ -1,8 +1,8 @@
 <div class="row">
 	<div class="col-md-12">
 		<?=gen_ui_portlet_open( $page_title, $page_icon, 'form' );?>
-			<div class="tabbable-custom nav-justified">
-					<ul class="nav nav-tabs nav-justified">
+			<div class="tabbable-custom">
+					<ul class="nav nav-tabs">
 						<li class="active">
 							<a href="#default-pages" data-toggle="tab" aria-expanded="true">
 							Pages </a>
@@ -14,26 +14,11 @@
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="default-pages">
-							<div class="row">
-								<div class="col-md-12">
-									<?=gen_ui_portlet_open( 'Page Defaults', 'file', 'form' );?>
-										<form id="default-pages-form">
-											<div class="row">
-												<h4 class="col-md-12">Settings</h4>	
-											</div>
-											<div class="row" id="default-pages-list"></div>											
-											<div class="form-actions right">
-												<?=gen_form_actions( site_url( 'admin/access_levels' ) );?>
-											</div>
-										</form>
-									<?=gen_ui_portlet_close();?>
-								</div>
-							</div>
 						</div>
 						<div class="tab-pane" id="default-menu-items">
 							<div class="row">
 								<div class="col-md-12">
-									<?=gen_ui_portlet_open( 'Menu Item Defaults', 'list-ol', 'form', [ 'actions' => [ 'href' => '#menu-item-add-modal', 'icon_text' => 'Create' ] ] );?>
+									<?=gen_ui_portlet_open( 'Menu Item Defaults', 'list-ol', 'form', [ 'actions' => [ 'href' => '#menu-item-modal', 'icon_text' => 'Create' ] ] );?>
 										<form id="default-menu-items-form">
 											<div class="row">
 												<h4 class="col-md-12">List</h4>

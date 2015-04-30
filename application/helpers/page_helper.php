@@ -1,18 +1,17 @@
 <?php
 
 function params_array( $mvc ) {
-	$page_control_item = isset( $mvc->control_item ) ? $mvc->control_item : '';
+	$page_control_item = $mvc->control_item;
+	$page_section      = isset( $mvc->section ) ? $mvc->section : section_check();
+	$page_page         = isset( $mvc->page ) ? $mvc->page : '';
+	$page_styles       = isset( $mvc->styles ) ? $mvc->styles : '';
+	$page_js           = isset( $mvc->js ) ? $mvc->js : '';
 	
 	$CI =& get_instance();
 	$CI->db->select( 'mi.*, mi2.title AS parent_title' );
 	$CI->db->join( 'menu_item AS mi2', 'mi2.menu_item_id = mi.parent_id', 'left' );
 	$query = $CI->db->get_where( 'menu_item AS mi', [ 'mi.view' => $page_control_item ] );
 	extract( $query->row_array() );
-	
-	$page_section      = isset( $mvc->section ) ? $mvc->section : section_check();
-	$page_page         = isset( $mvc->page ) ? $mvc->page : '';
-	$page_styles       = isset( $mvc->styles ) ? $mvc->styles : '';
-	$page_js           = isset( $mvc->js ) ? $mvc->js : '';
 	
 	switch( $page_section ) {
 		case 'ad':
@@ -71,7 +70,6 @@ function params_array( $mvc ) {
 	
 	return [ 'page_access_level' => $page_access_level, 'page_current' => $view, 'page_breadcrumbs' => $page_breadcrumbs, 'page_icon' => $icon, 'page_title' => $page_title, 'page_header' => $page_header, 'styles' => $page_styles, 'scripts' => [ 'js' => $page_js, 'init' => $page_init ] ];
 }
-
 
 function access_check( $access_level_id ) {
 	$CI =& get_instance();

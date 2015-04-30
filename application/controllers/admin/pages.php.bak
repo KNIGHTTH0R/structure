@@ -39,12 +39,13 @@ class Pages extends CI_Controller {
 	
 	/** Insert **/
 	public function insert() {
-		echo section_check( TRUE );
-		echo $_SERVER['HTTP_REFERER'];
+		print_r( $_POST );
 		exit;
+		$section = $this->input->post( 'portal_id' ) == -1 ? 'admin' : 'portal';
+		
 		$page = $this->pages_model->page_insert();
 		if( $page ) {
-			echo 's|created Page|' . site_url( section_check( TRUE ) . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
+			echo 's|created Page|' . site_url( $section . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
 		} else {
 			echo 'f|create Page';
 		}
@@ -63,9 +64,10 @@ class Pages extends CI_Controller {
 	
 	/** Update **/
 	public function update() {
+		$section = $this->input->post( 'portal_id' ) == -1 ? 'admin' : 'portal';
 		$page = $this->pages_model->page_update();
 		if( $page ) {
-			echo 's|updated Page|' . site_url( section_check( TRUE ) . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
+			echo 's|updated Page|' . site_url( $section . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
 		} else {
 			echo 'f|update Page';
 		}
@@ -74,5 +76,37 @@ class Pages extends CI_Controller {
 	/** Status **/
 	public function status() {
 		$this->pages_model->set_status();
+	}
+	
+	/** Defaults **/
+	/** Defaults Page List **/
+	public function defaults_list() {
+		$this->page = 'list';
+		$params = params_array( $this );
+		
+		$params['list']	     = $this->pages_model->page_list( -1 );
+		$params['portal_id'] = -1;
+		$this->load->view( 'admin/pages_view', $params );
+	}
+	
+	/** Defaults Create Page **/
+	public function defaults_create() {
+		$this->page = 'create';
+		$params = params_array( $this );
+		
+		$params['portal_id'] = -1;
+		
+		$this->load->view( 'admin/pages_create_view', $params );
+	}
+	
+	/** Defaults Revise Page **/
+	public function defaults_revise( $page_id ) {
+		$this->page = 'revise';
+		$params = params_array( $this );
+		
+		$params['page'] 		 = $this->pages_model->page_revise( $page_id );
+		$params['portal_id'] = -1;
+		
+		$this->load->view( 'admin/pages_revise_view', $params );
 	}
 }

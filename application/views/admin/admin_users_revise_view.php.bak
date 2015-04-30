@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="col-md-6">
+		<?=gen_ui_portlet_open( $page_title, $page_icon, 'form' );?>
+			<form id="admin-user-revise">
+				<div class="form-body">
+					<?=gen_hidden_input( 'admin_user_id', $admin_user['admin_user_id'] );?>
+					<div class="row">
+						<h4 class="col-md-12">Settings</h4>
+						<div class="col-md-6">
+							<?=gen_input( 'First Name', 'first_name', $admin_user['first_name'] );?>
+						</div>
+						<div class="col-md-6">
+							<?=gen_input( 'Last Name', 'last_name', $admin_user['last_name'] );?>	
+						</div>
+						<div class="col-md-6">
+							<?=gen_input( 'Email Address', 'email', $admin_user['email'] );?>	
+						</div>
+						<div class="col-md-6">
+							<?=gen_input( 'Username', 'username', $admin_user['username'] );?>	
+						</div>
+						<div class="col-md-6">
+							<?=gen_input( 'Password', 'password', '', [ 'type' => 'password' ] );?>	
+						</div>
+						<?php if( $admin_user['site_owner_flg'] != 'y' ) :?>
+							<div class="col-md-6">
+								<?=gen_select( 'Access Level', 'access_level_id', $access_level_options );?>	
+							</div>
+						<?php endif;?>
+					</div>
+				</div>
+				<div class="form-actions right">
+					<?=gen_form_actions( site_url( 'admin/admin_users' ) );?>
+				</div>
+			</form>
+		<?=gen_ui_portlet_close();?>
+	</div>	
+</div>
