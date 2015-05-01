@@ -5,6 +5,7 @@ var Defaults = function() {
 			var default_fr_menu_items = $( '#default-fr-menu-items' );
 			
 			var default_pages_list = function() {
+				$( '.page-table' ).DataTable().destroy();
 				$.get( site_url + 'admin/pages/defaults_list', function( data ) {
 					default_pages.html( data );
 					$( '.btn-create', default_pages ).attr( 'href', '' );
@@ -30,6 +31,7 @@ var Defaults = function() {
 			}
 			
 			var default_fr_menu_items_list = function() {
+				$( '.fr-menu-item-table' ).DataTable().destroy();
 				$.get( site_url + 'portal/fr_menu_items/defaults_menu_item_list', function( data ) {
 					default_fr_menu_items.html( data );
 					$( '.btn-create', default_fr_menu_items ).attr( 'href', '' );
@@ -121,6 +123,11 @@ var Defaults = function() {
 				default_pages_list();
 			});
 			
+			/** Defaults Pages Status **/
+			default_pages.on( 'click', '.status', function() {
+				status_update( $( this ), 'admin/pages/status' );
+			});
+			
 			/** Default Front-End Menu Items List **/
 			$( '.default-fr-menu-items' ).on( 'click', function() {
 				default_fr_menu_items_list();
@@ -184,7 +191,10 @@ var Defaults = function() {
 				default_fr_menu_items_list();
 			});
 			
-			status_update( site_url + 'admin/pages/status' );
+			/** Defaults Front-End Menu Items Status **/
+			default_fr_menu_items.on( 'click', '.status', function() {
+				status_update( $( this ), 'portal/fr_menu_items/status' );
+			});
 		}
 	}
 }();

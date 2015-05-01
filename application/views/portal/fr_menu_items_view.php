@@ -1,37 +1,4 @@
 <div class="row">
-	<div id="list-reorder" class="col-md-3 col-md-offset-4" style="display: none;">
-		<?=gen_ui_portlet_open( 'Menu Item Sequence', $page_icon, 'form' );?>
-			<form>
-				<div class="row">
-					<div class="col-md-12">
-						<ul id="sequence-list" class="list-unstyled list-group">
-							<?php foreach( $list as $menu_item ):?>
-								<?php if( $menu_item['status'] == '-' ): continue;?>
-								<?php endif;?>
-								<li id="fr_menu_item_id_<?=$menu_item['fr_menu_item_id'];?>" class="list-group-item parent-item">
-									<i class="fa fa-sort"></i><?=$menu_item['title'];?>
-									<?php if( isset( $menu_item['children_list'] ) ):?>
-										<ul class="list-unstyled child-list list-group">
-										<?php foreach( $menu_item['children_list'] as $child ):?>
-											<?php if( $menu_item['status'] == '-' ): continue;?>
-											<?php endif;?>
-											<li id="fr_menu_item_id_<?=$child['fr_menu_item_id'];?>" class="list-group-item child-item">
-												<i class="fa fa-sort"></i><?=$child['title'];?>
-											</li>
-										<?php endforeach;?>
-										</ul>
-									<?php endif;?>
-								</li>
-							<?php endforeach;?>
-						</ul>
-					</div>
-				</div>
-				<div class="form-actions right">
-					<button type="submit" class="btn green">Done</button>
-				</div>
-			</form>
-		<?=gen_ui_portlet_close();?>
-	</div>
 	<div id="menu-item-wrapper" class="col-md-12">
 		<?=gen_ui_portlet_open( $page_title, $page_icon, '', [ 'actions' => [ 'href' => 'fr_menu_items/create?portal_id=' . $portal_id, 'icon_text' => 'Create', 'reorder' => TRUE ] ] );?>
 		<table class="table table-striped table-hover fr-menu-item-table">

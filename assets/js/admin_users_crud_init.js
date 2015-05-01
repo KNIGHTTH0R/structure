@@ -1,7 +1,9 @@
 var Admin_Users_list = function() {
 	return {
-		init: function() {			
-			status_update( site_url + 'admin/admin_users/status' );
+		init: function() {
+			$( '.status' ).on( 'click', function() {		
+				status_update( $( this ), 'admin/admin_users/status' );
+			});
 		}
 	}
 }();

@@ -55,9 +55,9 @@ var Fr_Menu_Items_list = function() {
 			
 			$( '.status' ).on( 'click', function() {
 				status_update( $( this ), 'portal/fr_menu_items/status' );
-			});
+			}
 		}
-	}
+	};
 }();
 
 var Fr_Menu_Items_create = function() {

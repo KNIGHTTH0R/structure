@@ -46,7 +46,8 @@ var status_data = [
 	{ name: 'status', value: status }
 ];
 
-$.post( site_url + processing_file, status_data, function( data ) {
+$.post( processing_file, status_data, function( data ) {
+	alert( data );
 	setTimeout( function() {
 		publish.toggleClass( 'unpublish publish' );
 		publish.toggleClass( 'font-green font-grey-cascade' );

@@ -1,14 +1,6 @@
 var Menu_Items_list = function() {
 	return {
-		init: function() {
-			switch( section ) {
-				case 'portal':
-					var processing = 'admin/' + section;
-				break;
-				default:
-					var processing = 'admin/';
-			}
-				
+		init: function() {				
 			$( document ).ready( function() {
 				var table = $( '.menu-item-table' ).DataTable({
 					"aaSorting": [],
@@ -61,7 +53,9 @@ var Menu_Items_list = function() {
 				gen_spinner( '#list-reorder' );
 			});
 			
-			status_update( site_url + section + '/menu_items/status' );
+			$( '.status' ).on( 'click', function() {
+				status_update( $( this ), 'menu_items/status' );
+			});
 		}
 	}
 }();

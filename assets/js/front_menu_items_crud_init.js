@@ -53,7 +53,9 @@ var Front_menu_items_list = function() {
 				gen_spinner( '#list-reorder' );
 			});
 			
-			status_update( site_url + 'portal/front_menu_items/status' );
+			$( '.status' ).on( 'click', function() {
+				status_update( $( this ), 'portal/front_menu_items/status' );
+			});
 		}
 	}
 }();

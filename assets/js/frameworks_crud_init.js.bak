@@ -1,9 +1,7 @@
 var Frameworks_list = function() {
 	return {
 		init: function() {
-			$( '.status' ).on( 'click', function() {
-				status_update( $( this ), 'admin/frameworks/status' );
-			});
+			status_update( site_url + 'admin/frameworks/status' );
 		}
 	}
 }();

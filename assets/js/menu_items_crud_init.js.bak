@@ -1,4 +1,4 @@
-var Admin_Menu_list = function() {
+var Menu_Items_list = function() {
 	return {
 		init: function() {
 			switch( section ) {
@@ -61,12 +61,14 @@ var Admin_Menu_list = function() {
 				gen_spinner( '#list-reorder' );
 			});
 			
-			status_update( site_url + section + '/menu_items/status' );
+			$( '.status' ).on( 'click', function() {
+				status_update( $( this ), section + '/menu_items/status' );
+			});
 		}
 	}
 }();
 
-var Admin_Menu_create = function() {
+var Menu_Items_create = function() {
 	return {
 		init: function() {
 			$( '#menu-item-create' ).on( 'submit', function( e ) {
@@ -89,7 +91,7 @@ var Admin_Menu_create = function() {
 	}
 }();
 
-var Admin_Menu_revise = function() {
+var Menu_Items_revise = function() {
 	return {
 		init: function() {			
 			$( '#menu-item-revise' ).on( 'submit', function( e ) {
