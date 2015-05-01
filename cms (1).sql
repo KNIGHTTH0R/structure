@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2015 at 11:11 PM
+-- Generation Time: May 01, 2015 at 05:27 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `fr_menu_item` (
   `sequence` int(2) DEFAULT NULL,
   `icon` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`fr_menu_item_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Truncate table before insert `fr_menu_item`
@@ -192,12 +192,39 @@ TRUNCATE TABLE `fr_menu_item`;
 --
 
 INSERT INTO `fr_menu_item` (`fr_menu_item_id`, `status`, `entered`, `updated`, `portal_id`, `title`, `alias`, `access_level_id`, `parent_id`, `sequence`, `icon`) VALUES
-(1, '+', '2015-04-26 19:11:19', '2015-04-28 04:06:11', 1, 'Learning', 'learning', 4, 0, 1, 'book'),
-(2, '+', '2015-04-26 19:17:39', '2015-04-28 04:06:16', 1, 'News', 'news', 4, 0, 2, 'file-pdf-o'),
-(3, '+', '2015-04-26 21:42:09', '2015-04-28 04:06:20', 1, 'Feeds', 'feed', 4, 0, 3, 'rss'),
 (4, '+', '2015-04-30 21:41:03', '2015-04-30 23:01:51', -1, 'Home', 'home', 4, 0, 4, 'home'),
 (5, '+', '2015-04-30 23:02:06', NULL, -1, 'Feeds', 'feed', 4, 0, 5, 'rss'),
-(6, '+', '2015-04-30 23:10:47', NULL, -1, 'Test', 'test', 4, 0, 6, 'cog');
+(6, '+', '2015-04-30 23:10:47', NULL, -1, 'Test', 'test', 4, 0, 6, 'cog'),
+(7, '+', '2015-05-01 05:17:56', NULL, 1, 'Learning', 'learning', 4, 0, 7, 'book');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fr_menu_item_portal_xref`
+--
+
+DROP TABLE IF EXISTS `fr_menu_item_portal_xref`;
+CREATE TABLE IF NOT EXISTS `fr_menu_item_portal_xref` (
+  `fr_menu_item_id` int(8) NOT NULL,
+  `portal_id` int(8) NOT NULL,
+  `meta_data` text,
+  `sequence` int(2) NOT NULL,
+  PRIMARY KEY (`fr_menu_item_id`,`portal_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Truncate table before insert `fr_menu_item_portal_xref`
+--
+
+TRUNCATE TABLE `fr_menu_item_portal_xref`;
+--
+-- Dumping data for table `fr_menu_item_portal_xref`
+--
+
+INSERT INTO `fr_menu_item_portal_xref` (`fr_menu_item_id`, `portal_id`, `meta_data`, `sequence`) VALUES
+(4, 1, '{ "status": "+", "title": "Home", "alias": "home", "icon": "home", "access_level_id": "4" }', 1),
+(5, 1, '{ "status": "+", "title": "Feeds", "alias": "feed", "icon": "rss", "access_level_id": "4" }', 2),
+(6, 1, '{ "status": "+", "title": "Test", "alias": "test", "icon": "cog", "access_level_id": "4" }', 3);
 
 -- --------------------------------------------------------
 
@@ -220,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `menu_item` (
   `sequence` int(2) DEFAULT NULL,
   `icon` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`menu_item_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
 -- Truncate table before insert `menu_item`
@@ -252,7 +279,8 @@ INSERT INTO `menu_item` (`menu_item_id`, `status`, `entered`, `updated`, `portal
 (19, '+', '2015-02-07 21:47:20', '2015-02-07 21:59:20', -1, 'Portal Admin', '', 4, 'po', 0, 5, 'lock'),
 (20, '+', '2015-02-07 22:07:35', '2015-04-26 05:09:47', -1, 'Menu Items', 'portal/fr_menu_items', 4, 'po', 18, NULL, 'list-ol'),
 (21, '+', '2015-04-25 20:21:11', '2015-04-26 19:48:18', -1, 'Pages', 'portal/pages', 4, 'po', 18, 1, 'file'),
-(22, '+', '2015-02-07 21:48:37', '2015-04-25 20:17:54', -1, 'Settings', 'portal/settings', 4, 'po', 19, 2, 'cogs');
+(22, '+', '2015-02-07 21:48:37', '2015-05-01 02:55:37', -1, 'Profile', 'portal/profile', 4, 'po', 19, 2, 'cogs'),
+(23, '+', '2015-05-01 02:54:52', '2015-05-01 02:55:10', NULL, 'Defaults', 'portal/defaults', 4, 'po', 19, 1, 'magic');
 
 -- --------------------------------------------------------
 
@@ -348,7 +376,6 @@ TRUNCATE TABLE `portal`;
 --
 
 INSERT INTO `portal` (`portal_id`, `status`, `entered`, `updated`, `name`) VALUES
-(-1, '+', '2015-07-02 18:17:23', NULL, 'Default Portal'),
 (1, '+', '2015-04-25 00:00:00', NULL, 'Test');
 
 -- --------------------------------------------------------

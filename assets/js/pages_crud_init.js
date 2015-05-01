@@ -4,6 +4,7 @@ var Pages_list = function() {
 			$( document ).ready( function() {
 				gen_ui_datatable( '.page-table' );
 			});
+			
 			$( '.status' ).on( 'click', function() {
 				status_update( $( this ), 'admin/pages/status' );
 			});

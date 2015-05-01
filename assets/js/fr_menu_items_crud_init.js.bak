@@ -1,6 +1,8 @@
 var Fr_Menu_Items_list = function() {
 	return {
-		init: function() {				
+		init: function() {
+			var portal_id = window.location.search.replace( '?', '' ).split( '=' ).pop();
+
 			$( document ).ready( function() {
 				var table = $( '.fr-menu-item-table' ).DataTable({
 					"aaSorting": [],
@@ -16,8 +18,8 @@ var Fr_Menu_Items_list = function() {
 				$( "#sequence-list" ).sortable({
 						axis: 'y',
 						update: function() {
-							var post_data = $( this ).sortable( 'serialize' );
-							$.post( site_url +'portal/fr_menu_items/sequence', post_data );
+							var post_data = $( this ).sortable( 'serialize' ) + '&portal_id=' + portal_id;
+							$.post( site_url + 'portal/fr_menu_items/sequence', post_data, function( data ) { alert( data ); } );
 						},
             opacity: 0.8,
             tolerance: "pointer",
@@ -55,9 +57,9 @@ var Fr_Menu_Items_list = function() {
 			
 			$( '.status' ).on( 'click', function() {
 				status_update( $( this ), 'portal/fr_menu_items/status' );
-			}
+			});
 		}
-	};
+	}
 }();
 
 var Fr_Menu_Items_create = function() {

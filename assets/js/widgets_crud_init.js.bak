@@ -1,9 +1,7 @@
 var Widgets_list = function() {
 	return {
 		init: function() {
-			$( '.status' ).on( 'click', function() {
-				status_update( $( this ), 'admin/widgets/status' );
-			});
+			status_update( site_url + 'admin/widgets/status' );
 		}
 	}
 }();

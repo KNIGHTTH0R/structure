@@ -1,14 +1,6 @@
 var Menu_Items_list = function() {
 	return {
-		init: function() {
-			switch( section ) {
-				case 'portal':
-					var processing = 'admin/' + section;
-				break;
-				default:
-					var processing = 'admin/';
-			}
-				
+		init: function() {				
 			$( document ).ready( function() {
 				var table = $( '.menu-item-table' ).DataTable({
 					"aaSorting": [],
@@ -25,7 +17,7 @@ var Menu_Items_list = function() {
 						axis: 'y',
 						update: function() {
 							var post_data = $( this ).sortable( 'serialize' );
-							$.post( site_url + processing + '/menu_items/sequence', post_data );
+							$.post( site_url + 'menu_items/sequence', post_data );
 						},
             opacity: 0.8,
             tolerance: "pointer",
@@ -38,7 +30,7 @@ var Menu_Items_list = function() {
 						axis: 'y',
 						update: function() {
 							var post_data = $( this ).sortable( 'serialize' );
-							$.post( site_url + processing + '/menu_items/sequence', post_data );
+							$.post( site_url + 'menu_items/sequence', post_data, function( data ) { alert( data ); } );
 						},
             opacity: 0.8,
             tolerance: "pointer",
@@ -62,7 +54,7 @@ var Menu_Items_list = function() {
 			});
 			
 			$( '.status' ).on( 'click', function() {
-				status_update( $( this ), section + '/menu_items/status' );
+				status_update( $( this ), 'admin/menu_items/status' );
 			});
 		}
 	}

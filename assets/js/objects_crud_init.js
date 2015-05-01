@@ -1,7 +1,9 @@
 var Objects_list = function() {
 	return {
 		init: function() {
-			status_update( site_url + 'admin/objects/status' );
+			$( '.status' ).on( 'click', function() {
+				status_update( $( this ), 'admin/objects/status' );
+			});
 		}
 	}
 }();

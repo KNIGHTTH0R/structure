@@ -17,7 +17,7 @@ var Menu_Items_list = function() {
 						axis: 'y',
 						update: function() {
 							var post_data = $( this ).sortable( 'serialize' );
-							$.post( site_url + processing + '/menu_items/sequence', post_data );
+							$.post( site_url + 'admin/menu_items/sequence', post_data );
 						},
             opacity: 0.8,
             tolerance: "pointer",
@@ -30,7 +30,7 @@ var Menu_Items_list = function() {
 						axis: 'y',
 						update: function() {
 							var post_data = $( this ).sortable( 'serialize' );
-							$.post( site_url + processing + '/menu_items/sequence', post_data );
+							$.post( site_url + 'admin/menu_items/sequence', post_data, function( data ) { alert( data ); } );
 						},
             opacity: 0.8,
             tolerance: "pointer",
@@ -54,7 +54,7 @@ var Menu_Items_list = function() {
 			});
 			
 			$( '.status' ).on( 'click', function() {
-				status_update( $( this ), 'menu_items/status' );
+				status_update( $( this ), 'admin/menu_items/status' );
 			});
 		}
 	}

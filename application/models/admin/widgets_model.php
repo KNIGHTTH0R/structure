@@ -10,6 +10,7 @@ class Widgets_model extends CI_Model {
 	public function widget_list() {
 		$this->db->select( 'w.widget_id, w.status, w.alias, o.title' );
 		$this->db->join( 'object AS o', 'o.object_id = w.object_id' );
+		$this->db->order_by( 'w.status, w.alias' );
 		$query = $this->db->get( 'widget AS w' );
 		return $query->result_array();
 	}

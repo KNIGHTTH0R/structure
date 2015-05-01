@@ -37,10 +37,8 @@ var column_resize = function() {
 
 var Templates_list = function() {
 	return {
-		init: function() {
-			$( '.status' ).on( 'click', function() {
-				status_update( $( this ), 'admin/templates/status' );
-			});
+		init: function() {			
+			status_update( site_url + 'admin/templates/status' );
 		}
 	}
 }();

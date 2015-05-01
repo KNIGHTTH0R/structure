@@ -40,7 +40,9 @@ var Access_Levels_list = function() {
 				gen_spinner( '#list-reorder' );
 			});
 			
-			status_update( site_url + 'admin/access_levels/status' );
+			$( '.status' ).on( 'click', function() {
+				status_update( $( this ), 'admin/access_levels/status' );
+			}
 		}
 	}
 }();

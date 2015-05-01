@@ -33,26 +33,26 @@ function gen_toastr( results ) {
 }
 
 function status_update( object_ref, processing_file ) {
-var publish = $( object_ref );
-
-publish.toggleClass( 'fa-spinner fa-spin' );
-
-var target_id = publish.attr( 'data-value' );
-
-var status = publish.hasClass( 'unpublish' ) ? '-' : '+';
-
-var status_data = [
-	{ name: 'target_id', value: target_id },
-	{ name: 'status', value: status }
-];
-
-$.post( site_url + processing_file, status_data, function( data ) {
-	setTimeout( function() {
-		publish.toggleClass( 'unpublish publish' );
-		publish.toggleClass( 'font-green font-grey-cascade' );
-		publish.removeClass( 'fa-spinner fa-spin' );
-	}, 500 );
-});
+	var publish = $( object_ref );
+	
+	publish.toggleClass( 'fa-spinner fa-spin' );
+	
+	var target_id = publish.attr( 'data-value' );
+	
+	var status = publish.hasClass( 'unpublish' ) ? '-' : '+';
+	
+	var status_data = [
+		{ name: 'target_id', value: target_id },
+		{ name: 'status', value: status }
+	];
+	
+	$.post( site_url + processing_file, status_data, function( data ) {
+		setTimeout( function() {
+			publish.toggleClass( 'unpublish publish' );
+			publish.toggleClass( 'font-green font-grey-cascade' );
+			publish.removeClass( 'fa-spinner fa-spin' );
+		}, 500 );
+	});
 }
 
 function gen_spinner( target ) {

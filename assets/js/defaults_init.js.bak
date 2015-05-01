@@ -33,6 +33,7 @@ var Defaults = function() {
 			var default_fr_menu_items_list = function() {
 				$( '.fr-menu-item-table' ).DataTable().destroy();
 				$.get( site_url + 'portal/fr_menu_items/defaults_menu_item_list', function( data ) {
+					alert( data );
 					default_fr_menu_items.html( data );
 					$( '.btn-create', default_fr_menu_items ).attr( 'href', '' );
 					gen_ui_datatable( '.fr-menu-item-table' );
@@ -121,6 +122,11 @@ var Defaults = function() {
 			default_pages.on( 'click', '.default', function( e ) {
 				e.preventDefault();
 				default_pages_list();
+			});
+			
+			/** Defaults Pages Status **/
+			default_pages.on( 'click', '.status', function() {
+				status_update( $( this ), 'admin/pages/status' );
 			});
 			
 			/** Default Front-End Menu Items List **/

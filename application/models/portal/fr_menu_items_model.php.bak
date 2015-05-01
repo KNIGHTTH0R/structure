@@ -8,25 +8,57 @@ class Fr_menu_items_model extends CI_Model {
 	
 	/** List **/
 	public function fr_menu_item_list( $portal_id ) {
-		$parents = [];
-		$this->db->order_by( 'status' );
-		$this->db->order_by( 'sequence' );
-		$query = $this->db->get_where( 'fr_menu_item', [ 'parent_id' => 0, 'portal_id' => $portal_id ] );
+		$fr_menu_item_array = [];
+		$count = 0;
+		$this->db->select( 'fr.*, a.title AS access_level_title, "fr" AS type', FALSE );
+		$this->db->join( 'access_level AS a', 'a.access_level_id = fr.access_level_id' );
+		$this->db->order_by( 'fr.sequence' );
+		$query = $this->db->get_where( 'fr_menu_item AS fr', [ 'fr.parent_id' => 0, 'fr.portal_id' => $portal_id ] );
 		if( $query->num_rows() > 0 ) {
-			$parents = $query->result_array();
-			$count = 0;
-			foreach( $parents as $parent ) {
-				extract( $parent );
+			foreach( $query->result_array() as $parent_item ) {
+				$fr_menu_item_array[$count] = $parent_item;
 				
-				$this->db->order_by( 'sequence' );
-				$children = $this->db->get_where( 'fr_menu_item', [ 'parent_id' => $fr_menu_item_id, 'portal_id' => $portal_id ] );
+				$this->db->select( 'fr.*, a.title AS access_level_title, "fr" AS type', FALSE );
+				$this->db->join( 'access_level AS a', 'a.access_level_id = fr.access_level_id' );
+				$this->db->order_by( 'fr.sequence' );
+				$children = $this->db->get_where( 'fr_menu_item AS fr', [ 'fr.parent_id' => $parent_item['fr_menu_item_id'], 'fr.portal_id' => $portal_id ] );
 				if( $children->num_rows() > 0 ) {
-					$parents[$count]['children_list'] = $children->result_array();
+					$fr_menu_item_array[$count]['children'] = $children->result_array();
 				}
 				$count++;
 			}
 		}
-		return $parents;
+		
+		$this->db->select( '*, "df" AS type', FALSE );
+		$query = $this->db->get_where( 'fr_menu_item_portal_xref', [ 'portal_id' => $portal_id ] );
+		if( $query->num_rows() > 0 ) {
+			foreach( $query->result_array() as $fr_menu_item ) {
+				extract( $fr_menu_item );
+				$meta_data = json_decode( $meta_data, TRUE );
+				extract( $meta_data );
+				
+				$this->db->select( 'title AS access_level_title' );
+				$query = $this->db->get_where( 'access_level', [ 'access_level_id' => $access_level_id ] );
+				extract( $query->row_array() );
+				
+				$fr_menu_item_array[$count]['fr_menu_item_id'] = $fr_menu_item_id;
+				$fr_menu_item_array[$count]['title'] = $title;
+				$fr_menu_item_array[$count]['alias'] = $alias;
+				$fr_menu_item_array[$count]['icon'] = $icon;
+				$fr_menu_item_array[$count]['sequence'] = $sequence;
+				$fr_menu_item_array[$count]['access_level_title'] = $access_level_title;
+				$fr_menu_item_array[$count]['status'] = $status;
+				$fr_menu_item_array[$count]['type'] = $type;
+				$count++;
+			}	
+		}
+		
+		function sequence_sort( $a, $b ) {
+			return $a['sequence'] - $b['sequence'];
+		}
+		
+		usort( $fr_menu_item_array, "sequence_sort" );
+		return $fr_menu_item_array;
 	}
 	
 	/** Insert **/
@@ -48,7 +80,7 @@ class Fr_menu_items_model extends CI_Model {
 		$data['portal_id']		= $this->input->post( 'portal_id' );
 		$data['title']				= $this->input->post( 'title' );
 		$data['alias']				= $this->input->post( 'alias' );
-		$data['access_level']	= $this->input->post( 'access_level' );
+		$data['access_level_id']	= $this->input->post( 'access_level_id' );
 		$data['parent_id']		= $this->input->post( 'parent_id' );
 		$data['icon']					= $this->input->post( 'icon' );
 		$data['sequence']			= $sequence;
@@ -70,7 +102,7 @@ class Fr_menu_items_model extends CI_Model {
 		$data['updated']			= date( 'Y-m-d H:i:s' );
 		$data['title']				= $this->input->post( 'title' );
 		$data['alias']				= $this->input->post( 'alias' );
-		$data['access_level']	= $this->input->post( 'access_level' );
+		$data['access_level_id']	= $this->input->post( 'access_level_id' );
 		$data['parent_id']		= $this->input->post( 'parent_id' );
 		$data['icon']					= $this->input->post( 'icon' );
 		
@@ -85,9 +117,17 @@ class Fr_menu_items_model extends CI_Model {
 	
 	/** Sequence **/
 	public function update_sequence() {
-		foreach( $this->input->post( 'fr_menu_item_id' ) as $sequence => $fr_menu_item_id ) {
-			$data['sequence'] = $sequence + 1;
+		$sequence = 1;
+		foreach( $this->input->post( 'fr_menu_item_id' ) as $fr_menu_item_id ) {
+			$data['sequence'] = $sequence;
 			$this->db->update( 'fr_menu_item', $data, [ 'fr_menu_item_id' => $fr_menu_item_id ] );
+			$sequence++;
+		}
+		
+		foreach( $this->input->post( 'df_menu_item_id' ) as $df_menu_item_id ) {
+			$data['sequence'] = $sequence;
+			$this->db->update( 'fr_menu_item_portal_xref', $data, [ 'fr_menu_item_id' => $df_menu_item_id, 'portal_id' => $this->input->post( 'portal_id' ) ] );
+			$sequence++;
 		}
 	}
 	

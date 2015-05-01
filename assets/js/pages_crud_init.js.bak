@@ -2,7 +2,7 @@ var Pages_list = function() {
 	return {
 		init: function() {
 			$( document ).ready( function() {
-				gen_ui_datatable( '.page-list' );
+				gen_ui_datatable( '.page-table' );
 			});
 			$( '.status' ).on( 'click', function() {
 				status_update( $( this ), 'admin/pages/status' );

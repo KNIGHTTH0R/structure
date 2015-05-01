@@ -42,7 +42,7 @@ var Access_Levels_list = function() {
 			
 			$( '.status' ).on( 'click', function() {
 				status_update( $( this ), 'admin/access_levels/status' );
-			}
+			});
 		}
 	}
 }();
