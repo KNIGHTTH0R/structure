@@ -6,16 +6,15 @@ class Defaults extends CI_Controller {
 		$this->load->model( 'portal/defaults_model' );
 		
 		/** Section Params **/
-		$this->js           = '';
+		$this->js           = 'assets/js/portal/defaults_init.js';
 		$this->styles       = '';
 		$this->control_item = 'portal/defaults';
 	}
 	
 	public function index() {
-		$this->page = 'options';
 		$params = params_array( $this );
 		
-		$params['pages'] = get_default_pages( $this->input->get( 'portal_id' ) );
+		$params['pages'] = $this->defaults_model->get_default_pages( $this->input->get( 'portal_id' ) );
 		
 		$this->layout->view( 'portal/defaults_view', $params, 'default' );
 	}

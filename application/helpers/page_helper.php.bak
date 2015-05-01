@@ -25,7 +25,12 @@ function params_array( $mvc ) {
 	}
 	
 	if( ! isset( $mvc->init ) ) {
-		$page_init    = str_replace( ' ', '_', $title ) . '_' . strtolower( $page_page );
+		if( empty( $page_page ) ) {
+			$init_file = str_replace( ' ', '_', $title );
+		} else {
+			$init_filt = str_replace( ' ', '_', $title ) . '_' . strtolower( $page_page );
+		}
+		$page_init = $init_file;
 	} else {
 		$page_init = $mvc->init;
 	}
@@ -70,7 +75,6 @@ function params_array( $mvc ) {
 	
 	return [ 'page_access_level' => $page_access_level, 'page_current' => $view, 'page_breadcrumbs' => $page_breadcrumbs, 'page_icon' => $icon, 'page_title' => $page_title, 'page_header' => $page_header, 'styles' => $page_styles, 'scripts' => [ 'js' => $page_js, 'init' => $page_init ] ];
 }
-
 
 function access_check( $access_level_id ) {
 	$CI =& get_instance();

@@ -107,13 +107,9 @@ function menu_children_active_check( $page_current, $views ) {
 
 function fr_get_menu_items() {
 	$CI =& get_instance();
-	$CI->load->database();
+	$CI->load->model( 'portal/fr_menu_items_model' );
 	
-	$CI->db->where( 'parent_id', 0 );
-	$CI->db->where( 'portal_id', get_portal_id() );
-	$CI->db->where( 'status', '+' );
-	$CI->db->order_by( 'sequence' );
-	$menu_items = $CI->db->get( 'fr_menu_item' )->result_array();
+	$menu_items = $CI->fr_menu_items_model->fr_menu_item_list( 1 );
 	
 	$menu = '';
 	foreach( $menu_items as $attributes ) {

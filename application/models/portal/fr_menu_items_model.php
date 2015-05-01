@@ -46,6 +46,7 @@ class Fr_menu_items_model extends CI_Model {
 				$fr_menu_item_array[$count]['alias'] = $alias;
 				$fr_menu_item_array[$count]['icon'] = $icon;
 				$fr_menu_item_array[$count]['sequence'] = $sequence;
+				$fr_menu_item_array[$count]['access_level_id'] = $access_level_id;
 				$fr_menu_item_array[$count]['access_level_title'] = $access_level_title;
 				$fr_menu_item_array[$count]['status'] = $status;
 				$fr_menu_item_array[$count]['type'] = $type;

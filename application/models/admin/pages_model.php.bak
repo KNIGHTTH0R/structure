@@ -22,11 +22,11 @@ class Pages_model extends CI_Model {
 			return false;
 		}
 		
-		$data['entered']       = date( 'Y-m-d H:i:s' );
-		$data['title']	       = $this->input->post( 'title' );
-		$data['template_id']   = $this->input->post( 'template_id' );
-		$data['portal_id']	   = $this->input->post( 'portal_id' );
-		$data['access_level']	 = $this->input->post( 'access_level_id' );
+		$data['entered']         = date( 'Y-m-d H:i:s' );
+		$data['title']	         = $this->input->post( 'title' );
+		$data['template_id']   	 = $this->input->post( 'template_id' );
+		$data['portal_id']	   	 = $this->input->post( 'portal_id' );
+		$data['access_level_id'] = $this->input->post( 'access_level_id' );
 		$data['alias']					 = $this->input->post( 'alias' );
 		if( $this->input->post( 'default_view' ) ) {
 			$data['default_view'] = 'y';

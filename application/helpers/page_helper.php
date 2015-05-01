@@ -25,7 +25,12 @@ function params_array( $mvc ) {
 	}
 	
 	if( ! isset( $mvc->init ) ) {
-		$page_init    = str_replace( ' ', '_', $title ) . '_' . strtolower( $page_page );
+		if( empty( $page_page ) ) {
+			$init_file = str_replace( ' ', '_', $title );
+		} else {
+			$init_filt = str_replace( ' ', '_', $title ) . '_' . strtolower( $page_page );
+		}
+		$page_init = $init_file;
 	} else {
 		$page_init = $mvc->init;
 	}
@@ -44,7 +49,10 @@ function params_array( $mvc ) {
 	
 	if( ! isset( $mvc->breadcrumbs ) ) {
 		if( ! empty( $parent_title ) ) {
-			$page_breadcrumbs = [ $page_section => '#', $parent_title => '#', $title => $view, $page_page => '#' ];
+			$page_breadcrumbs = [ $page_section => '#', $parent_title => '#', $title => $view ];
+			if( ! empty( $page_page ) ) {
+				$page_breadcrumbs[$page_page] = '#';
+			}
 		} else {
 			$page_breadcrumbs = [ $page_section => '#', $title => $view ];
 		}

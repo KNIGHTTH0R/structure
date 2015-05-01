@@ -118,16 +118,20 @@ class Fr_menu_items_model extends CI_Model {
 	/** Sequence **/
 	public function update_sequence() {
 		$sequence = 1;
-		foreach( $this->input->post( 'fr_menu_item_id' ) as $fr_menu_item_id ) {
-			$data['sequence'] = $sequence;
-			$this->db->update( 'fr_menu_item', $data, [ 'fr_menu_item_id' => $fr_menu_item_id ] );
-			$sequence++;
+		if( $this->input->post( 'fr_menu_item_id' ) ) {
+			foreach( $this->input->post( 'fr_menu_item_id' ) as $fr_menu_item_id ) {
+				$data['sequence'] = $sequence;
+				$this->db->update( 'fr_menu_item', $data, [ 'fr_menu_item_id' => $fr_menu_item_id ] );
+				$sequence++;
+			}
 		}
 		
-		foreach( $this->input->post( 'df_menu_item_id' ) as $df_menu_item_id ) {
-			$data['sequence'] = $sequence;
-			$this->db->update( 'fr_menu_item_portal_xref', $data, [ 'fr_menu_item_id' => $df_menu_item_id, 'portal_id' => $this->input->post( 'portal_id' ) ] );
-			$sequence++;
+		if( $this->input->post( 'df_menu_item_id' ) ) {
+			foreach( $this->input->post( 'df_menu_item_id' ) as $df_menu_item_id ) {
+				$data['sequence'] = $sequence;
+				$this->db->update( 'fr_menu_item_portal_xref', $data, [ 'fr_menu_item_id' => $df_menu_item_id, 'portal_id' => $this->input->post( 'portal_id' ) ] );
+				$sequence++;
+			}
 		}
 	}
 	

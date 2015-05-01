@@ -14,17 +14,48 @@
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="default-pages">
+							<div class="row">
+								<div class="col-md-12">
+									<?=gen_ui_portlet_open( 'Default Pages', 'file', 'form' );?>
+										<form id="df-page-form">
+											<?php foreach( $pages as $page ):?>
+												<?php $meta_data = json_decode( $page['meta_data'], TRUE );?>
+												<div class="row">
+													<div class="col-md-2">
+														<?=gen_toggle( $meta_data['title'], $page['page_id'], $meta_data['status'] );?>
+													</div>
+													<div class="col-md-2">
+														<?=gen_input( 'Title', 'title', $meta_data['title'] );?>	
+													</div>
+													<div class="col-md-2">
+														<?=gen_input( 'Alias (view)', 'alias', $meta_data['alias'] );?>	
+													</div>
+													<div class="col-md-2">
+														<?=gen_select_template( $meta_data['template_id'] );?>	
+													</div>
+													<div class="col-md-2">
+														<?=gen_select_access_level( $meta_data['access_level_id'] );?>	
+													</div>
+												</div>
+											<?php endforeach;?>
+											<div class="form-actions right">
+												<button type="submit" class="btn green">Save</button>
+											</div>
+										</form>
+									<?=gen_ui_portlet_close();?>	
+								</div>	
+							</div>
 						</div>
 						<div class="tab-pane" id="default-fr-menu-items">
 							<div class="row">
 								<div class="col-md-12">
 									<?=gen_ui_portlet_open( 'Default Menu Items', 'list-ol', 'form' );?>
 										<form>
-											<?php foreach( $pages as $page ):?>
-												<?php $meta_data = json_decode( $page['meta_data'], TRUE );?>
+											<?php foreach( $menu_items as $menu_item ):?>
+												<?php $meta_data = json_decode( $menu_item['meta_data'], TRUE );?>
 												<div class="row">
 													<div class="col-md-2">
-														<?=gen_toggle( $meta_data['title'], $page['fr_menu_item_id'], $meta_data['status'] );?>
+														<?=gen_toggle( $meta_data['title'], $menu_item['fr_menu_item_id'], $meta_data['status'] );?>
 													</div>
 													<div class="col-md-2">
 														<?=gen_input( 'Title', 'title', $meta_data['title'] );?>	

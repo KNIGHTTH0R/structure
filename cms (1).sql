@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2015 at 05:27 AM
+-- Generation Time: May 02, 2015 at 01:54 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -332,7 +332,6 @@ CREATE TABLE IF NOT EXISTS `page` (
   `title` varchar(32) DEFAULT NULL,
   `alias` varchar(45) DEFAULT NULL,
   `access_level_id` int(2) DEFAULT NULL,
-  `default_view` char(1) DEFAULT NULL,
   PRIMARY KEY (`page_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -345,10 +344,38 @@ TRUNCATE TABLE `page`;
 -- Dumping data for table `page`
 --
 
-INSERT INTO `page` (`page_id`, `status`, `entered`, `updated`, `template_id`, `portal_id`, `title`, `alias`, `access_level_id`, `default_view`) VALUES
-(1, '+', '2015-04-26 22:50:40', '2015-04-29 04:37:07', 7, -1, 'Home', 'home', 4, 'y'),
-(2, '+', '2015-04-27 00:20:26', '2015-04-30 04:48:17', 2, -1, 'Feeds', 'feed', 4, 'y'),
-(3, '+', '2015-04-30 05:13:14', '2015-04-30 14:48:58', 8, -1, 'test', 'test', 4, 'y');
+INSERT INTO `page` (`page_id`, `status`, `entered`, `updated`, `template_id`, `portal_id`, `title`, `alias`, `access_level_id`) VALUES
+(1, '+', '2015-04-26 22:50:40', '2015-04-29 04:37:07', 7, -1, 'Home', 'home', 4),
+(2, '+', '2015-04-27 00:20:26', '2015-04-30 04:48:17', 2, -1, 'Feeds', 'feed', 4),
+(3, '+', '2015-04-30 05:13:14', '2015-04-30 14:48:58', 8, -1, 'test', 'test', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `page_portal_xref`
+--
+
+DROP TABLE IF EXISTS `page_portal_xref`;
+CREATE TABLE IF NOT EXISTS `page_portal_xref` (
+  `page_id` int(8) NOT NULL,
+  `portal_id` int(8) NOT NULL,
+  `meta_data` text NOT NULL,
+  PRIMARY KEY (`page_id`,`portal_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Truncate table before insert `page_portal_xref`
+--
+
+TRUNCATE TABLE `page_portal_xref`;
+--
+-- Dumping data for table `page_portal_xref`
+--
+
+INSERT INTO `page_portal_xref` (`page_id`, `portal_id`, `meta_data`) VALUES
+(1, 1, '{ "status": "+", "template_id": "7", "title": "Home", "alias": "home", "access_level_id": "4" }'),
+(2, 1, '{ "status": "+", "template_id": "2", "title": "Feeds", "alias": "feed", "access_level_id": "4" }'),
+(3, 1, '{ "status": "+", "template_id": "8", "title": "Test", "alias": "test", "access_level_id": "4" }');
 
 -- --------------------------------------------------------
 
