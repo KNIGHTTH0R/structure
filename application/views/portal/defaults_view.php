@@ -13,6 +13,7 @@
 						</li>
 					</ul>
 					<div class="tab-content">
+						<?=gen_hidden_input( 'portal_id', $portal_id );?>
 						<div class="tab-pane active" id="default-pages">
 							<div class="row">
 								<div class="col-md-12">
@@ -22,19 +23,19 @@
 												<?php $meta_data = json_decode( $page['meta_data'], TRUE );?>
 												<div class="row">
 													<div class="col-md-2">
-														<?=gen_toggle( $meta_data['title'], $page['page_id'], $meta_data['status'] );?>
+														<?=gen_toggle( $meta_data['title'], $page['page_id'], $meta_data['status'], [ 'name' => 'page_id[' . $page['page_id'] . '][status]' ] );?>
 													</div>
 													<div class="col-md-2">
-														<?=gen_input( 'Title', 'title', $meta_data['title'] );?>	
+														<?=gen_input( 'Title', 'title', $meta_data['title'], [ 'name' => 'page_id[' . $page['page_id'] . '][title]' ] );?>	
 													</div>
 													<div class="col-md-2">
-														<?=gen_input( 'Alias (view)', 'alias', $meta_data['alias'] );?>	
+														<?=gen_input( 'Alias (view)', 'alias', $page['alias'], [ 'name' => 'alias[' . $page['page_id'] . ']' ] );?>	
 													</div>
 													<div class="col-md-2">
-														<?=gen_select_template( $meta_data['template_id'] );?>	
+														<?=gen_select_template( $meta_data['template_id'], [ 'name' => 'page_id[' . $page['page_id'] . '][template_id]' ] );?>	
 													</div>
 													<div class="col-md-2">
-														<?=gen_select_access_level( $meta_data['access_level_id'] );?>	
+														<?=gen_select_access_level( $meta_data['access_level_id'], [ 'name' => 'page_id[' . $page['page_id'] . '][access_level_id]' ] );?>	
 													</div>
 												</div>
 											<?php endforeach;?>
@@ -50,24 +51,24 @@
 							<div class="row">
 								<div class="col-md-12">
 									<?=gen_ui_portlet_open( 'Default Menu Items', 'list-ol', 'form' );?>
-										<form>
+										<form id="df-menu-item-form">
 											<?php foreach( $menu_items as $menu_item ):?>
 												<?php $meta_data = json_decode( $menu_item['meta_data'], TRUE );?>
 												<div class="row">
 													<div class="col-md-2">
-														<?=gen_toggle( $meta_data['title'], $menu_item['fr_menu_item_id'], $meta_data['status'] );?>
+														<?=gen_toggle( $meta_data['title'], $menu_item['fr_menu_item_id'], $meta_data['status'], [ 'name' => 'fr_menu_item_id[' . $menu_item['fr_menu_item_id'] . '][status]' ] );?>
 													</div>
 													<div class="col-md-2">
-														<?=gen_input( 'Title', 'title', $meta_data['title'] );?>	
+														<?=gen_input( 'Title', 'title', $meta_data['title'], [ 'name' => 'fr_menu_item_id[' . $menu_item['fr_menu_item_id'] . '][title]' ] );?>	
 													</div>
 													<div class="col-md-2">
-														<?=gen_input( 'View (alias)', 'alias', $meta_data['alias'] );?>	
+														<?=gen_input( 'View (alias)', 'alias', $meta_data['alias'], [ 'name' => 'fr_menu_item_id[' . $menu_item['fr_menu_item_id'] . '][alias]' ] );?>	
 													</div>
 													<div class="col-md-2">
-														<?=gen_input( 'Icon', 'icon', $meta_data['icon'], [ 'addon' => [ 'type' => 'icon', 'option' => $meta_data['icon'] ] ] );?>	
+														<?=gen_input( 'Icon', 'icon', $meta_data['icon'], [ 'addon' => [ 'type' => 'icon', 'option' => $meta_data['icon'] ], 'name' => 'fr_menu_item_id[' . $menu_item['fr_menu_item_id'] . '][icon]' ] );?>	
 													</div>
 													<div class="col-md-2">
-														<?=gen_select_access_level( $meta_data['access_level_id'] );?>	
+														<?=gen_select_access_level( $meta_data['access_level_id'], [ 'name' => 'fr_menu_item_id[' . $menu_item['fr_menu_item_id'] . '][access_level_id]' ] );?>	
 													</div>
 												</div>
 											<?php endforeach;?>

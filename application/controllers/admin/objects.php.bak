@@ -8,7 +8,7 @@ class Objects extends CI_Controller {
 		/** Section Params **/
 		$this->js           = 'assets/js/objects_crud_init.js';
 		$this->styles       = '';
-		$this->control_item = 4;
+		$this->control_item = 'admin/objects';
 	}
 	
 	/** List **/

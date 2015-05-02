@@ -3,10 +3,10 @@
 class Pages extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model( 'admin/pages_model' );
+		$this->load->model( 'portal/pages_model' );
 		
 		/** Section Params **/
-		$this->js           = 'assets/js/pages_crud_init.js';
+		$this->js           = 'assets/js/portal/pages_crud_init.js';
 		$this->styles       = '';
 		$this->section      = section_check( TRUE );
 		
@@ -24,7 +24,7 @@ class Pages extends CI_Controller {
 		
 		$params['list']	     = $this->pages_model->page_list( $this->input->get( 'portal_id' ) );
 		$params['portal_id'] = $this->input->get( 'portal_id' );
-		$this->layout->view( 'admin/pages_view', $params );
+		$this->layout->view( 'portal/pages_view', $params );
 	}
 	
 	/** Create **/
@@ -34,16 +34,14 @@ class Pages extends CI_Controller {
 		
 		$params['portal_id'] = $this->input->get( 'portal_id' );
 		
-		$this->layout->view( 'admin/pages_create_view', $params );
+		$this->layout->view( 'portal/pages_create_view', $params );
 	}
 	
 	/** Insert **/
 	public function insert() {
-		$section = $this->input->post( 'portal_id' ) == -1 ? 'admin' : 'portal';
-		
 		$page = $this->pages_model->page_insert();
 		if( $page ) {
-			echo 's|created Page|' . site_url( $section . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
+			echo 's|created Page|' . site_url( 'portal/pages?portal_id=' . $this->input->post( 'portal_id' ) );
 		} else {
 			echo 'f|create Page';
 		}
@@ -57,15 +55,14 @@ class Pages extends CI_Controller {
 		$params['page'] 		 = $this->pages_model->page_revise( $page_id );
 		$params['portal_id'] = $this->input->get( 'portal_id' );
 		
-		$this->layout->view( 'admin/pages_revise_view', $params );
+		$this->layout->view( 'portal/pages_revise_view', $params );
 	}
 	
 	/** Update **/
 	public function update() {
-		$section = $this->input->post( 'portal_id' ) == -1 ? 'admin' : 'portal';
 		$page = $this->pages_model->page_update();
 		if( $page ) {
-			echo 's|updated Page|' . site_url( $section . '/pages?portal_id=' . $this->input->post( 'portal_id' ) );
+			echo 's|updated Page|' . site_url( 'portal/pages?portal_id=' . $this->input->post( 'portal_id' ) );
 		} else {
 			echo 'f|update Page';
 		}
@@ -84,7 +81,7 @@ class Pages extends CI_Controller {
 		
 		$params['list']	     = $this->pages_model->page_list( -1 );
 		$params['portal_id'] = -1;
-		$this->load->view( 'admin/pages_view', $params );
+		$this->load->view( 'portal/pages_view', $params );
 	}
 	
 	/** Defaults Create Page **/
@@ -94,7 +91,7 @@ class Pages extends CI_Controller {
 		
 		$params['portal_id'] = -1;
 		
-		$this->load->view( 'admin/pages_create_view', $params );
+		$this->load->view( 'portal/pages_create_view', $params );
 	}
 	
 	/** Defaults Revise Page **/
@@ -105,6 +102,6 @@ class Pages extends CI_Controller {
 		$params['page'] 		 = $this->pages_model->page_revise( $page_id );
 		$params['portal_id'] = -1;
 		
-		$this->load->view( 'admin/pages_revise_view', $params );
+		$this->load->view( 'portal/pages_revise_view', $params );
 	}
 }

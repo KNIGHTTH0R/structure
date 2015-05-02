@@ -6,7 +6,7 @@ class Admin_users extends CI_Controller {
 		$this->load->model( 'admin/admin_users_model' );
 		
 		/** Section Params **/
-		$this->js = 'assets/js/admin_users_crud_init.js';
+		$this->js = 'assets/js/admin/admin_users_crud_init.js';
 		$this->styles       = '';
 		$this->control_item = 'admin/admin_users';
 	}

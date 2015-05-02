@@ -35,9 +35,9 @@ class Admin_users extends CI_Controller {
 	public function insert() {
 		$access_level = $this->admin_users_model->admin_user_insert();
 		if( $access_level ) {
-			echo 's|created Access Level|' . site_url( 'admin/admin_users' );
+			echo 's|created Admin User|' . site_url( 'admin/admin_users' );
 		} else {
-			echo 'f|create Access Level';
+			echo 'f|create Admin User';
 		}
 	}
 	
@@ -56,9 +56,9 @@ class Admin_users extends CI_Controller {
 	public function update() {
 		$access_level = $this->admin_users_model->admin_user_update();
 		if( $access_level ) {
-			echo 's|updated Access Level|' . site_url( 'admin/admin_users' );
+			echo 's|updated Admin User|' . site_url( 'admin/admin_users' );
 		} else {
-			echo 'f|update Access Level';
+			echo 'f|update Admin User';
 		}
 	}
 	

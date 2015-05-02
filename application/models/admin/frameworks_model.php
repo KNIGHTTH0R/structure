@@ -30,6 +30,7 @@ class Frameworks_model extends CI_Model {
 		$count = 1;
 		
 		$file_data = '<div class="row">' . "\n";
+		$file_data = '<h1 class="col-md-12"><?=$title;?></h1>' . "\n";
 		foreach( $this->input->post( 'framework_width' ) as $row => $columns ) {
 			foreach( $columns as $column_count => $column ) {
 				if( isset( $_POST['allow_widgets'][$row][$column_count] ) ) {

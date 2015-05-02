@@ -6,7 +6,7 @@ class Access_levels extends CI_Controller {
 		$this->load->model( 'admin/access_levels_model' );
 		
 		/** Section Params **/
-		$this->js = 'assets/js/access_levels_crud_init.js';
+		$this->js = 'assets/js/admin/access_levels_crud_init.js';
 		$this->styles       = '';
 		$this->control_item = 'admin/access_levels';
 	}

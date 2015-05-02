@@ -6,8 +6,7 @@
 					<div class="col-md-12">
 						<ul id="sequence-list" class="list-unstyled list-group">
 							<?php foreach( $list as $menu_item ):?>
-								<?php if( $menu_item['status'] == '-' ): continue;?>
-								<?php endif;?>
+								<?php if( $menu_item['status'] == '-' ) { continue; }?>
 								<li id="<?=$menu_item['type'];?>_menu_item_id_<?=$menu_item['fr_menu_item_id'];?>" class="list-group-item parent-item">
 									<i class="fa fa-sort"></i><?=$menu_item['title'];?>
 									<?php if( isset( $menu_item['children_list'] ) ):?>
@@ -47,6 +46,7 @@
 			</thead>
 			<tbody>
 			<?php foreach( $list as $menu_item ):?>
+				<?php if( $menu_item['status'] == '-' ) { continue; }?>
 				<tr>
 					<td class="text-center">
 						<?php

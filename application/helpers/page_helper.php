@@ -28,7 +28,7 @@ function params_array( $mvc ) {
 		if( empty( $page_page ) ) {
 			$init_file = str_replace( ' ', '_', $title );
 		} else {
-			$init_filt = str_replace( ' ', '_', $title ) . '_' . strtolower( $page_page );
+			$init_file = str_replace( ' ', '_', $title ) . '_' . strtolower( $page_page );
 		}
 		$page_init = $init_file;
 	} else {

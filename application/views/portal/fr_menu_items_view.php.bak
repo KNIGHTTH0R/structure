@@ -8,14 +8,14 @@
 							<?php foreach( $list as $menu_item ):?>
 								<?php if( $menu_item['status'] == '-' ): continue;?>
 								<?php endif;?>
-								<li id="fr_menu_item_id_<?=$menu_item['type'];?>_<?=$menu_item['fr_menu_item_id'];?>" class="list-group-item parent-item">
+								<li id="<?=$menu_item['type'];?>_menu_item_id_<?=$menu_item['fr_menu_item_id'];?>" class="list-group-item parent-item">
 									<i class="fa fa-sort"></i><?=$menu_item['title'];?>
 									<?php if( isset( $menu_item['children_list'] ) ):?>
 										<ul class="list-unstyled child-list list-group">
 										<?php foreach( $menu_item['children_list'] as $child ):?>
 											<?php if( $menu_item['status'] == '-' ): continue;?>
 											<?php endif;?>
-											<li id="fr_menu_item_id_<?=$menu_item['type'];?>_<?=$child['fr_menu_item_id'];?>" class="list-group-item child-item">
+											<li id="<?=$menu_item['type'];?>_menu_item_id_<?=$child['fr_menu_item_id'];?>" class="list-group-item child-item">
 												<i class="fa fa-sort"></i><?=$child['title'];?>
 											</li>
 										<?php endforeach;?>
@@ -47,6 +47,7 @@
 			</thead>
 			<tbody>
 			<?php foreach( $list as $menu_item ):?>
+				<?php if( $menu_item['status'] == '-' ) { continue; }?>
 				<tr>
 					<td class="text-center">
 						<?php

@@ -17,8 +17,8 @@ class Menu_items extends CI_Controller {
 		$this->init = 'Menu_Items_list';
 		$params = params_array( $this );
 		
-		$params['list']						= $this->menu_items_model->menu_item_list( $this->input->get( 'section' ) );
-		$params['section']				= $this->input->get( 'section' );
+		$params['list']		 = $this->menu_items_model->menu_item_list( $this->input->get( 'section' ) );
+		$params['section'] = $this->input->get( 'section' );
 		
 		$this->layout->view( 'admin/menu_items_view', $params );
 	}

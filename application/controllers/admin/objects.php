@@ -6,7 +6,7 @@ class Objects extends CI_Controller {
 		$this->load->model( 'admin/objects_model' );
 		
 		/** Section Params **/
-		$this->js           = 'assets/js/objects_crud_init.js';
+		$this->js           = 'assets/js/admin/objects_crud_init.js';
 		$this->styles       = '';
 		$this->control_item = 'admin/objects';
 	}

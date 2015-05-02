@@ -1,41 +1,24 @@
 var Defaults = function() {
 	return {
 		init: function() {
-			var portal_id = $( '#portal_id' );
-			var df_page_form = $( '#df_page_form' );
+			var portal_id         = $( 'input[name="portal_id"]' ).val();
+			var df_page_form      = $( '#df-page-form' );
+			var df_menu_item_form = $( '#df-menu-item-form' );
 			
 			df_page_form.on( 'submit', function( e ) {
 				e.preventDefault();
 				
-				alert( 'here' );
-			});
-		}
-	}
-}();
-
-var Fr_Menu_Items_create = function() {
-	return {
-		init: function() {
-			$( '#fr-menu-item-create' ).on( 'submit', function( e ) {
-				e.preventDefault();
-				
 				var form_data = $( this ).serialize();
-				$.post( site_url + 'portal/fr_menu_items/insert', form_data, function( data ) {
+				$.post( site_url + 'portal/defaults/default_pages_update/' + portal_id, form_data, function( data ) {
 					gen_toastr( data );
 				});
 			});
-		}
-	}
-}();
-
-var Fr_Menu_Items_revise = function() {
-	return {
-		init: function() {			
-			$( '#fr-menu-item-revise' ).on( 'submit', function( e ) {
+			
+			df_menu_item_form.on( 'submit', function( e ) {
 				e.preventDefault();
 				
 				var form_data = $( this ).serialize();
-				$.post( site_url + 'portal/fr_menu_items/update', form_data, function( data ) {
+				$.post( site_url + 'portal/defaults/default_menu_items_update/' + portal_id, form_data, function( data ) {
 					gen_toastr( data );
 				});
 			});

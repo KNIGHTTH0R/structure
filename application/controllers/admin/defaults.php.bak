@@ -31,10 +31,11 @@ class Defaults extends CI_Controller {
 			extract( $page );
 			
 			${'column_' . $count} .= gen_toggle( $title . ' - ' . $alias, $page_id, $default_view, [ 'name' => 'page_id[' . $page_id . ']' ], TRUE );
-			$count++;
-			if( $count == 5 ) {
+			if( $count == 4 ) {
 				$count = 1;
+				continue;
 			}
+			$count++;
 		}
 		
 		echo json_encode( [ 'column_1' => $column_1, 'column_2' => $column_2, 'column_3' => $column_3, 'column_4' => $column_4 ] );

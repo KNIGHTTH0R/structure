@@ -9,20 +9,33 @@
 					<th>View (alias)</th>
 					<th>Template</th>
 					<th>Access Level</th>
-					<th>Default View</th>
 					<th>Status</th>
 				</tr>	
 			</thead>
 			<tbody>
+				<?=print_r( $list );?>
 			<?php foreach( $list as $page ): ?>
 				<tr>
-					<td class="text-center"><?=gen_ui_revise_button( site_url( '/pages/revise/' . $page['page_id'] . '?portal_id=' . $portal_id ), [ 'class' => 'default-revise' ] );?></td>
+					<td class="text-center">
+						<?php
+							if( $page['type'] == 'fr' ) {
+								gen_ui_revise_button( site_url( 'portal/pages/revise/' . $page['page_id'] . '?portal_id=' . $portal_id ), [ 'class' => 'default-revise' ] );
+							} else if( $page['type'] == 'df' ) {
+								echo '<span class="label label-sm bg-green">Default</span>';
+							}
+						?>
+					</td>
 					<td><?=$page['title'];?></tdw>
 					<td><?=$page['alias'];?></td>
 					<td><?=$page['template_title'];?></td>
 					<td><?=$page['access_level_title'];?></td>
-					<td class="text-center"><?=$page['default_view'];?></td>
-					<td class="text-center"><?=gen_ui_status( $page['page_id'], $page['status'] );?></td>
+					<td class="text-center">
+						<?php
+							if( $page['type'] == 'fr' ) {
+								gen_ui_status( $page['page_id'], $page['status'] );
+							}
+						?>
+					</td>
 				</tr>
 			<?php endforeach; ?>	
 			</tbody>

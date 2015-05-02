@@ -109,7 +109,7 @@ function fr_get_menu_items() {
 	$CI =& get_instance();
 	$CI->load->model( 'portal/fr_menu_items_model' );
 	
-	$menu_items = $CI->fr_menu_items_model->fr_menu_item_list( 1 );
+	$menu_items = $CI->fr_menu_items_model->fr_menu_item_list( get_portal_id() );
 	
 	$menu = '';
 	foreach( $menu_items as $attributes ) {
@@ -119,17 +119,7 @@ function fr_get_menu_items() {
 			continue;
 		}
 		
-		/*$CI->db->order_by( 'sequence' );
-		$CI->db->where( 'status', '+' );
-		$children = $CI->db->get_where( 'fr_menu_item', [ 'parent_id' => $fr_menu_item_id ] );
-		
-		if( $children->num_rows() > 0 ) {
-			//$active = menu_children_active_check( $page_current, $children->result_array() );
-			//$menu  .= gen_menu_group( $title, $icon, $children->result_array(), $active, $page_current );
-		} else {
-			//$active = $view == $page_current ? 'active' : '';*/
-			$menu  .= fr_gen_menu_link( $title, $alias, '', $icon );
-		//}
+		$menu  .= fr_gen_menu_link( $title, $alias, '', $icon );
 	}
 	echo $menu;
 }

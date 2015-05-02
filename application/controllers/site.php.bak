@@ -10,38 +10,46 @@ class Site extends CI_Controller {
 	
 	public function index() {
 		last_activity_check();
-		$params = [];
 		
-		$segment_1 = $this->uri->segment( 1 );		
-		$segment_2 = $this->uri->segment( 2 );
-		$segment_3 = $this->uri->segment( 3 );
+		/** Check For Default Page **/
+		$df_query = $this->db->get_where( 'page_portal_xref', [ 'portal_id' => get_portal_id(), 'alias' => $this->uri->segment( 1 ) ] );
 		
-		$this->db->select( 'p.page_id, f.file AS view_name' );
+		/** Check For Custom Page **/
+		$this->db->select( 'p.page_id, p.access_level_id, p.title, f.file AS view_name' );
 		$this->db->join( 'template AS t', 't.template_id = p.template_id' );
 		$this->db->join( 'framework AS f', 'f.framework_id = t.framework_id' );
 		$this->db->where( 'portal_id', get_portal_id() );
-		if( ! empty( $segment_1 ) ) {
-			$this->db->where( 'alias', $this->uri->segment( 1 ) );
-			$query = $this->db->get( 'page AS p' );
-		} else {
-			$this->db->where( 'default_view', 'y' );
-			$query = $this->db->get( 'page AS p');
-		}
-		if( $query->num_rows() > 0 ) {
-			extract( $query->result_array()[0] );
-			$params['page_id'] 		= $page_id;
-			$params['segment_2'] 	= $segment_2;
-			$params['segment_3'] 	= $segment_3;
+		$this->db->where( 'alias', $this->uri->segment( 1 ) );
+		$query = $this->db->get( 'page AS p' );
+		
+		if( $df_query->num_rows() > 0 ) {
+			extract( $df_query->row_array() );
 			
-			$this->db->select( 'access_level_id' );
-			$query = $this->db->get_where( 'page', [ 'page_id' => $page_id ] );
+			$meta_data = json_decode( $meta_data, TRUE );
+			extract( $meta_data );
+			
+			$this->db->select( 'f.file AS view_name' );
+			$this->db->join( 'template AS t', 't.framework_id = f.framework_id' );
+			$query = $this->db->get_where( 'framework AS f', [ 't.template_id' => $template_id ] );
+			if( $query->num_rows() > 0 ) {
+				extract( $query->row_array() );
+				
+				$params['page_id'] 						= $page_id;
+				$params['titleas']							= $title;	
+				$params['page_access_level'] 	= $access_level_id;
+				
+				$this->layout->view( $view_name, $params );
+			}
+		} else if( $query->num_rows() > 0 ) {
 			extract( $query->row_array() );
+				
+			$params['page_id'] 						= $page_id;
+			$params['titleas']							= $title;
 			$params['page_access_level'] 	= $access_level_id;
+			
+			$this->layout->view( $view_name, $params );
 		} else {
-			//show_404();
+			show_404();
 		}
-		
-		
-		$this->layout->view( $view_name, $params );
 	}
 }

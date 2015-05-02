@@ -6,7 +6,7 @@ class Defaults extends CI_Controller {
 		$this->load->model( 'admin/defaults_model' );
 		
 		/** Section Params **/
-		$this->js = 'assets/js/defaults_init.js';
+		$this->js = 'assets/js/admin/defaults_init.js';
 		$this->styles       = '';
 		$this->control_item = 'admin/defaults';
 	}

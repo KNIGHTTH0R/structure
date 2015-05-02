@@ -55,7 +55,7 @@ class Widgets extends CI_Controller {
 	public function update() {
 		$update = $this->widgets_model->widget_update();
 		if( $update ) {
-			echo 's|updated Widget|' . site_url( 'admin/widgets' );;
+			echo 's|updated Widget';
 		} else {
 			echo 'e|update Widget';
 		}

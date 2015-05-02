@@ -145,6 +145,7 @@ var Defaults = function() {
 				
 				var form_data = $( this ).serialize();
 				$.post( site_url + 'portal/fr_menu_items/insert', form_data, function( data ) {
+					alert( data );
 					var results = data.split( '|' )[0];
 					
 					switch( results ) {

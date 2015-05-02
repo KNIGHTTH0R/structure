@@ -45,7 +45,7 @@ class Access_levels extends CI_Controller {
 		$this->page = 'revise';
 		$params = params_array( $this );
 		
-		$params['access_level']					= $this->access_levels_model->get_access_level( $access_level_id );
+		$params['access_level']					= $this->access_levels_model->access_level_revise( $access_level_id );
 		
 		$this->layout->view( 'admin/access_levels_revise_view', $params );
 	}

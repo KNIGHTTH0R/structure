@@ -46,6 +46,7 @@ class Fr_menu_items_model extends CI_Model {
 				$fr_menu_item_array[$count]['alias'] = $alias;
 				$fr_menu_item_array[$count]['icon'] = $icon;
 				$fr_menu_item_array[$count]['sequence'] = $sequence;
+				$fr_menu_item_array[$count]['access_level_id'] = $access_level_id;
 				$fr_menu_item_array[$count]['access_level_title'] = $access_level_title;
 				$fr_menu_item_array[$count]['status'] = $status;
 				$fr_menu_item_array[$count]['type'] = $type;
@@ -76,16 +77,63 @@ class Fr_menu_items_model extends CI_Model {
 			$sequence = 1;
 		}
 		
-		$data['entered']			= date( 'Y-m-d H:i:s' );
-		$data['portal_id']		= $this->input->post( 'portal_id' );
-		$data['title']				= $this->input->post( 'title' );
-		$data['alias']				= $this->input->post( 'alias' );
+		$data['entered']					= date( 'Y-m-d H:i:s' );
+		$data['portal_id']				= $this->input->post( 'portal_id' );
+		$data['title']						= $this->input->post( 'title' );
+		$data['alias']						= $this->input->post( 'alias' );
 		$data['access_level_id']	= $this->input->post( 'access_level_id' );
-		$data['parent_id']		= $this->input->post( 'parent_id' );
-		$data['icon']					= $this->input->post( 'icon' );
-		$data['sequence']			= $sequence;
+		$data['parent_id']				= $this->input->post( 'parent_id' );
+		$data['icon']							= $this->input->post( 'icon' );
+		$data['sequence']					= $sequence;
 		
-		return $this->db->insert( 'fr_menu_item', $data );
+		$this->db->insert( 'fr_menu_item', $data );
+		$fr_menu_item_id = $this->db->insert_id();
+		
+		if( $this->input->post( 'all_portals' ) ) {
+			$this->db->select( 'portal_id' );
+			$query = $this->db->get( 'portal' );
+			if( $query->num_rows() > 0 ) {
+				$meta_data = [
+					'status' 					=> '+',
+					'title' 					=> $this->input->post( 'title' ),
+					'alias' 					=> $this->input->post( 'alias' ),
+					'icon' 					  => $this->input->post( 'icon' ),
+					'access_level_id' => $this->input->post( 'access_level_id' )
+				];
+				$meta_data = json_encode( $meta_data );
+				foreach( $query->result_array() as $row ) {
+					extract( $row );
+					
+					$this->db->select( 'sequence AS fr_sequence' );
+					$this->db->order_by( 'sequence DESC' );
+					$query = $this->db->get_where( 'fr_menu_item', [ 'portal_id' => $portal_id ], 1 );
+					if( $query->num_rows() > 0 ) {
+						extract( $query->row_array() );
+					}
+					
+					$this->db->select( 'sequence AS df_sequence' );
+					$this->db->order_by( 'sequence DESC' );
+					$query = $this->db->get_where( 'fr_menu_item_portal_xref', [ 'portal_id' => $portal_id ], 1 );
+					if( $query->num_rows() > 0 ) {
+						extract( $query->row_array() );
+					}
+					
+					if( $fr_sequence > $df_sequence ) {
+						$sequence = $fr_sequence + 1;
+					} else {
+						$sequence = $df_sequence + 1;
+					}
+					
+					$xrf_data = [ 'meta_data' => $meta_data ];
+					$xrf_data['fr_menu_item_id'] = $fr_menu_item_id;
+					$xrf_data['portal_id'] 			 = $portal_id;
+					$xrf_data['sequence']				 = $sequence;
+					$this->db->insert( 'fr_menu_item_portal_xref', $xrf_data );
+				}
+			}
+		}
+		
+		return $fr_menu_item_id;
 	}
 	
 	/** Revise **/

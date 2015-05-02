@@ -4,10 +4,11 @@ $object_params = json_decode( $params, TRUE );
 extract( $object_params );	
 
 $rss = simplexml_load_file( $url );
-$count = 0;
+$feeds = 0;
 
 ?>
-<h2><?=$rss->channel->title;?></h2>
+
+<h2><?=$title;?></h2>
 <ul class="list-unstyled">
 	<?php foreach( $rss->channel->item as $item ) :?>
 		<?php
@@ -16,5 +17,5 @@ $count = 0;
 			}
 		?>
 		<li><a target="_blank" href="<?=$item->link;?>"><?=$item->title;?></a></li>
-	<?php $count++; endforeach;?>	
+	<?php $feeds++; endforeach;?>	
 </ul>

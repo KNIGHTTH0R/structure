@@ -4,7 +4,7 @@ class Settings extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model( 'admin/settings_model' );
-		$this->js = 'assets/js/portal/settings_init.js';
+		$this->js = 'assets/js/settings_init.js';
 	}
 	
 	public function index() {

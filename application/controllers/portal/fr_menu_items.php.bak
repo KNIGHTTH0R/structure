@@ -75,8 +75,6 @@ class Fr_menu_items extends CI_Controller {
 	
 	/** Sequence **/
 	public function sequence() {
-		print_r( $_POST );
-		exit;
 		$this->fr_menu_items_model->update_sequence();
 	}
 	

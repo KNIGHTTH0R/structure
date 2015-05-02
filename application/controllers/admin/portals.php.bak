@@ -8,24 +8,13 @@ class Portals extends CI_Controller {
 		/** Section Params **/
 		$this->js           = '';
 		$this->styles       = '';
-		$this->control_item = 'admin/portals';
+		$this->control_item = 'admin/admin/portals';
 	}
 	
 	public function index() {
 		$this->page = 'list';
 		$params = params_array( $this );
 		
-		$params['page_title']					= 'Portals';
-		$params['page_header']				= 'Portals <small>list</small>';
-		
-		$portal_list = array(
-			'actions' => array(
-				'href' => 'portals/create',
-				'icon_text' => 'Create'
-			)
-		);
-		
-		$params['portal_list']	= $portal_list;
 		$params['list']					= $this->portals_model->portal_list();
 		
 		$this->layout->view( 'admin/portals_view', $params );

@@ -7,16 +7,14 @@
 		<link rel="stylesheet" href="<?=site_url( 'assets/css/styles2.css' );?>">
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-		
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<title><?=$page_title;?></title>
 	</head>
 	<body>
 		<div class="page-container">
 			<nav class="top-nav">
 				<div class="nav-logo">
+					<img src="<?=site_url( 'images/logo.PNG' );?>" alt="logo">
+					<span>STRUCTURE</span>
 				</div>
 				<ul class="nav-menu">
 					<?=fr_get_menu_items();?>

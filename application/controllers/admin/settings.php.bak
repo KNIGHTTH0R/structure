@@ -6,12 +6,13 @@ class Settings extends CI_Controller {
 		$this->load->model( 'admin/settings_model' );
 		
 		/** Section Params **/
-		$this->js           = [ 'assets/js/settings_init.js', 'assets/global/plugins/bootstrap-summernote/summernote.min.js' ];
+		$this->js           = [ 'assets/js/admin/settings_init.js', 'assets/global/plugins/bootstrap-summernote/summernote.min.js' ];
 		$this->styles       = 'assets/global/plugins/bootstrap-summernote/summernote.css';
 		$this->control_item = 'admin/settings';
 	}
 	
 	public function index() {
+		$this->page = 'Options';
 		$this->init = 'Settings';
 		$params = params_array( $this );
 		

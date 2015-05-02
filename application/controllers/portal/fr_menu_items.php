@@ -6,7 +6,7 @@ class Fr_menu_items extends CI_Controller {
 		$this->load->model( 'portal/fr_menu_items_model' );
 		
 		/** Section Params **/
-		$this->js 					= 'assets/js/fr_menu_items_crud_init.js';
+		$this->js 					= 'assets/js/portal/fr_menu_items_crud_init.js';
 		$this->styles 			= '';
 		$this->control_item = 'portal/fr_menu_items';
 	}
