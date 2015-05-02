@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2015 at 01:54 AM
+-- Generation Time: May 02, 2015 at 09:51 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `column` (
   `framework_id` int(8) NOT NULL DEFAULT '0',
   `target` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`column_id`,`framework_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Truncate table before insert `column`
@@ -115,17 +115,8 @@ TRUNCATE TABLE `column`;
 
 INSERT INTO `column` (`column_id`, `framework_id`, `target`) VALUES
 (1, 1, 'column_1'),
-(2, 2, 'column_1'),
-(3, 2, 'column_2'),
-(4, 3, 'column_1'),
-(5, 3, 'column_2'),
-(6, 3, 'column_3'),
-(7, 4, 'column_1'),
-(8, 4, 'column_2'),
-(9, 4, 'column_3'),
-(10, 4, 'column_4'),
-(11, 4, 'column_5'),
-(12, 4, 'column_6');
+(2, 1, 'column_2'),
+(3, 1, 'column_3');
 
 -- --------------------------------------------------------
 
@@ -143,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `framework` (
   `file` varchar(45) DEFAULT NULL,
   `mockup` text,
   PRIMARY KEY (`framework_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Truncate table before insert `framework`
@@ -155,10 +146,7 @@ TRUNCATE TABLE `framework`;
 --
 
 INSERT INTO `framework` (`framework_id`, `status`, `entered`, `updated`, `title`, `file`, `mockup`) VALUES
-(1, '+', '2015-04-26 02:57:19', NULL, 'Standard', 'standard_fr', '[["12"]]'),
-(2, '+', '2015-04-26 20:48:27', NULL, 'Standard 2', 'standard_2_fr', '[["6","6"]]'),
-(3, '+', '2015-04-26 22:41:21', NULL, 'Feeds', 'feeds_fr', '[["12"],["6","6"]]'),
-(4, '+', '2015-04-27 00:42:26', NULL, 'My News Center', 'my_news_center_fr', '[["8","4"],["12"],["4","4","4"]]');
+(1, '+', '2015-05-02 04:15:39', NULL, 'Home Page', 'home_page_fr', '[["8","4"],["12"]]');
 
 -- --------------------------------------------------------
 
@@ -180,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `fr_menu_item` (
   `sequence` int(2) DEFAULT NULL,
   `icon` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`fr_menu_item_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Truncate table before insert `fr_menu_item`
@@ -192,10 +180,9 @@ TRUNCATE TABLE `fr_menu_item`;
 --
 
 INSERT INTO `fr_menu_item` (`fr_menu_item_id`, `status`, `entered`, `updated`, `portal_id`, `title`, `alias`, `access_level_id`, `parent_id`, `sequence`, `icon`) VALUES
-(4, '+', '2015-04-30 21:41:03', '2015-04-30 23:01:51', -1, 'Home', 'home', 4, 0, 4, 'home'),
-(5, '+', '2015-04-30 23:02:06', NULL, -1, 'Feeds', 'feed', 4, 0, 5, 'rss'),
-(6, '+', '2015-04-30 23:10:47', NULL, -1, 'Test', 'test', 4, 0, 6, 'cog'),
-(7, '+', '2015-05-01 05:17:56', NULL, 1, 'Learning', 'learning', 4, 0, 7, 'book');
+(1, '+', '2015-05-02 04:19:00', NULL, -1, 'Home', 'home', 4, 0, 1, 'home'),
+(2, '+', '2015-05-02 04:20:06', NULL, -1, 'Feed Central', 'feeds', 4, 0, 2, 'rss'),
+(3, '+', '2015-05-02 04:22:39', NULL, -1, 'Profile', 'profile', 4, 0, 3, 'user');
 
 -- --------------------------------------------------------
 
@@ -222,9 +209,9 @@ TRUNCATE TABLE `fr_menu_item_portal_xref`;
 --
 
 INSERT INTO `fr_menu_item_portal_xref` (`fr_menu_item_id`, `portal_id`, `meta_data`, `sequence`) VALUES
-(4, 1, '{ "status": "+", "title": "Home", "alias": "home", "icon": "home", "access_level_id": "4" }', 1),
-(5, 1, '{ "status": "+", "title": "Feeds", "alias": "feed", "icon": "rss", "access_level_id": "4" }', 2),
-(6, 1, '{ "status": "+", "title": "Test", "alias": "test", "icon": "cog", "access_level_id": "4" }', 3);
+(1, 1, '{"status":"+","title":"Home","alias":"home","icon":"home","access_level_id":"4"}', 1),
+(2, 1, '{"status":"+","title":"Feed Central","alias":"feeds","icon":"rss","access_level_id":"4"}', 2),
+(3, 1, '{"status":"+","title":"Profile","alias":"profile","icon":"user","access_level_id":"4"}', 3);
 
 -- --------------------------------------------------------
 
@@ -298,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `object` (
   `file` varchar(45) DEFAULT NULL,
   `params` text,
   PRIMARY KEY (`object_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Truncate table before insert `object`
@@ -310,10 +297,8 @@ TRUNCATE TABLE `object`;
 --
 
 INSERT INTO `object` (`object_id`, `status`, `entered`, `updated`, `title`, `file`, `params`) VALUES
-(1, '+', '2015-04-26 02:56:52', '2015-04-27 04:20:27', 'Home WYSIWYG', 'home_wysiwyg_ob', '[{"type":"wysiwyg","label":"WYSIWYG","field_name":"wysiwyg"}]'),
-(2, '+', '2015-04-26 21:50:23', NULL, 'RSS Widget', 'rss_widget_ob', '[{"type":"text","label":"Source Url","field_name":"url"},{"type":"text","label":"# of Feeds","field_name":"feeds"},{"type":"toggle","label":"Show Attribution","field_name":"attribution"}]'),
-(3, '+', '2015-04-27 03:45:51', NULL, '', '_ob', 'false'),
-(4, '+', '2015-04-27 03:46:28', NULL, '', '_ob', 'false');
+(1, '+', '2015-05-02 04:11:38', '2015-05-02 04:13:15', 'WYSIWYG', 'wysiwyg_ob', '[{"type":"wysiwyg","label":"WYSIWYG","field_name":"wysiwyg"}]'),
+(2, '+', '2015-05-02 04:12:38', NULL, 'RSS Feeds', 'rss_feeds_ob', '[{"type":"text","label":"Title","field_name":"title"},{"type":"text","label":"URL","field_name":"url"},{"type":"text","label":"# of Feeds","field_name":"count"}]');
 
 -- --------------------------------------------------------
 
@@ -333,7 +318,7 @@ CREATE TABLE IF NOT EXISTS `page` (
   `alias` varchar(45) DEFAULT NULL,
   `access_level_id` int(2) DEFAULT NULL,
   PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Truncate table before insert `page`
@@ -345,9 +330,7 @@ TRUNCATE TABLE `page`;
 --
 
 INSERT INTO `page` (`page_id`, `status`, `entered`, `updated`, `template_id`, `portal_id`, `title`, `alias`, `access_level_id`) VALUES
-(1, '+', '2015-04-26 22:50:40', '2015-04-29 04:37:07', 7, -1, 'Home', 'home', 4),
-(2, '+', '2015-04-27 00:20:26', '2015-04-30 04:48:17', 2, -1, 'Feeds', 'feed', 4),
-(3, '+', '2015-04-30 05:13:14', '2015-04-30 14:48:58', 8, -1, 'test', 'test', 4);
+(1, '+', '2015-05-02 04:16:52', '2015-05-02 05:27:10', 1, -1, 'Home Page', 'home', 4);
 
 -- --------------------------------------------------------
 
@@ -359,8 +342,9 @@ DROP TABLE IF EXISTS `page_portal_xref`;
 CREATE TABLE IF NOT EXISTS `page_portal_xref` (
   `page_id` int(8) NOT NULL,
   `portal_id` int(8) NOT NULL,
+  `alias` varchar(45) NOT NULL,
   `meta_data` text NOT NULL,
-  PRIMARY KEY (`page_id`,`portal_id`)
+  PRIMARY KEY (`page_id`,`portal_id`,`alias`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -372,10 +356,8 @@ TRUNCATE TABLE `page_portal_xref`;
 -- Dumping data for table `page_portal_xref`
 --
 
-INSERT INTO `page_portal_xref` (`page_id`, `portal_id`, `meta_data`) VALUES
-(1, 1, '{ "status": "+", "template_id": "7", "title": "Home", "alias": "home", "access_level_id": "4" }'),
-(2, 1, '{ "status": "+", "template_id": "2", "title": "Feeds", "alias": "feed", "access_level_id": "4" }'),
-(3, 1, '{ "status": "+", "template_id": "8", "title": "Test", "alias": "test", "access_level_id": "4" }');
+INSERT INTO `page_portal_xref` (`page_id`, `portal_id`, `alias`, `meta_data`) VALUES
+(1, 1, 'home', '{"status":"+","title":"Home","template_id":"1","access_level_id":"4"}');
 
 -- --------------------------------------------------------
 
@@ -420,7 +402,7 @@ CREATE TABLE IF NOT EXISTS `position` (
   `column_id` int(8) NOT NULL DEFAULT '0',
   `sequence` int(2) DEFAULT NULL,
   PRIMARY KEY (`position_id`,`framework_id`,`template_id`,`widget_id`,`column_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Truncate table before insert `position`
@@ -432,35 +414,9 @@ TRUNCATE TABLE `position`;
 --
 
 INSERT INTO `position` (`position_id`, `framework_id`, `template_id`, `widget_id`, `column_id`, `sequence`) VALUES
-(9, 3, 1, 1, 4, 1),
-(10, 3, 1, 3, 5, 1),
-(11, 3, 1, 2, 6, 1),
-(12, 2, 2, 3, 2, 1),
-(13, 2, 2, 2, 3, 1),
-(14, 4, 0, 1, 7, 1),
-(15, 4, 0, 1, 9, 1),
-(16, 4, 0, 3, 10, 1),
-(17, 4, 0, 2, 10, 2),
-(18, 4, 0, 2, 11, 1),
-(19, 4, 0, 3, 11, 2),
-(20, 4, 0, 1, 12, 1),
-(21, 4, 0, 1, 7, 1),
-(22, 4, 0, 1, 9, 1),
-(23, 4, 0, 3, 10, 1),
-(24, 4, 0, 2, 10, 2),
-(25, 4, 0, 2, 11, 1),
-(26, 4, 0, 3, 11, 2),
-(27, 4, 0, 1, 12, 1),
-(58, 4, 7, 1, 7, 1),
-(59, 4, 7, 3, 8, 1),
-(60, 4, 7, 1, 9, 1),
-(61, 4, 7, 3, 10, 1),
-(62, 4, 7, 2, 10, 2),
-(63, 4, 7, 2, 11, 1),
-(64, 4, 7, 3, 11, 2),
-(65, 4, 7, 3, 12, 1),
-(66, 2, 8, 2, 2, 1),
-(67, 2, 8, 3, 3, 1);
+(11, 1, 1, 1, 1, 1),
+(12, 1, 1, 2, 2, 1),
+(13, 1, 1, 1, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -502,7 +458,7 @@ CREATE TABLE IF NOT EXISTS `template` (
   `framework_id` int(8) DEFAULT NULL,
   `title` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`template_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Truncate table before insert `template`
@@ -514,14 +470,7 @@ TRUNCATE TABLE `template`;
 --
 
 INSERT INTO `template` (`template_id`, `status`, `entered`, `updated`, `framework_id`, `title`) VALUES
-(1, '+', '2015-04-26 22:50:27', '2015-04-27 00:16:55', 3, 'Home'),
-(2, '+', '2015-04-27 00:18:23', NULL, 2, 'Feeds'),
-(3, '+', '2015-04-27 00:43:35', NULL, 4, 'News Center'),
-(4, '+', '2015-04-27 00:44:16', NULL, 4, 'News Center'),
-(5, '+', '2015-04-27 00:45:16', NULL, 4, 'News Center'),
-(6, '+', '2015-04-27 00:45:32', NULL, 4, 'News Center'),
-(7, '+', '2015-04-27 00:47:02', '2015-04-27 02:59:57', 4, 'News'),
-(8, '+', '2015-04-30 14:48:35', NULL, 2, 'Testing');
+(1, '+', '2015-05-02 04:16:14', '2015-05-02 05:14:34', 1, 'Home Page');
 
 -- --------------------------------------------------------
 
@@ -551,9 +500,9 @@ TRUNCATE TABLE `widget`;
 --
 
 INSERT INTO `widget` (`widget_id`, `status`, `entered`, `updated`, `object_id`, `alias`, `params`) VALUES
-(1, '+', '2015-04-26 22:48:58', '2015-04-27 00:41:10', 1, 'Home Page', '{"wysiwyg":"<h1>Home Page<\\/h1><p>Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Praesent ac sem eget est egestas volutpat. Donec interdum, metus et hendrerit aliquet, dolor diam sagittis ligula, eget egestas libero turpis vel mi. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.<\\/p><p><span style=\\"line-height: 1.42857143;\\">Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.. Proin faucibus arcu quis ante. Aenean commodo ligula eget dolor. Nullam tincidunt adipiscing enim.<\\/span><br><\\/p><p><span style=\\"line-height: 1.42857143;\\">Aliquam erat volutpat. Curabitur blandit mollis lacus. Fusce commodo aliquam arcu. Praesent nonummy mi in odio. Suspendisse non nisl sit amet velit hendrerit rutrum.<\\/span><br><\\/p><p><span style=\\"line-height: 1.42857143;\\">Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Curabitur at lacus ac velit ornare lobortis. Praesent ut ligula non mi varius sagittis. Nunc nec neque. Vivamus euismod mauris.<\\/span><br><\\/p><p><span style=\\"line-height: 1.42857143;\\">Aliquam erat volutpat. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Sed libero. Quisque malesuada placerat nisl. Suspendisse non nisl sit amet velit hendrerit rutrum.<\\/span><br><\\/p>"}'),
-(2, '+', '2015-04-26 22:49:26', NULL, 2, 'League of Legends', '{"url":"http:\\/\\/www.reddit.com\\/r\\/leagueoflegends\\/.rss","feeds":"5"}'),
-(3, '+', '2015-04-26 22:49:51', '2015-04-30 14:45:59', 2, 'Heroes of the Storm', '{"url":"http:\\/\\/www.reddit.com\\/r\\/heroesofthestorm\\/.rss","feeds":"5"}');
+(1, '+', '2015-05-02 04:13:56', NULL, 1, 'Home Intro', '{"wysiwyg":"<p>Cras sagittis. Donec orci lectus, aliquam ut, faucibus non, euismod id, nulla. Vestibulum rutrum, mi nec elementum vehicula, eros quam gravida nisl, id fringilla neque ante vel mi. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Fusce risus nisl, viverra et, tempor et, pretium in, sapien.<\\/p><p><br><\\/p><p>Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. In ac felis quis tortor malesuada pretium. Fusce pharetra convallis urna. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Quisque ut nisi.<\\/p><p><br><\\/p><p>Cras risus ipsum, faucibus ut, ullamcorper id, varius ac, leo. Phasellus dolor. Ut tincidunt tincidunt erat. Etiam feugiat lorem non metus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.<\\/p><p><br><\\/p><p>Nam adipiscing. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Donec vitae sapien ut libero venenatis faucibus. Praesent egestas tristique nibh. Nullam cursus lacinia erat.<\\/p><p><br><\\/p><p>Suspendisse potenti. Vivamus euismod mauris. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Praesent venenatis metus at tortor pulvinar varius.<\\/p>"}'),
+(2, '+', '2015-05-02 04:14:26', '2015-05-02 05:14:39', 2, 'League of Legends RSS', '{"title":"League of Legends","url":"http:\\/\\/www.reddit.com\\/r\\/leagueoflegends\\/.rss","count":"10"}'),
+(3, '+', '2015-05-02 04:14:55', NULL, 2, 'Heroes of the Storm RSS', '{"title":"Heroes of the Storm","url":"http:\\/\\/www.reddit.com\\/r\\/heroesofthestorm\\/.rss","count":"3"}');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
