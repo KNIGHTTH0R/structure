@@ -135,7 +135,7 @@ function get_access_levels() {
 	$CI->db->order_by( 'level', 'DESC' );
 	$access_levels = $CI->db->get( 'access_level' );
 	if( $access_levels->num_rows() > 0 ) {
-		$access_array = array_column( $access_levels->result_array(), 'title', 'access_level_id' );
+		$access_array = array_column( $access_levels->result_array(), 'level', 'access_level_id' );
 	}
 	return $access_array;
 }

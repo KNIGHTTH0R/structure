@@ -13,8 +13,6 @@ class Login extends CI_Controller {
 	}
 	
 	public function authenticate_admin() {
-		print_r( $_POST );
-		exit;
 		$admin_user = $this->login_model->authenticate_admin();
 		if( $admin_user ) {
 			echo 'success';

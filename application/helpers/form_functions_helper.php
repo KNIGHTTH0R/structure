@@ -276,7 +276,16 @@ function gen_form_entup( $entered, $updated ) {
 
 /** Custom Inputs **/
 function gen_select_access_level( $access_level_id = '', $args = [] ) {
-	return gen_select( 'Access Level', 'access_level_id', get_access_levels(), $access_level_id, $args );
+	$CI =& get_instance();
+	$CI->db->select( 'access_level_id, title' );
+	$CI->db->where( 'admin_flg IS NULL' );
+	$query = $CI->db->get_where( 'access_level', [ 'status' => '+' ] );
+	if( $query->num_rows() > 0 ) {
+		$access_level_options = array_column( $query->result_array(), 'title', 'access_level_id' );
+	} else {
+		$access_level_options = [];
+	}
+	return gen_select( 'Access Level', 'access_level_id', $access_level_options, $access_level_id, $args );
 }
 
 function gen_select_framework( $selected_id = '', $args = [] ) {

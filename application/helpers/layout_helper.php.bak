@@ -150,7 +150,7 @@ function section_check( $full = FALSE ) {
 		case ( in_array( 'portal', $current_page ) ):
 			$section = 'po';
 		break;
-		default:
+		case 'fr':
 			$section = 'fr';
 		break;
 	}
@@ -158,7 +158,7 @@ function section_check( $full = FALSE ) {
 	if( $full === FALSE ) {
 		return $section;
 	} else {
-		$section_array = [ 'ad' => 'admin', 'po' => 'portal', 'fr' => 'front' ];
+		$section_array = [ 'ad' => 'admin', 'po' => 'portal', 'fr' => 'portal' ];
 		return $section_array[$section];
 	}
 }

@@ -24,6 +24,7 @@ class Login_model extends CI_Model {
 			$session['email']						= $email;
 			$session['site_owner_flg']  = $site_owner_flg;
 			$session['username']        = $username;
+			$session['last_activity']   = strtotime( 'now' );
 			
 			$this->session->set_userdata( $session );
 			return true;

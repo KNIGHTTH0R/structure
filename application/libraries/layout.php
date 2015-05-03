@@ -9,7 +9,14 @@ class Layout {
 	}
 	
 	public function view( $view_name, $view_params = [], $layout = 'default' ) {
-		last_activity_check();
+		if( ! session_check( $view_params['page_access_level_id'] ) ) {
+			if( isset( $view_params['page_id'] ) ) {
+				redirect( 'home' );
+			} else {
+				redirect( 'admin/login' );
+			}
+		}
+		
 		$settings = $this->CI->db->get_where( 'setting', [ 'setting_id' => 1 ] )->row_array();
 		
 		define( 'SITE_TITLE', $settings['site_title'] );
@@ -18,11 +25,7 @@ class Layout {
 		
 		if( ! access_check( $view_params['page_access_level_id'] ) ) {
 			if( isset( $view_params['page_id'] ) ) {
-				$this->CI->db->select( 'f.file AS view_name' );
-				$this->CI->db->join( 'template AS t', 't.framework_id = f.framework_id' );
-				$this->CI->db->join( 'page AS p', 'p.template_id = t.template_id' );
-				$query = $this->CI->db->get_where( 'framework AS f', [ 'p.alias' => '404', 'p.portal_id' => -1 ] );
-				extract( $query->row_array() );
+				$view_name = get_404_page();
 				$view_params['page_id'] = -1;
 			} else {
 				show_404();

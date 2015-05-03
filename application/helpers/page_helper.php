@@ -105,14 +105,31 @@ function access_check( $access_level_id ) {
 	}
 }
 
-function last_activity_check() {
+function session_check( $access_level_id ) {
 	$CI =& get_instance();
 	
-	if( strtotime( '-20 minutes' ) > $CI->session->userdata( 'last_activity' ) ) {
+	if( strtotime( '+100 minutes' ) > $CI->session->userdata( 'last_activity' ) ) {
 		$CI->session->set_userdata( [] );
+		$access_levels = get_access_levels();
+		if( $access_levels[$access_level_id] == 0 ) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	} else {
+		return TRUE;
 	}
 }
 
-function redirect_404() {
-		
+function get_404_page() {
+	$CI =& get_instance();
+	$CI->db->select( 'f.file AS view_name' );
+	$CI->db->join( 'template AS t', 't.framework_id = f.framework_id' );
+	$CI->db->join( 'page AS p', 'p.template_id = t.template_id' );
+	$query = $CI->db->get_where( 'framework AS f', [ 'p.alias' => '404', 'p.portal_id' => -1 ] );
+	if( $query->num_rows() > 0 ) {
+		return $query->row_array()['view_name'];
+	} else {
+		show_404();
+	}
 }

@@ -19,7 +19,7 @@ class Login_model extends CI_Model {
 				return false;
 			}
 			
-			$session['access_level_id'] = 7;
+			$session['access_level_id'] = $access_level_id;
 			$session['name']            = $first_name . ' ' . $last_name;
 			$session['email']						= $email;
 			$session['site_owner_flg']  = $site_owner_flg;

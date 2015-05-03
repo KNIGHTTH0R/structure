@@ -6,7 +6,8 @@ var Login = function() {
 			login_form.on( 'submit', function( e ) {
 				e.preventDefault();
 				
-				$.post( 'login/authenticate_admin', function( data ) {
+				var form_data = $( this ).serialize();
+				$.post( 'login/authenticate_admin', form_data, function( data ) {
 					alert( data );
 				});
 			});

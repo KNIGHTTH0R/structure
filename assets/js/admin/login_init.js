@@ -8,7 +8,7 @@ var Login = function() {
 				
 				var form_data = $( this ).serialize();
 				$.post( 'login/authenticate_admin', form_data, function( data ) {
-					alert( data );
+					gen_toastr( data );
 				});
 			});
 		}

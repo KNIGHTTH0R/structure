@@ -30,6 +30,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="<?=site_url();?>assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
 <link href="<?=site_url();?>assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="<?=site_url();?>assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+<link href="<?=site_url();?>assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link href="<?=site_url();?>assets/global/plugins/select2/select2.css" rel="stylesheet" type="text/css"/>
@@ -47,7 +48,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN LOGO -->
 <div class="logo">
 	<a href="index.html">
-	<img src="<?=site_url();?>assets/admin/layout4/img/logo-big.png" alt=""/>
+	<img src="<?=site_url();?>images/logo.PNG" alt="Logo"/>
 	</a>
 </div>
 <!-- END LOGO -->
@@ -141,10 +142,12 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="<?=site_url();?>assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?=site_url();?>assets/global/plugins/select2/select2.min.js"></script>
+<script src="<?=site_url();?>assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="<?=site_url();?>assets/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="<?=site_url();?>assets/js/admin/login_init.js" type="text/javascript"></script>
+<script src="<?=site_url();?>assets/js/ajax_functions.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {     

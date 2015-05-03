@@ -15,9 +15,9 @@ class Login extends CI_Controller {
 	public function authenticate_admin() {
 		$admin_user = $this->login_model->authenticate_admin();
 		if( $admin_user ) {
-			echo 'success';
+			echo 's|authenticated User|' . site_url( 'admin/dashboard' );
 		} else {
-			echo 'failure';
+			echo 'f|authenticate User|';
 		}
 	}
 }

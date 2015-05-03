@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2015 at 08:12 PM
+-- Generation Time: May 04, 2015 at 12:10 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -182,7 +182,7 @@ TRUNCATE TABLE `fr_menu_item`;
 
 INSERT INTO `fr_menu_item` (`fr_menu_item_id`, `status`, `entered`, `updated`, `portal_id`, `title`, `alias`, `access_level_id`, `parent_id`, `sequence`, `icon`) VALUES
 (1, '+', '2015-05-02 04:19:00', NULL, -1, 'Home', 'home', 4, 0, 1, 'home'),
-(2, '+', '2015-05-02 04:20:06', NULL, -1, 'Feed Central', 'feeds', 4, 0, 2, 'rss'),
+(2, '+', '2015-05-02 04:20:06', '2015-05-04 00:08:49', -1, 'Feed Central', 'feeds', 3, 0, 2, 'rss'),
 (3, '+', '2015-05-02 04:22:39', NULL, -1, 'Profile', 'profile', 4, 0, 3, 'user');
 
 -- --------------------------------------------------------
@@ -319,7 +319,7 @@ CREATE TABLE IF NOT EXISTS `page` (
   `alias` varchar(45) DEFAULT NULL,
   `access_level_id` int(2) DEFAULT NULL,
   PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Truncate table before insert `page`
@@ -331,8 +331,9 @@ TRUNCATE TABLE `page`;
 --
 
 INSERT INTO `page` (`page_id`, `status`, `entered`, `updated`, `template_id`, `portal_id`, `title`, `alias`, `access_level_id`) VALUES
-(1, '+', '2015-05-02 04:16:52', '2015-05-03 20:08:00', 1, -1, 'Home Page', 'home', 4),
-(3, '+', '2015-05-03 02:57:31', NULL, 3, -1, '404', '404', 4);
+(1, '+', '2015-05-02 04:16:52', '2015-05-03 23:27:49', 1, -1, 'Home Page', 'home', 4),
+(3, '+', '2015-05-03 02:57:31', NULL, 3, -1, '404', '404', 4),
+(4, '+', '2015-05-03 23:29:04', NULL, 4, -1, 'Feeds', 'feeds', 3);
 
 -- --------------------------------------------------------
 
@@ -360,7 +361,8 @@ TRUNCATE TABLE `page_portal_xref`;
 
 INSERT INTO `page_portal_xref` (`page_id`, `portal_id`, `alias`, `meta_data`) VALUES
 (1, 1, 'home', '{"status":"+","title":"Home","template_id":"1","access_level_id":"4"}'),
-(3, 1, '404', '{"status":"+","title":"404","template_id":"3","access_level_id":"4"}');
+(3, 1, '404', '{"status":"+","title":"404","template_id":"3","access_level_id":"4"}'),
+(4, 1, 'feeds', '{"status":"+","title":"Feeds","template_id":"4","access_level_id":"3"}');
 
 -- --------------------------------------------------------
 
@@ -405,7 +407,7 @@ CREATE TABLE IF NOT EXISTS `position` (
   `column_id` int(8) NOT NULL DEFAULT '0',
   `sequence` int(2) DEFAULT NULL,
   PRIMARY KEY (`position_id`,`framework_id`,`template_id`,`widget_id`,`column_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Truncate table before insert `position`
@@ -420,7 +422,10 @@ INSERT INTO `position` (`position_id`, `framework_id`, `template_id`, `widget_id
 (14, 1, 1, 1, 1, 1),
 (15, 1, 1, 2, 2, 1),
 (16, 1, 1, 3, 2, 2),
-(17, 1, 1, 1, 3, 1);
+(17, 1, 1, 1, 3, 1),
+(18, 1, 4, 3, 1, 1),
+(19, 1, 4, 2, 2, 1),
+(20, 1, 4, 1, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -462,7 +467,7 @@ CREATE TABLE IF NOT EXISTS `template` (
   `framework_id` int(8) DEFAULT NULL,
   `title` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`template_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Truncate table before insert `template`
@@ -475,7 +480,8 @@ TRUNCATE TABLE `template`;
 
 INSERT INTO `template` (`template_id`, `status`, `entered`, `updated`, `framework_id`, `title`) VALUES
 (1, '+', '2015-05-02 04:16:14', '2015-05-03 04:38:33', 1, 'Home Page'),
-(3, '+', '2015-05-03 02:57:08', NULL, 2, '404');
+(3, '+', '2015-05-03 02:57:08', NULL, 2, '404'),
+(4, '+', '2015-05-03 23:28:30', NULL, 1, 'Feeds');
 
 -- --------------------------------------------------------
 
