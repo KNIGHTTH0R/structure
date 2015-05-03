@@ -9,8 +9,8 @@ class Layout {
 	}
 	
 	public function view( $view_name, $view_params = [], $layout = 'default' ) {
-		if( ! access_check( $view_params['page_access_level'] ) ) {
-			//show_404();
+		if( ! access_check( $view_params['page_access_level_id'] ) ) {
+			show_404();
 		}
 		
 		if( isset( $view_params['page_id'] ) ) {
@@ -59,7 +59,7 @@ class Layout {
 			$location = '';
 		}
 		
-		$settings = $this->CI->db->get_where( 'setting', array( 'setting_id' => 1 ) )->row_array();
+		$settings = $this->CI->db->get_where( 'setting', [ 'setting_id' => 1 ] )->row_array();
 		define( 'SITE_TITLE', $settings['site_title'] . ' | ' );
 		
 		last_activity_check();

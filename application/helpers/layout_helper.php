@@ -163,19 +163,6 @@ function section_check( $full = FALSE ) {
 	}
 }
 
-//Update to use codeigniter methods
-function last_activity_check() {
-	if( ! isset( $_SESSION['last_activity'] ) ) {
-		return;
-	} else if( strtotime( '-20 minutes' ) > strtotime( $_SESSION['last_activity'] ) ) {
-		session_destroy();
-		session_start();
-		$_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
-	} else {
-		$_SESSION['last_activity'] = date( 'Y-m-d H:i:s' );
-	}
-}
-
 function get_portal_id() {
 	$CI =& get_instance();
 	return $CI->session->userdata( 'portal_id' ) ? $CI->session->userdata( 'portal_id' ) : -1;

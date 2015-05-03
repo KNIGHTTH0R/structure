@@ -127,7 +127,7 @@ function gen_breadcrumbs( $breadcrumbs, $return = FALSE ) {
 }
 
 function get_access_levels() {
-	$access_array = array();
+	$access_array = [];
 	
 	$CI =& get_instance();
 	$CI->load->database();
@@ -135,11 +135,7 @@ function get_access_levels() {
 	$CI->db->order_by( 'level', 'DESC' );
 	$access_levels = $CI->db->get( 'access_level' );
 	if( $access_levels->num_rows() > 0 ) {
-		foreach( $access_levels->result_array() as $row ) {
-			extract( $row );
-			
-			$access_array[$level] = $title;
-		}
+		$access_array = array_column( $access_levels->result_array(), 'title', 'access_level_id' );
 	}
 	return $access_array;
 }

@@ -6,7 +6,7 @@ class Menu_items extends CI_Controller {
 		$this->load->model( 'admin/menu_items_model' );
 		
 		/** Section Params **/
-		$this->js           = 'assets/js/menu_items_crud_init.js';		
+		$this->js           = 'assets/js/admin/menu_items_crud_init.js';		
 		$this->styles       = '';
 		$this->control_item = 'admin/menu_items?section=' . $this->input->get( 'section' );
 	}

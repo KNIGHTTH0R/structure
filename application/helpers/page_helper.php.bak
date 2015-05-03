@@ -28,7 +28,7 @@ function params_array( $mvc ) {
 		if( empty( $page_page ) ) {
 			$init_file = str_replace( ' ', '_', $title );
 		} else {
-			$init_filt = str_replace( ' ', '_', $title ) . '_' . strtolower( $page_page );
+			$init_file = str_replace( ' ', '_', $title ) . '_' . strtolower( $page_page );
 		}
 		$page_init = $init_file;
 	} else {
@@ -69,37 +69,60 @@ function params_array( $mvc ) {
 	}
 	
 	if( ! isset( $mvc->access_level ) ) {
-		$page_access_level = $access_level_id;
+		$page_access_level_id = $access_level_id;
 	} else if( isset( $mvc->access_level ) ) {
-		$page_access_level = $mvc->access_level;
+		$page_access_level_id = $mvc->access_level;
 	} else {
-		$page_access_level = 0;
+		$page_access_level_id = 0;
 	}
 	
-	return [ 'page_access_level' => $page_access_level, 'page_current' => $view, 'page_breadcrumbs' => $page_breadcrumbs, 'page_icon' => $icon, 'page_title' => $page_title, 'page_header' => $page_header, 'styles' => $page_styles, 'scripts' => [ 'js' => $page_js, 'init' => $page_init ] ];
+	return [ 'page_access_level_id' => $page_access_level_id, 'page_current' => $view, 'page_breadcrumbs' => $page_breadcrumbs, 'page_icon' => $icon, 'page_title' => $page_title, 'page_header' => $page_header, 'styles' => $page_styles, 'scripts' => [ 'js' => $page_js, 'init' => $page_init ] ];
 }
 
-function access_check( $access_level_id ) {
+function access_check( $access_level_id ) {	
 	$CI =& get_instance();
 	
-	$query = $CI->db->get_where( 'access_level', [ 'access_level_id' => $access_level_id ] );
-	if( $query->num_rows() == 0 ) {
-		return FALSE;
-	} else {
-		extract( $query->row_array() );
+	$CI->db->select( 'access_level_id, level' );
+	$query = $CI->db->get_where( 'access_level', [ 'status' => '+' ] );
+	if( $query->num_rows() > 0 ) {
+		$access_array = array_column( $query->result_array(), 'level', 'access_level_id' );
 	}
 	
-	$access_array = get_access_levels();
-
-	if( $CI->session->userdata( 'user_level' ) ) {
-		if( $access_array[$CI->session->userdata( 'user_level' )] >= $access_array[$level] ) {
+	if( $CI->session->userdata( 'access_level_id' ) ) {
+		if( $CI->session->userdata( 'access_level_id' ) == -1 ) {
 			return TRUE;
 		} else {
-			return FALSE;
+			$CI->db->select( 'level' );
+			$query = $CI->db->get_where( 'access_level', [ 'access_level_id' => $access_level_id ] );
+			if( $query->num_rows() > 0 ) {
+				extract( $query->row_array() );
+			} else {
+				return FALSE;
+			}
+			
+			if( $access_array[$CI->session->userdata( 'access_level_id' )] >= $level ) {
+				return TRUE;
+			} else {
+				return FALSE;
+			}
 		}
 	} else if( $level == 0 ) {
 		return TRUE;
 	} else {
 		return FALSE;
+	}
+}
+
+function last_activity_check() {
+	$CI =& get_instance();
+	
+	if( $CI->session->userdata( 'last_activity' ) ) {
+		return;
+	} else if( strtotime( '-20 minutes' ) > $_SESSION['last_activity'] ) {
+		session_destroy();
+		session_start();
+		$_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
+	} else {
+		$_SESSION['last_activity'] = date( 'Y-m-d H:i:s' );
 	}
 }

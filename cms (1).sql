@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2015 at 09:51 PM
+-- Generation Time: May 03, 2015 at 02:01 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `access_level` (
   `level` int(2) DEFAULT NULL,
   `admin_flg` char(1) DEFAULT NULL,
   PRIMARY KEY (`access_level_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Truncate table before insert `access_level`
@@ -48,12 +48,12 @@ TRUNCATE TABLE `access_level`;
 --
 
 INSERT INTO `access_level` (`access_level_id`, `status`, `entered`, `updated`, `title`, `level`, `admin_flg`) VALUES
-(1, '+', '2015-01-19 23:07:17', '2015-04-30 03:04:40', 'Super Admin', 4, 'y'),
 (2, '+', '2015-01-19 23:07:23', '2015-04-30 03:05:07', 'Admin', 3, 'y'),
 (3, '+', '2015-01-19 23:07:29', NULL, 'User', 1, NULL),
 (4, '+', '2015-01-19 23:07:35', NULL, 'Guest', 0, NULL),
 (5, '+', '2015-01-23 04:01:27', '2015-04-30 03:05:11', 'Portal Admin', 2, 'y'),
-(6, '+', '2015-04-30 05:29:28', NULL, 'Developer', 5, 'y');
+(6, '+', '2015-04-30 05:29:28', NULL, 'Developer', 5, 'y'),
+(7, '+', '2015-05-03 01:30:57', NULL, 'Super Admin', 4, 'y');
 
 -- --------------------------------------------------------
 
@@ -246,28 +246,28 @@ TRUNCATE TABLE `menu_item`;
 --
 
 INSERT INTO `menu_item` (`menu_item_id`, `status`, `entered`, `updated`, `portal_id`, `title`, `view`, `access_level_id`, `section`, `parent_id`, `sequence`, `icon`) VALUES
-(1, '+', '2015-01-17 12:00:00', '2015-04-29 04:47:53', -1, 'Dashboard', 'admin/dashboard', 4, 'ad', 0, 1, 'home'),
-(2, '+', '2015-01-17 12:00:00', '2015-04-24 05:01:46', -1, 'Portal Management', '', 4, 'ad', 0, 2, 'globe'),
-(3, '+', '2015-01-17 12:00:00', '2015-01-22 03:31:28', -1, 'Display Management', '', 4, 'ad', 0, 3, 'laptop'),
-(4, '+', '2015-01-17 12:00:00', '2015-04-25 19:58:45', -1, 'CMS Management', '', 4, 'ad', 0, 4, 'lock'),
-(5, '+', '2015-04-24 05:00:55', '2015-04-26 01:48:17', -1, 'Portals', 'admin/portals', 4, 'ad', 2, 1, 'users'),
-(6, '+', '2015-04-26 00:39:45', '2015-04-30 04:10:12', -1, 'Portal Menu', 'admin/menu_items?section=po', 4, 'ad', 4, 4, 'list-ol'),
-(7, '+', '2015-01-17 12:00:00', '2015-04-25 03:45:49', -1, 'Objects', 'admin/objects', 4, 'ad', 3, 1, 'cube'),
-(8, '+', '2015-01-17 12:00:00', '2015-01-22 03:32:35', -1, 'Widgets', 'admin/widgets', 4, 'ad', 3, 2, 'cubes'),
-(9, '+', '2015-01-17 12:00:00', '2015-01-22 03:31:58', -1, 'Frameworks', 'admin/frameworks', 4, 'ad', 3, 3, 'building'),
-(10, '+', '2015-01-17 12:00:00', '2015-02-01 04:39:13', -1, 'Templates', 'admin/templates', 4, 'ad', 3, 4, 'picture-o'),
-(12, '+', '2015-04-26 03:01:13', '2015-04-30 01:59:49', -1, 'Defaults', 'admin/defaults', 4, 'ad', 2, 2, 'magic'),
-(13, '+', '2015-01-17 12:00:00', '2015-01-22 03:26:11', -1, 'Access Levels', 'admin/access_levels', 4, 'ad', 4, 2, 'key'),
-(14, '+', '2015-01-17 12:00:00', '2015-04-26 03:03:05', -1, 'Admin Users', 'admin/admin_users', 4, 'ad', 4, 1, 'user-secret'),
-(15, '+', '2015-01-17 12:00:00', '2015-04-30 04:10:01', -1, 'Admin Menu', 'admin/menu_items?section=ad', 4, 'ad', 4, 3, 'list-ol'),
-(16, '+', NULL, NULL, -1, 'Settings', 'admin/settings', 4, 'ad', 4, 5, 'cogs'),
-(17, '+', '2015-02-07 21:42:48', '2015-04-26 02:26:12', -1, 'Dashboard', 'portal/dashboard', 4, 'po', 0, 3, 'home'),
-(18, '+', '2015-02-07 21:58:39', '2015-02-07 22:05:39', -1, 'Front-End', '', 4, 'po', 0, 4, 'database'),
-(19, '+', '2015-02-07 21:47:20', '2015-02-07 21:59:20', -1, 'Portal Admin', '', 4, 'po', 0, 5, 'lock'),
-(20, '+', '2015-02-07 22:07:35', '2015-04-26 05:09:47', -1, 'Menu Items', 'portal/fr_menu_items', 4, 'po', 18, NULL, 'list-ol'),
-(21, '+', '2015-04-25 20:21:11', '2015-04-26 19:48:18', -1, 'Pages', 'portal/pages', 4, 'po', 18, 1, 'file'),
-(22, '+', '2015-02-07 21:48:37', '2015-05-01 02:55:37', -1, 'Profile', 'portal/profile', 4, 'po', 19, 2, 'cogs'),
-(23, '+', '2015-05-01 02:54:52', '2015-05-01 02:55:10', NULL, 'Defaults', 'portal/defaults', 4, 'po', 19, 1, 'magic');
+(1, '+', '2015-01-17 12:00:00', '2015-05-03 01:23:22', -1, 'Dashboard', 'admin/dashboard', 5, 'ad', 0, 1, 'home'),
+(2, '+', '2015-01-17 12:00:00', '2015-05-03 01:27:57', -1, 'Portal Management', '', 5, 'ad', 0, 2, 'globe'),
+(3, '+', '2015-01-17 12:00:00', '2015-05-03 01:29:13', -1, 'Display Management', '', 2, 'ad', 0, 3, 'laptop'),
+(4, '+', '2015-01-17 12:00:00', '2015-05-03 01:51:07', -1, 'CMS Management', '', 7, 'ad', 0, 4, 'lock'),
+(5, '+', '2015-04-24 05:00:55', '2015-05-03 01:28:07', -1, 'Portals', 'admin/portals', 5, 'ad', 2, 1, 'users'),
+(6, '+', '2015-04-26 00:39:45', '2015-05-03 01:34:34', -1, 'Portal Menu', 'admin/menu_items?section=po', 6, 'ad', 4, 4, 'list-ol'),
+(7, '+', '2015-01-17 12:00:00', '2015-05-03 01:29:27', -1, 'Objects', 'admin/objects', 6, 'ad', 3, 1, 'cube'),
+(8, '+', '2015-01-17 12:00:00', '2015-05-03 01:29:43', -1, 'Widgets', 'admin/widgets', 2, 'ad', 3, 2, 'cubes'),
+(9, '+', '2015-01-17 12:00:00', '2015-05-03 01:29:54', -1, 'Frameworks', 'admin/frameworks', 6, 'ad', 3, 3, 'building'),
+(10, '+', '2015-01-17 12:00:00', '2015-05-03 01:30:07', -1, 'Templates', 'admin/templates', 2, 'ad', 3, 4, 'picture-o'),
+(12, '+', '2015-04-26 03:01:13', '2015-05-03 01:29:01', -1, 'Defaults', 'admin/defaults', 2, 'ad', 2, 2, 'magic'),
+(13, '+', '2015-01-17 12:00:00', '2015-05-03 01:31:32', -1, 'Access Levels', 'admin/access_levels', 7, 'ad', 4, 2, 'key'),
+(14, '+', '2015-01-17 12:00:00', '2015-05-03 01:31:18', -1, 'Admin Users', 'admin/admin_users', 7, 'ad', 4, 1, 'user-secret'),
+(15, '+', '2015-01-17 12:00:00', '2015-05-03 01:34:23', -1, 'Admin Menu', 'admin/menu_items?section=ad', 6, 'ad', 4, 3, 'list-ol'),
+(16, '+', NULL, '2015-05-03 01:34:46', -1, 'Settings', 'admin/settings', 7, 'ad', 4, 5, 'cogs'),
+(17, '+', '2015-02-07 21:42:48', '2015-05-03 01:51:19', -1, 'Dashboard', 'portal/dashboard', 5, 'po', 0, 3, 'home'),
+(18, '+', '2015-02-07 21:58:39', '2015-05-03 01:51:30', -1, 'Front-End', '', 5, 'po', 0, 4, 'database'),
+(19, '+', '2015-02-07 21:47:20', '2015-05-03 01:52:01', -1, 'Portal Admin', '', 5, 'po', 0, 5, 'lock'),
+(20, '+', '2015-02-07 22:07:35', '2015-05-03 01:51:40', -1, 'Menu Items', 'portal/fr_menu_items', 5, 'po', 18, NULL, 'list-ol'),
+(21, '+', '2015-04-25 20:21:11', '2015-05-03 01:51:52', -1, 'Pages', 'portal/pages', 5, 'po', 18, 1, 'file'),
+(22, '+', '2015-02-07 21:48:37', '2015-05-03 01:52:36', -1, 'Profile', 'portal/profile', 5, 'po', 19, 2, 'cogs'),
+(23, '+', '2015-05-01 02:54:52', '2015-05-03 01:52:10', NULL, 'Defaults', 'portal/defaults', 5, 'po', 19, 1, 'magic');
 
 -- --------------------------------------------------------
 

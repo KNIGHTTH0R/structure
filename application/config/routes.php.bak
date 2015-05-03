@@ -41,10 +41,8 @@
 $route['default_controller'] 				 = "admin/dashboard";
 $route['404_override'] 							 = '';
 $route['admin']               			 = 'admin/dashboard';
-$route['admin/pages'] 			 				 = 'portal/pages';
-$route['admin/pages/(:any)'] 			   = 'portal/pages/$1';
 $route['admin/(:any)'] 							 = 'admin/$1';
-$route['portal/(:any)'] 						 = 'portal/$1';
+$route['admin/portal/(:any)'] 						 = 'portal/$1';
 $route['(.*)']											 = "site";
 
 

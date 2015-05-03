@@ -62,7 +62,7 @@ class Menu_items extends CI_Controller {
 	public function update() {
 		$menu_item = $this->menu_items_model->menu_item_update();
 		if( $menu_item ) {
-			echo 's|created Menu Item|' . site_url( 'admin/menu_items?section=' . $this->input->post( 'section' ) );
+			echo 's|updated Menu Item|' . site_url( 'admin/menu_items?section=' . $this->input->post( 'section' ) );
 		} else {
 			echo 'f|update Menu Item';
 		}
