@@ -30,6 +30,29 @@
 Rounded Portlets
 ***/
 
+.page-logo {
+	margin-top: 4px;
+	width: 360px !important;
+}
+
+.page-header {
+	border-bottom: 5px solid #eee !important;
+	box-shadow: 0px 4px 10px #999 !important;
+}
+
+.page-footer {
+	color: #fff;
+	background-color: #3B3F51;
+	box-shadow: 0px -2px 10px #999;
+	font-size: 12px;
+	font-weight: 600;
+	height: 50px;
+	line-height: 50px;
+	padding: 0px 0px 0px 25px !important;
+	width: 100%;
+}
+
+
 .portlet {
 	border-radius: 4px !important;
 }

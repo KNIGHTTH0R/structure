@@ -64,11 +64,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
 			<a href="index.html">
-				<h2><span style="color: red;">CMS</span><span style="color: #fff;">Demo</span></h2>
+				<img src="<?=site_url();?>images/logo.PNG" alt="logo">
 			</a>
-			<div class="menu-toggler sidebar-toggler">
-				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
-			</div>
 		</div>
 		<!-- END LOGO -->
 		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -489,29 +486,6 @@ License: You must have a valid license purchased only from themeforest(the above
 			<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
 			<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 				<?=get_menu_items( $page_current );?>
-				<!--<li class="">
-					<a href="index.html">
-					<i class="icon-home"></i>
-					<span class="title">Dashboard</span>
-					</a>
-				</li>
-				<li class="last">
-					<a href="javascript:;">
-					<i class="icon-pointer"></i>
-					<span class="title">Maps</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="maps_google.html">
-							Google Maps</a>
-						</li>
-						<li>
-							<a href="maps_vector.html">
-							Vector Maps</a>
-						</li>
-					</ul>
-				</li>-->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

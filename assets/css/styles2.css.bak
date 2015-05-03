@@ -1,5 +1,9 @@
+html, body {
+	font-family: "Open Sans", sans-serif;
+}
+
 nav {
-	background: #3F51B5;
+	background: #3B3F51;
 	border-bottom: 5px solid #eee;
 	box-shadow: 0px 4px 10px #999;
 	height: 70px;
@@ -61,6 +65,11 @@ nav {
 	border-bottom: 5px solid #fff;
 }
 
+.nav-menu > li.active a {
+	background-color: #78909C;
+	border-bottom: 5px solid #fff;
+}
+
 .page-content {
 	margin-top: 95px;
 }
@@ -72,7 +81,7 @@ nav {
 
 footer {
 	color: #fff;
-	background-color: #3F51B5;
+	background-color: #3B3F51;
 	box-shadow: 0px -2px 10px #999;
 	font-size: 12px;
 	font-weight: 600;
@@ -83,4 +92,14 @@ footer {
 
 footer span {
 	padding-left: 25px;
+}
+
+.front-login {
+	position: absolute;
+	right: 0;
+}
+
+.front-login a {
+	background-color: #3F51B5;
+	border-bottom: 5px solid #eee;
 }

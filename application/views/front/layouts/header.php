@@ -14,10 +14,15 @@
 			<nav class="top-nav">
 				<div class="nav-logo">
 					<img src="<?=site_url( 'images/logo.PNG' );?>" alt="logo">
-					<span>STRUCTURE</span>
 				</div>
 				<ul class="nav-menu">
-					<?=fr_get_menu_items();?>
+					<?=fr_get_menu_items( $page_current );?>
+					<li class="front-login">
+						<a href="javascript:;">
+							<i class="fa fa-sign-in"></i> 
+							<div class="nav-item">Login</div>
+						</a>
+					</li>
 				</ul>	
 			</nav>
 			<div class="page-content">

@@ -150,7 +150,7 @@ function section_check( $full = FALSE ) {
 		case ( in_array( 'portal', $current_page ) ):
 			$section = 'po';
 		break;
-		case 'fr':
+		default:
 			$section = 'fr';
 		break;
 	}
@@ -158,21 +158,8 @@ function section_check( $full = FALSE ) {
 	if( $full === FALSE ) {
 		return $section;
 	} else {
-		$section_array = [ 'ad' => 'admin', 'po' => 'portal', 'fr' => 'portal' ];
+		$section_array = [ 'ad' => 'admin', 'po' => 'portal', 'fr' => 'front' ];
 		return $section_array[$section];
-	}
-}
-
-//Update to use codeigniter methods
-function last_activity_check() {
-	if( ! isset( $_SESSION['last_activity'] ) ) {
-		return;
-	} else if( strtotime( '-20 minutes' ) > strtotime( $_SESSION['last_activity'] ) ) {
-		session_destroy();
-		session_start();
-		$_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
-	} else {
-		$_SESSION['last_activity'] = date( 'Y-m-d H:i:s' );
 	}
 }
 

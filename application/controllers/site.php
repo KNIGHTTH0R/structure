@@ -9,7 +9,6 @@ class Site extends CI_Controller {
 	}
 	
 	public function index() {
-		last_activity_check();
 		
 		/** Check For Default Page **/
 		$df_query = $this->db->get_where( 'page_portal_xref', [ 'portal_id' => get_portal_id(), 'alias' => $this->uri->segment( 1 ) ] );
@@ -34,22 +33,34 @@ class Site extends CI_Controller {
 			if( $query->num_rows() > 0 ) {
 				extract( $query->row_array() );
 				
-				$params['page_id'] 						= $page_id;
-				$params['title']							= $title;	
-				$params['page_access_level'] 	= $access_level_id;
+				$params['page_id'] 							= $page_id;
+				$params['title']								= $title;	
+				$params['page_access_level_id'] = $access_level_id;
+				$params['page_current']         = $this->uri->segment( 1 );
 				
 				$this->layout->view( $view_name, $params );
 			}
 		} else if( $query->num_rows() > 0 ) {
 			extract( $query->row_array() );
 				
-			$params['page_id'] 						= $page_id;
-			$params['title']							= $title;
-			$params['page_access_level'] 	= $access_level_id;
+			$params['page_id'] 							= $page_id;
+			$params['title']								= $title;
+			$params['page_access_level_id'] = $access_level_id;
+			$params['page_current']         = $this->uri->segment( 1 );
 			
 			$this->layout->view( $view_name, $params );
 		} else {
-			show_404();
+			$this->db->select( 'f.file AS view_name, p.access_level_id' );
+			$this->db->join( 'template AS t', 't.framework_id = f.framework_id' );
+			$this->db->join( 'page AS p', 'p.template_id = t.template_id' );
+			$query = $this->db->get_where( 'framework AS f', [ 'p.alias' => '404', 'p.portal_id' => -1 ] );
+			extract( $query->row_array() );
+			
+			$params['page_id'] 							= -1;
+			$params['page_access_level_id'] = $access_level_id;
+			$params['page_current']         = '';
+			
+			$this->layout->view( $view_name, $params );
 		}
 	}
 }

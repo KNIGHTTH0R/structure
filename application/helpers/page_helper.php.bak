@@ -92,21 +92,13 @@ function access_check( $access_level_id ) {
 		if( $CI->session->userdata( 'access_level_id' ) == -1 ) {
 			return TRUE;
 		} else {
-			$CI->db->select( 'level' );
-			$query = $CI->db->get_where( 'access_level', [ 'access_level_id' => $access_level_id ] );
-			if( $query->num_rows() > 0 ) {
-				extract( $query->row_array() );
-			} else {
-				return FALSE;
-			}
-			
-			if( $access_array[$CI->session->userdata( 'access_level_id' )] >= $level ) {
+			if( $access_array[$CI->session->userdata( 'access_level_id' )] >= $access_array[$access_level_id] ) {
 				return TRUE;
 			} else {
 				return FALSE;
 			}
 		}
-	} else if( $level == 0 ) {
+	} else if( $access_array[$access_level_id] == 0 ) {
 		return TRUE;
 	} else {
 		return FALSE;
@@ -116,13 +108,15 @@ function access_check( $access_level_id ) {
 function last_activity_check() {
 	$CI =& get_instance();
 	
-	if( $CI->session->userdata( 'last_activity' ) ) {
-		return;
-	} else if( strtotime( '-20 minutes' ) > $_SESSION['last_activity'] ) {
-		session_destroy();
-		session_start();
-		$_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
+	if( ! $CI->session->userdata( 'last_activity' ) ) {
+		return FALSE;
+	} else if( strtotime( '-20 minutes' ) > $CI->session->userdata( 'last_activity' ) ) {
+		return FALSE;
 	} else {
-		$_SESSION['last_activity'] = date( 'Y-m-d H:i:s' );
+		return TRUE;
 	}
+}
+
+function redirect_404() {
+		
 }

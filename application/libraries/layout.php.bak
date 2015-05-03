@@ -9,11 +9,29 @@ class Layout {
 	}
 	
 	public function view( $view_name, $view_params = [], $layout = 'default' ) {
+		last_activity_check();
+		$settings = $this->CI->db->get_where( 'setting', [ 'setting_id' => 1 ] )->row_array();
+		
+		define( 'SITE_TITLE', $settings['site_title'] );
+		$location	 			= '';
+		$view_directory = 'admin/';
+		
 		if( ! access_check( $view_params['page_access_level_id'] ) ) {
-			show_404();
+			if( isset( $view_params['page_id'] ) ) {
+				$this->CI->db->select( 'f.file AS view_name' );
+				$this->CI->db->join( 'template AS t', 't.framework_id = f.framework_id' );
+				$this->CI->db->join( 'page AS p', 'p.template_id = t.template_id' );
+				$query = $this->CI->db->get_where( 'framework AS f', [ 'p.alias' => '404', 'p.portal_id' => -1 ] );
+				extract( $query->row_array() );
+				$view_params['page_id'] = -1;
+			} else {
+				show_404();
+			}
 		}
+		
 		if( isset( $view_params['page_id'] ) ) {
-			$location = 'frameworks/';
+			$location 			= 'frameworks/';
+			$view_directory = 'front/';
 			
 			$this->CI->db->select( 'c.target' );
 			$this->CI->db->join( 'template AS t', 't.framework_id = f.framework_id' );
@@ -54,37 +72,16 @@ class Layout {
 					$column_count++;
 				}
 			}
-		} else {
-			$location = '';
 		}
-		
-		$settings = $this->CI->db->get_where( 'setting', array( 'setting_id' => 1 ) )->row_array();
-		define( 'SITE_TITLE', $settings['site_title'] . ' | ' );
-		
-		last_activity_check();
 		
 		$layout_params['breadcrumbs'] 	= isset( $view_params['breadcrumbs'] ) ? $view_params['breadcrumbs'] : '';
 		$layout_params['page_header'] 	= isset( $view_params['page_header'] ) ? $view_params['page_header'] : 'Default';
-		$layout_params['page_title']		= isset( $view_params['page_title'] ) ? SITE_TITLE . $view_params['page_title'] : SITE_TITLE . 'Default';
+		$layout_params['page_title']		= isset( $view_params['page_title'] ) ? SITE_TITLE . ' | ' . $view_params['page_title'] : SITE_TITLE . '| Default';
 		$layout_params['styles'] 				= isset( $view_params['styles'] ) ? $view_params['styles'] : '';
 		$layout_params['scripts']				= isset( $view_params['scripts'] ) ? $view_params['scripts'] : '';
 		$layout_params['username'] 			= $this->CI->session->userdata( 'username' );
 		$layout_params['view_content']	= $this->CI->load->view( $location . $view_name, $view_params, TRUE );
 		
-		$view_directory = section_check() == 'ad' ? 'admin' : 'front';
-		
-		switch( section_check() ) {
-			case 'ad':
-				$view_directory = 'admin';
-			break;
-			case 'po':
-				$view_directory = 'admin';
-			break;
-			case 'fr':
-				$view_directory = 'front';
-			break;
-		}
-		
-		$this->CI->load->view( $view_directory . '/layouts/' . $layout . '.php', $layout_params);
+		$this->CI->load->view( $view_directory . 'layouts/' . $layout . '.php', $layout_params);
 	}
 }

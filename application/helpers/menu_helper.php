@@ -105,7 +105,7 @@ function menu_children_active_check( $page_current, $views ) {
 
 /** Front Menu Item Functions **/
 
-function fr_get_menu_items() {
+function fr_get_menu_items( $page_current ) {
 	$CI =& get_instance();
 	$CI->load->model( 'portal/fr_menu_items_model' );
 	
@@ -119,7 +119,8 @@ function fr_get_menu_items() {
 			continue;
 		}
 		
-		$menu  .= fr_gen_menu_link( $title, $alias, '', $icon );
+		$active = $page_current == $alias ? 'active' : '';
+		$menu  .= fr_gen_menu_link( $title, $alias, $active, $icon );
 	}
 	echo $menu;
 }

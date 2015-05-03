@@ -6,9 +6,7 @@
 <!-- END CONTAINER -->
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
-	<div class="page-footer-inner">
-		 <?=date( 'Y' );?> &copy; CMSDemo.
-	</div>
+	<span><?=date( 'Y' );?> &copy; <?=SITE_TITLE;?>.</span>
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>
 	</div>

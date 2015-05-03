@@ -3,7 +3,7 @@
 				</div>
 			</div>
 			<footer>
-				<span><?=date( 'Y' );?>&copy; Structure</span>
+				<span><?=date( 'Y' );?>&copy; Structure CMS.</span>
 			</footer>
 		</div>
 		<!-- Latest compiled and minified JavaScript -->
