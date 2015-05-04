@@ -277,9 +277,15 @@ function gen_form_entup( $entered, $updated ) {
 /** Custom Inputs **/
 function gen_select_access_level( $access_level_id = '', $args = [] ) {
 	$CI =& get_instance();
-	$CI->db->select( 'access_level_id, tile' );
-	$CI->db->where( 'admin_flg IS NULL' );
-	$query = $CI->db->get_where( 'access_level', [ 'status' => '+' ] );
+	
+	if( $CI->session->userdata( 'access_level_id' ) != -1 ) {
+		$access_levels = get_access_levels();
+		$level = $access_levels[$CI->session->userdata( 'access_level_id' )];
+		$CI->db->where( 'level <=', $level );
+	}
+	
+	$CI->db->select( 'access_level_id, title' );
+	$query = $CI->db->get_where( 'access_level', [ 'status' => '+'  ] );
 	if( $query->num_rows() > 0 ) {
 		$access_level_options = array_column( $query->result_array(), 'title', 'access_level_id' );
 	} else {

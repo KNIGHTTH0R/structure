@@ -1,4 +1,4 @@
-var Login = function() {
+var Authentication = function() {
 	return {
 		init: function() {
 			var login_form = $( '#login-form' );

@@ -10,7 +10,7 @@ class Layout {
 	
 	public function view( $view_name, $view_params = [], $layout = 'default' ) {
 		if( ! session_check( $view_params['page_access_level_id'] ) ) {
-			if( isset( $view_params['page_id'] ) && $access_level[$view_params['page_access_level_id']] != 0 ) {
+			if( isset( $view_params['page_id'] ) ) {
 				redirect( 'home' );
 			} else {
 				redirect( 'admin/login' );
@@ -28,7 +28,7 @@ class Layout {
 				$view_name = get_404_page();
 				$view_params['page_id'] = -1;
 			} else {
-				show_404();
+				//show_404();
 			}
 		}
 		

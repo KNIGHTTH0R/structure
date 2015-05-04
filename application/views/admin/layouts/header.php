@@ -111,15 +111,13 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- BEGIN PAGE TOP -->
 		<div class="page-top">
 			<!-- BEGIN TOP NAVIGATION MENU -->
-			<div class="top-menu hide">
+			<div class="top-menu">
 				<ul class="nav navbar-nav pull-right">
-					<li class="separator hide">
-					</li>
 					<!-- BEGIN NOTIFICATION DROPDOWN -->
 					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-					<li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+					<li class="dropdown dropdown-extended dropdown-notification dropdown-dark hide" id="header_notification_bar">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<i class="icon-bell"></i>
+						<i class="fa fa-bell"></i>
 						<span class="badge badge-success">
 						7 </span>
 						</a>
@@ -225,13 +223,11 @@ License: You must have a valid license purchased only from themeforest(the above
 						</ul>
 					</li>
 					<!-- END NOTIFICATION DROPDOWN -->
-					<li class="separator hide">
-					</li>
 					<!-- BEGIN INBOX DROPDOWN -->
 					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-					<li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
+					<li class="dropdown dropdown-extended dropdown-inbox dropdown-dark hide" id="header_inbox_bar">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<i class="icon-envelope-open"></i>
+						<i class="fa fa-envelope"></i>
 						<span class="badge badge-danger">
 						4 </span>
 						</a>
@@ -317,13 +313,11 @@ License: You must have a valid license purchased only from themeforest(the above
 						</ul>
 					</li>
 					<!-- END INBOX DROPDOWN -->
-					<li class="separator hide">
-					</li>
 					<!-- BEGIN TODO DROPDOWN -->
 					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-					<li class="dropdown dropdown-extended dropdown-tasks dropdown-dark" id="header_task_bar">
+					<li class="dropdown dropdown-extended dropdown-tasks dropdown-dark hide" id="header_task_bar">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<i class="icon-calendar"></i>
+						<i class="fa fa-calendar"></i>
 						<span class="badge badge-primary">
 						3 </span>
 						</a>
@@ -421,26 +415,26 @@ License: You must have a valid license purchased only from themeforest(the above
 					<li class="dropdown dropdown-user dropdown-dark">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 						<span class="username username-hide-on-mobile">
-						Nick </span>
+						<?=$this->session->userdata( 'name' );?> </span>
 						<!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-						<img alt="" class="img-circle" src="<?=site_url();?>assets/admin/layout4/img/avatar9.jpg"/>
+						<img alt="" class="img-circle hide" src="<?=site_url();?>assets/admin/layout4/img/avatar9.jpg"/>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-default">
 							<li>
-								<a href="extra_profile.html">
-								<i class="icon-user"></i> My Profile </a>
+								<a href="<?=site_url( 'admin/admin_users/revise/' . $this->session->userdata( 'admin_user_id' ) );?>">
+								<i class="fa fa-user"></i> My Profile </a>
 							</li>
-							<li>
+							<li class="hide">
 								<a href="page_calendar.html">
 								<i class="icon-calendar"></i> My Calendar </a>
 							</li>
-							<li>
+							<li class="hide">
 								<a href="inbox.html">
 								<i class="icon-envelope-open"></i> My Inbox <span class="badge badge-danger">
 								3 </span>
 								</a>
 							</li>
-							<li>
+							<li class="hide">
 								<a href="page_todo.html">
 								<i class="icon-rocket"></i> My Tasks <span class="badge badge-success">
 								7 </span>
@@ -450,11 +444,11 @@ License: You must have a valid license purchased only from themeforest(the above
 							</li>
 							<li>
 								<a href="extra_lock.html">
-								<i class="icon-lock"></i> Lock Screen </a>
+								<i class="fa fa-lock"></i> Lock Screen </a>
 							</li>
 							<li>
-								<a href="login.html">
-								<i class="icon-key"></i> Log Out </a>
+								<a href="<?=site_url( 'admin/authentication/logout_admin' );?>">
+								<i class="fa fa-key"></i> Log Out </a>
 							</li>
 						</ul>
 					</li>

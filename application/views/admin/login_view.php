@@ -146,13 +146,13 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="<?=site_url();?>assets/global/scripts/metronic.js" type="text/javascript"></script>
-<script src="<?=site_url();?>assets/js/admin/login_init.js" type="text/javascript"></script>
+<script src="<?=site_url();?>assets/js/admin/authentication_init.js" type="text/javascript"></script>
 <script src="<?=site_url();?>assets/js/ajax_functions.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {     
   Metronic.init();
-  Login.init();
+  Authentication.init();
 });
 </script>
 <!-- END JAVASCRIPTS -->

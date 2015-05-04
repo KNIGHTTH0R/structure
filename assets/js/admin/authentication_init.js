@@ -1,4 +1,4 @@
-var Login = function() {
+var Authentication = function() {
 	return {
 		init: function() {
 			var login_form = $( '#login-form' );
@@ -7,7 +7,7 @@ var Login = function() {
 				e.preventDefault();
 				
 				var form_data = $( this ).serialize();
-				$.post( 'login/authenticate_admin', form_data, function( data ) {
+				$.post( 'authentication/authenticate_admin', form_data, function( data ) {
 					gen_toastr( data );
 				});
 			});

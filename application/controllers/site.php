@@ -74,7 +74,7 @@ class Site extends CI_Controller {
 		$this->db->select( 'f.file AS view_name, p.access_level_id' );
 		$this->db->join( 'template AS t', 't.framework_id = f.framework_id' );
 		$this->db->join( 'page AS p', 'p.template_id = t.template_id' );
-		$query = $this->db->get_where( 'framework AS f', [ 'p.alias' => '404', 'p.portal_id' => -1 ] );
+		$query = $this->db->get_where( 'framework AS f', [ 'p.status' => '+', 'p.alias' => '404', 'p.portal_id' => -1 ] );
 		if( $query->num_rows() > 0 ) {
 			extract( $query->row_array() );
 			

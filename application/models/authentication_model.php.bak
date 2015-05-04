@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct scripts access allowed');
 
-class Login_model extends CI_Model {
+class Authentication_model extends CI_Model {
 	function __construct() {
 		parent::__construct();
 		$this->load->database();
@@ -20,6 +20,7 @@ class Login_model extends CI_Model {
 			}
 			
 			$session['access_level_id'] = $access_level_id;
+			$session['admin_user_id']   = $admin_user_id;
 			$session['name']            = $first_name . ' ' . $last_name;
 			$session['email']						= $email;
 			$session['site_owner_flg']  = $site_owner_flg;
@@ -31,5 +32,9 @@ class Login_model extends CI_Model {
 		} else {
 			return false;
 		}
+	}
+	
+	public function logout_admin() {
+		$this->session->set_userdata( [] );
 	}
 }

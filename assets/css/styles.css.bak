@@ -52,8 +52,12 @@ Rounded Portlets
 	width: 100%;
 }
 
-.menu-toggler {
-	//margin: 25px 0px 0px 0px !important;
+.top-menu .dropdown .dropdown-toggle {
+	padding-bottom: 20px !important;
+}
+
+.dropdown-user {
+	height: 70px !important;
 }
 
 .portlet {

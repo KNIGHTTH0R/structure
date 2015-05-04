@@ -40,6 +40,7 @@
 
 $route['default_controller'] 				 = "admin/dashboard";
 $route['404_override'] 							 = 'admin/admin_404';
+$route['admin/login']								 = 'admin/authentication';
 $route['admin']               			 = 'admin/dashboard';
 $route['admin/(:any)'] 							 = 'admin/$1';
 $route['portal/(:any)'] 						 = 'portal/$1';

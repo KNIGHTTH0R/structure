@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct scripts access allowed');
 
-class Login extends CI_Controller {	
+class Authentication extends CI_Controller {	
 	function __construct() {
 		parent::__construct();
-		$this->load->model( 'login_model' );
+		$this->load->model( 'authentication_model' );
 		/** Section Params **/
 	}
 	
@@ -13,11 +13,16 @@ class Login extends CI_Controller {
 	}
 	
 	public function authenticate_admin() {
-		$admin_user = $this->login_model->authenticate_admin();
+		$admin_user = $this->authentication_model->authenticate_admin();
 		if( $admin_user ) {
 			echo 's|authenticated User|' . site_url( 'admin/dashboard' );
 		} else {
-			echo 'f|authenticate User|';
+			echo 'e|authenticate User|';
 		}
+	}
+	
+	public function logout_admin() {
+		$this->authentication_model->logout_admin();
+		redirect( 'admin/login' );
 	}
 }
