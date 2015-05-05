@@ -25,4 +25,23 @@ class Authentication extends CI_Controller {
 		$this->authentication_model->logout_admin();
 		redirect( 'admin/login' );
 	}
+	
+	public function authenticate_user() {
+		$user = $this->authentication_model->authenticate_user();
+		if( $user ) {
+			echo 's|authenticated User|' . site_url( 'home' );
+		} else {
+			$admin_user = $this->authentication_model->authenticate_admin();
+			if( $admin_user ) {
+				echo 's|authenticated User|' . site_url( 'home' );
+			} else {
+				echo 'e|authenticate User|';
+			}
+		}
+	}
+	
+	public function logout_user() {
+		$this->authentication_model->logout_user();
+		echo 'here';
+	}
 }

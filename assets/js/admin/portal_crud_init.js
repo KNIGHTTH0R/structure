@@ -1,0 +1,18 @@
+var Portals_list = function() {
+	return {
+		init: function() {
+			
+			$( '#portal-form' ).on( 'submit', function( e ) {
+				e.preventDefault();
+				
+				var form_data = $( this ).serialize();
+				$.post( site_url + 'admin/portals/insert', form_data, function( data ) {
+					gen_toastr( data );
+					if( data[0] == 's' ) {
+						$( '#portal-modal' ).modal( 'hide' );
+					}
+				});
+			});
+		}
+	};
+}();

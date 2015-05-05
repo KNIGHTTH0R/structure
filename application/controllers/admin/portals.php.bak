@@ -6,9 +6,9 @@ class Portals extends CI_Controller {
 		$this->load->model( 'admin/portals_model' );
 		
 		/** Section Params **/
-		$this->js           = '';
+		$this->js           = 'assets/js/admin/portal_crud_init.js';
 		$this->styles       = '';
-		$this->control_item = 'admin/admin/portals';
+		$this->control_item = 'admin/portals';
 	}
 	
 	public function index() {

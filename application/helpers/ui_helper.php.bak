@@ -106,7 +106,7 @@ function gen_ui_modal_open( $params = [] ) {
 	$params['title']		= isset( $params['title'] ) ? $params['title'] : '';
 	
 	$modal =<<<EOD
-		<div id="{$params['modal_id']}" class="modal fade">
+		<div id="{$params['modal_id']}" class="modal fade" style="margin-top: 150px;">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	    	<form role="form" id="{$params['form_id']}">
@@ -365,7 +365,7 @@ function gen_ui_widget_params( $params ) {
 }
 
 function gen_ui_admin_user_label( $access_level_title ) {
-	switch( TRUE ) {
+	switch( $access_level_title ) {
 		case 'Site Owner':
 			return '<span class="badge bg-green">' . $access_level_title . '</span>';
 		break;

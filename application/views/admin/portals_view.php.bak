@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<?=gen_ui_portlet_open( $page_title, $page_icon, '', [ 'actions' => [ 'href' => 'portals/create', 'icon_text' => 'Create' ] ] );?>
+		<?=gen_ui_portlet_open( $page_title, $page_icon, '', [ 'actions' => [ 'href' => '#portal-create', 'icon_text' => 'Create' ] ] );?>
 		<table class="table table-striped table-hover standard-table">
 			<thead>
 				<tr>
@@ -12,7 +12,7 @@
 			<tbody>
 			<?php foreach( $list as $portal ):?>
 				<tr>
-					<td class="text-center"><?=gen_ui_revise_button( site_url( 'portal/dashboard?portal_id=' . $portal['portal_id'] ), [ 'label' => 'Manage', 'target' => '_blank' );?></td>
+					<td class="text-center"><?=gen_ui_revise_button( site_url( 'portal/dashboard?portal_id=' . $portal['portal_id'] ), [ 'label' => 'Manage', 'target' => '_blank' ] );?></td>
 					<td><?=$portal['name'];?></td>
 					<td class="text-center"><?=gen_ui_status( $portal['portal_id'], $portal['status'] );?></td>
 				</tr>
@@ -22,3 +22,20 @@
 		<?=gen_ui_portlet_close();?>	
 	</div>	
 </div>
+<div id="portal-create" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

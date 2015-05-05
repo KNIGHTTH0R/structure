@@ -8,7 +8,7 @@ class Portals_model extends CI_Model {
 	
 	public function portal_list() {
 		$this->db->where( 'portal_id > 0' );
-		return $this->db->get( 'portal', )->result_array();
+		return $this->db->get( 'portal' )->result_array();
 	}
 	
 	public function portal_insert() {
@@ -16,43 +16,65 @@ class Portals_model extends CI_Model {
 			return false;
 		}
 		
-		$this->db->set( 'level', 'level+1', FALSE );
-		$this->db->update( 'portal' );
-		
-		$data['status'] 		= '+';
 		$data['entered']		= date( 'Y-m-d H:i:s' );
-		$data['title']			= $this->input->post( 'title' );
-		$data['level']			= 0;
+		$data['name']			= $this->input->post( 'name' );
 		
-		return $this->db->insert( 'portal', $data );
+		$this->db->insert( 'portal', $data );
+		$portal_id = $this->db->insert_id();
+		$this->default_menu_items( $portal_id );
 	}
 	
-	public function portal_update() {
-		if( empty( $_POST ) ) {
-			return false;
+	public function default_menu_items( $portal_id ) {
+		$this->db->select( 'fr_menu_item_id, title, alias, access_level_id, icon' );
+		$query = $this->db->get_where( 'fr_menu_item', [ 'portal_id' => -1, 'status' => '+' ] );
+		if( $query->num_rows() > 0 ) {
+			$sequence = 1;
+			foreach( $query->result_array() as $row ) {
+				extract( $row );
+				$meta_data = [
+					'status' 					=> '+',
+					'title' 					=> $title,
+					'alias' 					=> $alias,
+					'icon' 					  => $icon,
+					'access_level_id' => $access_level_id
+				];
+				$meta_data = json_encode( $meta_data );
+				$xrf_data = [ 'meta_data' => $meta_data ];
+				$xrf_data['fr_menu_item_id'] = $fr_menu_item_id;
+				$xrf_data['portal_id'] 			 = $portal_id;
+				$xrf_data['sequence']				 = $sequence;
+				
+				$this->db->insert( 'fr_menu_item_portal_xref', $xrf_data );
+				$sequence++;
+			}
 		}
-		
-		$data['updated']		= date( 'Y-m-d H:i:s' );
-		$data['title']			= $this->input->post( 'title' );
-		
-		return $this->db->update( 'portal', $data, array( 'portal_id' => $this->input->post( 'portal_id' ) ) );
 	}
 	
-	public function get_portal( $portal_id ) {
-		return $this->db->get_where( 'portal', array( 'portal_id' => $portal_id ) )->row_array();
+	public function default_pages( $portal_id ) {
+		$this->db->select( 'page_id, template_id, title, alias, access_level_id' );
+		$query = $this->db->get_where( 'page', [ 'portal_id' => -1, 'status' => '+' ] );
+		if( $query->num_rows() > 0 ) {
+			foreach( $query->result_array() as $row ) {
+				extract( $row );
+				$meta_data = [
+					'status' 					=> '+',
+					'title' 					=> $title,
+					'template_id' 		=> $template_id,
+					'access_level_id' => $access_level_id
+				];
+				$meta_data = json_encode( $meta_data );
+				$xrf_data = [ 'meta_data' => $meta_data ];
+				$xrf_data['page_id']   = $page_id;
+				$xrf_data['portal_id'] = $portal_id;
+				$xrf_data['alias']     = $alias;
+				
+				$this->db->insert( 'page_portal_xref', $xrf_data );
+			}
+		}
 	}
 	
 	public function set_status() {
 		$data['status'] = $this->input->post( 'status' );
 		$this->db->update( 'portal', $data, array( 'portal_id' => $this->input->post( 'target_id' ) ) );
-	}
-	
-	public function update_level() {
-		$level = count( $this->input->post( 'portal_id' ) ) - 1;
-		foreach( $this->input->post( 'portal_id' ) as $portal_id ) {
-			$data['level'] = $level;
-			$this->db->update( 'portal', $data, array( 'portal_id' => $portal_id ) );
-			$level--;
-		}
 	}
 }

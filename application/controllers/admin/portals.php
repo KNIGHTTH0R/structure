@@ -6,7 +6,7 @@ class Portals extends CI_Controller {
 		$this->load->model( 'admin/portals_model' );
 		
 		/** Section Params **/
-		$this->js           = '';
+		$this->js           = 'assets/js/admin/portal_crud_init.js';
 		$this->styles       = '';
 		$this->control_item = 'admin/portals';
 	}
@@ -20,49 +20,16 @@ class Portals extends CI_Controller {
 		$this->layout->view( 'admin/portals_view', $params );
 	}
 	
-	public function create() {		
-		$params['page_title']						= 'Access Levels';
-		$params['page_header']					= 'Access Level <small>create</small>';
-		
-		$params['scripts']							= array( 'js' => $this->js, 'init' => 'Access_levels_create' );
-		$params['site_url']							= site_url();
-		
-		$this->layout->view( 'admin/access_levels_create_view', $params );
-	}
-	
 	public function insert() {
-		$access_level = $this->access_levels_model->access_level_insert();
-		if( $access_level ) {
-			echo 's|created Access Level|' . site_url( 'admin/access_levels' );
+		$portal = $this->portals_model->portal_insert();
+		if( $portal ) {
+			echo 's|created Portal|' . site_url( 'portal/dashboard?portal_id=' . $portal );
 		} else {
-			echo 'f|create Access Level';
-		}
-	}
-	
-	public function revise( $access_level_id ) {
-		$params['page_title']						= 'Access Levels';
-		$params['page_header']					= 'Access Level <small>revise</small>';
-		
-		$params['access_level']					= $this->access_levels_model->get_access_level( $access_level_id );
-		$params['scripts']							= array( 'js' => $this->js, 'init' => 'Access_levels_revise' );
-		
-		$this->layout->view( 'admin/access_levels_revise_view', $params );
-	}
-	
-	public function update() {
-		$access_level = $this->access_levels_model->access_level_update();
-		if( $access_level ) {
-			echo 's|updated Access Level|' . site_url( 'admin/access_levels' );
-		} else {
-			echo 'f|update Access Level';
+			echo 'f|create Portal';
 		}
 	}
 	
 	public function status() {
 		$this->access_levels_model->set_status();
-	}
-	
-	public function level() {
-		$this->access_levels_model->update_level();
 	}
 }
