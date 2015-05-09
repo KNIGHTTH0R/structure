@@ -19,7 +19,7 @@ $( window ).resize( function() {
 $( '#front-form' ).on( 'submit', function( e ) {
 	e.preventDefault();
 	var form_data = $( this ).serialize();
-	$.post( '/john/admin/authentication/authenticate_user', form_data, function( data ) {
+	$.post( '/structure/admin/authentication/authenticate_user', form_data, function( data ) {
 		gen_toastr( data );
 		if( data[0] == 's' ) {
 			$( '#front-modal' ).modal( 'hide' );
@@ -28,7 +28,7 @@ $( '#front-form' ).on( 'submit', function( e ) {
 });
 
 sign_out.on( 'click', function() {
-	$.post( '/john/admin/authentication/logout_user', function() {
-		window.location = '/john/home'; 
+	$.post( '/structure/admin/authentication/logout_user', function() {
+		window.location = '/structure/home'; 
 	});
 });
