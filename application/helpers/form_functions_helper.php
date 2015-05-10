@@ -9,29 +9,29 @@ function gen_input_addon( $input, $addon ) {
 	
 	switch( $type ) {
 		case 'button':
-		  $inputAddon = '<div class="input-group-btn"><button type="button" class="btn ' . $class . '">' . $option . '</button></div>';
+		  $input_addon = '<div class="input-group-btn"><button type="button" class="btn ' . $class . '">' . $option . '</button></div>';
 		break;
 		case 'dropdown':
-		  $inputAddon = '<div class="input-group-btn">' . gen_button_dropdown( 'standard', $dropdown ) . '</div>';
+		  $input_addon = '<div class="input-group-btn">' . gen_button_dropdown( 'standard', $dropdown ) . '</div>';
 		break;
 		case 'icon':
-		  $inputAddon = '<span class="input-group-addon"><i class="fa fa-' . $option . '"></i></span>';
+		  $input_addon = '<span class="input-group-addon"><i class="fa fa-' . $option . '"></i></span>';
 		break;
 		case 'input':
-		  $inputAddon = '<span class="input-group-addon">' . $option . '</span>';
+		  $input_addon = '<span class="input-group-addon">' . $option . '</span>';
 		break;
 		case 'segmented':
-		  $inputAddon = '<div class="input-group-btn">' . gen_button_dropdown( 'segmented', $dropdown ) . '<button type="button" class="btn ' . $class . '">' . $option . '</button></div>';
+		  $input_addon = '<div class="input-group-btn">' . gen_button_dropdown( 'segmented', $dropdown ) . '<button type="button" class="btn ' . $class . '">' . $option . '</button></div>';
 		break;
 		case 'text':
-		  $inputAddon = '<span class="input-group-addon">' . $option . '</span>';
+		  $input_addon = '<span class="input-group-addon">' . $option . '</span>';
 		break;
 	}
 	
 	if( $align == 'left' ) {
-		return '<div class="input-group">' . $inputAddon . $input . '</div>';
+		return '<div class="input-group">' . $input_addon . $input . '</div>';
 	} else {
-		return '<div class="input-group">' . $input . $inputAddon  . '</div>';
+		return '<div class="input-group">' . $input . $input_addon  . '</div>';
 	}
 }
 
